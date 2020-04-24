@@ -1,7 +1,7 @@
 " ==============================================================================
 " basic configuration
 
-set relativenumber
+set number
 syntax on
 set tabstop=2
 set shiftwidth=4
@@ -101,11 +101,8 @@ let g:indent_guides_guide_size=1
 " ==============================================================================
 "  NERDTree configuration
 
+" NERDTree will open automaticly when a file or folder is open
 autocmd vimenter * NERDTree
-
-" open NERDTree automatically when vim starts up if no file name provided
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 
 
