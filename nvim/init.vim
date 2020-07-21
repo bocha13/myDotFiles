@@ -21,6 +21,10 @@ set incsearch
 set termguicolors
 set scrolloff=8
 
+" Hide default command line at bottom --INSERT--
+set laststatus=0
+set noshowmode
+
 " Give more space for displaying messages.
 set cmdheight=2
 
