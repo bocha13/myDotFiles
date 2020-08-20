@@ -1,12 +1,36 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
 
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
+
+### ARCHIVE EXTRACTION
+# usage: ex <file>
+ex() {
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)  tar xjf $1    ;;
+      *.tar.gz)   tar xzf $1    ;;
+      *.bz2)      bunzip2 $1    ;;
+      *.rar)      unrar x $1    ;;
+      *.gz)       gunzip $1     ;;
+      *.tar)      tar xf $1     ;;
+      *.tbz2)     tar xjf $1    ;;
+      *.tgz)      tar xzf $1    ;;
+      *.zip)      unzip $1      ;;
+      *.Z)        uncompress $1 ;;
+      *.7z)       7z x $1       ;;
+      *.deb)      ar x $1       ;;
+      *.tar.xz)   tar xf $1     ;;
+      *.tar.zst)  unzstd $1     ;;
+      *)          echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -22,10 +46,6 @@ HISTFILESIZE=2000
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -78,7 +98,7 @@ function parse_git_branch() {
 	if [ ! "${BRANCH}" == "" ]
 	then
 		STAT=`parse_git_dirty`
-    echo "(${BRANCH}${STAT})"
+    		echo "(${BRANCH}${STAT})"
 	else
 		echo ""
 	fi
