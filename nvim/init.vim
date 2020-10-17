@@ -99,8 +99,10 @@ let mapleader = " "
 
 let g:netrw_browse_split = 2
 let g:netrw_banner = 0
-let g:netrw_winsize = 25
+let g:netrw_winsize = 20
+let g:netrw_liststyle = 3
 
+nnoremap <leader>b :Vex<CR>
 nnoremap <leader>prr :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>phw :h <C-R>=expand("<cword>")<CR><CR>
