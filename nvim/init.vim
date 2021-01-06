@@ -26,7 +26,7 @@ set laststatus=0
 set noshowmode
 
 " Give more space for displaying messages.
-set cmdheight=2
+set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -50,9 +50,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vuciv/vim-bujo'
 
-"  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
-"  TOOOOOOOOOOOOO
-Plug 'gruvbox-community/gruvbox'
+Plug 'rakr/vim-one'
 Plug 'sainnhe/gruvbox-material'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'vim-airline/vim-airline'
@@ -61,12 +59,7 @@ Plug '/home/mpaulson/personal/vim-be-good'
 
 call plug#end()
 
-let g:gruvbox_contrast_dark = 'hard'
-if exists('+termguicolors')
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
-let g:gruvbox_invert_selection='0'
+let g:airline_theme='one'
 
 " --- The Greatest plugin of all time.  I am not bias
 " let g:vim_be_good_floating = 0
@@ -87,7 +80,7 @@ let g:go_highlight_format_strings = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_auto_sameids = 1
 
-colorscheme gruvbox
+colorscheme one
 set background=dark
 
 if executable('rg')
@@ -166,6 +159,14 @@ nnoremap <leader>cr :CocRestart
 nmap <leader>gh :diffget //3<CR>
 nmap <leader>gu :diffget //2<CR>
 nmap <leader>gs :G<CR>
+
+" Prettier setup (user :Prettier to format current buffer)
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" Automatically closing braces on key Enter press
+inoremap {<CR> {<CR>}<Esc>ko
+inoremap [<CR> [<CR>]<Esc>ko
+inoremap (<CR> (<CR>)<Esc>ko
 
 augroup highlight_yank
     autocmd!
