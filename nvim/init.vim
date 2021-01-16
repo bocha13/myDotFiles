@@ -20,6 +20,7 @@ set undofile
 set incsearch
 set termguicolors
 set scrolloff=8
+set signcolumn=yes
 
 " Hide default command line at bottom --INSERT--
 set laststatus=0
@@ -51,8 +52,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'vuciv/vim-bujo'
 
 Plug 'rakr/vim-one'
-Plug 'sainnhe/gruvbox-material'
-Plug 'phanviet/vim-monokai-pro'
+Plug 'haishanh/night-owl.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
 Plug '/home/mpaulson/personal/vim-be-good'
@@ -80,7 +80,7 @@ let g:go_highlight_format_strings = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_auto_sameids = 1
 
-colorscheme one
+colorscheme night-owl
 set background=dark
 
 if executable('rg')
@@ -122,7 +122,6 @@ nmap <Leader>th <Plug>BujoAddnormal
 let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 
 " Vim with me
-nnoremap <leader>vwm :colorscheme gruvbox<bar>:set background=dark<CR>
 nmap <leader>vtm :highlight Pmenu ctermbg=gray guibg=gray
 
 vnoremap X "_d
@@ -160,10 +159,10 @@ nmap <leader>gh :diffget //3<CR>
 nmap <leader>gu :diffget //2<CR>
 nmap <leader>gs :G<CR>
 
-" Prettier setup (user :Prettier to format current buffer)
+" Prettier settup (use :Prettier to format current buffer)
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-" Automatically closing braces on key Enter press
+" Automatically closing braces on press Enter
 inoremap {<CR> {<CR>}<Esc>ko
 inoremap [<CR> [<CR>]<Esc>ko
 inoremap (<CR> (<CR>)<Esc>ko
