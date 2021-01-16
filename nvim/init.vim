@@ -55,14 +55,10 @@ Plug 'rakr/vim-one'
 Plug 'haishanh/night-owl.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
-Plug '/home/mpaulson/personal/vim-be-good'
 
 call plug#end()
 
 let g:airline_theme='one'
-
-" --- The Greatest plugin of all time.  I am not bias
-" let g:vim_be_good_floating = 0
 
 " --- vim go (polyglot) settings.
 let g:go_highlight_build_constraints = 1
