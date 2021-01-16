@@ -9,27 +9,27 @@ esac
 ### ARCHIVE EXTRACTION
 # usage: ex <file>
 ex() {
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)  tar xjf $1    ;;
-      *.tar.gz)   tar xzf $1    ;;
-      *.bz2)      bunzip2 $1    ;;
-      *.rar)      unrar x $1    ;;
-      *.gz)       gunzip $1     ;;
-      *.tar)      tar xf $1     ;;
-      *.tbz2)     tar xjf $1    ;;
-      *.tgz)      tar xzf $1    ;;
-      *.zip)      unzip $1      ;;
-      *.Z)        uncompress $1 ;;
-      *.7z)       7z x $1       ;;
-      *.deb)      ar x $1       ;;
-      *.tar.xz)   tar xf $1     ;;
-      *.tar.zst)  unzstd $1     ;;
-      *)          echo "'$1' cannot be extracted via ex()" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)    tar xjf    $1  ;;
+            *.tar.gz)     tar xzf    $1  ;;
+            *.bz2)        bunzip2    $1  ;;
+            *.rar)        unrar x    $1  ;;
+            *.gz)         gunzip     $1  ;;
+            *.tar)        tar xf     $1  ;;
+            *.tbz2)       tar xjf    $1  ;;
+            *.tgz)        tar xzf    $1  ;;
+            *.zip)        unzip      $1  ;;
+            *.Z)          uncompress $1  ;;
+            *.7z)         7z x       $1  ;;
+            *.deb)        ar x       $1  ;;
+            *.tar.xz)     tar xf     $1  ;;
+            *.tar.zst)    unzstd     $1  ;;
+            *)            echo "'$1' cannot be extracted via ex()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
 }
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -47,6 +47,10 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -63,7 +67,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -76,12 +80,27 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# <ModifiedByDemian>
+# Uncomment to add Git branch in prompt
+prompt_with_git=yes
+if [ -n "$prompt_with_git" ]; then
+    parse_git_branch() {
+        git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+    }
+    if [ "$color_prompt" = yes ]; then
+        PS1='${debian_chroot:+($debian_chroot)}\[\e[37m\][\u:\W]\[\e[m\]\[\e[91m\]$(parse_git_branch)\[\e[m\]$ '
+    else
+        PS1='${debian_chroot:+($debian_chroot)}\u:\W$(parse_git_branch)\$ '
+    fi
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    if [ "$color_prompt" = yes ]; then
+        PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u:\h\[\033[00m\]\[\033[01;34m\]\W\[\033[00m\] \$'
+    else
+        PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    fi
 fi
 unset color_prompt force_color_prompt
+# </ModifiedByDemian>
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -91,55 +110,6 @@ xterm*|rxvt*)
 *)
     ;;
 esac
-
-# get current branch in git repo
-function parse_git_branch() {
-	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-	if [ ! "${BRANCH}" == "" ]
-	then
-		STAT=`parse_git_dirty`
-    		echo "(${BRANCH}${STAT})"
-	else
-		echo ""
-	fi
-}
-
-# get current status of git repo
-function parse_git_dirty {
-	status=`git status 2>&1 | tee`
-	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
-	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
-	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
-	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
-	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
-	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
-	bits=''
-	if [ "${renamed}" == "0" ]; then
-		bits=">${bits}"
-	fi
-	if [ "${ahead}" == "0" ]; then
-		bits="*${bits}"
-	fi
-	if [ "${newfile}" == "0" ]; then
-		bits="+${bits}"
-	fi
-	if [ "${untracked}" == "0" ]; then
-		bits="?${bits}"
-	fi
-	if [ "${deleted}" == "0" ]; then
-		bits="x${bits}"
-	fi
-	if [ "${dirty}" == "0" ]; then
-		bits="!${bits}"
-	fi
-	if [ ! "${bits}" == "" ]; then
-		echo " ${bits}"
-	else
-		echo ""
-	fi
-}
-
-export PS1="\[\e[33m\][\[\e[m\]\[\e[32m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\]\[\e[33m\]]\[\e[m\]\[\e[33m\]:\[\e[m\]\[\e[34m\]\W\[\e[m\]\[\e[32m\]\`parse_git_branch\`\[\e[m\]\[\e[33m\]:\[\e[m\] "
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -160,7 +130,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-
+alias vim="nvim"
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -184,3 +154,15 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# <AddedByDemian> -------------------------------------------------------------
+
+# If present, append separate path file
+if [ -f ~/.bash_paths ]; then
+    . ~/.bash_paths
+fi
+
+# Default color for executable directories is unreadable, so override:
+LS_COLORS="ow=01;36;40" && export LS_COLORS
+
+# </AddedByDemian> ------------------------------------------------------------
