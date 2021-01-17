@@ -1,9 +1,9 @@
 {
   "suggest.noselect": false,
   "coc.preferences.formatOnType": true,
-  "diagnostic.errorSign": "✘",
-  "diagnostic.infoSign": "⚠",
-  "diagnostic.hintSign": "➤",
+  "diagnostic.errorSign": "x",
+  "diagnostic.infoSign": ">",
+  "diagnostic.hintSign": "?",
   "diagnostic.enableHighlightLineNumber": true,
   "codeLens.enable": true,
   "signature.enable": true,
