@@ -51,14 +51,14 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vuciv/vim-bujo'
 
-Plug 'rakr/vim-one'
+Plug 'vim-airline/vim-airline'
 Plug 'haishanh/night-owl.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
 
 call plug#end()
 
-let g:airline_theme='one'
+let g:airline_theme='murmur'
 
 " --- vim go (polyglot) settings.
 let g:go_highlight_build_constraints = 1
