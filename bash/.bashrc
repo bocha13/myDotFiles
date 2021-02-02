@@ -127,7 +127,6 @@ function parse_git_dirty {
     fi
 }
 
-# <ModifiedByDemian>
 # Uncomment to add Git branch in prompt
 prompt_with_git=yes
 if [ -n "$prompt_with_git" ]; then
@@ -144,7 +143,6 @@ else
     fi
 fi
 unset color_prompt force_color_prompt
-# </ModifiedByDemian>
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
