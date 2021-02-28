@@ -52,8 +52,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'vuciv/vim-bujo'
 
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'haishanh/night-owl.vim'
-Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
 
 call plug#end()
