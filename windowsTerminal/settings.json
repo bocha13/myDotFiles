@@ -27,7 +27,7 @@
     {
         "defaults":
         {
-            "colorScheme": "Night Owl"
+            "colorScheme": "VSCode Dark"
         },
         "list":
         [
@@ -128,6 +128,29 @@
       "red": "#EF5350",
       "white": "#FFFFFF",
       "yellow": "#ADDB67"
+    },
+    {
+        "background": "#1E1E1E",
+        "black": "#000000",
+        "blue": "#2472C8",
+        "brightBlack": "#666666",
+        "brightBlue": "#3B8EEA",
+        "brightCyan": "29B8DB",
+        "brightGreen": "#23D18B",
+        "brightPurple": "#D670D6",
+        "brightRed": "F14C4C",
+        "brightWhite": "#E5E5E5",
+        "brightYellow": "#F5F543",
+        "cursorColor": "#FFFFFF",
+        "cyan": "#11A8CD",
+        "foreground": "#CCCCCC",
+        "green": "#0DBC79",
+        "name": "VSCode Dark",
+        "purple": "#BC3FBC",
+        "red": "#CD3131",
+        "selectionBackground": "#FFFFFF",
+        "white": "#D8D8D8",
+        "yellow": "#E5E510"
     }
 ],
 
