@@ -50,7 +50,6 @@ precmd () { vcs_info }
 setopt prompt_subst
 PROMPT='[%n:%F{green}%.%f]%F{red}${vcs_info_msg_0_}%f$ '
 
-
 # ---------- ALIAS ----------
 # readlink doesn't work like in linux so we map it
 # to execute greadlink which works the same
