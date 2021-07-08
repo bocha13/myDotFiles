@@ -1,5 +1,5 @@
 # ---------- LOADS / IMPORTS ----------
-autoload -Uz vcs_info
+autoload -Uz add-zsh-hook vcs_info
 zstyle ':vcs_info:*' enable git svn
 
 
@@ -43,11 +43,16 @@ export NVM_DIR="$HOME/.nvm"
 export CLICOLOR=1
 
 # ----------- PROMPT -----------
+# Enable checking for (un)staged changes, enabling use of %u and %c
+zstyle ':vcs_info:*' check-for-changes true
+# Set custom strings for an unstaged vcs repo changes (*) and staged changes (+)
+zstyle ':vcs_info:*' unstagedstr ' *'
+zstyle ':vcs_info:*' stagedstr ' +'
 # format vcs_info_msg_0_
-zstyle ':vcs_info:git:*' formats '(%b %u%c)'
+zstyle ':vcs_info:git:*' formats '(%b%u%c)'
 
-precmd () { vcs_info }
 setopt prompt_subst
+add-zsh-hook precmd vcs_info
 PROMPT='[%n:%F{green}%.%f]%F{red}${vcs_info_msg_0_}%f$ '
 
 # ---------- ALIAS ----------
