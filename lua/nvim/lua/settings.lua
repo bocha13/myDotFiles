@@ -15,7 +15,7 @@ o.laststatus = 0
 o.hidden = true
 o.splitright = true
 o.cmdheight = 1
+vim.cmd("set noshowmode")
 
 -- THEME --
-b.syntax = true
 vim.cmd('colorscheme dracula')

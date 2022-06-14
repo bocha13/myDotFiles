@@ -1,3 +1,6 @@
 require('settings')
 require('mappings')
 require('plugins')
+require('autopairs')
+require('treesitter')
+require('cmpConfig')
