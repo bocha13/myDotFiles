@@ -1,0 +1,19 @@
+
+
+## Dependencies
+
+Ripgrep
+
+```
+sudo apt install ripgrep
+```
+
+
+
+
+## Install neovim
+- clone nvim from https://github.com/neovim/neovim.git
+- checkout the branch with the version you want to install (ej. release-0.7)
+- inside the repo run ``` make CMAKE_BUILD_TYPE=Release ```
+- then run "sudo make install"
+- if no errors, nvim should be installed

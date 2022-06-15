@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/home/bocha13/learnlight/learner-frontend/src/features/cafe/FullPage'
+let g:netrw_dirhist_9='/home/bocha13/learnlight/learner-frontend'
+let g:netrw_dirhist_8='/home/bocha13/learnlight/learner-frontend/src/features/cafe/FullPage'
+let g:netrw_dirhist_7='/home/bocha13/learnlight/learner-frontend'
+let g:netrw_dirhist_6='/home/bocha13/learnlight/learner-frontend/src/features/cafe/FullPage'
+let g:netrw_dirhist_5='/home/bocha13/learnlight/learner-frontend'
+let g:netrw_dirhist_4='/home/bocha13/.config/nvim'
+let g:netrw_dirhist_3='/home/bocha13/learnlight/learner-frontend/src/features/cafe/CafeSession'
+let g:netrw_dirhist_2='/home/bocha13/learnlight/learner-frontend/src/features/cafe/FullPage'
+let g:netrw_dirhist_1='/home/bocha13/learnlight/learner-frontend/src/features'
