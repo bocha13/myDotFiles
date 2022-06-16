@@ -10,14 +10,13 @@ M.setup = function()
 		{ name = "DiagnosticSignHint", text = "" },
 		{ name = "DiagnosticSignInfo", text = "" },
 	}
-
 	for _, sign in ipairs(signs) do
 		vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 	end
 
 	local config = {
-		-- disable virtual text
-		virtual_text = true,
+    -- disable inline error message
+		virtual_text = false,
 		-- show signs
 		signs = {
 			active = signs,
@@ -27,6 +26,7 @@ M.setup = function()
 		severity_sort = true,
 		float = {
 			focusable = true,
+			scope = "line",
 			style = "minimal",
 			border = "rounded",
 			source = "always",
@@ -37,6 +37,23 @@ M.setup = function()
 
 	vim.diagnostic.config(config)
 
+
+  -- show diagnostic float window on cursor
+	local function on_cursor_hold()
+		if vim.lsp.buf.server_ready() then
+			vim.diagnostic.open_float()
+		end
+	end
+
+	local diagnostic_hover_augroup_name = "lspconfig-diagnostic"
+	vim.api.nvim_set_option("updatetime", 500)
+	vim.api.nvim_create_augroup(diagnostic_hover_augroup_name, { clear = true })
+	vim.api.nvim_create_autocmd({ "CursorHold" }, { group = diagnostic_hover_augroup_name, callback = on_cursor_hold })
+
+	vim.o.updatetime = 250
+	vim.cmd([[autocmd CursorHold, CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
+
+  -- Handlers
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 		border = "rounded",
 	})
@@ -80,9 +97,9 @@ M.on_attach = function(client, bufnr)
 	if client.name == "tsserver" then
 		client.resolved_capabilities.document_formatting = false
 	end
-  if client.name == "sumneko_lua" then
-    client.resolved_capabilities.document_formatting = false
-  end
+	if client.name == "sumneko_lua" then
+		client.resolved_capabilities.document_formatting = false
+	end
 
 	M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 	M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
