@@ -26,7 +26,6 @@ local options = {
 	expandtab = true,
 	shiftwidth = 2,
 	tabstop = 2,
-	cursorline = true,
 	number = true,
 	laststatus = 3,
 	showcmd = false,
@@ -37,18 +36,16 @@ local options = {
 	wrap = false,
 	scrolloff = 8,
 	sidescrolloff = 8,
-	guifont = "monospace:h17"
+	guifont = "monospace:h17",
 }
 
 for key, value in pairs(options) do
   vim.opt[key] = value
 end
 
--- INLINE CONFIG
-vim.cmd "set whichwrap+=<,>,[,],h,l"
-vim.cmd [[set iskeyword+=-]]
-
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.fillchars.eob=" "
 vim.opt.shortmess:append "c"
+vim.opt.whichwrap:append "<,>,[,],h,l"
+vim.opt.iskeyword:append "-"

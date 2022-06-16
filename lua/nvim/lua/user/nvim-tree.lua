@@ -12,14 +12,14 @@ local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
   hijack_directories = {
-    enable = false,
+    enable = true,
   },
-  -- update_to_buf_dir = {
-  --   enable = false,
-  -- },
-  -- disable_netrw = true,
-  -- hijack_netrw = true,
-  -- open_on_setup = false,
+  --update_to_buf_dir = {
+  --  enable = false,
+  --},
+  disable_netrw = true,
+  hijack_netrw = true,
+  open_on_setup = false,
   ignore_ft_on_setup = {
     "startify",
     "dashboard",

@@ -8,6 +8,15 @@ if not dap_ui_status_ok then
 	return
 end
 
+local dap_install_status_ok, dap_install = pcall(require, "dap-install")
+if not dap_install_status_ok then
+  return
+end
+
+dap_install.setup({
+  installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
+})
+
 dapui.setup {
   icons = { expanded = "▾", collapsed = "▸" },
   mappings = {
@@ -51,9 +60,8 @@ dapui.setup {
   windows = { indent = 1 },
 }
 
-local icons = require "user.icons"
 
-vim.fn.sign_define('DapBreakpoint', {text=icons.ui.Bug, texthl='DiagnosticSignError', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpoint', {text="", texthl='DiagnosticSignError', linehl='', numhl=''})
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
