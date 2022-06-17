@@ -9,7 +9,7 @@ end
 -- end
 
 local mode_color = {
-	n = "#6F91DB",
+	n = "#7AA2F7",
 	i = "#9ECE6A",
 	v = "#BB9AF7",
 	[""] = "#BB9AF7",
@@ -17,14 +17,14 @@ local mode_color = {
 	-- c = '#B5CEA8',
 	-- c = '#D7BA7D',
 	c = "#E0AF68",
-	no = "#6F91DB",
+	no = "#7AA2F7",
 	s = "#ce9178",
 	S = "#ce9178",
 	ic = "#dcdcaa",
 	R = "#F7768E",
 	Rv = "#F7768E",
-	cv = "#6F91DB",
-	ce = "#6F91DB",
+	cv = "#7AA2F7",
+	ce = "#7AA2F7",
 	r = "#F7768E",
 	rm = "#E0AF68",
 	["r?"] = "#E0AF68",
