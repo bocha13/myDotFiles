@@ -21,6 +21,12 @@ sudo apt install ripgrep
 - ```./install.sh <name of font>```
 - set the font in your terminal preferences
 
+### FONTS IN MAC
+```
+brew tap homebrew/cask-fonts
+brew install --cask <name-of-font>   ej: font-hack-nerd-font
+```
+
 #### Upgrade to latest release
 Inside the cloned neovim repo run the following commands
 ```
