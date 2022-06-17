@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-local status_theme_ok, theme = pcall(require, "lualine.themes.darkplus_dark")
+local status_theme_ok, theme = pcall(require, "lualine.themes.ayu_mirage")
 if not status_theme_ok then
   return
 end
@@ -59,7 +59,7 @@ local diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
   sections = { "error", "warn" },
-  symbols = { error =  "", warn =  ""},
+  symbols = { error =  " ", warn =  " "},
   colored = false,
   update_in_insert = false,
   always_visible = true,
@@ -92,15 +92,6 @@ local progress = {
   "progress",
   color = "SLProgress",
 }
-
-local current_signature = function()
-  if not pcall(require, "lsp_signature") then
-    return
-  end
-  local sig = require("lsp_signature").status_line(30)
-  -- return sig.label .. "🐼" .. sig.hint
-  return "%#SLSeparator#" .. sig.hint .. "%*"
-end
 
 local spaces = {
   function()

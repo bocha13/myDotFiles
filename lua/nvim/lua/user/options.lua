@@ -1,5 +1,5 @@
 local options = {
-	termguicolors = true,         -- Enables 24-bit RGB color
+	-- termguicolors = true,         -- Enables 24-bit RGB color
 	cursorline = true,	      -- Highlight the text line of the cursor
 	backup = false,
 	clipboard = "unnamedplus",
@@ -36,7 +36,7 @@ local options = {
 	wrap = false,
 	scrolloff = 8,
 	sidescrolloff = 8,
-	guifont = "monospace:h17",
+	guifont = "JetBrainsMono:17",
 }
 
 for key, value in pairs(options) do
