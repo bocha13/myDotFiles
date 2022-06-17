@@ -94,6 +94,7 @@ M.on_attach = function(client, bufnr)
 	if not status_cmp_ok then
 		return
 	end
+  -- use prettier to format this type of files instead of the running server
 	if client.name == "tsserver" then
 		client.resolved_capabilities.document_formatting = false
 	end

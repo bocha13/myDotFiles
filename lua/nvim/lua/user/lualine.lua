@@ -3,16 +3,11 @@ if not status_ok then
   return
 end
 
-local status_theme_ok, theme = pcall(require, "lualine.themes.ayu_mirage")
+local status_theme_ok, theme = pcall(require, "lualine.themes.jellybeans")
 if not status_theme_ok then
   return
 end
 
-vim.api.nvim_set_hl(0, "SLGitIcon", { fg = "#E8AB53", bg = "#303030" })
-vim.api.nvim_set_hl(0, "SLBranchName", { fg = "#D4D4D4", bg = "#303030", bold = false })
--- vim.api.nvim_set_hl(0, "SLProgress", { fg = "#D7BA7D", bg = "#252525" })
-vim.api.nvim_set_hl(0, "SLProgress", { fg = "#D4D4D4", bg = "#303030" })
-vim.api.nvim_set_hl(0, "SLSeparator", { fg = "#808080", bg = "#252525" })
 local mode_color = {
   n = "#569cd6",
   i = "#6a9955",
@@ -46,7 +41,6 @@ local mode = {
     -- auto change color according to neovims mode
     return { bg = mode_color[vim.fn.mode()], fg = "#303030" }
   end,
-  -- padding = { right = 1 },
   padding = 0,
 }
 
@@ -68,9 +62,9 @@ local diagnostics = {
 local diff = {
   "diff",
   colored = false,
-  symbols = { added = " ", modified = " ", removed = " "}, -- changes diff symbols
+  symbols = { added = " ", modified = " ", removed = " "}, -- changes diff symbols
   cond = hide_in_width,
-  separator = "%#SLSeparator#" .. "│ " .. "%*",
+  separator = " │ ",
 }
 
 
@@ -83,14 +77,13 @@ local filetype = {
 local branch = {
   "branch",
   icons_enabled = true,
-  icon = "%#SLGitIcon#" .. "" .. "%*" .. "%#SLBranchName#",
-  -- color = "Constant",
+  icon =  " ",
   colored = false,
 }
 
 local progress = {
   "progress",
-  color = "SLProgress",
+  -- color = "SLProgress",
 }
 
 local spaces = {
@@ -98,7 +91,7 @@ local spaces = {
     return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
   end,
   padding = 0,
-  separator = "%#SLSeparator#" .. " │" .. "%*",
+  separator = " | ",
 }
 
 local location = {
