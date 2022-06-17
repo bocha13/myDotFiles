@@ -15,6 +15,12 @@ sudo apt install ripgrep
 - then run "sudo make install"
 - if no errors, nvim should be installed
 
+## Install fonts
+- clone https://github.com/ryanoasis/nerd-fonts
+- install the font you want (be sure it has Nerd Font in the name to include icons)
+- ```./install.sh <name of font>```
+- set the font in your terminal preferences
+
 #### Upgrade to latest release
 Inside the cloned neovim repo run the following commands
 ```
