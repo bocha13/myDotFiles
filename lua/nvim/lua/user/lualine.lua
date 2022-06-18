@@ -27,7 +27,7 @@ local mode_color = {
 	rm = "#608B4E",
 	["r?"] = "#608B4E",
 	["!"] = "#608B4E",
-	t = "#D7BA7D",
+	t = "#608B4E",
 }
 
 local mode = {
@@ -61,7 +61,7 @@ local diff = {
 	colored = false,
 	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
 	cond = hide_in_width,
-	separator = " │ ",
+	separator = "| ",
 }
 
 local filetype = {
