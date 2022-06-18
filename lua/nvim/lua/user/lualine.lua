@@ -3,7 +3,7 @@ if not status_ok then
 	return
 end
 
--- local status_theme_ok, theme = pcall(require, "lualine.themes.jellybeans")
+-- local status_theme_ok, theme = pcall(require, "lualine.themes.seoul256")
 -- if not status_theme_ok then
 -- return
 -- end
@@ -14,8 +14,6 @@ local mode_color = {
 	v = "#BB9AF7",
 	[""] = "#BB9AF7",
 	V = "#BB9AF7",
-	-- c = '#B5CEA8',
-	-- c = '#D7BA7D',
 	c = "#E0AF68",
 	no = "#7AA2F7",
 	s = "#ce9178",
@@ -76,7 +74,10 @@ local branch = {
 	"branch",
 	icons_enabled = true,
 	icon = " ",
-	colored = false,
+	color = function()
+    return { fg = mode_color[vim.fn.mode()], bg = "#1F2335" }
+
+  end
 }
 
 local progress = {

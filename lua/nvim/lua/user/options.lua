@@ -1,5 +1,5 @@
 local options = {
-	-- termguicolors = true,         -- Enables 24-bit RGB color
+	termguicolors = true,         -- Enables 24-bit RGB color
 	cursorline = true,	      -- Highlight the text line of the cursor
 	backup = false,
 	clipboard = "unnamedplus",
