@@ -61,7 +61,7 @@ local diff = {
 	colored = false,
 	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
 	cond = hide_in_width,
-	separator = " │ ",
+	separator = "| ",
 }
 
 local filetype = {
@@ -75,9 +75,8 @@ local branch = {
 	icons_enabled = true,
 	icon = " ",
 	color = function()
-    return { fg = mode_color[vim.fn.mode()], bg = "#1F2335" }
-
-  end
+		return { fg = mode_color[vim.fn.mode()], bg = "#3B4261" }
+	end,
 }
 
 local progress = {
@@ -90,7 +89,7 @@ local spaces = {
 		return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 	end,
 	padding = 0,
-	separator = " | ",
+	separator = " |",
 }
 
 local location = {
