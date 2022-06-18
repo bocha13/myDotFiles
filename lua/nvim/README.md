@@ -2,10 +2,19 @@
 
 ## Dependencies
 
-Ripgrep
+Rust
+[Follow Rustup instructions](https://rustup.rs/)
 
+Ripgrep
+- ripgrep is a line-oriented search tool that recursively searches the current directory for a regex pattern.
 ```
 sudo apt install ripgrep
+```
+
+Stylua
+- An opinionated code formatter for Lua 5.1, Lua 5.2 and Luau, built using full-moon. StyLua is inspired by the likes of prettier, it parses your Lua codebase, and prints it back out from scratch, enforcing a consistent code style.
+```
+cargo install stylua
 ```
 
 [Skip to Mac specifics config](#MacOS)
