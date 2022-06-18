@@ -1,6 +1,6 @@
 ## This configuration only works in neovim 0.7
 
-Heavily inspired by [LunaVim](https://github.com/LunarVim/nvim-basic-ide)
+Heavily inspired by [LunarVim](https://github.com/LunarVim/nvim-basic-ide)
 
 ## Dependencies
 
