@@ -59,8 +59,7 @@ return packer.startup(function(use)
 
 	-- Colorschemes
 	use("folke/tokyonight.nvim")
-  	use("bluz71/vim-moonfly-colors")
-
+  use("martinsione/darkplus.nvim")
 	-- cmp plugins
 	use("hrsh7th/nvim-cmp") -- The completion plugin
 	use("hrsh7th/cmp-buffer") -- buffer completions
