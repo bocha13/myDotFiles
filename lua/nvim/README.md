@@ -3,7 +3,7 @@
 ## Dependencies
 
 Rust
-[Follow Rustup instructions](https://rustup.rs/)
+- [Follow Rustup instructions](https://rustup.rs/)
 
 Ripgrep
 - ripgrep is a line-oriented search tool that recursively searches the current directory for a regex pattern.
