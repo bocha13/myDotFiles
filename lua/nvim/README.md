@@ -64,3 +64,6 @@ brew update neovim
 brew tap homebrew/cask-fonts
 brew install --cask <name-of-font>   ej: font-hack-nerd-font
 ```
+
+
+Heavily inspired by [LunaVim](https://github.com/LunarVim/nvim-basic-ide)
