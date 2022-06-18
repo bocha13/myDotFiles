@@ -9,24 +9,24 @@ end
 -- end
 
 local mode_color = {
-	n = "#7AA2F7",
-	i = "#9ECE6A",
-	v = "#BB9AF7",
-	[""] = "#BB9AF7",
-	V = "#BB9AF7",
-	c = "#E0AF68",
-	no = "#7AA2F7",
+	n = "#608B4E",
+	i = "#4E88B8",
+	v = "#A774A3",
+	[""] = "#A774A3",
+	V = "#A774A3",
+	c = "#608B4E",
+	no = "#608B4E",
 	s = "#ce9178",
 	S = "#ce9178",
 	ic = "#dcdcaa",
-	R = "#F7768E",
-	Rv = "#F7768E",
-	cv = "#7AA2F7",
-	ce = "#7AA2F7",
+	R = "#D16969",
+	Rv = "#D16969",
+	cv = "#608B4E",
+	ce = "#608B4E",
 	r = "#F7768E",
-	rm = "#E0AF68",
-	["r?"] = "#E0AF68",
-	["!"] = "#E0AF68",
+	rm = "#608B4E",
+	["r?"] = "#608B4E",
+	["!"] = "#608B4E",
 	t = "#D7BA7D",
 }
 
@@ -37,7 +37,7 @@ local mode = {
 	end,
 	color = function()
 		-- auto change color according to neovims mode
-		return { bg = mode_color[vim.fn.mode()], fg = "#303030" }
+		return { bg = mode_color[vim.fn.mode()], fg = "#262626" }
 	end,
 	padding = 0,
 }
@@ -61,7 +61,7 @@ local diff = {
 	colored = false,
 	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
 	cond = hide_in_width,
-	separator = "| ",
+	separator = " │ ",
 }
 
 local filetype = {
@@ -75,7 +75,7 @@ local branch = {
 	icons_enabled = true,
 	icon = " ",
 	color = function()
-		return { fg = mode_color[vim.fn.mode()], bg = "#3B4261" }
+		return { fg = mode_color[vim.fn.mode()], bg = "#262626" }
 	end,
 }
 
@@ -103,7 +103,7 @@ lualine.setup({
 	options = {
 		globalstatus = true,
 		icons_enabled = true,
-		theme = "tokyonight",
+		theme = "codedark",
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
 		disabled_filetypes = { "alpha", "dashboard" },
