@@ -2,6 +2,9 @@
 
 ## Dependencies
 
+Nodejs
+- [Follow nodejs instructions](https://nodejs.org/en/)
+
 Rust
 - [Follow Rustup instructions](https://rustup.rs/)
 
@@ -12,7 +15,7 @@ sudo apt install ripgrep
 ```
 
 Stylua
-- An opinionated code formatter for Lua 5.1, Lua 5.2 and Luau, built using full-moon. StyLua is inspired by the likes of prettier, it parses your Lua codebase, and prints it back out from scratch, enforcing a consistent code style.
+- An opinionated code formatter for Lua. StyLua is inspired by the likes of prettier.
 ```
 cargo install stylua
 ```
@@ -21,14 +24,14 @@ cargo install stylua
 
 # Linux / wsl
 
-## Install neovim
+### Install neovim
 - clone nvim from https://github.com/neovim/neovim.git
-- checkout the branch with the version you want to install (ej. release-0.7)
+- checkout the branch with the version you want to install (eg. release-0.7)
 - inside the repo run ``` make CMAKE_BUILD_TYPE=Release ```
 - then run "sudo make install"
 - if no errors, nvim should be installed
 
-### Upgrade to latest release
+#### Upgrade to latest release
 Inside the cloned neovim repo run the following commands
 ```
 git pull
@@ -37,7 +40,7 @@ sudo make install
 nvim -v
 ```
 
-## Install fonts
+### Install fonts
 - clone https://github.com/ryanoasis/nerd-fonts
 - install the font you want (be sure it has Nerd Font in the name to include icons)
 - ```./install.sh <name of font>```
