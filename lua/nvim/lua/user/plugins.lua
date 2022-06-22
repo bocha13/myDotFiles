@@ -50,7 +50,7 @@ return packer.startup(function(use)
 	use("akinsho/bufferline.nvim") -- A  buffer line for Neovim built using lua
 	use("moll/vim-bbye") -- Allows you to do delete buffers without closing your windows or messing up your layout
 	use("nvim-lualine/lualine.nvim") --A blazing fast and easy to configure Neovim statusline written in Lua
-	use("akinsho/toggleterm.nvim")  -- A neovim plugin to persist and toggle multiple terminals during an editing session
+	use("akinsho/toggleterm.nvim") -- A neovim plugin to persist and toggle multiple terminals during an editing session
 	use("ahmedkhalf/project.nvim") -- An all in one neovim plugin written in lua that provides superior project management
 	use("lewis6991/impatient.nvim") -- Improve startup time
 	use("lukas-reineke/indent-blankline.nvim") -- Adds indentation guides to all lines (including empty lines)
@@ -59,7 +59,7 @@ return packer.startup(function(use)
 
 	-- Colorschemes
 	use("folke/tokyonight.nvim")
-  use("martinsione/darkplus.nvim")
+	use("martinsione/darkplus.nvim")
 	-- cmp plugins
 	use("hrsh7th/nvim-cmp") -- The completion plugin
 	use("hrsh7th/cmp-buffer") -- buffer completions
@@ -86,6 +86,9 @@ return packer.startup(function(use)
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	})
+
+	-- Copilot
+	use("github/copilot.vim") -- Provides autocomplete-style suggestions from an AI pair programmer as you code
 
 	-- Git
 	use("lewis6991/gitsigns.nvim") -- Super fast git decorations
