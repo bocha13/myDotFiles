@@ -50,6 +50,8 @@ local kind_icons = {
 	TypeParameter = "",
 }
 
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -77,22 +79,22 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
 
 		-- TODO: THIS ONE HAS CONFLICTS WITH COPILOT
-		-- ["<Tab>"] = cmp.mapping(function(fallback)
-		-- if cmp.visible() then
-		-- cmp.select_next_item()
-		-- elseif luasnip.expandable() then
-		-- luasnip.expand()
-		-- elseif luasnip.expand_or_jumpable() then
-		-- luasnip.expand_or_jump()
-		-- elseif check_backspace() then
-		-- fallback()
-		-- else
-		-- fallback()
-		-- end
-		-- end, {
-		-- "i",
-		-- "s",
-		-- }),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.expandable() then
+				luasnip.expand()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			elseif check_backspace() then
+				fallback()
+			else
+				fallback()
+			end
+		end, {
+			"i",
+			"s",
+		}),
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
@@ -111,6 +113,12 @@ cmp.setup({
 		format = function(entry, vim_item)
 			-- Kind icons
 			vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+
+			if entry.source.name == "copilot" then
+				vim_item.kind = ""
+				vim_item.kind_hl_group = "CmpItemKindCopilot"
+			end
+
 			vim_item.menu = ({
 				nvim_lsp = "",
 				nvim_lua = "",
@@ -123,6 +131,7 @@ cmp.setup({
 		end,
 	},
 	sources = {
+		{ name = "copilot" },
 		{ name = "nvim_lsp" },
 		{ name = "nvim_lua" },
 		{ name = "luasnip" },

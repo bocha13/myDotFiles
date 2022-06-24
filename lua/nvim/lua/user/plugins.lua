@@ -88,7 +88,20 @@ return packer.startup(function(use)
 	})
 
 	-- Copilot
-	use("github/copilot.vim") -- Provides autocomplete-style suggestions from an AI pair programmer as you code
+	-- use("github/copilot.vim") -- Provides autocomplete-style suggestions from an AI pair programmer as you code
+	use({
+		"zbirenbaum/copilot.lua",
+		event = { "VimEnter" },
+		config = function()
+			vim.defer_fn(function()
+				require("user.copilot")
+			end, 100)
+		end,
+	})
+	use({
+		"zbirenbaum/copilot-cmp",
+		module = "copilot_cmp",
+	})
 
 	-- Git
 	use("lewis6991/gitsigns.nvim") -- Super fast git decorations
