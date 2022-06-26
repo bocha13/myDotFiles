@@ -1,21 +1,57 @@
-require("user.autocommands")
-require("user.options")
-require("user.keymaps")
-require("user.plugins")
-require("user.colorscheme")
-require("user.lsp")
-require("user.cmp")
-require("user.telescope")
-require("user.treesitter")
-require("user.autopairs")
-require("user.comment")
-require("user.gitsigns")
-require("user.nvim-tree")
-require("user.bufferline")
-require("user.lualine")
-require("user.toggleterm")
-require("user.projects")
-require("user.impatient")
-require("user.indentline")
-require("user.alpha")
-require("user.dap")
+local options = {
+	termguicolors = true,
+	cursorline = true, -- Highlight the text line of the cursor
+	backup = false,
+	clipboard = "unnamedplus",
+	cmdheight = 1,
+	completeopt = { "menuone", "noselect" },
+	conceallevel = 0,
+	-- colorcolumn = "80",
+	fileencoding = "utf-8",
+	hlsearch = true,
+	ignorecase = true,
+	mouse = "a",
+	pumheight = 10,
+	showmode = false,
+	showtabline = 0,
+	smartcase = true,
+	smartindent = true,
+	splitbelow = true,
+	splitright = true,
+	swapfile = false,
+	timeoutlen = 1000,
+	undofile = true,
+	updatetime = 300,
+	writebackup = false,
+	expandtab = true,
+	shiftwidth = 2,
+	tabstop = 2,
+	number = true,
+	laststatus = 3,
+	showcmd = false,
+	ruler = false,
+	relativenumber = true,
+	numberwidth = 4,
+	signcolumn = "yes",
+	wrap = false,
+	scrolloff = 8,
+	sidescrolloff = 8,
+	guifont = "JetBrainsMono:17",
+}
+
+for key, value in pairs(options) do
+	vim.opt[key] = value
+end
+
+-- source remining config giles
+require("plugins")
+require("autocommands")
+require("keymaps")
+require("lsp")
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.opt.fillchars.eob = " "
+vim.opt.shortmess:append("c")
+vim.opt.whichwrap:append("<,>,[,],h,l")
+vim.opt.iskeyword:append("-")

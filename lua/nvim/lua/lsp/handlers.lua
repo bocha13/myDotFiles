@@ -15,7 +15,7 @@ M.setup = function()
 	end
 
 	local config = {
-    -- disable inline error message
+		-- disable inline error message
 		virtual_text = false,
 		-- show signs
 		signs = {
@@ -37,8 +37,7 @@ M.setup = function()
 
 	vim.diagnostic.config(config)
 
-
-  -- show diagnostic float window on cursor
+	-- show diagnostic float window on cursor
 	local function on_cursor_hold()
 		if vim.lsp.buf.server_ready() then
 			vim.diagnostic.open_float()
@@ -53,7 +52,7 @@ M.setup = function()
 	vim.o.updatetime = 250
 	vim.cmd([[autocmd CursorHold, CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
 
-  -- Handlers
+	-- Handlers
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 		border = "rounded",
 	})
@@ -94,9 +93,10 @@ M.on_attach = function(client, bufnr)
 	if not status_cmp_ok then
 		return
 	end
-  -- use prettier to format this type of files instead of the running server
+	-- use prettier to format this type of files instead of the running server
 	if client.name == "tsserver" then
 		client.resolved_capabilities.document_formatting = false
+		client.resolved_capabilities.document_range_formatting = false
 	end
 	if client.name == "sumneko_lua" then
 		client.resolved_capabilities.document_formatting = false
