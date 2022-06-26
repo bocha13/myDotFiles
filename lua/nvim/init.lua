@@ -1,10 +1,10 @@
 local options = {
 	termguicolors = true,
-	cursorline = true, -- Highlight the text line of the cursor
+	cursorline = true,	      -- Highlight the text line of the cursor
 	backup = false,
 	clipboard = "unnamedplus",
 	cmdheight = 1,
-	completeopt = { "menuone", "noselect" },
+	completeopt =  {"menuone", "noselect"},
 	conceallevel = 0,
 	-- colorcolumn = "80",
 	fileencoding = "utf-8",
@@ -51,7 +51,8 @@ require("lsp")
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.opt.fillchars.eob = " "
-vim.opt.shortmess:append("c")
-vim.opt.whichwrap:append("<,>,[,],h,l")
-vim.opt.iskeyword:append("-")
+vim.opt.fillchars.eob=" "
+vim.opt.shortmess:append "c"
+vim.opt.whichwrap:append "<,>,[,],h,l"
+vim.opt.iskeyword:append "-"
+
