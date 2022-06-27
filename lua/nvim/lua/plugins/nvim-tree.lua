@@ -52,7 +52,7 @@ nvim_tree.setup({
 			enable = false,
 			icons = {
 				corner = "└ ",
-				edge = "│ ",
+				edge = "▎",
 				none = "  ",
 			},
 		},
@@ -96,9 +96,9 @@ nvim_tree.setup({
 		enable = true,
 		icons = {
 			hint = "",
-			info = "",
-			warning = "",
-			error = "",
+			info = "■",
+			warning = "■",
+			error = "■",
 		},
 	},
 	update_focused_file = {
