@@ -157,10 +157,10 @@ return packer.startup(function(use)
 	use({
 		"zbirenbaum/copilot.lua",
 		event = { "VimEnter" },
-		--config = config("copilot"),
+		-- config = config("copilot"),
 		config = function()
 			vim.defer_fn(function()
-				require("plugins.copilot")
+				require("copilot").setup()
 			end, 100)
 		end,
 	})
