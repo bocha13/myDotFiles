@@ -29,10 +29,6 @@ if not status_ok then
 	return
 end
 
-local config = function(name)
-	return string.format("require('plugins.%s')", name)
-end
-
 -- Have packer use a popup window
 packer.init({
 	display = {
@@ -44,6 +40,15 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
+	-- Source config files
+	local config = function(name)
+		return string.format("require('plugins.%s')", name)
+	end
+
+	local use_with_config = function(path, name)
+		use({ path, config = config(name) })
+	end
+
 	use("wbthomason/packer.nvim") -- Have packer manage itself
 	use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
 	use("moll/vim-bbye") -- Allows you to do delete buffers without closing your windows or messing up your layout
@@ -77,10 +82,7 @@ return packer.startup(function(use)
 	})
 
 	-- Highlight other uses of current word under cursor
-	use({
-		"RRethy/vim-illuminate",
-		config = config("illuminate"),
-	})
+	use_with_config("RRethy/vim-illuminate", "illuminate")
 
 	-- Greeter for nvim
 	use({
