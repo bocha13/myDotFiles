@@ -76,7 +76,7 @@ cmp.setup({
 		}),
 		-- Accept currently selected item. If none selected, `select` first item.
 		-- Set `select` to `false` to only confirm explicitly selected items.
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<CR>"] = cmp.mapping.confirm({ select = false }),
 
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
@@ -142,17 +142,18 @@ cmp.setup({
 		select = false,
 	},
 	-- documentation = true,
-	window = {
-		-- documentation = "native",
-		documentation = {
-			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-			winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-		},
-		completion = {
-			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-			winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-		},
-	},
+	-- window = {
+	-- documentation = "native",
+	-- completion = "native",
+	-- documentation = {
+	-- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	-- winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
+	-- },
+	-- completion = {
+	-- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	-- winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
+	-- },
+	-- },
 	experimental = {
 		ghost_text = true,
 		-- native_menu = false,

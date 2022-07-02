@@ -12,4 +12,13 @@ copilot.setup({
 		enabled = true,
 	},
 	ft_disable = { "markdown" },
+	server_opts_overrides = {
+		trace = "verbose",
+		settings = {
+			advanced = {
+				listCount = 10,
+				inlineSuggestCount = 3,
+			},
+		},
+	},
 })
