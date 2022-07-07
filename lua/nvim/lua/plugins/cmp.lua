@@ -78,7 +78,7 @@ cmp.setup({
 		-- Set `select` to `false` to only confirm explicitly selected items.
 		["<CR>"] = cmp.mapping.confirm({ select = false }),
 
-		["<Tab>"] = cmp.mapping(function(fallback)
+		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
 			elseif luasnip.expandable() then
@@ -94,18 +94,18 @@ cmp.setup({
 			"i",
 			"s",
 		}),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, {
-			"i",
-			"s",
-		}),
+		-- ["<S-Tab>"] = cmp.mapping(function(fallback)
+		-- if cmp.visible() then
+		-- cmp.select_prev_item()
+		-- elseif luasnip.jumpable(-1) then
+		-- luasnip.jump(-1)
+		-- else
+		-- fallback()
+		-- end
+		-- end, {
+		-- "i",
+		-- "s",
+		-- }),
 	}),
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
@@ -155,7 +155,7 @@ cmp.setup({
 	-- },
 	-- },
 	experimental = {
-		ghost_text = true,
+		ghost_text = false,
 		-- native_menu = false,
 	},
 })
