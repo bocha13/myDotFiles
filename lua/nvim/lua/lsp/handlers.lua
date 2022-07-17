@@ -62,13 +62,13 @@ M.setup = function()
 	})
 end
 
-local function lsp_highlight_document(client)
-	local status_ok, illuminate = pcall(require, "illuminate")
-	if not status_ok then
-		return
-	end
-	illuminate.on_attach(client)
-end
+-- local function lsp_highlight_document(client)
+-- local status_ok, illuminate = pcall(require, "illuminate")
+-- if not status_ok then
+-- return
+-- end
+-- illuminate.on_attach(client)
+-- end
 
 local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true }
@@ -113,7 +113,7 @@ M.on_attach = function(client, bufnr)
 	M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
 
 	lsp_keymaps(bufnr)
-	lsp_highlight_document(client)
+	-- lsp_highlight_document(client)
 end
 
 return M

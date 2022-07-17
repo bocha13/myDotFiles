@@ -82,7 +82,7 @@ return packer.startup(function(use)
 	})
 
 	-- Highlight other uses of current word under cursor
-	use_with_config("RRethy/vim-illuminate", "illuminate")
+	use("RRethy/vim-illuminate")
 
 	-- Greeter for nvim
 	use({
