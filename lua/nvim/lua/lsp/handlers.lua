@@ -100,9 +100,8 @@ M.on_attach = function(client, bufnr)
 	end
 
 	-- use rust_analyzer to format and linting instead of rustc
-	if client.name == "rustc" then
+	if client.name == "rust_analyzer" then
 		client.resolved_capabilities.document_formatting = false
-		client.resolved_capabilities.document_range_formatting = false
 	end
 
 	if client.name == "sumneko_lua" then

@@ -22,9 +22,9 @@ local settings = {
 	-- automatic_installation = false,
 	ui = {
 		icons = {
-			-- server_installed = "◍",
-			-- server_pending = "◍",
-			-- server_uninstalled = "◍",
+			server_installed = "◍",
+			server_pending = "◍",
+			server_uninstalled = "◍",
 			-- server_installed = "✓",
 			-- server_pending = "➜",
 			-- server_uninstalled = "✗",
@@ -74,5 +74,13 @@ for _, server in pairs(servers) do
 		local tsserver_opts = require("lsp.settings.tsserver")
 		opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
 	end
+
+	if server == "rust_analyzer" then
+    local rust_opts = require("lsp.settings.rust")
+    require("rust-tools").setup(rust_opts)
+    goto continue
+	end
+
 	lspconfig[server].setup(opts)
+  ::continue::
 end

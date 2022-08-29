@@ -181,6 +181,7 @@ return packer.startup(function(use)
 	use("neovim/nvim-lspconfig") -- enable LSP
 	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
+	use("simrat39/rust-tools.nvim") -- rust tools?
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
