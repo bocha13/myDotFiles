@@ -152,24 +152,32 @@ return packer.startup(function(use)
 		config = config("colorscheme"),
 	})
 
+	-- TABNINE
+	use({
+		"tzachar/cmp-tabnine",
+		run = "./install.sh",
+		requires = "hrsh7th/nvim-cmp",
+		config = config("tabnine"),
+	})
+
 	-- Copilot
 	-- first install this plugin, to config copilot
 	-- once installed, comment it out and use the other two
 	-- use("github/copilot.vim") -- Provides autocomplete-style suggestions from an AI pair programmer as you code
-	use({
-		"zbirenbaum/copilot.lua",
-		event = { "VimEnter" },
-		-- config = config("copilot"),
-		config = function()
-			vim.defer_fn(function()
-				require("copilot").setup()
-			end, 100)
-		end,
-	})
-	use({
-		"zbirenbaum/copilot-cmp",
-		module = "copilot_cmp",
-	})
+	--	use({
+	--		"zbirenbaum/copilot.lua",
+	--		event = { "VimEnter" },
+	--		-- config = config("copilot"),
+	--		config = function()
+	--			vim.defer_fn(function()
+	--				require("copilot").setup()
+	--			end, 100)
+	--		end,
+	--	})
+	--	use({
+	--		"zbirenbaum/copilot-cmp",
+	--		module = "copilot_cmp",
+	--	})
 
 	-- Telescope, fuzzy finder
 	use({
