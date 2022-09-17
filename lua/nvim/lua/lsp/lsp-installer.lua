@@ -5,9 +5,8 @@ end
 
 local servers = {
 	"cssls",
-	"cssmodules_ls",
 	"html",
-	"jsonls",
+	--"jsonls",
 	"sumneko_lua",
 	"tsserver",
 	"pyright",
