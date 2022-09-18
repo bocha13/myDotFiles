@@ -31,8 +31,11 @@ function ex(){
 }
 
 # ----------- EXPORTS -------------
-# homebrew export
+# homebrew export uncomment on macOS
 export PATH="/opt/homebrew/bin:$PATH"
+
+# vscode uncomment on windows
+#export PATH=$PATH:"/mnt/c/Users/ignac/AppData/Local/Programs/Microsoft VS Code/bin"
 
 # nvm export
 export NVM_DIR="$HOME/.nvm"
@@ -63,3 +66,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias vim='nvim'
+
+# open tmux by default
+#case $- in *i*)
+#    [ -z "$TMUX" ] && exec tmux
+#esac
