@@ -50,7 +50,9 @@ local kind_icons = {
 	TypeParameter = "",
 }
 
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+-- SET COLOUR TO COPILOT / TABNINE ICONS
+-- vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { bg = "#A044C7" })
 
 cmp.setup({
 	snippet = {
@@ -113,9 +115,16 @@ cmp.setup({
 			-- Kind icons
 			vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
 
-			if entry.source.name == "copilot" then
-				vim_item.kind = ""
-				vim_item.kind_hl_group = "CmpItemKindCopilot"
+			-- COPILOT ICON
+			-- if entry.source.name == "copilot" then
+			-- 	vim_item.kind = ""
+			-- 	vim_item.kind_hl_group = "CmpItemKindCopilot"
+			-- end
+
+			-- TABNINE ICON
+			if entry.source.name == "cmp_tabnine" then
+				vim_item.kind = "Ω"
+				vim_item.kind_hl_group = "CmpItemKindTabnine"
 			end
 
 			vim_item.menu = ({
