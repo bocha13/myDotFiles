@@ -52,7 +52,7 @@ local kind_icons = {
 
 -- SET COLOUR TO COPILOT / TABNINE ICONS
 -- vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { bg = "#A044C7" })
+vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#A044C7" })
 
 cmp.setup({
 	snippet = {

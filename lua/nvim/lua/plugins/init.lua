@@ -75,6 +75,9 @@ return packer.startup(function(use)
 		config = config("gitsigns"),
 	})
 
+	-- Neogit
+	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
+
 	-- Improve startup
 	use({
 		"lewis6991/impatient.nvim",
@@ -148,7 +151,7 @@ return packer.startup(function(use)
 
 	-- Colorschemes
 	use({
-		"martinsione/darkplus.nvim",
+		"haishanh/night-owl.vim",
 		config = config("colorscheme"),
 	})
 

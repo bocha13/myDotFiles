@@ -1,6 +1,6 @@
 local options = {
 	termguicolors = true,
-	cursorline = true, -- Highlight the text line of the cursor
+	-- cursorline = true, -- Highlight the text line of the cursor
 	backup = false,
 	clipboard = "unnamedplus",
 	cmdheight = 1,
