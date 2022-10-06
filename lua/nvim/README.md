@@ -1,4 +1,5 @@
 ## This configuration only works in neovim 0.7
+### Requires git >= 2.31.0
 
 Heavily inspired by [LunarVim](https://github.com/LunarVim/nvim-basic-ide)
 
