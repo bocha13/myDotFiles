@@ -3,4 +3,17 @@ if not status_ok then
 	return
 end
 
-comment.setup({})
+comment.setup({
+	padding = true,
+	sticky = true,
+	ignore = nil,
+	toggler = {
+		line = "/",
+	},
+	opleader = {
+		block = "/",
+	},
+	mappings = {
+		basic = true,
+	},
+})

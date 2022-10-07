@@ -75,15 +75,14 @@ keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 keymap("n", "<leader>li", "<cmd>LspInfo<CR>", opts)
 keymap("n", "<leader>lI", "<cmd>LspInstallInfo<CR>", opts)
 keymap("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-keymap("n", "<leader>ld", "<cmd>Telescope lsp_workspace_diagnostics<CR>",opts)
-keymap("n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>",opts)
-keymap("n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<CR>",opts)
-keymap("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>",opts)
+keymap("n", "<leader>ld", "<cmd>Telescope lsp_workspace_diagnostics<CR>", opts)
+keymap("n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>", opts)
+keymap("n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<CR>", opts)
+keymap("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 
 -- GIT
-keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>",opts)
+keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
 -- MISC
-keymap("n", "<leader>h","<cmd>nohlsearch<CR>", opts)
-keymap("n", "<leader>/", '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', opts)
+keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
 keymap("n", "<leader>c", "<cmd>Bdelete!<CR>", opts)
