@@ -17,9 +17,11 @@ null_ls.setup({
 			extra_filetypes = { "toml", "solidity" },
 			extra_args = { "--no-semi" },
 		}),
+
 		formatting.black.with({ extra_args = { "--fast" } }),
 		formatting.stylua,
 		formatting.shfmt,
+		formatting.rustfmt,
 		formatting.google_java_format,
 		diagnostics.eslint,
 		diagnostics.shellcheck,

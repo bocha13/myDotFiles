@@ -1,6 +1,13 @@
 local M = {}
 
+local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not status_cmp_ok then
+	return
+end
+
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
 
 M.setup = function()
 	local signs = {
@@ -103,8 +110,9 @@ M.on_attach = function(client, bufnr)
 		client.resolved_capabilities.document_formatting = false
 	end
 
-	M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-	M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
+	if client.name == "rust_analyzer" then
+		client.resolved_capabilities.document_formatting = false
+	end
 
 	lsp_keymaps(bufnr)
 	-- lsp_highlight_document(client)
