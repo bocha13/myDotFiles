@@ -8,7 +8,7 @@ end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
+M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 M.setup = function()
 	local signs = {
@@ -143,9 +143,9 @@ M.on_attach = function(client, bufnr)
 		client.resolved_capabilities.document_formatting = false
 	end
 
-	--[[ if client.name == "rust_analyzer" then
+	if client.name == "rust_analyzer" then
 		client.resolved_capabilities.document_formatting = false
-	end ]]
+	end
 
 	lsp_keymaps(bufnr)
 	-- lsp_highlight_document(client)
