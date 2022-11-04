@@ -6,13 +6,11 @@ end
 local servers = {
 	"cssls",
 	"html",
-	--"jsonls",
 	"sumneko_lua",
 	"tsserver",
 	"pyright",
 	"yamlls",
 	"bashls",
-	"rust_analyzer",
 	"clangd",
 }
 
@@ -73,31 +71,6 @@ for _, server in pairs(servers) do
 		local tsserver_opts = require("lsp.settings.tsserver")
 		opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
 	end
-
-	--[[ if server == "rust_analyzer" then
-    local keymap = vim.keymap.set
-    local key_opts = { silent = true}
-
-    keymap("n", "<leader>rh", "<cmd>RustSetInlayHints<Cr>", key_opts)
-
-    require("rust-tools").setup {
-      server = {
-        on_attach = require("lsp.handlers").on_attach,
-        capabilities = require("lsp.handlers").capabilities,
-        settings = {
-          ["rust_analyzer"] = {
-            lens = {
-              enable = true,
-            },
-            checkOnSave = {
-              command = "clippy"
-            }
-          }
-        }
-      }
-    }
-    goto continue
-	end ]]
 
 	lspconfig[server].setup(opts)
 	-- ::continue::

@@ -111,13 +111,8 @@ return packer.startup(function(use)
 	-- Bufferline
 	use({
 		"akinsho/bufferline.nvim",
+		tag = "v3.*",
 		config = config("bufferline"),
-	})
-
-	-- NVIM-TREE, a file explorer
-	use({
-		"kyazdani42/nvim-tree.lua",
-		config = config("nvim-tree"),
 	})
 
 	-- Autopairs, integrates with both cmp and treesitter
@@ -125,6 +120,8 @@ return packer.startup(function(use)
 		"windwp/nvim-autopairs",
 		config = config("autopairs"),
 	})
+
+	use({ "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim", config = config("toggle-lsp") })
 
 	-- cmp plugins
 	use({

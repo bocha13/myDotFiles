@@ -7,13 +7,13 @@ comment.setup({
 	padding = true,
 	sticky = true,
 	ignore = nil,
-	toggler = {
-		line = "/",
-	},
-	opleader = {
-		block = "/",
-	},
-	mappings = {
-		basic = true,
-	},
+	-- toggler = {
+	-- line = "/",
+	-- },
+	-- opleader = {
+	-- block = "/",
+	-- },
+	-- mappings = {
+	-- basic = true,
+	-- },
 })

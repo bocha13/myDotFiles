@@ -1,6 +1,5 @@
 local M = {}
 
-local rust_tools = require("rust-tools")
 local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_cmp_ok then
 	return
@@ -8,7 +7,7 @@ end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
+M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 M.setup = function()
 	local signs = {
@@ -20,39 +19,6 @@ M.setup = function()
 	for _, sign in ipairs(signs) do
 		vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 	end
-
-	rust_tools.setup({
-		--[[ tools = {
-			autoSetHints = true,
-			hover_with_actions = true,
-			inlay_hints = {
-				show_parameter_hints = false,
-				parameter_hints_prefix = "",
-				other_hints_prefix = "",
-			},
-		}, ]]
-
-		-- all the opts to send to nvim-lspconfig
-		-- these override the defaults set by rust-tools.nvim
-		-- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
-		server = {
-			-- on_attach is a callback called when the language server attachs to the buffer
-			on_attach = function(client)
-				client.resolved_capabilities.document_formatting = false
-				client.resolved_capabilities.document_range_formatting = false
-			end,
-			settings = {
-				-- to enable rust-analyzer settings visit:
-				-- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-				["rust-analyzer"] = {
-					-- enable clippy on save
-					checkOnSave = {
-						command = "clippy",
-					},
-				},
-			},
-		},
-	})
 
 	local config = {
 		-- disable inline error message
@@ -84,13 +50,13 @@ M.setup = function()
 		end
 	end
 
-	local diagnostic_hover_augroup_name = "lspconfig-diagnostic"
-	vim.api.nvim_set_option("updatetime", 500)
-	vim.api.nvim_create_augroup(diagnostic_hover_augroup_name, { clear = true })
-	vim.api.nvim_create_autocmd({ "CursorHold" }, { group = diagnostic_hover_augroup_name, callback = on_cursor_hold })
+	-- local diagnostic_hover_augroup_name = "lspconfig-diagnostic"
+	-- vim.api.nvim_set_option("updatetime", 500)
+	-- vim.api.nvim_create_augroup(diagnostic_hover_augroup_name, { clear = true })
+	-- vim.api.nvim_create_autocmd({ "CursorHold" }, { group = diagnostic_hover_augroup_name, callback = on_cursor_hold })
 
-	vim.o.updatetime = 250
-	vim.cmd([[autocmd CursorHold, CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
+	-- vim.o.updatetime = 250
+	-- vim.cmd([[autocmd CursorHold, CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
 
 	-- Handlers
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -101,14 +67,6 @@ M.setup = function()
 		border = "rounded",
 	})
 end
-
--- local function lsp_highlight_document(client)
--- local status_ok, illuminate = pcall(require, "illuminate")
--- if not status_ok then
--- return
--- end
--- illuminate.on_attach(client)
--- end
 
 local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true }
@@ -142,10 +100,6 @@ M.on_attach = function(client, bufnr)
 	if client.name == "sumneko_lua" then
 		client.resolved_capabilities.document_formatting = false
 	end
-
-	--[[ if client.name == "rust_analyzer" then
-		client.resolved_capabilities.document_formatting = false
-	end ]]
 
 	lsp_keymaps(bufnr)
 	-- lsp_highlight_document(client)
