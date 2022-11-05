@@ -12,6 +12,7 @@ local servers = {
 	"yamlls",
 	"bashls",
 	"clangd",
+  "rust_analyzer"
 }
 
 local settings = {
@@ -72,6 +73,43 @@ for _, server in pairs(servers) do
 		opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
 	end
 
+  if server == "rust_analyzer" then
+    local optsRust = {
+      tools = {
+        -- autoSetHints = true,
+        runnables = {
+          use_telescope = true
+        },
+        inlay_hints = {
+          auto = true,
+          show_parameter_hints = true,
+          parameter_hints_prefix = "",
+          other_hints_refix = "",
+          only_current_line = false,
+        }
+      },
+      server = {
+        on_attach = require("lsp.handlers").on_attach,
+        settings = {
+          ["rust-analyzer"] = {
+    				completion = {
+		    			postfix = {
+				    		enable = false,
+					    },
+				    },
+            checkOnSave = {
+              command = "clippy",
+            }
+          }
+        }
+      }
+    }
+
+    require("rust-tools").setup(optsRust)
+
+    goto continue
+  end
+
 	lspconfig[server].setup(opts)
-	-- ::continue::
+	::continue::
 end
