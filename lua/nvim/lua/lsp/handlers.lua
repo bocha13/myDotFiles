@@ -93,12 +93,12 @@ M.on_attach = function(client, bufnr)
 	end
 	-- use prettier to format this type of files instead of the running server
 	if client.name == "tsserver" then
-		client.resolved_capabilities.document_formatting = false
-		client.resolved_capabilities.document_range_formatting = false
+		client.server_capabilities.document_formatting = false
+		client.server_capabilities.document_range_formatting = false
 	end
 
 	if client.name == "sumneko_lua" then
-		client.resolved_capabilities.document_formatting = false
+		client.server_capabilities.document_formatting = false
 	end
 
 	lsp_keymaps(bufnr)

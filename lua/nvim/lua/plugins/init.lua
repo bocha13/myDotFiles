@@ -150,10 +150,11 @@ return packer.startup(function(use)
 	})
 
 	-- Colorschemes
-	use({
-		"haishanh/night-owl.vim",
-		config = config("colorscheme"),
-	})
+	use({ "lunarvim/darkplus.nvim", config = config("colorscheme") })
+	-- use({
+	--	"haishanh/night-owl.vim",
+	--	config = config("colorscheme"),
+	-- })
 
 	-- TABNINE
 	use({
@@ -193,6 +194,9 @@ return packer.startup(function(use)
 	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 	use("simrat39/rust-tools.nvim") -- rust tools?
+
+	-- VIM BE GOOD :D
+	use("ThePrimeagen/vim-be-good")
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
