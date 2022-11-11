@@ -94,7 +94,7 @@ for _, server in pairs(servers) do
           ["rust-analyzer"] = {
     				completion = {
 		    			postfix = {
-				    		enable = false,
+				    		enable = true,
 					    },
 				    },
             checkOnSave = {

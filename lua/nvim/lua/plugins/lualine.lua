@@ -8,37 +8,15 @@ end
 -- return
 -- end
 
-local mode_color = {
-	n = "#608B4E",
-	i = "#4E88B8",
-	v = "#A774A3",
-	[""] = "#A774A3",
-	V = "#A774A3",
-	c = "#608B4E",
-	no = "#608B4E",
-	s = "#ce9178",
-	S = "#ce9178",
-	ic = "#dcdcaa",
-	R = "#D16969",
-	Rv = "#D16969",
-	cv = "#608B4E",
-	ce = "#608B4E",
-	r = "#F7768E",
-	rm = "#608B4E",
-	["r?"] = "#608B4E",
-	["!"] = "#608B4E",
-	t = "#608B4E",
-}
-
 local mode = {
 	"mode",
 	fmt = function(str)
 		return "-- " .. str .. " --"
 	end,
-	color = function()
-		-- auto change color according to neovims mode
-		return { bg = mode_color[vim.fn.mode()], fg = "#262626" }
-	end,
+	-- color = function()
+	-- 	-- auto change color according to neovims mode
+	-- 	return { bg = mode_color[vim.fn.mode()], fg = "#262626" }
+	-- end,
 	padding = 0,
 }
 
@@ -74,9 +52,9 @@ local branch = {
 	"branch",
 	icons_enabled = true,
 	icon = " ",
-	color = function()
-		return { fg = mode_color[vim.fn.mode()], bg = "#262626" }
-	end,
+	-- color = function()
+	-- 	return { fg = mode_color[vim.fn.mode()], bg = "#262626" }
+	-- end,
 }
 
 local progress = {
@@ -94,19 +72,23 @@ local spaces = {
 
 local location = {
 	"location",
-	color = function()
-		return { fg = "#252525", bg = mode_color[vim.fn.mode()] }
-	end,
+	-- color = function()
+	-- 	return { fg = "#252525", bg = mode_color[vim.fn.mode()] }
+	-- end,
 }
 
 lualine.setup({
 	options = {
 		globalstatus = true,
 		icons_enabled = true,
-		theme = "codedark",
-		component_separators = { left = "", right = "" },
-		section_separators = { left = "", right = "" },
-		disabled_filetypes = { "alpha", "dashboard" },
+		theme = "nightfly",
+		component_separators = { left = '', right = ''},
+		section_separators = { left = '', right = ''},
+		disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
 		always_divide_middle = true,
 	},
 	sections = {
