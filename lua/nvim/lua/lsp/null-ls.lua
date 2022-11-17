@@ -23,7 +23,7 @@ null_ls.setup({
 		formatting.shfmt,
 		-- formatting.rustfmt,
 		formatting.google_java_format,
-		diagnostics.eslint,
+		--diagnostics.eslint,
 		diagnostics.shellcheck,
 	},
 	on_attach = function(client)
