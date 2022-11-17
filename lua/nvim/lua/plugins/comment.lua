@@ -8,12 +8,13 @@ comment.setup({
 	sticky = true,
 	ignore = nil,
 	toggler = {
-		line = "/",
+	  line = "gcc",
 	},
 	opleader = {
-		block = "/",
-	},
+    line = "gc",
+	  block = "gb",
+  },
 	mappings = {
-		basic = true,
+	  basic = true,
 	},
 })

@@ -86,3 +86,7 @@ keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 -- MISC
 keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
 keymap("n", "<leader>c", "<cmd>Bdelete!<CR>", opts)
+
+-- BUFFERLINE
+keymap("n", "<leader>cl", ":BufferLineCloseLeft<CR>", opts)
+keymap("n", "<leader>cr", ":BufferLineCloseRight<CR>", opts)

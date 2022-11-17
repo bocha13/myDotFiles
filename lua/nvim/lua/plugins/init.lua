@@ -111,13 +111,8 @@ return packer.startup(function(use)
 	-- Bufferline
 	use({
 		"akinsho/bufferline.nvim",
+		tag = "v3.*",
 		config = config("bufferline"),
-	})
-
-	-- NVIM-TREE, a file explorer
-	use({
-		"kyazdani42/nvim-tree.lua",
-		config = config("nvim-tree"),
 	})
 
 	-- Autopairs, integrates with both cmp and treesitter
@@ -125,6 +120,8 @@ return packer.startup(function(use)
 		"windwp/nvim-autopairs",
 		config = config("autopairs"),
 	})
+
+	use({ "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim", config = config("toggle-lsp") })
 
 	-- cmp plugins
 	use({
@@ -153,10 +150,11 @@ return packer.startup(function(use)
 	})
 
 	-- Colorschemes
-	use({
-		"haishanh/night-owl.vim",
-		config = config("colorscheme"),
-	})
+	use({ "folke/tokyonight.nvim", config = config("colorscheme") })
+	-- use({
+	--	"haishanh/night-owl.vim",
+	--	config = config("colorscheme"),
+	-- })
 
 	-- TABNINE
 	use({
@@ -196,6 +194,9 @@ return packer.startup(function(use)
 	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 	use("simrat39/rust-tools.nvim") -- rust tools?
+
+	-- VIM BE GOOD :D
+	use("ThePrimeagen/vim-be-good")
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

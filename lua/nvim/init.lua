@@ -50,8 +50,6 @@ require("keymaps")
 require("lsp")
 require("plugins.illuminate")
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 vim.opt.fillchars.eob = " "
 vim.opt.shortmess:append("c")
 vim.opt.whichwrap:append("<,>,[,],h,l")
