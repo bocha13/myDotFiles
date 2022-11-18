@@ -29,6 +29,9 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	end,
 })
 
+-- set file type to groovy for Jenkinsfile to have syntax highlight
+vim.cmd("autocmd BufRead,BufNewFile Jenkinsfile set filetype=groovy")
+
 vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
 
 -- Fixes Autocomment
