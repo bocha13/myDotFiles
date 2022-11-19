@@ -1,4 +1,4 @@
-# ---------- LOADS / IMPORTS ----------
+# --------- LOADS / IMPORTS ----------
 autoload -Uz add-zsh-hook vcs_info
 zstyle ':vcs_info:*' enable git svn
 
@@ -31,11 +31,21 @@ function ex(){
 }
 
 # ----------- EXPORTS -------------
-# homebrew export uncomment on macOS
-export PATH="/opt/homebrew/bin:$PATH"
+# homebrew export
+#export PATH="/opt/homebrew/bin:$PATH"
 
-# vscode uncomment on windows
-#export PATH=$PATH:"/mnt/c/Users/ignac/AppData/Local/Programs/Microsoft VS Code/bin"
+# code
+export PATH=$PATH:"/mnt/c/Users/ignac/AppData/Local/Programs/Microsoft VS Code/bin"
+
+# DENO
+export DENO_INSTALL="/home/bocha13/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+# go
+export PATH=$PATH:/usr/local/go/bin
+
+# rust_analyzer
+export PATH=$PATH:/.local/share/nvim/lsp_servers/rust/rust_analyzer
 
 # nvm export
 export NVM_DIR="$HOME/.nvm"
@@ -62,12 +72,32 @@ PROMPT='[%n:%F{green}%.%f]%F{red}${vcs_info_msg_0_}%f$ '
 # readlink doesn't work like in linux so we map it
 # to execute greadlink which works the same
 alias readlink=greadlink
+alias ls='ls --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias vim='nvim'
+alias dosaml="yarn server do api --useHttps --host auth.learnlight.com --port 8443"
 
-# open tmux by default
-#case $- in *i*)
-#    [ -z "$TMUX" ] && exec tmux
-#esac
+# Tmux
+# attaches tmux to a session
+alias ta='tmux attach -t'
+# creates a new session
+alias tn='tmux new-session -s '
+# kill session
+alias tk='tmux kill-session -t '
+# list all ongoing sessions
+alias tl='tmux list-sessions'
+# detach from session
+alias td='tmux detach'
+# tmux clear pane
+alias tc='clear; tmux clear-history; clear'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# bun completions
+[ -s "/home/bocha13/.bun/_bun" ] && source "/home/bocha13/.bun/_bun"
+
+# Bun
+export BUN_INSTALL="/home/bocha13/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
