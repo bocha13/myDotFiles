@@ -76,7 +76,11 @@ return packer.startup(function(use)
 	})
 
 	-- Neogit
-	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
+	use(
+    { "TimUntersberger/neogit",
+      requires = "nvim-lua/plenary.nvim",
+      config = config("neogit")
+    })
 
 	-- Diffview
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
