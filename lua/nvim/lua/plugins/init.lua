@@ -114,6 +114,9 @@ return packer.startup(function(use)
 		tag = "v3.*",
 		config = config("bufferline"),
 	})
+  -- use({"nanozuki/tabby.nvim",
+  --   config = config("tabby")
+  -- })
 
 	-- Autopairs, integrates with both cmp and treesitter
 	use({

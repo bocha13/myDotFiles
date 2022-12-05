@@ -25,6 +25,10 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
+-- On page jump, center the cursor
+keymap("n", "<C-d>", "<C-d>zz", opts)
+keymap("n", "<C-u>", "<C-u>zz", opts)
+
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
@@ -90,3 +94,4 @@ keymap("n", "<leader>c", "<cmd>Bdelete!<CR>", opts)
 -- BUFFERLINE
 keymap("n", "<leader>cl", ":BufferLineCloseLeft<CR>", opts)
 keymap("n", "<leader>cr", ":BufferLineCloseRight<CR>", opts)
+keymap("n", "<leader>bd", ":bdelete<CR>", opts)
