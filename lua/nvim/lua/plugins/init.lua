@@ -157,6 +157,7 @@ return packer.startup(function(use)
 	})
 
 	-- Colorschemes
+  -- use({ "EdenEast/nightfox.nvim", config = config("colorscheme")})
 	use({ "folke/tokyonight.nvim", config = config("colorscheme") })
 	-- use({
 	--	"haishanh/night-owl.vim",
