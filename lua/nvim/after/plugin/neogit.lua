@@ -8,4 +8,3 @@ neogit.setup({
     diffview = true
   }
 })
-
