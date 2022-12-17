@@ -77,6 +77,8 @@ return require('packer').startup(function(use)
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
 
+  use('simrat39/rust-tools.nvim')
+
   -- LSP
   use {
     'VonHeikemen/lsp-zero.nvim',
