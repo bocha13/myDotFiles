@@ -21,28 +21,30 @@ colors:
     background: '#161616'
 
   normal:
-    black:   '#282828'
-    red:     '#cc241d'
-    green:   '#54aa1c'
-    yellow:  '#f5c32e'
-    blue:    '#458588'
+    black:   '#78717f'
+    red:     '#f7506f'
+    green:   '#a8d974'
+    yellow:  '#e0af68'
+    blue:    '#7aa2f7'
     magenta: '#b16286'
-    cyan:    '#689d6a'
-    white:   '#a89984'
+    cyan:    '#7aa2f7'
+    white:   '#ffffff'
 
   bright:
-    black:   '#928374'
-    red:     '#fb4934'
-    green:   '#b8bb26'
-    yellow:  '#fabd2f'
-    blue:    '#83a598'
+    black:   '#78717f'
+    red:     '#f7506f'
+    green:   '#a8d974'
+    yellow:  '#e0af68'
+    blue:    '#7aa2f7'
     magenta: '#d3869b'
     cyan:    '#8ec07c'
-    white:   '#ebdbb2'
+    white:   '#ffffff'
+
   selection:
     text: '0xffffff'
     background: '0xdc3232'
     white:   '0xffffff'
+
 cursor:
   style: Block
   unfocused_hollow: true
