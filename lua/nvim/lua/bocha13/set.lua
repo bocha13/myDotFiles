@@ -1,5 +1,7 @@
 vim.opt.guicursor = ""
 
+vim.api.nvim_command("set fillchars+=vert:\\▎")
+
 vim.opt.showmode = false
 vim.opt.nu = true
 vim.opt.relativenumber = true
