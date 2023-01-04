@@ -1,0 +1,48 @@
+shell:
+  program: wsl.exe -d Ubuntu-20.04
+  args:
+    - --cd ~
+env:
+  TERM: alacritty
+font:
+  normal:
+    family: JetBrainsMonoNL Nerd Font
+    style: Regular
+  bold:
+    family: JetBrainsMonoNL Nerd Font
+    style: Bold
+  italic:
+    family: JetBrainsMonoNL Nerd Font
+    style: Regular
+  size: 12
+
+colors:
+  primary:
+    background: '#161616'
+
+  normal:
+    black:   '#282828'
+    red:     '#cc241d'
+    green:   '#54aa1c'
+    yellow:  '#f5c32e'
+    blue:    '#458588'
+    magenta: '#b16286'
+    cyan:    '#689d6a'
+    white:   '#a89984'
+
+  bright:
+    black:   '#928374'
+    red:     '#fb4934'
+    green:   '#b8bb26'
+    yellow:  '#fabd2f'
+    blue:    '#83a598'
+    magenta: '#d3869b'
+    cyan:    '#8ec07c'
+    white:   '#ebdbb2'
+  selection:
+    text: '0xffffff'
+    background: '0xdc3232'
+    white:   '0xffffff'
+cursor:
+  style: Block
+  unfocused_hollow: true
