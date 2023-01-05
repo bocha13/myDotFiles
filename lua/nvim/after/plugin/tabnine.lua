@@ -3,6 +3,15 @@ if not status_ok then
 	return
 end
 
+local cmp = require("cmp")
+cmp.setup {
+  sources = {
+    {name = "buffer"},
+    {name = "nvim_lsp"},
+    {name = "cmp_tabnine"}
+  }
+}
+
 tabnine.setup({
 	max_lines = 1000,
 	max_num_results = 20,
