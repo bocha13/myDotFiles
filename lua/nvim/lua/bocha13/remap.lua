@@ -37,10 +37,25 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
--- BUFFERLINE
-vim.keymap.set("n", "<leader>cl", ":BufferLineCloseLeft<CR>")
-vim.keymap.set("n", "<leader>cr", ":BufferLineCloseRight<CR>")
-vim.keymap.set("n", "<leader>bd", ":bdelete<CR>")
+-- BARBAR --
+local opts = { noremap = true, silent = true}
+-- Move to previous/next buffer
+vim.keymap.set("n", "<A-,>", "<cmd>BufferPrevious<CR>", opts)
+vim.keymap.set("n", "<A-.>", "<cmd>BufferNext<CR>", opts)
+-- Go to buffer in position
+vim.keymap.set("n", "<A-1>", "<cmd>BufferGoto 1<CR>", opts)
+vim.keymap.set("n", "<A-2>", "<cmd>BufferGoto 2<CR>", opts)
+vim.keymap.set("n", "<A-3>", "<cmd>BufferGoto 3<CR>", opts)
+vim.keymap.set("n", "<A-4>", "<cmd>BufferGoto 4<CR>", opts)
+vim.keymap.set("n", "<A-5>", "<cmd>BufferGoto 5<CR>", opts)
+vim.keymap.set("n", "<A-6>", "<cmd>BufferGoto 6<CR>", opts)
+vim.keymap.set("n", "<A-7>", "<cmd>BufferGoto 7<CR>", opts)
+vim.keymap.set("n", "<A-8>", "<cmd>BufferGoto 8<CR>", opts)
+vim.keymap.set("n", "<A-9>", "<cmd>BufferGoto 9<CR>", opts)
+vim.keymap.set("n", "<A-0>", "<cmd>BufferGoto 0<CR>", opts)
+-- Pin/unpin buffer
+vim.keymap.set("n", "<A-p>", "<cmd>BufferPin<CR>", opts)
+vim.keymap.set("n", "<A-c>", "<cmd>BufferClose<CR>", opts)
 
 -- Resize with arrows
 vim.keymap.set("n", "<C-Up>", ":resize -2<CR>")

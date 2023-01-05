@@ -19,6 +19,10 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  -- BARBAR
+  use 'nvim-tree/nvim-web-devicons'
+  use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}
+
   use("RRethy/vim-illuminate")
 
   -- tmux navigation
@@ -26,12 +30,6 @@ return require('packer').startup(function(use)
 
   -- Status Line
   use("nvim-lualine/lualine.nvim")
-
-  -- Bufferline
-  use({
-    "akinsho/bufferline.nvim",
-    tag = "v3.*"
-  })
 
   use("WhoIsSethDaniel/toggle-lsp-diagnostics.nvim")
 
@@ -53,7 +51,6 @@ return require('packer').startup(function(use)
 
   -- indentation lines
   use("lukas-reineke/indent-blankline.nvim")
-
   -- Git Signs
   use("lewis6991/gitsigns.nvim")
 
