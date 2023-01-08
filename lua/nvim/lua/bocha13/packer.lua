@@ -19,9 +19,14 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim"
+  }
+
   -- BARBAR
   use 'nvim-tree/nvim-web-devicons'
-  use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}
+  use { 'romgrk/barbar.nvim', wants = 'nvim-web-devicons' }
 
   use("RRethy/vim-illuminate")
 
