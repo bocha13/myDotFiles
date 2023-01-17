@@ -10,6 +10,20 @@ require'tokyonight'.setup({
 		colors.bg_statusline = "#1c1c1c"
     colors.border = "#458588"
 	end,
+  on_highlights = function(highlight, c)
+    highlight.NvimTreeNormal = {
+      bg = c.bg,
+      fg = '#a9b1d6'
+    }
+    highlight.NvimTreeNormalNC = {
+      bg = c.bg,
+      fg = '#a9b1d6'
+    }
+    highlight.NvimTreeWinSeparator = {
+      bg = c.bg,
+      fg = '#458588'
+    }
+  end
 })
 
 vim.cmd.colorscheme("tokyonight")

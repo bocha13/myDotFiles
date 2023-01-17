@@ -28,6 +28,13 @@ return require('packer').startup(function(use)
   use 'nvim-tree/nvim-web-devicons'
   use { 'romgrk/barbar.nvim', wants = 'nvim-web-devicons' }
 
+  -- NVIM TREE
+  use {
+    'nvim-tree/nvim-tree.lua',
+    wants = 'nvim-tree/nvim-web-devicons'
+  }
+
+
   use("RRethy/vim-illuminate")
 
   -- tmux navigation
