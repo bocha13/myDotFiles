@@ -15,6 +15,10 @@ require'tokyonight'.setup({
       bg = c.bg,
       fg = '#a9b1d6'
     }
+    highlight.NvimTreeStatusLine = {
+      bg = "#303030",
+      fg = '#a9b1d6'
+    }
     highlight.NvimTreeNormalNC = {
       bg = c.bg,
       fg = '#a9b1d6'
@@ -22,6 +26,18 @@ require'tokyonight'.setup({
     highlight.NvimTreeWinSeparator = {
       bg = c.bg,
       fg = '#458588'
+    }
+    highlight.BufferTabpageFill = {
+      bg = "#303030",
+      fg = '#737aa2'
+    }
+    highlight.BufferInactive = {
+      bg = c.bg,
+      fg = '#737aa2'
+    }
+    highlight.MsgArea = {
+      bg = c.bg,
+      fg = '#60b2a5'
     }
   end
 })

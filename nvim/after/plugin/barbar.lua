@@ -7,8 +7,8 @@ local options = {
   animation = false,
   auto_hide = false,
   tabpages = true,
-  closable = false,
-  clickable = false,
+  closable = true,
+  clickable = true,
   diagnostics = {
     {enabled = true}
   },
@@ -20,7 +20,7 @@ local options = {
   icon_close_tab_modified = '●',
   icon_pinned = '車',
   insert_at_end = true,
-  letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
+  letters = 'asdfjklghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
 }
 
 barBar.setup(options)
