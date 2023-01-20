@@ -35,6 +35,16 @@ require'tokyonight'.setup({
       bg = c.bg,
       fg = '#737aa2'
     }
+    highlight.BufferOffset = {
+      fg = "#458588"
+    }
+    highlight.BufferInactiveSign= {
+      fg= "#458588"
+    }
+    highlight.BufferCurrentSign = {
+      bg= "#3b4261",
+      fg = "#458588"
+    }
     highlight.MsgArea = {
       bg = c.bg,
       fg = '#60b2a5'
