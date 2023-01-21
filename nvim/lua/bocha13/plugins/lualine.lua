@@ -1,8 +1,3 @@
-local status_ok, lualine = pcall(require, "lualine")
-if not status_ok then
-  return
-end
-
 -- local status_theme_ok, theme = pcall(require, "lualine.themes.seoul256")
 -- if not status_theme_ok then
 -- return
@@ -77,42 +72,48 @@ local location = {
   -- end,
 }
 
-local nvim_tree_shift = {
-  function()
-    return string.rep(' ',
-      vim.api.nvim_win_get_width(require 'nvim-tree.view'.get_winnr()) - 2)
-  end,
-  cond = require('nvim-tree.view').is_visible,
-  color = 'NvimTreeStatusLine'
-}
+-- local nvim_tree_shift = {
+--   function()
+--     return string.rep(' ',
+--       vim.api.nvim_win_get_width(require 'nvim-tree.view'.get_winnr()) - 2)
+--   end,
+--   cond = require('nvim-tree.view').is_visible,
+--   color = 'NvimTreeStatusLine'
+-- }
 
-lualine.setup({
-  options = {
-    globalstatus = true,
-    icons_enabled = true,
-    theme = "moonfly",
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
-    disabled_filetypes = {
-    },
-    ignore_focus = {},
-    always_divide_middle = true,
-  },
-  sections = {
-    lualine_a = { nvim_tree_shift, mode, branch },
-    lualine_b = { diagnostics },
-    lualine_x = { diff, spaces, filetype },
-    lualine_y = { progress },
-    lualine_z = { location },
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = { "location" },
-    lualine_y = {},
-    lualine_z = {},
-  },
-  tabline = {},
-  extensions = {},
-})
+return {
+  "nvim-lualine/lualine.nvim",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  config = function()
+    require("lualine").setup({
+      options = {
+        globalstatus = true,
+        icons_enabled = true,
+        theme = "moonfly",
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
+        disabled_filetypes = {
+        },
+        ignore_focus = {},
+        always_divide_middle = true,
+      },
+      sections = {
+        lualine_a = { mode, branch },
+        lualine_b = { diagnostics },
+        lualine_x = { diff, spaces, filetype },
+        lualine_y = { progress },
+        lualine_z = { location },
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = { "location" },
+        lualine_y = {},
+        lualine_z = {},
+      },
+      tabline = {},
+      extensions = {},
+    })
+  end
+}

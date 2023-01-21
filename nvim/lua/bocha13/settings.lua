@@ -2,24 +2,6 @@ vim.opt.guicursor = ""
 
 vim.api.nvim_command("set fillchars+=vert:\\▎")
 
-vim.api.nvim_create_autocmd('BufWinEnter', {
-  pattern = '*',
-  callback = function()
-    if vim.bo.filetype == 'NvimTree' then
-      require'bufferline.api'.set_offset(38, '------------- Explorer -------------')
-    end
-  end
-})
-
-vim.api.nvim_create_autocmd('BufWinLeave', {
-  pattern = '*',
-  callback = function()
-    if vim.fn.expand('<afile>'):match('NvimTree') then
-      require'bufferline.api'.set_offset(0)
-    end
-  end
-})
-
 -- NVIM-TREE configurations
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -55,3 +37,6 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.g.mapleader = " "
+
+-- Fugitive
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
