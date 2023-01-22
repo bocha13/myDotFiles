@@ -20,7 +20,7 @@ return {
           fg = '#a9b1d6'
         }
         highlight.NvimTreeStatusLine = {
-          bg = "#303030",
+          bg = "#242b38",
           fg = '#a9b1d6'
         }
         highlight.NvimTreeNormalNC = {
@@ -32,7 +32,7 @@ return {
           fg = '#458588'
         }
         highlight.BufferTabpageFill = {
-          bg = "#303030",
+          bg = "#242b38",
           fg = '#737aa2'
         }
         highlight.BufferInactive = {
@@ -43,7 +43,6 @@ return {
           fg = "#458588"
         }
         highlight.BufferInactiveSign = {
-          bg = "#3b4261",
           fg = "#458588"
         }
         highlight.BufferCurrentSign = {
