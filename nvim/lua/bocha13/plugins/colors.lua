@@ -43,6 +43,7 @@ return {
           fg = "#458588"
         }
         highlight.BufferInactiveSign = {
+          bg = "#3b4261",
           fg = "#458588"
         }
         highlight.BufferCurrentSign = {
