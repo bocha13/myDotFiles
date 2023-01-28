@@ -32,14 +32,15 @@ return {
           fg = '#458588'
         }
         highlight.BufferTabpageFill = {
-          bg = "#242b38",
+          bg = "#1c1c1c",
           fg = '#737aa2'
         }
         highlight.BufferInactive = {
-          bg = c.bg,
+          bg = "#1c1c1c",
           fg = '#737aa2'
         }
         highlight.BufferOffset = {
+          bg = "#1c1c1c",
           fg = "#458588"
         }
         highlight.BufferInactiveSign = {

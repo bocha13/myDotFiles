@@ -9,10 +9,6 @@ map("n", "<A-k>", ":m .-2<cr>==", { desc = "Move up" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 map("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
 
--- move highlighted text
-map("v", "J", ":m '>+1<CR>gv=gv")
-map("v", "K", ":m '<-2<CR>gv=gv")
-
 map("n", "<C-d", "<C-d>zz")
 map("n", "<C-u", "<C-u>zz")
 
