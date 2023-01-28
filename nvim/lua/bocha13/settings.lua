@@ -40,3 +40,10 @@ vim.g.mapleader = " "
 
 -- Fugitive
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+
+-- Format on save
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 	callback = function()
+-- 		vim.lsp.buf.format()
+-- 	end,
+-- })

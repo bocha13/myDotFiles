@@ -1,106 +1,159 @@
 return {
-  'VonHeikemen/lsp-zero.nvim',
-  dependencies = {
-    -- LSP Support
-    { 'neovim/nvim-lspconfig' },
-    { 'williamboman/mason.nvim' },
-    { 'williamboman/mason-lspconfig.nvim' },
-
-    -- Autocompletion
-    { 'hrsh7th/nvim-cmp' },
-    { 'hrsh7th/cmp-buffer' },
-    { 'hrsh7th/cmp-path' },
-    { 'saadparwaiz1/cmp_luasnip' },
-    { 'hrsh7th/cmp-nvim-lsp' },
-    { 'hrsh7th/cmp-nvim-lua' },
-
-    -- Snippets
-    { 'L3MON4D3/LuaSnip' },
-    { 'rafamadriz/friendly-snippets' },
-  },
-  config = function()
-    local lsp = require("lsp-zero")
-
-    lsp.set_preferences({
-      suggest_lsp_servers = true,
-      setup_servers_on_start = true,
-      set_lsp_keymaps = true,
-      configure_diagnostics = true,
-      cmp_capabilities = true,
-      manage_nvim_cmp = true,
-      call_servers = 'local',
-      sign_icons = {
-        error = '',
-        warn = '',
-        hint = '',
-        info = ''
-      }
-    })
-
-    lsp.ensure_installed({
-      'tsserver',
-      'eslint',
-      'sumneko_lua',
-      'rust_analyzer'
-    })
-    local cmp          = require('cmp')
-    local cmp_select   = { behavior = cmp.SelectBehavior.Select }
-    local cmp_mappings = lsp.defaults.cmp_mappings({
-      ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-      ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-      ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-      ['<C-Space>'] = cmp.mapping.complete()
-    })
-    local rust_lsp     = lsp.build_options('rust_analyzer', {})
-
-    lsp.setup_nvim_cmp({
-      mapping = cmp_mappings
-    })
-
-    lsp.on_attach(function(client, bufnr)
-      local opts = { buffer = bufnr, remap = false }
-
-      vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-      vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-      vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-      vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-      vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-      vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-      vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
-      vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.references() end, opts)
-      vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
-      vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-    end)
-
-
-    lsp.setup()
-
-    vim.diagnostic.config({
-      virtual_text = true,
-      signs = true,
-      update_in_insert = false,
-      underline = true,
-      severity_sort = false,
-      float = true,
-    })
-
-    local optsRust = {
-      tools = {
-        runnables = {
-          use_telescope = true
-        },
-        inlay_hints = {
-          auto = true,
-          show_parameter_hints = true,
-          parameter_hints_prefix = "=>",
-          other_hints_refix = "->",
-          only_current_line = false,
-        }
+  -- lspconfig
+  {
+    "neovim/nvim-lspconfig",
+    event = "BufReadPre",
+    dependencies = {
+      "mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      {
+        "hrsh7th/cmp-nvim-lsp"
       },
-      server = rust_lsp
-    }
+    },
+    opts = {
+      -- options for vim.diagnostic.config()
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        virtual_text = { spacing = 4, prefix = "●" },
+        severity_sort = true,
+      },
+      -- Automatically format on save
+      autoformat = true,
+      -- options for vim.lsp.buf.format
+      format = {
+        formatting_options = nil,
+        timeout_ms = nil,
+      },
+      -- LSP Server Settings
+      servers = {
+        jsonls = {},
+        sumneko_lua = {
+          -- mason = false, -- set to false if you don't want this server to be installed with mason
+          settings = {
+            Lua = {
+              workspace = {
+                checkThirdParty = false,
+              },
+              completion = {
+                callSnippet = "Replace",
+              },
+            },
+          },
+        },
+      },
+      -- you can do any additional lsp server setup here
+      -- return true if you don't want this server to be setup with lspconfig
+      setup = {
+        -- example to setup with typescript.nvim
+        -- tsserver = function(_, opts)
+        --   require("typescript").setup({ server = opts })
+        --   return true
+        -- end,
+        -- Specify * to use this function as a fallback for any server
+        -- ["*"] = function(server, opts) end,
+      },
+    },
+    config = function(plugin, opts)
+      -- setup formatting and keymaps
+      vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { noremap = true, silent = true })
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true })
+      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true })
+      vim.keymap.set("n", "<leader>fa", vim.lsp.buf.format, { noremap = true, silent = true })
+      vim.keymap.set("n", "<leader>fA", "<cmd>EslintFixAll<CR>")
 
-    require('rust-tools').setup(optsRust)
+      -- diagnostics
+      for name, icon in pairs({
+        Error = " ",
+        Warn = " ",
+        Hint = " ",
+        Info = " ",
+      }) do
+        name = "DiagnosticSign" .. name
+        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+      end
+      vim.diagnostic.config(opts.diagnostics)
 
-  end
+      local servers = opts.servers
+      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+      local function setup(server)
+        local server_opts = servers[server] or {}
+        server_opts.capabilities = capabilities
+        if opts.setup[server] then
+          if opts.setup[server](server, server_opts) then
+            return
+          end
+        elseif opts.setup["*"] then
+          if opts.setup["*"](server, server_opts) then
+            return
+          end
+        end
+        require("lspconfig")[server].setup(server_opts)
+      end
+
+      local mlsp = require("mason-lspconfig")
+      local available = mlsp.get_available_servers()
+
+      local ensure_installed = {}
+      for server, server_opts in pairs(servers) do
+        if server_opts then
+          server_opts = server_opts == true and {} or server_opts
+          -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
+          if server_opts.mason == false or not vim.tbl_contains(available, server) then
+            setup(server)
+          else
+            ensure_installed[#ensure_installed + 1] = server
+          end
+        end
+      end
+
+      require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
+      require("mason-lspconfig").setup_handlers({ setup })
+    end,
+  },
+
+  -- formatters
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    event = "BufReadPre",
+    dependencies = { "mason.nvim" },
+    opts = function()
+      local nls = require("null-ls")
+      return {
+        sources = {
+          -- nls.builtins.formatting.prettierd,
+          nls.builtins.formatting.stylua,
+          nls.builtins.diagnostics.flake8,
+        },
+      }
+    end,
+  },
+
+  -- cmdline tools and lsp servers
+  {
+
+    "williamboman/mason.nvim",
+    cmd = "Mason",
+    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+    opts = {
+      ensure_installed = {
+        "stylua",
+        "shellcheck",
+        "shfmt",
+        "flake8",
+      },
+    },
+    config = function(plugin, opts)
+      require("mason").setup(opts)
+      local mr = require("mason-registry")
+      for _, tool in ipairs(opts.ensure_installed) do
+        local p = mr.get_package(tool)
+        if not p:is_installed() then
+          p:install()
+        end
+      end
+    end,
+  },
 }
+

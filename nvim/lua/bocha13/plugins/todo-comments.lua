@@ -1,5 +1,7 @@
 return {
   "folke/todo-comments.nvim",
+  cmd = { "TodoTrouble", "TodoTelescope"},
+  event = "BufReadPost",
   config = function()
     require("todo-comments").setup({
       signs = true,
