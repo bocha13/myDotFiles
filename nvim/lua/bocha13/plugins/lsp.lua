@@ -61,6 +61,7 @@ return {
       vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true })
       vim.keymap.set("n", "<leader>fa", vim.lsp.buf.format, { noremap = true, silent = true })
       vim.keymap.set("n", "<leader>fA", "<cmd>EslintFixAll<CR>")
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, {noremap = true, silent = true})
 
       -- diagnostics
       for name, icon in pairs({

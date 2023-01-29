@@ -132,17 +132,13 @@ return {
 							Unit = " ",
 							Value = " ",
 							Variable = " ",
+              Copilot = " ",
 						}
 						if icons[item.kind] then
 							item.kind = icons[item.kind] .. item.kind
 						end
 						return item
 					end,
-				},
-				experimental = {
-					ghost_text = {
-						hl_group = "LspCodeLens",
-					},
 				},
 			}
 		end,
