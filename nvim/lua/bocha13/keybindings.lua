@@ -26,7 +26,7 @@ map("v", "<leader>d", '"_d')
 map("n", "Q", "<nop>")
 map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 map("n", "<leader>fa", function()
-  vim.lsp.buf.format()
+	vim.lsp.buf.format()
 end)
 map("n", "<leader>fA", "<cmd>EslintFixAll<CR>")
 
@@ -74,8 +74,17 @@ map("n", "<leader>fg", builtin.git_files, {})
 map("n", "<leader>ft", builtin.live_grep, {})
 map("n", "<leader>fb", builtin.buffers, {})
 map("n", "<leader>fp", function()
-  builtin.gre_string({ search = vim.fn.input("Grep > ") })
+	builtin.gre_string({ search = vim.fn.input("Grep > ") })
 end)
 
 -- UNDOTREE
 map("n", "<leader>u", vim.cmd.UndotreeToggle)
+
+-- LSP
+-- setup formatting and keymaps
+map("n", "<leader>cd", vim.diagnostic.open_float, { noremap = true, silent = true })
+map("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true })
+map("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true })
+map("n", "<leader>fa", vim.lsp.buf.format, { noremap = true, silent = true })
+map("n", "<leader>fA", "<cmd>EslintFixAll<CR>")
+map("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true })

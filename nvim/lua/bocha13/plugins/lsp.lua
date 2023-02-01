@@ -1,160 +1,67 @@
 return {
   -- lspconfig
   {
-    "neovim/nvim-lspconfig",
-    event = "BufReadPre",
+    "VonHeikemen/lsp-zero.nvim",
+    branch = "v1.x",
     dependencies = {
-      "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      {
-        "hrsh7th/cmp-nvim-lsp"
-      },
+      -- LSP Support
+      { "neovim/nvim-lspconfig" }, -- Required
+      { "williamboman/mason.nvim" }, -- Optional
+      { "williamboman/mason-lspconfig.nvim" }, -- Optional
+
+      -- Autocompletion
+      { "hrsh7th/nvim-cmp" }, -- Required
+      { "hrsh7th/cmp-nvim-lsp" }, -- Required
+      { "hrsh7th/cmp-buffer" }, -- Optional
+      { "hrsh7th/cmp-path" }, -- Optional
+      { "saadparwaiz1/cmp_luasnip" }, -- Optional
+      { "hrsh7th/cmp-nvim-lua" }, -- Optional
+
+      -- Snippets
+      { "L3MON4D3/LuaSnip" }, -- Required
+      { "rafamadriz/friendly-snippets" }, -- Optional
     },
-    opts = {
-      -- options for vim.diagnostic.config()
-      diagnostics = {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = { spacing = 4, prefix = "●" },
-        severity_sort = true,
-      },
-      -- Automatically format on save
-      autoformat = true,
-      -- options for vim.lsp.buf.format
-      format = {
-        formatting_options = nil,
-        timeout_ms = nil,
-      },
-      -- LSP Server Settings
-      servers = {
-        jsonls = {},
-        sumneko_lua = {
-          -- mason = false, -- set to false if you don't want this server to be installed with mason
-          settings = {
-            Lua = {
-              workspace = {
-                checkThirdParty = false,
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-            },
-          },
-        },
-      },
-      -- you can do any additional lsp server setup here
-      -- return true if you don't want this server to be setup with lspconfig
-      setup = {
-        -- example to setup with typescript.nvim
-        -- tsserver = function(_, opts)
-        --   require("typescript").setup({ server = opts })
-        --   return true
-        -- end,
-        -- Specify * to use this function as a fallback for any server
-        -- ["*"] = function(server, opts) end,
-      },
-    },
-    config = function(plugin, opts)
-      -- setup formatting and keymaps
-      vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>fa", vim.lsp.buf.format, { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>fA", "<cmd>EslintFixAll<CR>")
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {noremap = true, silent = true})
+    config = function()
+      local lsp = require("lsp-zero")
+      local cmp = require("cmp")
 
-      -- diagnostics
-      for name, icon in pairs({
-        Error = " ",
-        Warn = " ",
-        Hint = " ",
-        Info = " ",
-      }) do
-        name = "DiagnosticSign" .. name
-        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-      end
-      vim.diagnostic.config(opts.diagnostics)
+      lsp.preset("recommended")
+      lsp.setup()
 
-      local servers = opts.servers
-      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      lsp.ensure_installed({
+        "tsserver",
+        "eslint",
+        "sumneko_lua",
+        "rust_analyzer"
+      })
 
-      local function setup(server)
-        local server_opts = servers[server] or {}
-        server_opts.capabilities = capabilities
-        if opts.setup[server] then
-          if opts.setup[server](server, server_opts) then
-            return
-          end
-        elseif opts.setup["*"] then
-          if opts.setup["*"](server, server_opts) then
-            return
-          end
-        end
-        require("lspconfig")[server].setup(server_opts)
-      end
-
-      local mlsp = require("mason-lspconfig")
-      local available = mlsp.get_available_servers()
-
-      local ensure_installed = {}
-      for server, server_opts in pairs(servers) do
-        if server_opts then
-          server_opts = server_opts == true and {} or server_opts
-          -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-          if server_opts.mason == false or not vim.tbl_contains(available, server) then
-            setup(server)
-          else
-            ensure_installed[#ensure_installed + 1] = server
-          end
-        end
-      end
-
-      require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
-      require("mason-lspconfig").setup_handlers({ setup })
-    end,
-  },
-
-  -- formatters
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
-    dependencies = { "mason.nvim" },
-    opts = function()
-      local nls = require("null-ls")
-      return {
+      cmp.setup {
         sources = {
-          -- nls.builtins.formatting.prettierd,
-          nls.builtins.formatting.stylua,
-          nls.builtins.diagnostics.flake8,
-        },
+          { name = "copilot", group_index = 2 },
+          { name = "luasnip", group_index = 2 },
+          { name = "buffer", group_index = 2 },
+          { name = "nvim_lsp", group_index = 2 },
+          { name = "path", group_index = 2 },
+        }
       }
-    end,
-  },
 
-  -- cmdline tools and lsp servers
-  {
+      vim.diagnostic.config({
+        underline = true,
+        update_in_insert = true,
+        virtual_text = { spacing = 4, prefix = "●" },
+        severity_sort = true
+      })
 
-    "williamboman/mason.nvim",
-    cmd = "Mason",
-    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
-    opts = {
-      ensure_installed = {
-        "stylua",
-        "shellcheck",
-        "shfmt",
-        "flake8",
-      },
-    },
-    config = function(plugin, opts)
-      require("mason").setup(opts)
-      local mr = require("mason-registry")
-      for _, tool in ipairs(opts.ensure_installed) do
-        local p = mr.get_package(tool)
-        if not p:is_installed() then
-          p:install()
-        end
-      end
-    end,
+      local cmp_select   = { behavior = cmp.SelectBehavior.Select }
+      local cmp_mappings = lsp.defaults.cmp_mappings({
+        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-Space>'] = cmp.mapping.complete()
+      })
+      lsp.setup_nvim_cmp({
+        mapping = cmp_mappings
+      })
+    end
   },
 }
-
