@@ -65,7 +65,7 @@ map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
 
 -- Nvim-tree mappings
-map("n", "<leader>e", ":NvimTreeToggle<CR>")
+map("n", "<leader>e", ":Ex<CR>")
 
 -- TELESCOPE
 local builtin = require("telescope.builtin")
