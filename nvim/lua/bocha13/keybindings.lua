@@ -38,25 +38,12 @@ map("n", "<leader>j", "<cmd>lprev<CR>zz")
 map("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
--- BARBAR --
+-- BUFFERS
 local opts = { noremap = true, silent = true }
 -- Move to previous/next buffer
-map("n", "<S-h>", "<cmd>BufferPrevious<CR>", opts)
-map("n", "<S-l>", "<cmd>BufferNext<CR>", opts)
--- Go to buffer in position
-map("n", "<A-1>", "<cmd>BufferGoto 1<CR>", opts)
-map("n", "<A-2>", "<cmd>BufferGoto 2<CR>", opts)
-map("n", "<A-3>", "<cmd>BufferGoto 3<CR>", opts)
-map("n", "<A-4>", "<cmd>BufferGoto 4<CR>", opts)
-map("n", "<A-5>", "<cmd>BufferGoto 5<CR>", opts)
-map("n", "<A-6>", "<cmd>BufferGoto 6<CR>", opts)
-map("n", "<A-7>", "<cmd>BufferGoto 7<CR>", opts)
-map("n", "<A-8>", "<cmd>BufferGoto 8<CR>", opts)
-map("n", "<A-9>", "<cmd>BufferGoto 9<CR>", opts)
-map("n", "<A-0>", "<cmd>BufferGoto 0<CR>", opts)
--- Pin/unpin buffer
-map("n", "<A-p>", "<cmd>BufferPin<CR>", opts)
-map("n", "<A-c>", "<cmd>BufferClose<CR>", opts)
+map("n", "<S-h>", "<cmd>bprevious<CR>", opts)
+map("n", "<S-l>", "<cmd>bnext<CR>", opts)
+map("n", "<leader>gb", "<cmd>buffers<CR>:buffer<Space>")
 
 -- Resize with arrows
 map("n", "<C-Up>", ":resize +2<CR>")

@@ -2,11 +2,6 @@ vim.opt.guicursor = ""
 
 vim.api.nvim_command("set fillchars+=vert:\\▎")
 
--- NVIM-TREE configurations
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
--- vim.g.nvim_tree_quit_on_open = 0
-
 vim.opt.showmode = false
 vim.opt.nu = true
 vim.opt.relativenumber = true
