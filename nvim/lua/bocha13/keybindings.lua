@@ -43,6 +43,7 @@ local opts = { noremap = true, silent = true }
 -- Move to previous/next buffer
 map("n", "<S-h>", "<cmd>bprevious<CR>", opts)
 map("n", "<S-l>", "<cmd>bnext<CR>", opts)
+map("n", "<A-c>", "<cmd>bd<CR>", opts)
 map("n", "<leader>gb", "<cmd>buffers<CR>:buffer<Space>")
 
 -- Resize with arrows
