@@ -41,9 +41,24 @@ map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- BUFFERS
 local opts = { noremap = true, silent = true }
 -- Move to previous/next buffer
-map("n", "<S-h>", "<cmd>bprevious<CR>", opts)
-map("n", "<S-l>", "<cmd>bnext<CR>", opts)
-map("n", "<A-c>", "<cmd>bd<CR>", opts)
+map("n", "<S-h>", "<Cmd>BufferPrevious<CR>", opts)
+map("n", "<S-l>", "<Cmd>BufferNext<CR>", opts)
+-- close buffer
+map("n", "<A-c>", "<Cmd>BufferClose<CR>", opts)
+-- Pin current buffer
+map("n", "<A-p>", "<Cmd>BufferPin<CR>", opts)
+-- Goto buffer in position...
+map("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", opts)
+map("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", opts)
+map("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", opts)
+map("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", opts)
+map("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", opts)
+map("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", opts)
+map("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", opts)
+map("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", opts)
+map("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", opts)
+map("n", "<A-0>", "<Cmd>BufferLast<CR>", opts)
+
 map("n", "<leader>gb", "<cmd>buffers<CR>:buffer<Space>")
 
 -- Resize with arrows
@@ -52,8 +67,20 @@ map("n", "<C-Down>", ":resize -2<CR>")
 map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
 
--- Nvim-tree mappings
-map("n", "<leader>e", ":Ex<CR>")
+-- Goto buffer in position...
+map("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", opts)
+map("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", opts)
+map("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", opts)
+map("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", opts)
+map("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", opts)
+map("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", opts)
+map("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", opts)
+map("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", opts)
+map("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", opts)
+map("n", "<A-0>", "<Cmd>BufferLast<CR>", opts)
+
+-- Neo-Tree mappings
+map("n", "<leader>e", "<cmd>NeoTreeShowToggle<CR>")
 
 -- TELESCOPE
 local builtin = require("telescope.builtin")
@@ -73,6 +100,12 @@ map("n", "<leader>u", vim.cmd.UndotreeToggle)
 map("n", "<leader>cd", vim.diagnostic.open_float, { noremap = true, silent = true })
 map("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true })
 map("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true })
-map("n", "<leader>fa", vim.lsp.buf.format, { noremap = true, silent = true })
+map("n", "<leader>fa", function()
+	vim.lsp.buf.format({
+		filter = function(client)
+			return client.name == "null-ls"
+		end,
+	})
+end, { noremap = true, silent = true })
 map("n", "<leader>fA", "<cmd>EslintFixAll<CR>")
 map("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true })

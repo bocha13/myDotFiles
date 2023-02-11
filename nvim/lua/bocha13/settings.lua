@@ -1,5 +1,9 @@
 vim.opt.guicursor = ""
 
+-- NEO-TREE
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.api.nvim_command("set fillchars+=vert:\\▎")
 
 vim.opt.showmode = false

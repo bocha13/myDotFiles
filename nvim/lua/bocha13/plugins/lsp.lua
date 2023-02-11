@@ -1,67 +1,95 @@
 return {
-  -- lspconfig
-  {
-    "VonHeikemen/lsp-zero.nvim",
-    branch = "v1.x",
-    dependencies = {
-      -- LSP Support
-      { "neovim/nvim-lspconfig" }, -- Required
-      { "williamboman/mason.nvim" }, -- Optional
-      { "williamboman/mason-lspconfig.nvim" }, -- Optional
+	-- LSP support
+	{
+		"neovim/nvim-lspconfig",
+		config = function()
+			local lspconfig = require("lspconfig")
+			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-      -- Autocompletion
-      { "hrsh7th/nvim-cmp" }, -- Required
-      { "hrsh7th/cmp-nvim-lsp" }, -- Required
-      { "hrsh7th/cmp-buffer" }, -- Optional
-      { "hrsh7th/cmp-path" }, -- Optional
-      { "saadparwaiz1/cmp_luasnip" }, -- Optional
-      { "hrsh7th/cmp-nvim-lua" }, -- Optional
+			local capabilities = cmp_nvim_lsp.default_capabilities()
 
-      -- Snippets
-      { "L3MON4D3/LuaSnip" }, -- Required
-      { "rafamadriz/friendly-snippets" }, -- Optional
-    },
-    config = function()
-      local lsp = require("lsp-zero")
-      local cmp = require("cmp")
+			-- Change the Diagnostic symbols in the sign column (gutter)
+			local signs = { Error = "E", Warn = "W", Hint = "H", Info = "E" }
+			for type, icon in pairs(signs) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+			end
 
-      lsp.preset("recommended")
-      lsp.setup()
+			-- configure tsserver
+			lspconfig["tsserver"].setup({
+				capabilities = capabilities,
+			})
 
-      lsp.ensure_installed({
-        "tsserver",
-        "eslint",
-        "sumneko_lua",
-        "rust_analyzer"
-      })
+			-- configure rust_analyzer server
+			lspconfig["rust_analyzer"].setup({
+				capabilities = capabilities,
+				cmd = {
+					"rustup",
+					"run",
+					"stable",
+					"rust-analyzer",
+				},
+			})
 
-      cmp.setup {
-        sources = {
-          { name = "copilot", group_index = 2 },
-          { name = "luasnip", group_index = 2 },
-          { name = "buffer", group_index = 2 },
-          { name = "nvim_lsp", group_index = 2 },
-          { name = "path", group_index = 2 },
-        }
-      }
+			-- configure gopls
+			lspconfig["gopls"].setup({
+				capabilities = capabilities,
+			})
 
-      vim.diagnostic.config({
-        underline = true,
-        update_in_insert = true,
-        virtual_text = { spacing = 4, prefix = "●" },
-        severity_sort = true
-      })
+			-- configure lua server (with special settings)
+			lspconfig["sumneko_lua"].setup({
+				capabilities = capabilities,
+				settings = { -- custom settings for lua
+					Lua = {
+						-- make the language server recognize "vim" global
+						diagnostics = {
+							globals = { "vim" },
+						},
+						workspace = {
+							-- make language server aware of runtime files
+							library = {
+								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+								[vim.fn.stdpath("config") .. "/lua"] = true,
+							},
+						},
+					},
+				},
+			})
 
-      local cmp_select   = { behavior = cmp.SelectBehavior.Select }
-      local cmp_mappings = lsp.defaults.cmp_mappings({
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-Space>'] = cmp.mapping.complete()
-      })
-      lsp.setup_nvim_cmp({
-        mapping = cmp_mappings
-      })
-    end
-  },
+			-- configure rust_analyzer server
+			local rt_status_ok, rt = pcall(require, "rust-tools")
+			if not rt_status_ok then
+				print("no rust-tools")
+				return
+			end
+
+			local rust_opts = {
+				tools = {
+					autoSetHints = false,
+					hover_actions = { border = false },
+					cache = true,
+				},
+				server = {
+					capabilities = capabilities,
+					cmd = {
+						"rustup",
+						"run",
+						"stable",
+						"rust-analyzer",
+					},
+					settings = {
+						["rust-analyzer"] = {
+							diagnostics = {
+								experimental = true,
+							},
+						},
+					},
+				},
+			}
+			rt.setup(rust_opts)
+		end,
+	},
+	-- Snippets
+	{ "L3MON4D3/LuaSnip" },
+	{ "rafamadriz/friendly-snippets" },
 }
