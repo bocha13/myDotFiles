@@ -37,7 +37,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
-		event = "BufReadPre",
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			signs = {
 				add = { hl = "GitSignsAdd", text = "█", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
@@ -105,7 +105,7 @@ return {
 	-- indent guides for Neovim
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = "BufReadPost",
+		event = "BufReadPre",
 		opts = {
 			-- char = "▏",
 			char = "│",

@@ -7,7 +7,7 @@ return {
 			local mason_null_ls = require("mason-null-ls")
 
 			local config = {
-				virtual_text = true,
+				virtual_text = { spacing = 4, prefix = "●" },
 				update_in_insert = true,
 				underline = true,
 				severity_sort = true,

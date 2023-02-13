@@ -18,16 +18,12 @@ return {
 					bg = c.bg_statusline,
 					fg = "#3b4261",
 				}
-				highlight.BufferInactive = {
-					bg = "#1e2030",
-					fg = "#3b4261",
-				}
 				highlight.BufferOffset = {
 					bg = c.bg_statusline,
 					fg = "#65bcff",
 				}
 				highlight.BufferInactiveSign = {
-					bg = c.bg,
+					bg = "#161824",
 					fg = "#65bcff",
 				}
 				highlight.BufferCurrentSign = {

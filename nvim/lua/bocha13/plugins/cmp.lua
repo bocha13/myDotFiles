@@ -1,12 +1,13 @@
 return {
 	{
 		"hrsh7th/nvim-cmp",
-		config = function()
+		event = "InsertEnter",
+		opts = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-			cmp.setup({
+			return {
 				snippet = {
 					expand = function(args)
 						luasnip.lsp_expand(args.body)
@@ -44,7 +45,7 @@ return {
 						winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
 					},
 				},
-			})
+			}
 		end,
 	},
 	{ "hrsh7th/cmp-nvim-lsp" },
