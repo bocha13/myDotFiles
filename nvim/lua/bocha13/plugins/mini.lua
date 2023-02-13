@@ -1,4 +1,5 @@
 return {
+	{ "echasnovski/mini.nvim", version = false },
 	-- auto pairs
 	{
 		"echasnovski/mini.pairs",
@@ -92,6 +93,46 @@ return {
 		config = function(_, opts)
 			local ai = require("mini.ai")
 			ai.setup(opts)
+		end,
+	},
+	-- buffer remove
+	{
+		"echasnovski/mini.bufremove",
+		keys = {
+			{
+				"<leader>bd",
+				function()
+					require("mini.bufremove").delete(0, false)
+				end,
+				desc = "Delete Buffer",
+			},
+			{
+				"<leader>bD",
+				function()
+					require("mini.bufremove").delete(0, true)
+				end,
+				desc = "Delete Buffer (Force)",
+			},
+		},
+	},
+	-- active indent guide and indent text objects
+	{
+		"echasnovski/mini.indentscope",
+		version = false, -- wait till new 0.7.0 release to put it back on semver
+		event = "BufReadPre",
+		opts = {
+			-- symbol = "▏",
+			symbol = "│",
+			options = { try_as_border = true },
+		},
+		config = function(_, opts)
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "help", "alpha", "dashboard", "NvimTree", "Trouble", "lazy", "mason" },
+				callback = function()
+					vim.b.miniindentscope_disable = true
+				end,
+			})
+			require("mini.indentscope").setup(opts)
 		end,
 	},
 }

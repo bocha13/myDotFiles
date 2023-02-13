@@ -11,9 +11,11 @@ return {
 				formatting.prettier,
 				formatting.stylua,
 				diagnostics.eslint_d.with({
-					-- only enable islint if root has .eslintrc.js
-					confition = function(utils)
+					-- only enable eslint if root has .eslintrc.*
+					condition = function(utils)
 						return utils.root_has_file(".eslintrc.js")
+							or utils.root_has_file(".eslintrc.json")
+							or utils.root_has_file(".eslintrc.yml")
 					end,
 				}),
 			},

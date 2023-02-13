@@ -20,6 +20,11 @@ return {
 				capabilities = capabilities,
 			})
 
+			-- configure .prisma server
+			lspconfig["prismals"].setup({
+				capabilities = capabilities,
+			})
+
 			-- configure rust_analyzer server
 			lspconfig["rust_analyzer"].setup({
 				capabilities = capabilities,
