@@ -40,9 +40,11 @@ return {
 				window = {
 					documentation = {
 						winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
+						border = "rounded",
 					},
 					completion = {
 						winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
+						border = "rounded",
 					},
 				},
 			}

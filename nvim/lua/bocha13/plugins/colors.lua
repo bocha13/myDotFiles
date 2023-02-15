@@ -16,10 +16,8 @@ return {
 			on_highlights = function(highlight, c)
 				-- mini.indent line color
 				highlight.MiniIndentscopeSymbol = {
-					bg = c.bg,
 					fg = c.border,
 				}
-				-- Bufferline colors
 				-- 	highlight.BufferTabpageFill = {
 				-- 		bg = c.bg_statusline,
 				-- 		fg = "#3b4261",
@@ -36,7 +34,6 @@ return {
 				-- 		bg = "#3b4261",
 				-- 		fg = "#65bcff",
 				-- 	}
-				-- 	Message area colors
 				-- 	highlight.MsgArea = {
 				-- 		bg = c.bg,
 				-- 		fg = "#65bcff",

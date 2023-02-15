@@ -30,11 +30,6 @@ map("n", "<leader>fa", function()
 end)
 map("n", "<leader>fA", "<cmd>EslintFixAll<CR>")
 
-map("n", "<C-k>", "<cmd>cnext<CR>zz")
-map("n", "<C-j>", "<cmd>cprev<CR>zz")
-map("n", "<leader>k", "<cmd>lnext<CR>zz")
-map("n", "<leader>j", "<cmd>lprev<CR>zz")
-
 map("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
