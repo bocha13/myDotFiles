@@ -42,24 +42,24 @@ return {
 			})
 
 			-- configure lua server (with special settings)
-			lspconfig["sumneko_lua"].setup({
-				capabilities = capabilities,
-				settings = { -- custom settings for lua
-					Lua = {
-						-- make the language server recognize "vim" global
-						diagnostics = {
-							globals = { "vim" },
-						},
-						workspace = {
-							-- make language server aware of runtime files
-							library = {
-								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-								[vim.fn.stdpath("config") .. "/lua"] = true,
-							},
-						},
-					},
-				},
-			})
+			-- lspconfig["sumneko_lua"].setup({
+			-- 	capabilities = capabilities,
+			-- 	settings = { -- custom settings for lua
+			-- 		Lua = {
+			-- 			-- make the language server recognize "vim" global
+			-- 			diagnostics = {
+			-- 				globals = { "vim" },
+			-- 			},
+			-- 			workspace = {
+			-- 				-- make language server aware of runtime files
+			-- 				library = {
+			-- 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+			-- 					[vim.fn.stdpath("config") .. "/lua"] = true,
+			-- 				},
+			-- 			},
+			-- 		},
+			-- 	},
+			-- })
 
 			-- configure rust_analyzer server
 			local rt_status_ok, rt = pcall(require, "rust-tools")
@@ -95,18 +95,18 @@ return {
 		end,
 	},
 	-- Snippets
-	{
-		"L3MON4D3/LuaSnip",
-		dependencies = {
-			"rafamadriz/friendly-snippets",
-		},
-		config = function()
-			require("luasnip.loaders.from_vscode").lazy_load()
-		end,
-		opts = {
-			history = true,
-			delete_check_events = "TextChanged",
-		},
-	},
+	-- {
+	-- 	"L3MON4D3/LuaSnip",
+	-- 	dependencies = {
+	-- 		"rafamadriz/friendly-snippets",
+	-- 	},
+	-- 	config = function()
+	-- 		require("luasnip.loaders.from_vscode").lazy_load()
+	-- 	end,
+	-- 	opts = {
+	-- 		history = true,
+	-- 		delete_check_events = "TextChanged",
+	-- 	},
+	-- },
 	{ "rafamadriz/friendly-snippets" },
 }

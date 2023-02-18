@@ -2,7 +2,7 @@ return {
 	"folke/tokyonight.nvim",
 	config = function()
 		require("tokyonight").setup({
-			style = "night",
+			style = "moon",
 			on_colors = function(colors)
 				-- colors.bg = "#1e2030"
 				-- colors.bg_visual = "#292e42"
@@ -43,3 +43,10 @@ return {
 		vim.cmd.colorscheme("tokyonight")
 	end,
 }
+
+-- return {
+-- 	"morhetz/gruvbox",
+-- 	config = function()
+-- 		vim.cmd.colorscheme("gruvbox")
+-- 	end,
+-- }
