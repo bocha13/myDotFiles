@@ -11,7 +11,8 @@ return {
 				-- colors.bg_popup = "#1c1c1c"
 				-- colors.bg_sidebar = "#1c1c1c"
 				-- colors.bg_statusline = "#161824"
-				colors.border = "#65bcff"
+				colors.purple = "#c099ff"
+				colors.border = "#0db9d7"
 			end,
 			on_highlights = function(highlight, c)
 				-- mini.indent line color
