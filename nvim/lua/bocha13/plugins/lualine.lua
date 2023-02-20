@@ -34,6 +34,8 @@ return {
 			options = {
 				theme = "auto",
 				globalstatus = true,
+				component_separators = { left = "", right = "" },
+				section_separators = { left = "", right = "" },
 				disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
 			},
 			sections = {
@@ -51,7 +53,7 @@ return {
 					},
 					-- show filename, type, icon and path in statusline
 					-- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-					-- { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+					{ "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
 					{
 						function()
 							return require("nvim-navic").get_location()
@@ -85,14 +87,14 @@ return {
 						cond = require("lazy.status").has_updates,
 						color = fg("Special"),
 					},
-					{
-						"diff",
-						symbols = {
-							added = icons.git.added,
-							modified = icons.git.modified,
-							removed = icons.git.removed,
-						},
-					},
+					-- {
+					-- 	"diff",
+					-- 	symbols = {
+					-- 		added = icons.git.added,
+					-- 		modified = icons.git.modified,
+					-- 		removed = icons.git.removed,
+					-- 	},
+					-- },
 				},
 				lualine_y = {
 					{ "progress", separator = "", padding = { left = 1, right = 0 } },

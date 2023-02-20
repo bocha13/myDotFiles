@@ -15,17 +15,37 @@ return {
 				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 			end
 
-			-- configure tsserver
+			-- configure ts and js servers
 			lspconfig["tsserver"].setup({
 				capabilities = capabilities,
 			})
 
-			-- configure .prisma server
+			-- configure lua server
+			lspconfig["lua_ls"].setup({
+				capabilities = capabilities,
+				settings = { -- custom settings for lua
+					Lua = {
+						-- make the language server recognize "vim" global
+						diagnostics = {
+							globals = { "vim" },
+						},
+						workspace = {
+							-- make language server aware of runtime files
+							library = {
+								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+								[vim.fn.stdpath("config") .. "/lua"] = true,
+							},
+						},
+					},
+				},
+			})
+
+			-- configure prisma server
 			lspconfig["prismals"].setup({
 				capabilities = capabilities,
 			})
 
-			-- configure rust_analyzer server
+			-- configure rust server
 			lspconfig["rust_analyzer"].setup({
 				capabilities = capabilities,
 				cmd = {
@@ -36,30 +56,10 @@ return {
 				},
 			})
 
-			-- configure gopls
+			-- configure golang server
 			lspconfig["gopls"].setup({
 				capabilities = capabilities,
 			})
-
-			-- configure lua server (with special settings)
-			-- lspconfig["sumneko_lua"].setup({
-			-- 	capabilities = capabilities,
-			-- 	settings = { -- custom settings for lua
-			-- 		Lua = {
-			-- 			-- make the language server recognize "vim" global
-			-- 			diagnostics = {
-			-- 				globals = { "vim" },
-			-- 			},
-			-- 			workspace = {
-			-- 				-- make language server aware of runtime files
-			-- 				library = {
-			-- 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-			-- 					[vim.fn.stdpath("config") .. "/lua"] = true,
-			-- 				},
-			-- 			},
-			-- 		},
-			-- 	},
-			-- })
 
 			-- configure rust_analyzer server
 			local rt_status_ok, rt = pcall(require, "rust-tools")
@@ -98,10 +98,10 @@ return {
 		"L3MON4D3/LuaSnip",
 		dependencies = {
 			"rafamadriz/friendly-snippets",
+			config = function()
+				require("luasnip.loaders.from_vscode").lazy_load()
+			end,
 		},
-		config = function()
-			require("luasnip.loaders.from_vscode").lazy_load()
-		end,
 		opts = {
 			history = true,
 			delete_check_events = "TextChanged",

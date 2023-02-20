@@ -2,10 +2,20 @@ return {
 	-- references
 	{
 		"RRethy/vim-illuminate",
-		event = "BufReadPost",
+		event = { "BufReadPost", "BufNewFile" },
 		opts = { delay = 200 },
 		config = function(_, opts)
 			require("illuminate").configure(opts)
+
+			local function map(key, dir, buffer)
+				vim.keymap.set("n", key, function()
+					require("illuminate")["goto_" .. dir .. "_reference"](false)
+				end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. " Reference", buffer = buffer })
+			end
+
+			map("]]", "next")
+			map("[[", "prev")
+
 			vim.api.nvim_create_autocmd("FileType", {
 				callback = function()
 					local buffer = vim.api.nvim_get_current_buf()
@@ -15,20 +25,8 @@ return {
 			})
 		end,
 		keys = {
-			{
-				"]]",
-				function()
-					require("illuminate").goto_next_reference(false)
-				end,
-				desc = "Next Reference",
-			},
-			{
-				"[[",
-				function()
-					require("illuminate").goto_prev_reference(false)
-				end,
-				desc = "Prev Reference",
-			},
+			{ "]]", desc = "Next Reference" },
+			{ "[[", desc = "Prev Reference" },
 		},
 	},
 	-- git signs
@@ -65,6 +63,7 @@ return {
 					numhl = "GitSignsChangeNr",
 					linehl = "GitSignsChangeLn",
 				},
+				untracked = { text = "█" },
 			},
 			signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
 			numhl = false, -- Toggle with `:Gitsigns toggle_numhl`

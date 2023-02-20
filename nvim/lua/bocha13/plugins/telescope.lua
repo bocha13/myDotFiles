@@ -7,6 +7,8 @@ return {
 	version = false,
 	opts = {
 		defaults = {
+			prompt_prefix = " ",
+			selection_caret = " ",
 			file_ignore_patterns = { "node_modules" },
 		},
 	},
