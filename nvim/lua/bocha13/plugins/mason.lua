@@ -26,6 +26,7 @@ return {
 					"rust_analyzer",
 					"tsserver",
 					"eslint",
+					"gopls",
 				},
 				automatic_installation = true,
 			})
@@ -35,7 +36,9 @@ return {
 					"prettier",
 					"stylua",
 					"eslint_d",
+					"gofmt",
 				},
+				automatic_installation = true,
 			})
 		end,
 	},

@@ -4,15 +4,15 @@ return {
 		event = "InsertEnter",
 		opts = function()
 			local cmp = require("cmp")
-			-- local luasnip = require("luasnip")
+			local luasnip = require("luasnip")
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 			return {
-				-- snippet = {
-				-- 	expand = function(args)
-				-- 		luasnip.lsp_expand(args.body)
-				-- 	end,
-				-- },
+				snippet = {
+					expand = function(args)
+						luasnip.lsp_expand(args.body)
+					end,
+				},
 				sources = {
 					{ name = "copilot", group_index = 2 },
 					-- { name = "luasnip", group_index = 3 },
@@ -53,7 +53,7 @@ return {
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/cmp-buffer" },
 	{ "hrsh7th/cmp-path" },
-	-- { "saadparwaiz1/cmp_luasnip" },
+	{ "saadparwaiz1/cmp_luasnip" },
 	{ "hrsh7th/cmp-nvim-lua" },
 	-- copilot
 	{

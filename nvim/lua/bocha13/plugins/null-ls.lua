@@ -10,6 +10,7 @@ return {
 			sources = {
 				formatting.prettier,
 				formatting.stylua,
+				formatting.gofmt,
 				diagnostics.eslint_d.with({
 					-- only enable eslint if root has .eslintrc.*
 					condition = function(utils)
