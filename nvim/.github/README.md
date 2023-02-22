@@ -3,6 +3,7 @@
 </div>
 
 A customized neovim configuration
+![Screenshot1](https://raw.githubusercontent.com/bocha13/myDotFiles/master/nvim/.github/screen.JPG)
 
 ## Requirements
 
