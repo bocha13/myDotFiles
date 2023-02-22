@@ -5,7 +5,7 @@ return {
 		event = "InsertEnter",
 		opts = function()
 			local cmp = require("cmp")
-			local luasnip = require("luasnip")
+			-- local luasnip = require("luasnip")
 			local lspkind = require("lspkind")
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
@@ -18,11 +18,11 @@ return {
 			}
 
 			return {
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body)
-					end,
-				},
+				-- snippet = {
+				-- 	expand = function(args)
+				-- 		luasnip.lsp_expand(args.body)
+				-- 	end,
+				-- },
 				formatting = {
 					format = function(entry, vim_item)
 						vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
@@ -45,7 +45,7 @@ return {
 				},
 				sources = {
 					{ name = "cmp_tabnine", group_index = 2 },
-					{ name = "luasnip", group_index = 3 },
+					-- { name = "luasnip", group_index = 3 },
 					{ name = "buffer", group_index = 2 },
 					{ name = "nvim_lsp", group_index = 2 },
 					{ name = "path", group_index = 2 },
@@ -94,6 +94,6 @@ return {
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/cmp-buffer" },
 	{ "hrsh7th/cmp-path" },
-	{ "saadparwaiz1/cmp_luasnip" },
+	-- { "saadparwaiz1/cmp_luasnip" },
 	{ "hrsh7th/cmp-nvim-lua" },
 }

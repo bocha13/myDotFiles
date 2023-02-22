@@ -3,6 +3,10 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			"mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+		},
 		config = function()
 			local lspconfig = require("lspconfig")
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -95,18 +99,18 @@ return {
 			rt.setup(rust_opts)
 		end,
 	},
-	{
-		"L3MON4D3/LuaSnip",
-		dependencies = {
-			"rafamadriz/friendly-snippets",
-			config = function()
-				require("luasnip.loaders.from_vscode").lazy_load()
-			end,
-		},
-		opts = {
-			history = true,
-			delete_check_events = "TextChanged",
-		},
-	},
-	{ "rafamadriz/friendly-snippets" },
+	-- {
+	-- 	"L3MON4D3/LuaSnip",
+	-- 	dependencies = {
+	-- 		"rafamadriz/friendly-snippets",
+	-- 		config = function()
+	-- 			require("luasnip.loaders.from_vscode").lazy_load()
+	-- 		end,
+	-- 	},
+	-- 	opts = {
+	-- 		history = true,
+	-- 		delete_check_events = "TextChanged",
+	-- 	},
+	-- },
+	-- { "rafamadriz/friendly-snippets" },
 }
