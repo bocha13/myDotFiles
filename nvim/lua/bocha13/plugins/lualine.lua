@@ -36,7 +36,7 @@ return {
 				globalstatus = true,
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
-				disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
+				disabled_filetypes = { statusline = { "dashboard", "lazy" } },
 			},
 			sections = {
 				lualine_a = { mode },
