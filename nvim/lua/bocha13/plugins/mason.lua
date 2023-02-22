@@ -1,19 +1,19 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		opts = {
-			ensure_installed = {
-				"lua_ls",
-				"rust_analyzer",
-				"tsserver",
-				"eslint",
-				"gopls",
-			},
-		},
+		-- opts = {
+		-- 	ensure_installed = {
+		-- 		"lua_ls",
+		-- 		"rust_analyzer",
+		-- 		"tsserver",
+		-- 		"eslint",
+		-- 		"gopls",
+		-- 	},
+		-- },
 		config = function()
 			local mason = require("mason")
-			-- local mason_lsp = require("mason-lspconfig")
-			-- local mason_null_ls = require("mason-null-ls")
+			local mason_lsp = require("mason-lspconfig")
+			local mason_null_ls = require("mason-null-ls")
 
 			local config = {
 				virtual_text = { spacing = 4, prefix = "●" },
@@ -29,26 +29,26 @@ return {
 			vim.diagnostic.config(config)
 			mason.setup()
 
-			-- mason_lsp.setup({
-			-- 	ensure_installed = {
-			-- 		"lua_ls",
-			-- 		"rust_analyzer",
-			-- 		"tsserver",
-			-- 		"eslint",
-			-- 		"gopls",
-			-- 	},
-			-- 	automatic_installation = true,
-			-- })
+			mason_lsp.setup({
+				ensure_installed = {
+					"lua_ls",
+					"rust_analyzer",
+					"tsserver",
+					"eslint",
+					"gopls",
+				},
+				automatic_installation = true,
+			})
 
-			-- mason_null_ls.setup({
-			-- 	ensure_installed = {
-			-- 		"prettier",
-			-- 		"stylua",
-			-- 		"eslint_d",
-			-- 		"gofmt",
-			-- 	},
-			-- 	automatic_installation = true,
-			-- })
+			mason_null_ls.setup({
+				ensure_installed = {
+					"prettier",
+					"stylua",
+					"eslint_d",
+					"gofmt",
+				},
+				automatic_installation = true,
+			})
 		end,
 	},
 	{ "williamboman/mason-lspconfig.nvim" },

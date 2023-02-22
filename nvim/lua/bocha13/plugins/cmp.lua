@@ -1,11 +1,30 @@
 return {
 	{ "onsails/lspkind.nvim" },
 	{
+		"L3MON4D3/LuaSnip",
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			-- config = function()
+			-- 	require("luasnip.loaders.from_vscode").lazy_load()
+			-- end,
+		},
+		opts = {
+			history = true,
+			delete_cehck_events = "TextChanged",
+		},
+	},
+	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"saadparwaiz1/cmp_luasnip",
+		},
 		opts = function()
 			local cmp = require("cmp")
-			-- local luasnip = require("luasnip")
+			local luasnip = require("luasnip")
 			local lspkind = require("lspkind")
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
@@ -18,11 +37,11 @@ return {
 			}
 
 			return {
-				-- snippet = {
-				-- 	expand = function(args)
-				-- 		luasnip.lsp_expand(args.body)
-				-- 	end,
-				-- },
+				snippet = {
+					expand = function(args)
+						luasnip.lsp_expand(args.body)
+					end,
+				},
 				formatting = {
 					format = function(entry, vim_item)
 						vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
@@ -94,6 +113,5 @@ return {
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/cmp-buffer" },
 	{ "hrsh7th/cmp-path" },
-	-- { "saadparwaiz1/cmp_luasnip" },
 	{ "hrsh7th/cmp-nvim-lua" },
 }
