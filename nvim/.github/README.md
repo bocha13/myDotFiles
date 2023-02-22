@@ -7,7 +7,7 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/bocha13/myDotFiles?color=74be88&style=for-the-badge)
 </div>
 
-![Screenshot1](https://raw.githubusercontent.com/bocha13/myDotFiles/nvim/screen.jpg)
+![Screenshot1](https://raw.githubusercontent.com/bocha13/myDotFiles/nvim/.github/screen.JPG)
 
 A customized neovim configuration
 
