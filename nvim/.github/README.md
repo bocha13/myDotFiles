@@ -1,13 +1,6 @@
 <div align="center">
   <h1> NVIM </h1>
 </div>
-<div align="center">
-![GitHub top language](https://img.shields.io/github/languages/top/bocha13/myDotFiles?color=6d92bf&style=for-the-badge)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/bocha13/myDotFiles?color=e1b56a&style=for-the-badge)
-![GitHub Repo stars](https://img.shields.io/github/stars/bocha13/myDotFiles?color=74be88&style=for-the-badge)
-</div>
-
-![Screenshot1](https://raw.githubusercontent.com/bocha13/myDotFiles/nvim/.github/screen.JPG)
 
 A customized neovim configuration
 
