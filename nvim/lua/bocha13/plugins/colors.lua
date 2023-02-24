@@ -1,53 +1,30 @@
 return {
-	"folke/tokyonight.nvim",
+	"catppuccin/nvim",
+	name = "catppuccin",
 	config = function()
-		require("tokyonight").setup({
-			style = "moon",
-			on_colors = function(colors)
-				-- colors.bg = "#1e2030"
-				-- colors.bg_visual = "#292e42"
-				-- colors.bg_dark = "#1c1c1c"
-				-- colors.bg_float = "#1c1c1c"
-				-- colors.bg_popup = "#1c1c1c"
-				-- colors.bg_sidebar = "#1c1c1c"
-				-- colors.bg_statusline = "#161824"
-				colors.purple = "#c099ff"
-				colors.border = "#0db9d7"
-			end,
-			on_highlights = function(highlight, c)
-				-- mini.indent line color
-				highlight.MiniIndentscopeSymbol = {
-					fg = c.border,
-				}
-				-- 	highlight.BufferTabpageFill = {
-				-- 		bg = c.bg_statusline,
-				-- 		fg = "#3b4261",
-				-- 	}
-				-- 	highlight.BufferOffset = {
-				-- 		bg = c.bg_statusline,
-				-- 		fg = "#65bcff",
-				-- 	}
-				-- 	highlight.BufferInactiveSign = {
-				-- 		bg = "#161824",
-				-- 		fg = "#65bcff",
-				-- 	}
-				-- 	highlight.BufferCurrentSign = {
-				-- 		bg = "#3b4261",
-				-- 		fg = "#65bcff",
-				-- 	}
-				-- 	highlight.MsgArea = {
-				-- 		bg = c.bg,
-				-- 		fg = "#65bcff",
-				-- 	}
-			end,
+		require("catppuccin").setup({
+			integrations = {
+				telescope = true,
+				cmp = true,
+				gitsigns = true,
+				neotree = true,
+			},
+			color_overrides = {
+				flavour = "mocha",
+				mocha = {
+					base = "#191724",
+					mantle = "#2b2b3c",
+					crust = "#2b2b3c",
+				},
+			},
+			highlight_overrides = {
+				mocha = {
+					NeoTreeNormal = { bg = "#191724" },
+					NeoTreeNormalNC = { bg = "#191724" },
+					TelescopeBorder = { fg = "#c8aaad" },
+				},
+			},
 		})
-		vim.cmd.colorscheme("tokyonight")
+		vim.cmd.colorscheme("catppuccin")
 	end,
 }
-
--- return {
--- 	"morhetz/gruvbox",
--- 	config = function()
--- 		vim.cmd.colorscheme("gruvbox")
--- 	end,
--- }

@@ -86,16 +86,16 @@ return {
 						"s",
 					}),
 				}),
-				window = {
-					documentation = {
-						winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-						border = "rounded",
-					},
-					completion = {
-						winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-						border = "rounded",
-					},
-				},
+				-- window = {
+				-- 	documentation = {
+				-- 		winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
+				-- 		border = "rounded",
+				-- 	},
+				-- 	completion = {
+				-- 		winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
+				-- 		border = "rounded",
+				-- 	},
+				-- },
 			}
 		end,
 	},
