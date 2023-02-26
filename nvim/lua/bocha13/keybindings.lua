@@ -1,6 +1,8 @@
 local map = vim.keymap.set
 vim.g.mapleader = " "
 
+local opts = { noremap = true, silent = true }
+
 -- Move Lines
 map("n", "<A-j>", ":m .+1<cr>==", { desc = "Move down" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
@@ -18,23 +20,18 @@ map("x", "<leader>p", '"_dp')
 -- use system clipboard
 map("n", "<leader>y", '"+y')
 map("v", "<leader>y", '"+y')
-map("n", "<leader>Y", '"+Y')
+map("n", "<leader>Y", '"+y')
 
 map("n", "<leader>d", '"_d')
 map("v", "<leader>d", '"_d')
 
 map("n", "Q", "<nop>")
 map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-map("n", "<leader>fa", function()
-	vim.lsp.buf.format()
-end)
-map("n", "<leader>fA", "<cmd>EslintFixAll<CR>")
 
 map("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- BUFFERS
-local opts = { noremap = true, silent = true }
 -- Move to previous/next buffer
 map("n", "<S-h>", "<Cmd>BufferPrevious<CR>", opts)
 map("n", "<S-l>", "<Cmd>BufferNext<CR>", opts)
@@ -92,16 +89,20 @@ map("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- LSP
 -- setup formatting and keymaps
-map("n", "<leader>cd", vim.diagnostic.open_float, { noremap = true, silent = true })
-map("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true })
-map("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true })
-map("n", "<leader>gd", vim.lsp.buf.definition, { noremap = true, silent = true })
-map("n", "<leader>gD", vim.lsp.buf.declaration, { noremap = true, silent = true })
+map("n", "<leader>cd", vim.diagnostic.open_float, opts)
+map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+map("n", "<leader>rn", vim.lsp.buf.rename, opts)
+map("n", "<leader>gd", vim.lsp.buf.definition, opts)
+map("n", "<leader>gD", vim.lsp.buf.declaration, opts)
+map("n", "<leader>fA", "<cmd>EslintFixAll<CR>")
+map("n", "K", vim.lsp.buf.hover, opts)
+map("n", "<leader>fa", function()
+	vim.lsp.buf.format()
+end)
 map("n", "<leader>fa", function()
 	vim.lsp.buf.format({
 		filter = function(client)
 			return client.name == "null-ls"
 		end,
 	})
-end, { noremap = true, silent = true })
-map("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true })
+end, opts)

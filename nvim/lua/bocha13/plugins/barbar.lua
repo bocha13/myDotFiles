@@ -34,7 +34,7 @@ return {
 			-- Enables / disables diagnostic symbols
 			diagnostics = {
 				-- you can use a list
-				{ enabled = true, icon = "ﬀ" }, -- ERROR
+				{ enabled = true }, -- ERROR
 				{ enabled = false }, -- WARN
 				{ enabled = false }, -- INFO
 				{ enabled = true }, -- HINT
