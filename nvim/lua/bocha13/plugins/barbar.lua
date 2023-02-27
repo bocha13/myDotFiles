@@ -34,23 +34,11 @@ return {
 			-- Enables / disables diagnostic symbols
 			diagnostics = {
 				-- you can use a list
-				{ enabled = true }, -- ERROR
+				{ enabled = true, icon = "E" }, -- ERROR
 				{ enabled = false }, -- WARN
 				{ enabled = false }, -- INFO
-				{ enabled = true }, -- HINT
-
-				-- OR `vim.diagnostic.severity`
-				[vim.diagnostic.severity.ERROR] = { enabled = true, icon = "ﬀ" },
-				[vim.diagnostic.severity.WARN] = { enabled = false },
-				[vim.diagnostic.severity.INFO] = { enabled = false },
-				[vim.diagnostic.severity.HINT] = { enabled = true },
+				{ enabled = false }, -- HINT
 			},
-			-- Excludes buffers from the tabline
-			-- exclude_ft = { "javascript" },
-			-- exclude_name = { "package.json" },
-
-			-- Hide inactive buffers and file extensions. Other options are `alternate`, `current`, and `visible`.
-			-- hide = { extensions = true, inactive = true },
 
 			-- Disable highlighting alternate buffers
 			highlight_alternate = false,

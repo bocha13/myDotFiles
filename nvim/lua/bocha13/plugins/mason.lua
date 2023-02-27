@@ -26,7 +26,6 @@ return {
 					"rust_analyzer",
 					"tsserver",
 					"eslint",
-					"gopls",
 				},
 				automatic_installation = true,
 			})
