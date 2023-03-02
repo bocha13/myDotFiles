@@ -5,6 +5,7 @@ return {
 		config = function()
 			require("catppuccin").setup({
 				integrations = {
+					barbar = true,
 					telescope = true,
 					cmp = true,
 					gitsigns = true,

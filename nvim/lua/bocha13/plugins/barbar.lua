@@ -17,6 +17,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWipeout" }, {
 return {
 	"romgrk/barbar.nvim",
 	dependencies = "nvim-tree/nvim-web-devicons",
+	event = "VeryLazy",
 	config = function()
 		require("bufferline").setup({
 			-- Enable/disable animations
