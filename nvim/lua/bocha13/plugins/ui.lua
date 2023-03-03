@@ -106,7 +106,6 @@ return {
 		"lukas-reineke/indent-blankline.nvim",
 		event = "BufReadPre",
 		opts = {
-			-- char = "▏",
 			char = "│",
 			filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
 			show_trailing_blankline_indent = false,
@@ -123,6 +122,7 @@ return {
 	{
 		"goolord/alpha-nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+		event = "VimEnter",
 		config = function()
 			local alpha = require("alpha")
 			local dashboard = require("alpha.themes.dashboard")

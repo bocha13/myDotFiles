@@ -25,6 +25,20 @@ return {
 				capabilities = capabilities,
 			})
 
+			-- config yaml/docker servers
+			lspconfig["yamlls"].setup({
+				capabilities = capabilities,
+				settings = {
+					yaml = {
+						workspace = {
+							library = {
+								[vim.fn.expand("$VIMRUNTIME/yaml")] = true,
+							},
+						},
+					},
+				},
+			})
+
 			-- configure lua server
 			lspconfig["lua_ls"].setup({
 				capabilities = capabilities,
@@ -84,6 +98,9 @@ return {
 					},
 					settings = {
 						["rust-analyzer"] = {
+							checkOnSave = {
+								command = "clippy",
+							},
 							diagnostics = {
 								experimental = true,
 							},

@@ -59,9 +59,6 @@ map("n", "<C-Down>", ":resize -2<CR>")
 map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
 
--- Neo-Tree mappings
-map("n", "<leader>e", "<cmd>NeoTreeShowToggle<CR>")
-
 -- TELESCOPE
 local builtin = require("telescope.builtin")
 map("n", "<leader>ff", builtin.find_files, {})
