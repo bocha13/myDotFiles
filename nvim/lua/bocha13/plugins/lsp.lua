@@ -28,15 +28,6 @@ return {
 			-- config yaml/docker servers
 			lspconfig["yamlls"].setup({
 				capabilities = capabilities,
-				settings = {
-					yaml = {
-						workspace = {
-							library = {
-								[vim.fn.expand("$VIMRUNTIME/yaml")] = true,
-							},
-						},
-					},
-				},
 			})
 
 			-- configure lua server
