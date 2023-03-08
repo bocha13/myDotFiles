@@ -8,7 +8,6 @@ return {
 			require("illuminate").configure({
 				under_cursor = false,
 			})
-
 			local function map(key, dir, buffer)
 				vim.keymap.set("n", key, function()
 					require("illuminate")["goto_" .. dir .. "_reference"](false)
