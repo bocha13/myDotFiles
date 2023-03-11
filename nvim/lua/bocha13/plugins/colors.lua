@@ -24,6 +24,7 @@ return {
 						NeoTreeNormal = { bg = "#191724" },
 						NeoTreeNormalNC = { bg = "#191724" },
 						TelescopeBorder = { fg = "#c8aaad" },
+						BufferCurrentERROR = { fg = "#f38ba8", bg = "#45475a" },
 						GitSignsAdd = { fg = "#8fc28c" },
 						GitSignsChange = { fg = "#7495d1" },
 						GitSignsDelete = { fg = "#f38ba8" },

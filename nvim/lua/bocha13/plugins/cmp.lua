@@ -1,5 +1,4 @@
 return {
-	{ "onsails/lspkind.nvim" },
 	{
 		"L3MON4D3/LuaSnip",
 		dependencies = {
@@ -25,16 +24,7 @@ return {
 		opts = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
-			local lspkind = require("lspkind")
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-			local source_mapping = {
-				buffer = "[Buf]",
-				nvim_lsp = "[LSP]",
-				nvim_lua = "[Lua]",
-				cmp_tabnine = "[TN]",
-				path = "[Path]",
-			}
 
 			return {
 				snippet = {
@@ -42,28 +32,8 @@ return {
 						luasnip.lsp_expand(args.body)
 					end,
 				},
-				formatting = {
-					format = function(entry, vim_item)
-						vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
-						vim_item.menu = source_mapping[entry.source.name]
-						if entry.source.name == "cmp_tabnine" then
-							local detail = (entry.completion_item.data or {}).detail
-							vim_item.kind = ""
-							if detail and detail:find(".*%%.*") then
-								vim_item.kind = vim_item.kind .. " " .. detail
-							end
-
-							if (entry.completion_item.data or {}).multiline then
-								vim_item.kind = vim_item.kind .. " " .. "[ML]"
-							end
-						end
-						local maxwidth = 80
-						vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
-						return vim_item
-					end,
-				},
 				sources = {
-					{ name = "cmp_tabnine", group_index = 1 },
+					{ name = "copilot", group_index = 1 },
 					{ name = "buffer", group_index = 1 },
 					{ name = "nvim_lsp", group_index = 1 },
 					{ name = "path", group_index = 1 },
@@ -89,14 +59,21 @@ return {
 		end,
 	},
 	{
-		"tzachar/cmp-tabnine",
-		build = "./install.sh",
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
 		config = function()
-			local tabnine = require("cmp_tabnine.config")
-			tabnine:setup({
-				snippet_placeholder = "..",
-				sort = true,
+			require("copilot").setup({
+				sugestion = { enabled = false },
+				panel = { enabled = false },
 			})
+		end,
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		dependencies = { "copilot.lua" },
+		config = function()
+			require("copilot_cmp").setup()
 		end,
 	},
 	{ "hrsh7th/cmp-nvim-lsp" },

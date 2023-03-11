@@ -37,6 +37,13 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 		event = { "BufReadPre", "BufNewFile" },
+		keys = {
+			{
+				"<leader>gf",
+				"<cmd>Gitsigns preview_hunk<CR>",
+				desc = "Preview git diff of current line",
+			},
+		},
 		opts = {
 			signs = {
 				add = { hl = "GitSignsAdd", text = "█", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
@@ -91,7 +98,7 @@ return {
 			max_file_length = 40000,
 			preview_config = {
 				-- Options passed to nvim_open_win
-				border = "rounded",
+				border = "single",
 				style = "minimal",
 				relative = "cursor",
 				row = 0,
@@ -153,27 +160,27 @@ return {
 			})
 		end,
 	},
-	{
-		"folke/noice.nvim",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-		},
-		config = function()
-			require("noice").setup({
-				cmdline = {
-					enabled = true,
-					view = "cmdline",
-					format = {
-						cmdline = { pattern = "^:", icon = ":", lang = "vim" },
-						search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-						search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
-						filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
-						lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
-						help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
-						input = {}, -- Used by input()
-					},
-				},
-			})
-		end,
-	},
+	-- {
+	-- 	"folke/noice.nvim",
+	-- 	dependencies = {
+	-- 		"MunifTanjim/nui.nvim",
+	-- 	},
+	-- 	config = function()
+	-- 		require("noice").setup({
+	-- 			cmdline = {
+	-- 				enabled = true,
+	-- 				view = "cmdline",
+	-- 				format = {
+	-- 					cmdline = { pattern = "^:", icon = ":", lang = "vim" },
+	-- 					search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+	-- 					search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+	-- 					filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
+	-- 					lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
+	-- 					help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+	-- 					input = {}, -- Used by input()
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 }
