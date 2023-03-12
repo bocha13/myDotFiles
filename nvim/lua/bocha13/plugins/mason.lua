@@ -30,6 +30,7 @@ return {
 					"rust_analyzer",
 					"tsserver",
 					"eslint",
+					"tailwindcss",
 				},
 				automatic_installation = true,
 			})
@@ -39,7 +40,6 @@ return {
 					"prettier",
 					"stylua",
 					"eslint_d",
-					"gofmt",
 				},
 				automatic_installation = true,
 			})

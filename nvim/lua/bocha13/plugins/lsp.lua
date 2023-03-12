@@ -25,6 +25,11 @@ return {
 				capabilities = capabilities,
 			})
 
+			-- tailwind
+			lspconfig["tailwindcss"].setup({
+				capabilities = capabilities,
+			})
+
 			-- config yaml/docker servers
 			lspconfig["yamlls"].setup({
 				capabilities = capabilities,
