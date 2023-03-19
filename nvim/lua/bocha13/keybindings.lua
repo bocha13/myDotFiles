@@ -84,10 +84,10 @@ map("n", "K", vim.lsp.buf.hover, opts)
 map("n", "<leader>fa", function()
 	vim.lsp.buf.format()
 end)
-map("n", "<leader>fa", function()
-	vim.lsp.buf.format({
-		filter = function(client)
-			return client.name == "null-ls"
-		end,
-	})
-end, opts)
+-- map("n", "<leader>fa", function()
+-- 	vim.lsp.buf.format({
+-- 		filter = function(client)
+-- 			return client.name == "null-ls"
+-- 		end,
+-- 	})
+-- end, opts)

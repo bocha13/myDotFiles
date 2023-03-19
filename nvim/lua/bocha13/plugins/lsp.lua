@@ -25,6 +25,11 @@ return {
 				capabilities = capabilities,
 			})
 
+			-- configure svelte
+			lspconfig["svelte"].setup({
+				capabilities = capabilities,
+			})
+
 			-- tailwind
 			lspconfig["tailwindcss"].setup({
 				capabilities = capabilities,
