@@ -69,14 +69,14 @@ return {
 						cond = require("lazy.status").has_updates,
 						color = fg("Special"),
 					},
-					-- {
-					-- 	"diff",
-					-- 	symbols = {
-					-- 		added = icons.git.added,
-					-- 		modified = icons.git.modified,
-					-- 		removed = icons.git.removed,
-					-- 	},
-					-- },
+					{
+						"diff",
+						symbols = {
+							added = icons.git.added,
+							modified = icons.git.modified,
+							removed = icons.git.removed,
+						},
+					},
 				},
 				lualine_y = {
 					{ "progress", separator = " ", padding = { left = 1, right = 0 } },
