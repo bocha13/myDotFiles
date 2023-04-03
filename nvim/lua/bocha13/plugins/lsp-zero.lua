@@ -14,7 +14,13 @@ return {
     "zbirenbaum/copilot-cmp",
     dependencies = { "copilot.lua" },
     config = function()
-      require("copilot_cmp").setup()
+      require("copilot_cmp").setup({
+        formatters = {
+          label = require("copilot_cmp.format").format_label_text,
+          preview = require("copilot_cmp.format").deindent,
+          insert_text = require("copilot_cmp.format").remove_existing
+        },
+      })
     end,
   },
   {
@@ -74,14 +80,13 @@ return {
           }),
         }),
         sources = {
-          { name = "copilot", group_index = 1 },
+          { name = "copilot", group_index = 1,   keyword_length = 3 },
           { name = 'path' },
           { name = 'nvim_lsp' },
           { name = 'buffer',  keyword_length = 3 },
           { name = 'luasnip', keyword_length = 2 },
         }
       })
-
 
       lsp.nvim_workspace()
       lsp.setup()
