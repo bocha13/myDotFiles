@@ -80,7 +80,7 @@ return {
           }),
         }),
         sources = {
-          { name = "copilot", group_index = 1,   keyword_length = 3 },
+          { name = "copilot"},
           { name = 'path' },
           { name = 'nvim_lsp' },
           { name = 'buffer',  keyword_length = 3 },

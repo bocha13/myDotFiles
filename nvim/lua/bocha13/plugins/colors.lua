@@ -9,6 +9,12 @@ return {
           GitSignsChange = { fg = "#7495d1" },
           GitSignsDelete = { fg = "#f38ba8" },
           StatusLine = { bg = "#1f1d2e" },
+          MiniIndentscopePrefix = {
+            nocombine = true
+          },
+          MiniIndentscopeSymbol = {
+            fg = "#d6d5eb"
+          },
         }
       })
       vim.cmd.colorscheme("rose-pine")

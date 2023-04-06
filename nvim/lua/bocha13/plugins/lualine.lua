@@ -30,6 +30,7 @@ return {
       end
     end
 
+    -- changed the background color of the statusline to match the theme rose-pine
     local rose_pine_background = require("lualine.themes.auto")
     rose_pine_background.normal.c.bg = "#26233a"
     rose_pine_background.insert.c.bg = "#26233a"
@@ -60,7 +61,7 @@ return {
           },
           -- show filename, type, icon and path in statusline
           -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          -- { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+          { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
           -- {
           -- 	function()
           -- 		return require("nvim-navic").get_location()

@@ -6,7 +6,7 @@ return {
     opts = { delay = 200 },
     config = function()
       require("illuminate").configure({
-        under_cursor = false,
+        under_cursor = true,
       })
       local function map(key, dir, buffer)
         vim.keymap.set("n", key, function()
@@ -159,18 +159,6 @@ return {
         end,
       })
     end,
-  },
-  {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
-    },
-    opts = {
-      -- configurations go here
-    },
   },
   {
     "jackMort/ChatGPT.nvim",
