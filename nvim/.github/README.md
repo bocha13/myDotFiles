@@ -6,7 +6,7 @@
 
 ## Requirements
 
-- Neovim >= 0.8
+- Neovim >= 0.9
 - git >= 2.31.0
 - [Nodejs](https://nodejs.org/en/)
 - [Rust](https://rustup.rs/) (optional)
@@ -21,7 +21,7 @@
 #### Install neovim from source
 
 - clone nvim from https://github.com/neovim/neovim.git
-- checkout the branch with the version you want to install (eg. release-0.7)
+- checkout the branch with the version you want to install (eg. release-0.9)
 - inside the repo run `make CMAKE_BUILD_TYPE=Release`
 - then run "sudo make install"
 - if no errors, nvim should be installed
