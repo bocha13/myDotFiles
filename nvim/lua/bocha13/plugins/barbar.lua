@@ -42,13 +42,15 @@ return {
     -- if set to 'numbers', will show buffer index in the tabline
     -- if set to 'both', will show buffer index and icons in the tabline
     icons = {
-      filetype = { enabled = true },
+      filetype = {
+        enabled = true,
+        custom_colors = false,
+      },
       diagnostics = {
-        -- you can use a list
-        { enabled = true, icon = "E" },   -- ERROR
-        { enabled = false },              -- WARN
-        { enabled = false },              -- INFO
-        { enabled = false },              -- HINT
+        [vim.diagnostic.severity.ERROR] = { enabled = true, icon = "E" }, -- ERROR
+        [vim.diagnostic.severity.WARN] = { enabled = false },             -- WARN
+        [vim.diagnostic.severity.INFO] = { enabled = false },             -- INFO
+        [vim.diagnostic.severity.HINT] = { enabled = false },             -- HINT
       },
       button = "",
       modified = {
@@ -61,6 +63,7 @@ return {
       },
       separator = {
         left = "▎",
+        right = ""
       },
       inactive = {
         separator = {
@@ -68,11 +71,6 @@ return {
         }
       }
     },
-    -- If set, the icon color will follow its corresponding buffer
-    -- highlight group. By default, the Buffer*Icon group is linked to the
-    -- Buffer* group (see Highlighting below). Otherwise, it will take its
-    -- default value as defined by devicons.
-    icon_custom_colors = false,
     -- If true, new buffers will be inserted at the start/end of the list.
     -- Default is to insert after current buffer.
     insert_at_end = false,
