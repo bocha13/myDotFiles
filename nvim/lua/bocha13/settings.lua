@@ -6,6 +6,15 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.api.nvim_command("set fillchars+=vert:\\▎")
 
+-- remove auto comment on new line after comment
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    vim.opt.formatoptions:remove { "c", "r", "o" }
+  end,
+  group = general,
+  desc = "Disable New Line Comment",
+})
+
 vim.opt.showmode = false
 vim.opt.nu = true
 vim.opt.relativenumber = true
