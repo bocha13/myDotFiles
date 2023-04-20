@@ -87,8 +87,10 @@ map("n", "<leader>fa", function()
 end)
 -- map("n", "<leader>fa", function()
 -- 	vim.lsp.buf.format({
--- 		filter = function(client)
--- 			return client.name == "eslint"
+-- 		filter = function(clients)
+-- 			return vim.tbl_filter(function(client)
+-- 				return client.name ~= "tsserver"
+-- 			end, clients)
 -- 		end,
 -- 	})
 -- end, opts)

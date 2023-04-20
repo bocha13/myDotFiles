@@ -18,18 +18,23 @@ return {
         formatters = {
           label = require("copilot_cmp.format").format_label_text,
           preview = require("copilot_cmp.format").deindent,
-          insert_text = require("copilot_cmp.format").remove_existing
+          insert_text = require("copilot_cmp.format").remove_existing,
         },
       })
     end,
   },
   {
     "VonHeikemen/lsp-zero.nvim",
-    branch = "v1.x",
+    branch = "v2.x",
     dependencies = {
       -- LSP Support
-      { "neovim/nvim-lspconfig" },             -- Required
-      { "williamboman/mason.nvim" },           -- Optional
+      { "neovim/nvim-lspconfig" }, -- Required
+      {
+        "williamboman/mason.nvim",
+        build = function()
+          pcall(vim.vmd, "MasonUpdate")
+        end,
+      },                                       -- Optional
       { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
       -- Autocompletion
@@ -45,22 +50,26 @@ return {
       { "rafamadriz/friendly-snippets" }, -- Optional
     },
     config = function()
-      local cmp = require('cmp')
+      local cmp = require("cmp")
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
-      local lsp = require('lsp-zero').preset({
-        name = 'minimal',
+      local lsp = require("lsp-zero").preset({
+        name = "minimal",
         set_lsp_keymaps = true,
         manage_nvim_cmp = true,
-        suggest_lsp_servers = false
+        suggest_lsp_servers = false,
       })
       lsp.setup_servers({
-        'tsserver', 'eslint', 'rust_analyzer', 'tailwindcss', 'lua_ls'
+        "tsserver",
+        "eslint",
+        "rust_analyzer",
+        "tailwindcss",
+        "lua_ls",
       })
 
       lsp.setup_nvim_cmp({
-        preselect = 'none',
+        preselect = "none",
         completion = {
-          completeopt = 'menu,menuone,noinsert,noselect',
+          completeopt = "menu,menuone,noinsert,noselect",
         },
         mapping = lsp.defaults.cmp_mappings({
           ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
@@ -80,13 +89,47 @@ return {
           }),
         }),
         sources = {
-          { name = "copilot"},
-          { name = 'path' },
-          { name = 'nvim_lsp' },
-          { name = 'buffer',  keyword_length = 3 },
-          { name = 'luasnip', keyword_length = 2 },
-        }
+          { name = "copilot" },
+          { name = "path" },
+          { name = "nvim_lsp" },
+          { name = "buffer",  keyword_length = 3 },
+          { name = "luasnip", keyword_length = 2 },
+        },
       })
+
+      local function filter(arr, fn)
+        if type(arr) ~= "table" then
+          return arr
+        end
+
+        local filtered = {}
+        for k, v in pairs(arr) do
+          if fn(v, k, arr) then
+            table.insert(filtered, v)
+          end
+        end
+
+        return filtered
+      end
+
+      local function filterReactDTS(value)
+        return string.match(value.filename, 'react/index.d.ts') == nil
+      end
+
+      local function on_list(options)
+        local items = options.items
+        if #items > 1 then
+          items = filter(items, filterReactDTS)
+        end
+
+        vim.fn.setqflist({}, ' ', { title = options.title, items = items, context = options.context })
+        vim.api.nvim_command('cfirst') -- or maybe you want 'copen' instead of 'cfirst'
+      end
+
+      lsp.on_attach(function(client, bufnr)
+        local bufopts = { noremap = true, silent = true, buffer = bufnr }
+        vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition { on_list = on_list } end, bufopts)
+      end)
 
       lsp.nvim_workspace()
       lsp.setup()
@@ -96,10 +139,10 @@ return {
         virtual_text = true,
         signs = true,
         float = {
-          style = 'minimal',
-          border = 'none'
-        }
+          style = "minimal",
+          border = "none",
+        },
       })
-    end
+    end,
   },
 }
