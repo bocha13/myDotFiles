@@ -13,6 +13,7 @@ return {
   {
     "zbirenbaum/copilot-cmp",
     dependencies = { "copilot.lua" },
+    event = "BufReadPre",
     config = function()
       require("copilot_cmp").setup({
         formatters = {

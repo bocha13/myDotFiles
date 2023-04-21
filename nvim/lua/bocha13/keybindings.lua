@@ -37,9 +37,6 @@ map("n", "<C-Down>", ":resize -2<CR>")
 map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
 
--- UNDOTREE
-map("n", "<leader>u", vim.cmd.UndotreeToggle)
-
 -- LSP
 -- setup formatting and keymaps
 map("n", "<leader>cd", vim.diagnostic.open_float, opts)
