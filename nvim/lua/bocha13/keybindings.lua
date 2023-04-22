@@ -18,9 +18,15 @@ map("n", "<C-u", "<C-u>zz")
 map("x", "<leader>p", '"_dp')
 
 -- use system clipboard
+-- yank
 map("n", "<leader>y", '"+y')
 map("v", "<leader>y", '"+y')
 map("n", "<leader>Y", '"+y')
+-- paste
+map("n", "<leader>p", '"+p')
+map("v", "<leader>p", '"+p')
+map("n", "<leader>P", '"+P')
+
 
 map("n", "<leader>d", '"_d')
 map("v", "<leader>d", '"_d')
