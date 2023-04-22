@@ -1,10 +1,8 @@
 local root_patterns = { ".git", "lua" }
 
 local function get_root()
-  ---@type string?
   local path = vim.api.nvim_buf_get_name(0)
   path = path ~= "" and vim.loop.fs_realpath(path) or nil
-  ---@type string[]
   local roots = {}
   if path then
     for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
@@ -23,15 +21,12 @@ local function get_root()
   table.sort(roots, function(a, b)
     return #a > #b
   end)
-  ---@type string?
   local root = roots[1]
   if not root then
     path = path and vim.fs.dirname(path) or vim.loop.cwd()
-    ---@type string?
     root = vim.fs.find(root_patterns, { path = path, upward = true })[1]
     root = root and vim.fs.dirname(root) or vim.loop.cwd()
   end
-  ---@cast root string
   return root
 end
 

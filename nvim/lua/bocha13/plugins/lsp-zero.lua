@@ -2,26 +2,19 @@ return {
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup({
-        sugestion = { enabled = false },
-        panel = { enabled = false },
-      })
-    end,
+    build = ":Copilot auth",
+    opts = {
+      sugestion = { enabled = false },
+      panel = { enabled = false },
+    }
   },
   {
     "zbirenbaum/copilot-cmp",
     dependencies = { "copilot.lua" },
     event = "BufReadPre",
-    config = function()
-      require("copilot_cmp").setup({
-        formatters = {
-          label = require("copilot_cmp.format").format_label_text,
-          preview = require("copilot_cmp.format").deindent,
-          insert_text = require("copilot_cmp.format").remove_existing,
-        },
-      })
+    config = function(_, opts)
+      local copilot_cmp = require("copilot_cmp")
+      copilot_cmp.setup(opts)
     end,
   },
   {

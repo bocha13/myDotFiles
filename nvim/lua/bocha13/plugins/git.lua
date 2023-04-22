@@ -1,18 +1,11 @@
 return {
   {
-    "TimUntersberger/neogit",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    cmd = "Neogit",
-    config = function()
-      require("neogit").setup({
-        integrations = {
-          diffview = true,
-        },
-      })
-    end,
-  },
-  {
-    "sindrets/diffview.nvim",
-    cmd = "DiffviewOpen",
+    "tpope/vim-fugitive",
+    cmd = "Git",
+    keys = {
+      { "<leader>gc", ":Git commit -m \"", desc = "Git commit with message" },
+      { "<leader>gp", ":Git push -u origin HEAD<CR>", desc = "Git push to origin" },
+
+    }
   }
 }

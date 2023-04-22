@@ -1,11 +1,3 @@
-local mode = {
-  "mode",
-  fmt = function(str)
-    return "-- " .. str .. " --"
-  end,
-  padding = 0,
-}
-
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
@@ -41,13 +33,13 @@ return {
     return {
       options = {
         theme = rose_pine_background,
-        globalstatus = true,
+        globalstatus = false,
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         disabled_filetypes = { statusline = { "dashboard", "lazy" } },
       },
       sections = {
-        lualine_a = { mode },
+        lualine_a = { "mode" },
         lualine_b = { "branch" },
         lualine_c = {
           {

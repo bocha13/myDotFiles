@@ -4,10 +4,9 @@ return {
     "RRethy/vim-illuminate",
     event = { "BufReadPost", "BufNewFile" },
     opts = { delay = 200 },
-    config = function()
-      require("illuminate").configure({
-        under_cursor = true,
-      })
+    config = function(_, opts)
+      require("illuminate").configure(opts)
+
       local function map(key, dir, buffer)
         vim.keymap.set("n", key, function()
           require("illuminate")["goto_" .. dir .. "_reference"](false)
