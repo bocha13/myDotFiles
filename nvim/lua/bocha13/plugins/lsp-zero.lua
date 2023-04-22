@@ -91,6 +91,8 @@ return {
         },
       })
 
+      -- this following bunch of code is to filter out react/.index.d.ts from the definition list
+      -- because it's annoying to have to scroll through them
       local function filter(arr, fn)
         if type(arr) ~= "table" then
           return arr

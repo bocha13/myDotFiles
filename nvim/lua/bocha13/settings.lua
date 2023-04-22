@@ -28,14 +28,14 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
-vim.opt.swapfile = true
+vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
-vim.opt.cursorline = true
+-- vim.opt.cursorline = true
 
 vim.opt.termguicolors = true
 
@@ -46,9 +46,6 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.g.mapleader = " "
-
--- Fugitive
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
 -- Format on save
 -- vim.api.nvim_create_autocmd("BufWritePre", {

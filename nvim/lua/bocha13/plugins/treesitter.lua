@@ -16,7 +16,6 @@ return {
 			"help",
 			"html",
 			"javascript",
-			"svelte",
 			"json",
 			"lua",
 			"markdown",

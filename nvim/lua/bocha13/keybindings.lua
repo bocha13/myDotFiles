@@ -50,12 +50,11 @@ map("n", "K", vim.lsp.buf.hover, opts)
 map("n", "<leader>fa", function()
 	vim.lsp.buf.format()
 end)
--- map("n", "<leader>fa", function()
+-- map("n", "<leader>fa", function(bufnr)
 -- 	vim.lsp.buf.format({
--- 		filter = function(clients)
--- 			return vim.tbl_filter(function(client)
+-- 		filter = function(client)
 -- 				return client.name ~= "tsserver"
--- 			end, clients)
 -- 		end,
+--  bufnr = bufnr,
 -- 	})
 -- end, opts)
