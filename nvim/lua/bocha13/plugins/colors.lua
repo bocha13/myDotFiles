@@ -8,24 +8,14 @@ return {
           GitSignsAdd = { fg = "#8fc28c" },
           GitSignsChange = { fg = "#7495d1" },
           GitSignsDelete = { fg = "#f38ba8" },
-          StatusLine = { bg = "#1f1d2e" },
-          IlluminatedWordText = { bg = "#282838" },
-          IlluminatedWordRead = { bg = "#45475a" },
-          IlluminatedWordWrite = { bg = "#45475a" },
+          -- IlluminatedWordText = { bg = "#282838" },
+          -- IlluminatedWordRead = { bg = "#45475a" },
+          -- IlluminatedWordWrite = { bg = "#45475a" },
           MiniIndentscopePrefix = {
             nocombine = true
           },
           MiniIndentscopeSymbol = {
             fg = "#d6d5eb"
-          },
-          BufferOffset = { fg = "#d6d5eb", bg = "#1f1d2e" },
-          BufferTabpageFill = {
-            bg = "#1f1d2e",
-            fg = "#737aa2"
-          },
-          BufferTabpages = {
-            bg = "1f1d2e",
-            fg = "NONE"
           },
         }
       })

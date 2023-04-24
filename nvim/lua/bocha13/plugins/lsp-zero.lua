@@ -20,52 +20,38 @@ return {
   {
     "VonHeikemen/lsp-zero.nvim",
     branch = "v2.x",
+    lazy = true,
+    config = function()
+      require('lsp-zero.settings').preset({})
+      -- diagnostic configs
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs = true,
+        float = {
+          style = "minimal",
+          border = "none",
+        },
+      })
+    end,
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     dependencies = {
-      -- LSP Support
-      { "neovim/nvim-lspconfig" }, -- Required
-      {
-        "williamboman/mason.nvim",
-        build = function()
-          pcall(vim.vmd, "MasonUpdate")
-        end,
-      },                                       -- Optional
-      { "williamboman/mason-lspconfig.nvim" }, -- Optional
-
-      -- Autocompletion
-      { "hrsh7th/nvim-cmp" },         -- Required
-      { "hrsh7th/cmp-nvim-lsp" },     -- Required
-      { "hrsh7th/cmp-buffer" },       -- Optional
-      { "hrsh7th/cmp-path" },         -- Optional
-      { "saadparwaiz1/cmp_luasnip" }, -- Optional
-      { "hrsh7th/cmp-nvim-lua" },     -- Optional
-
-      -- Snippets
-      { "L3MON4D3/LuaSnip" },             -- Required
-      { "rafamadriz/friendly-snippets" }, -- Optional
+      { "L3MON4D3/LuaSnip" },
     },
     config = function()
+      require("lsp-zero.cmp").extend()
+
       local cmp = require("cmp")
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
-      local lsp = require("lsp-zero").preset({
-        name = "minimal",
-        set_lsp_keymaps = true,
-        manage_nvim_cmp = true,
-        suggest_lsp_servers = false,
-      })
-      lsp.setup_servers({
-        "tsserver",
-        "eslint",
-        "rust_analyzer",
-        "tailwindcss",
-        "lua_ls",
-      })
 
-      lsp.setup_nvim_cmp({
+      cmp.setup({
         preselect = "none",
         completion = {
           completeopt = "menu,menuone,noinsert,noselect",
         },
-        mapping = lsp.defaults.cmp_mappings({
+        mapping = {
           ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
           ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
           ["<C-y>"] = cmp.mapping.confirm({ select = true }),
@@ -81,7 +67,7 @@ return {
             "i",
             "s",
           }),
-        }),
+        },
         sources = {
           { name = "copilot" },
           { name = "path" },
@@ -89,6 +75,33 @@ return {
           { name = "buffer",  keyword_length = 3 },
           { name = "luasnip", keyword_length = 2 },
         },
+      })
+    end
+  },
+  {
+    'neovim/nvim-lspconfig',
+    cmd = 'LspInfo',
+    event = { 'BufReadPre', 'BufNewFile' },
+    dependencies = {
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'williamboman/mason-lspconfig.nvim' },
+      {
+        'williamboman/mason.nvim',
+        build = function()
+          pcall(vim.cmd, 'MasonUpdate')
+        end,
+      },
+    },
+    config = function()
+      -- This is where all the LSP shenanigans will live
+      local lsp = require('lsp-zero')
+
+      lsp.setup_servers({
+        "tsserver",
+        "eslint",
+        "rust_analyzer",
+        "tailwindcss",
+        "lua_ls",
       })
 
       -- this following bunch of code is to filter out react/.index.d.ts from the definition list
@@ -123,22 +136,15 @@ return {
       end
 
       lsp.on_attach(function(client, bufnr)
+        lsp.default_keymaps({ buffer = bufnr })
         local bufopts = { noremap = true, silent = true, buffer = bufnr }
         vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition { on_list = on_list } end, bufopts)
       end)
 
-      lsp.nvim_workspace()
-      lsp.setup()
+      -- (Optional) Configure lua language server for neovim
+      require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
-      -- diagnostic configs
-      vim.diagnostic.config({
-        virtual_text = true,
-        signs = true,
-        float = {
-          style = "minimal",
-          border = "none",
-        },
-      })
-    end,
-  },
+      lsp.setup()
+    end
+  }
 }
