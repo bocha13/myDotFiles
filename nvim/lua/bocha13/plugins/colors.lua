@@ -17,6 +17,15 @@ return {
           MiniIndentscopeSymbol = {
             fg = "#d6d5eb"
           },
+          BufferOffset = { fg = "#d6d5eb", bg = "#1f1d2e" },
+          BufferTabpageFill = {
+            bg = "#1f1d2e",
+            fg = "#737aa2"
+          },
+          BufferTabpages = {
+            bg = "1f1d2e",
+            fg = "NONE"
+          },
         }
       })
       vim.cmd.colorscheme("rose-pine")

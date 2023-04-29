@@ -24,11 +24,11 @@ return {
 
     -- changed the background color of the statusline to match the theme rose-pine
     local rose_pine_background = require("lualine.themes.auto")
-    rose_pine_background.normal.c.bg = "#26233a"
-    rose_pine_background.insert.c.bg = "#26233a"
-    rose_pine_background.visual.c.bg = "#26233a"
-    rose_pine_background.command.c.bg = "#26233a"
-    rose_pine_background.replace.c.bg = "#26233a"
+    rose_pine_background.normal.c.bg = "#1f1d2e"
+    rose_pine_background.insert.c.bg = "#1f1d2e"
+    rose_pine_background.visual.c.bg = "#1f1d2e"
+    rose_pine_background.command.c.bg = "#1f1d2e"
+    rose_pine_background.replace.c.bg = "#1f1d2e"
 
     return {
       options = {
