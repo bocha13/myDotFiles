@@ -45,30 +45,12 @@ return {
 			require("mini.surround").setup(opts)
 		end,
 	},
-
-	-- comments
-	{ "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
-	{
-		"echasnovski/mini.comment",
-		event = "VeryLazy",
-		opts = {
-			hooks = {
-				pre = function()
-					require("ts_context_commentstring.internal").update_commentstring({})
-				end,
-			},
-		},
-		config = function(_, opts)
-			require("mini.comment").setup(opts)
-		end,
-	},
-
 	-- buffer remove
 	{
 		"echasnovski/mini.bufremove",
 		keys = {
 			{
-				"<leader>bd",
+				"<A-c>",
 				function()
 					require("mini.bufremove").delete(0, false)
 				end,
@@ -82,24 +64,5 @@ return {
 				desc = "Delete Buffer (Force)",
 			},
 		},
-	},
-	-- active indent guide and indent text objects
-	{
-		"echasnovski/mini.indentscope",
-		version = false, -- wait till new 0.7.0 release to put it back on semver
-		event = "BufReadPre",
-		opts = {
-			symbol = "│",
-			options = { try_as_border = true },
-		},
-		config = function(_, opts)
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "help", "alpha", "dashboard", "NvimTree", "Trouble", "lazy", "mason" },
-				callback = function()
-					vim.b.miniindentscope_disable = true
-				end,
-			})
-			require("mini.indentscope").setup(opts)
-		end,
 	},
 }

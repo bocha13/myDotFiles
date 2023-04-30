@@ -6,19 +6,16 @@ return {
     keys = {
       { "<S-h>", "<Cmd>BufferLineCyclePrev<CR>",            desc = "Previous Buffer" },
       { "<S-l>", "<Cmd>BufferLineCycleNext<CR>",            desc = "Next Buffer" },
-      { "<A-c>", "<Cmd>bdelete<CR>",                        desc = "Close Curent Buffer" },
       { "<A-p>", "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
       { "<A-C>", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
     },
     opts = {
       options = {
         mode = "buffers",
-        close_command = "bdelete! %d",
-        right_mouse_command = "bdelete! %d",
-        left_mouse_command = "buffer %d",
-        middle_mouse_command = "bdelete! %d",
+        close_command = function(n) require("mini.bufremove").delete(n, false) end,
+        right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
         diagnostics = "nvim_lsp",
-        always_show_bufferline = true,
+        always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
           local icons = {
             Error = " ",
