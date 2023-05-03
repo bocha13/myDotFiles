@@ -23,16 +23,17 @@ return {
     end
 
     -- changed the background color of the statusline to match the theme rose-pine
-    local rose_pine_background = require("lualine.themes.auto")
-    rose_pine_background.normal.c.bg = "#1f1d2e"
-    rose_pine_background.insert.c.bg = "#1f1d2e"
-    rose_pine_background.visual.c.bg = "#1f1d2e"
-    rose_pine_background.command.c.bg = "#1f1d2e"
-    rose_pine_background.replace.c.bg = "#1f1d2e"
+    -- local rose_pine_background = require("lualine.themes.auto")
+    -- rose_pine_background.normal.c.bg = "#1f1d2e"
+    -- rose_pine_background.insert.c.bg = "#1f1d2e"
+    -- rose_pine_background.visual.c.bg = "#1f1d2e"
+    -- rose_pine_background.command.c.bg = "#1f1d2e"
+    -- rose_pine_background.replace.c.bg = "#1f1d2e"
+    -- rose_pine_background.inactive.c.bg = "#1f1d2e"
 
     return {
       options = {
-        theme = rose_pine_background,
+        theme = "auto",
         globalstatus = false,
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },

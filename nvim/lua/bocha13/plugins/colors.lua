@@ -1,73 +1,76 @@
 return {
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
+    'folke/tokyonight.nvim',
     config = function()
-      require("rose-pine").setup({
-        highlight_groups = {
-          GitSignsAdd = { fg = "#8fc28c" },
-          GitSignsChange = { fg = "#7495d1" },
-          GitSignsDelete = { fg = "#f38ba8" },
-          -- IlluminatedWordText = { bg = "#282838" },
-          -- IlluminatedWordRead = { bg = "#45475a" },
-          -- IlluminatedWordWrite = { bg = "#45475a" },
-          MiniIndentscopePrefix = {
-            nocombine = true
-          },
-          MiniIndentscopeSymbol = {
-            fg = "#d6d5eb"
-          },
-          BufferOffset = { fg = "#d6d5eb", bg = "#1f1d2e" },
-          BufferTabpageFill = {
-            bg = "#1f1d2e",
-            fg = "#737aa2"
-          },
-          BufferTabpages = {
-            bg = "1f1d2e",
-            fg = "NONE"
-          },
-        }
+      require("tokyonight").setup({
+        style = "night",
+        on_colors = function(c)
+          c.gitSigns = {
+            add = "#8fc28c",
+            change = "#7495d1",
+            delete = "#f38ba8",
+          }
+        end,
+        		on_highlights = function(highlight, c)
+				-- mini.indent line color
+				-- highlight.MiniIndentscopeSymbol = {
+				-- 	fg = c.border,
+				-- }
+				-- 	highlight.BufferTabpageFill = {
+				-- 		bg = c.bg_statusline,
+				-- 		fg = "#3b4261",
+				-- 	}
+				-- 	highlight.BufferOffset = {
+				-- 		bg = c.bg_statusline,
+				-- 		fg = "#65bcff",
+				-- 	}
+				-- 	highlight.BufferInactiveSign = {
+				-- 		bg = "#161824",
+				-- 		fg = "#65bcff",
+				-- 	}
+				-- 	highlight.BufferCurrentSign = {
+				-- 		bg = "#3b4261",
+				-- 		fg = "#65bcff",
+				-- 	}
+				-- 	highlight.MsgArea = {
+				-- 		bg = c.bg,
+				-- 		fg = "#65bcff",
+				-- 	}
+			end,
       })
-      vim.cmd.colorscheme("rose-pine")
+      vim.cmd.colorscheme("tokyonight")
     end
-  },
+  }
   -- {
-  -- 	"catppuccin/nvim",
-  -- 	name = "catppuccin",
-  -- 	config = function()
-  -- 		require("catppuccin").setup({
-  -- 			integrations = {
-  -- 				barbar = true,
-  -- 				telescope = true,
-  -- 				cmp = true,
-  -- 				gitsigns = true,
-  -- 				neotree = true,
-  -- 			},
-  -- 			color_overrides = {
-  -- 				flavour = "mocha",
-  -- 				mocha = {
-  -- 					base = "#171717",
-  -- 					mantle = "#2b2b3c",
-  -- 					crust = "#2b2b3c",
-  -- 				},
-  -- 			},
-  -- 			highlight_overrides = {
-  -- 				mocha = {
-  -- 					NeoTreeNormal = { bg = "#171717" },
-  -- 					NeoTreeNormalNC = { bg = "#171717" },
-  -- 					TelescopeBorder = { fg = "#c8aaad" },
-  --           TelescopeNormal = { bg = "#171717" },
-  -- 					BufferCurrentERROR = { fg = "#f38ba8", bg = "#45475a" },
-  -- 					GitSignsAdd = { fg = "#8fc28c" },
-  -- 					GitSignsChange = { fg = "#7495d1" },
-  -- 					GitSignsDelete = { fg = "#f38ba8" },
-  -- 					IlluminatedWordText = { bg = "#282838" },
-  -- 					IlluminatedWordRead = { bg = "#45475a" },
-  -- 					IlluminatedWordWrite = { bg = "#45475a" },
-  -- 				},
-  -- 			},
-  -- 		})
-  -- 		vim.cmd.colorscheme("catppuccin")
-  -- 	end,
+  --   "rose-pine/neovim",
+  --   name = "rose-pine",
+  --   config = function()
+  --     require("rose-pine").setup({
+  --       highlight_groups = {
+  --         GitSignsAdd = { fg = "#8fc28c" },
+  --         GitSignsChange = { fg = "#7495d1" },
+  --         GitSignsDelete = { fg = "#f38ba8" },
+  --         -- IlluminatedWordText = { bg = "#282838" },
+  --         -- IlluminatedWordRead = { bg = "#45475a" },
+  --         -- IlluminatedWordWrite = { bg = "#45475a" },
+  --         MiniIndentscopePrefix = {
+  --           nocombine = true
+  --         },
+  --         MiniIndentscopeSymbol = {
+  --           fg = "#d6d5eb"
+  --         },
+  --         BufferOffset = { fg = "#d6d5eb", bg = "#1f1d2e" },
+  --         BufferTabpageFill = {
+  --           bg = "#1f1d2e",
+  --           fg = "#737aa2"
+  --         },
+  --         BufferTabpages = {
+  --           bg = "1f1d2e",
+  --           fg = "NONE"
+  --         },
+  --       }
+  --     })
+  --     vim.cmd.colorscheme("rose-pine")
+  --   end
   -- },
 }
