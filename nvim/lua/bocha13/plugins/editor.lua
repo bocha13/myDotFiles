@@ -25,5 +25,9 @@ return {
     "folke/trouble.nvim",
     dependencies = { "nvim-web-devicons" },
     event = "VeryLazy"
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter"
   }
 }

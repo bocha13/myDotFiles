@@ -12,31 +12,31 @@ return {
           }
         end,
         		on_highlights = function(highlight, c)
-				-- mini.indent line color
-				-- highlight.MiniIndentscopeSymbol = {
-				-- 	fg = c.border,
-				-- }
-				-- 	highlight.BufferTabpageFill = {
-				-- 		bg = c.bg_statusline,
-				-- 		fg = "#3b4261",
-				-- 	}
-				-- 	highlight.BufferOffset = {
-				-- 		bg = c.bg_statusline,
-				-- 		fg = "#65bcff",
-				-- 	}
-				-- 	highlight.BufferInactiveSign = {
-				-- 		bg = "#161824",
-				-- 		fg = "#65bcff",
-				-- 	}
-				-- 	highlight.BufferCurrentSign = {
-				-- 		bg = "#3b4261",
-				-- 		fg = "#65bcff",
-				-- 	}
-				-- 	highlight.MsgArea = {
-				-- 		bg = c.bg,
-				-- 		fg = "#65bcff",
-				-- 	}
-			end,
+  		-- mini.indent line color
+  		-- highlight.MiniIndentscopeSymbol = {
+  		-- 	fg = c.border,
+  		-- }
+  		-- 	highlight.BufferTabpageFill = {
+  		-- 		bg = c.bg_statusline,
+  		-- 		fg = "#3b4261",
+  		-- 	}
+  		-- 	highlight.BufferOffset = {
+  		-- 		bg = c.bg_statusline,
+  		-- 		fg = "#65bcff",
+  		-- 	}
+  		-- 	highlight.BufferInactiveSign = {
+  		-- 		bg = "#161824",
+  		-- 		fg = "#65bcff",
+  		-- 	}
+  		-- 	highlight.BufferCurrentSign = {
+  		-- 		bg = "#3b4261",
+  		-- 		fg = "#65bcff",
+  		-- 	}
+  		-- 	highlight.MsgArea = {
+  		-- 		bg = c.bg,
+  		-- 		fg = "#65bcff",
+  		-- 	}
+  	end,
       })
       vim.cmd.colorscheme("tokyonight")
     end
