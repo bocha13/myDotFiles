@@ -34,9 +34,11 @@ return {
 					end, opts)
 					vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
 					vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+					vim.keymap.set("n", "<space>cd", vim.diagnostic.open_float, opts)
 					vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
 					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-					vim.keymap.set("n", "<space>f", function()
+					vim.keymap.set("n", "<leader>fA", "<cmd>EslintFixAll<CR>", opts)
+					vim.keymap.set("n", "<space>fa", function()
 						vim.lsp.buf.format({ async = true })
 					end, opts)
 				end,
@@ -54,10 +56,10 @@ return {
 				capabilities = capabilities,
 			})
 
-      -- configure astro lsp
-      lspconfig["astro"].setup({
+			-- configure astro lsp
+			lspconfig["astro"].setup({
 				capabilities = capabilities,
-      })
+			})
 
 			-- configure formatter
 			lspconfig["eslint"].setup({

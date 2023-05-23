@@ -27,7 +27,6 @@ map("n", "<leader>p", '"+p')
 map("v", "<leader>p", '"+p')
 map("n", "<leader>P", '"+P')
 
-
 map("n", "<leader>d", '"_d')
 map("v", "<leader>d", '"_d')
 
@@ -42,25 +41,3 @@ map("n", "<C-Up>", ":resize +2<CR>")
 map("n", "<C-Down>", ":resize -2<CR>")
 map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
-
--- LSP
--- setup formatting and keymaps
-map("n", "<leader>cd", vim.diagnostic.open_float, opts)
-map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-map("n", "<leader>rn", vim.lsp.buf.rename, opts)
--- this two are already by default in lsp-zero
--- map("n", "<leader>gd", vim.lsp.buf.definition, opts)
--- map("n", "<leader>gD", vim.lsp.buf.declaration, opts)
-map("n", "<leader>fA", "<cmd>EslintFixAll<CR>")
-map("n", "K", vim.lsp.buf.hover, opts)
-map("n", "<leader>fa", function()
-	vim.lsp.buf.format()
-end)
--- map("n", "<leader>fa", function(bufnr)
--- 	vim.lsp.buf.format({
--- 		filter = function(client)
--- 				return client.name ~= "tsserver"
--- 		end,
---  bufnr = bufnr,
--- 	})
--- end, opts)
