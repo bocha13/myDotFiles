@@ -1,7 +1,7 @@
 return {
 	{
 		"L3MON4D3/LuaSnip",
-		event = "VeryLazy",
+		event = "InsertEnter",
 		opts = {
 			history = true,
 			delete_check_events = "TextChanged",
@@ -70,15 +70,5 @@ return {
 			local copilot_cmp = require("copilot_cmp")
 			copilot_cmp.setup(opts)
 		end,
-	},
-	{ "hrsh7th/cmp-nvim-lsp", event = "VeryLazy" },
-	{ "hrsh7th/cmp-buffer", event = "VeryLazy" },
-	{
-		"hrsh7th/cmp-path",
-		event = "VeryLazy",
-	},
-	{
-		"hrsh7th/cmp-nvim-lua",
-		event = "VeryLazy",
 	},
 }

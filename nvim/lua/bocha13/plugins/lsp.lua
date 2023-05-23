@@ -54,6 +54,11 @@ return {
 				capabilities = capabilities,
 			})
 
+      -- configure astro lsp
+      lspconfig["astro"].setup({
+				capabilities = capabilities,
+      })
+
 			-- configure formatter
 			lspconfig["eslint"].setup({
 				capabilities = capabilities,
