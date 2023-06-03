@@ -98,15 +98,15 @@ return {
 			})
 
 			-- configure rust server
-			lspconfig["rust_analyzer"].setup({
-				capabilities = capabilities,
-				cmd = {
-					"rustup",
-					"run",
-					"stable",
-					"rust-analyzer",
-				},
-			})
+			-- lspconfig["rust_analyzer"].setup({
+			-- 	capabilities = capabilities,
+			-- cmd = {
+			-- 	"rustup",
+			-- 	"run",
+			-- 	"stable",
+			-- 	"rust-analyzer",
+			-- },
+			-- })
 
 			-- configure rust_analyzer server
 			local rt_status_ok, rt = pcall(require, "rust-tools")

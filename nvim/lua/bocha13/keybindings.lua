@@ -1,8 +1,6 @@
 local map = vim.keymap.set
 vim.g.mapleader = " "
 
-local opts = { noremap = true, silent = true }
-
 -- Move Lines
 map("n", "<A-j>", ":m .+1<cr>==", { desc = "Move down" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })

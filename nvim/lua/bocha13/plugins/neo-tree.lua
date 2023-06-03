@@ -17,15 +17,6 @@ return {
     require("neo-tree").setup({
       close_if_last_window = true,
       enable_diagnostics = true,
-      source_selector = {
-        winbar = true,
-        content_layout = "center",
-        sources = {
-          { source = "filesystem" },
-          { source = "buffers" },
-          { source = "git_status" },
-        },
-      },
       default_component_configs = {
         indent = {
           padding = 0,
