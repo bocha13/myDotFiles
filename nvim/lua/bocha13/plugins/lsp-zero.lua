@@ -34,12 +34,12 @@ return {
 			})
 		end,
 	},
+  { "L3MON4D3/LuaSnip",
+    lazy = true,
+  },
 	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
-		dependencies = {
-			{ "L3MON4D3/LuaSnip" },
-		},
 		config = function()
 			require("lsp-zero.cmp").extend()
 
@@ -87,9 +87,7 @@ return {
 			{ "williamboman/mason-lspconfig.nvim" },
 			{
 				"williamboman/mason.nvim",
-				build = function()
-					pcall(vim.cmd, "MasonUpdate")
-				end,
+				build = ":MasonUpdate"
 			},
 		},
 		config = function()
