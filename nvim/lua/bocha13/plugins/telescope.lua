@@ -49,7 +49,6 @@ local function telescope_utils(builtin, opts)
   end
 end
 
-
 return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
