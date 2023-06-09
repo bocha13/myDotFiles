@@ -39,9 +39,7 @@ nvim -v
 
 #### Install fonts
 
-- clone https://github.com/ryanoasis/nerd-fonts
-- install the font you want (be sure it has Nerd Font in the name to include icons)
-- `./install.sh <name of font>`
+- search and download the font you want from here [Nerd Fonts](https://www.nerdfonts.com/font-downloads)
 - set the font in your terminal preferences
 
 ### MacOS

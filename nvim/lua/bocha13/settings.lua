@@ -8,11 +8,11 @@ vim.api.nvim_command("set fillchars+=vert:\\▎")
 
 -- remove auto comment on new line after comment
 vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    vim.opt.formatoptions:remove { "c", "r", "o" }
-  end,
-  group = general,
-  desc = "Disable New Line Comment",
+	callback = function()
+		vim.opt.formatoptions:remove({ "c", "r", "o" })
+	end,
+	group = general,
+	desc = "Disable New Line Comment",
 })
 
 vim.opt.showmode = false
@@ -33,7 +33,7 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 -- vim.opt.cursorline = true
 
