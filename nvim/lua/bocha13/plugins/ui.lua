@@ -125,6 +125,7 @@ return {
       show_current_context = true,
     },
   },
+  -- highlight hex colors
   {
     "norcalli/nvim-colorizer.lua",
     event = "BufReadPre",
@@ -168,14 +169,15 @@ return {
       })
     end,
   },
+  -- chatGPT code sugestions
   {
     "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
     dependencies = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
     },
-    cmd = "ChatGPT",
     config = function()
       require("chatgpt").setup({
         keymaps = {

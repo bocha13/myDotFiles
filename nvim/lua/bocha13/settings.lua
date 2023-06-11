@@ -4,7 +4,7 @@ vim.opt.guicursor = ""
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.api.nvim_command("set fillchars+=vert:\\▎")
+-- vim.api.nvim_command("set fillchars+=vert:\\▎")
 
 -- remove auto comment on new line after comment
 vim.api.nvim_create_autocmd("BufEnter", {
