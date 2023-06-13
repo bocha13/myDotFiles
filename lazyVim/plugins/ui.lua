@@ -49,7 +49,7 @@ return {
             -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
-              path = 2,
+              path = 1,
               symbols = {
                 modified = "[+]",
                 readonly = "[-]",
@@ -85,5 +85,38 @@ return {
         },
       }
     end,
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      signs = {
+        add = { hl = "GitSignsAdd", text = "█", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+        change = {
+          hl = "GitSignsChange",
+          text = "█",
+          numhl = "GitSignsChangeNr",
+          linehl = "GitSignsChangeLn",
+        },
+        delete = {
+          hl = "GitSignsDelete",
+          text = "~",
+          numhl = "GitSignsDeleteNr",
+          linehl = "GitSignsDeleteLn",
+        },
+        topdelete = {
+          hl = "GitSignsDelete",
+          text = "~",
+          numhl = "GitSignsDeleteNr",
+          linehl = "GitSignsDeleteLn",
+        },
+        changedelete = {
+          hl = "GitSignsChange",
+          text = "█",
+          numhl = "GitSignsChangeNr",
+          linehl = "GitSignsChangeLn",
+        },
+        untracked = { text = "█" },
+      },
+    },
   },
 }
