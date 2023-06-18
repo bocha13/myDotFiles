@@ -5,7 +5,7 @@ return {
       colorscheme = "tokyonight",
       icons = {
         diagnostics = {
-          error = "E",
+          Error = "E",
           Warn = "W",
           Hint = "H",
           Info = "I",
