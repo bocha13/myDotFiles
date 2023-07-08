@@ -11,3 +11,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
   group = augroup("general"),
   desc = "Disable New Line Comment",
 })
+
+-- go to github repo for selected text
+vim.api.nvim_create_user_command("OpenGithubRepo", function(_)
+  local ghpath = vim.api.nvim_eval("shellescape(expand('<cfile>'))")
+  local formathpath = ghpath:sub(2, #ghpath - 1)
+  local repourl = "https://www.github.com/" .. formathpath
+  vim.fn.system({ "xdg-open", repourl })
+end, {
+  desc = "Open Github Repo",
+  force = true,
+})
