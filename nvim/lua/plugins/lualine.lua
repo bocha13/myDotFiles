@@ -2,7 +2,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    opts = function()
+    opts = function(_, opts)
       local icons = {
         diagnostics = {
           Error = "E ",
