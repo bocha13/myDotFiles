@@ -46,13 +46,14 @@ return {
         "hrsh7th/cmp-path",
         lazy = true,
       },
-      { "saadparwaiz1/cmp_luasnip",
+      {
+        "saadparwaiz1/cmp_luasnip",
         lazy = true,
       },
     },
     event = "InsertEnter",
     config = function()
-      require("lsp-zero.cmp").extend()
+      -- require("lsp-zero.cmp").extend()
       require("bocha13.icons")
 
       local cmp = require("cmp")
@@ -69,6 +70,8 @@ return {
           end
         },
         mapping = {
+          ["<Up>"] = cmp.mapping.select_prev_item(cmp_select),
+          ["<Down>"] = cmp.mapping.select_next_item(cmp_select),
           ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
           ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
           ["<C-y>"] = cmp.mapping.confirm({ select = true }),
@@ -117,7 +120,7 @@ return {
     },
     config = function()
       -- This is where all the LSP shenanigans will live
-      local lsp = require("lsp-zero")
+      local lsp = require("lsp-zero").preset({})
 
       lsp.setup_servers({
         "tsserver",
