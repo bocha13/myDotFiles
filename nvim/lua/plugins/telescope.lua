@@ -8,8 +8,8 @@ local function get_root()
     for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
       local workspace = client.config.workspace_folders
       local paths = workspace and vim.tbl_map(function(ws)
-            return vim.uri_to_fname(ws.uri)
-          end, workspace) or client.config.root_dir and { client.config.root_dir } or {}
+        return vim.uri_to_fname(ws.uri)
+      end, workspace) or client.config.root_dir and { client.config.root_dir } or {}
       for _, p in ipairs(paths) do
         local r = vim.loop.fs_realpath(p)
         if path:find(r, 1, true) then
@@ -61,7 +61,8 @@ return {
     { "<leader>fb", "<cmd>Telescope buffers<cr>",     desc = "Buffers" },
     { "<leader>ff", telescope_utils("files"),         desc = "Find Files (root dir)" },
     { "<leader>fg", telescope_utils(),                desc = "Find Files (repo)" },
-    { "<leader>ft", telescope_utils("live_grep"),   desc = "Word" },
+    -- search
+    { "<leader>sg", telescope_utils("live_grep"),     desc = "Grep (root dir)" },
     -- git
     { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
     { "<leader>gs", "<cmd>Telescope git_status<CR>",  desc = "status" },
