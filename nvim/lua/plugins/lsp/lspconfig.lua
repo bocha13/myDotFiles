@@ -1,3 +1,5 @@
+local get_root = require("utils").get_root
+
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
@@ -13,13 +15,17 @@ return {
     local keymap = vim.keymap
     local on_attach = function(client, bufnr)
       local opts = { noremap = true, silent = true, buffer = bufnr }
+      local root_dir = get_root()
 
-      -- disable tsserver formatting when eslint is enabled
-      if client.name == "eslint" then
-        client.server_capabilities.documentFormattingProvider = true
-      elseif client.name == "tsserver" then
-        client.server_capabilities.documentFormattingProvider = false
+      -- disable tsserver formatting for learner-frontend project
+      if string.find(root_dir, "frontend") ~= nil then
+        if client.name == "eslint" then
+          client.server_capabilities.documentFormattingProvider = true
+        elseif client.name == "tsserver" then
+          client.server_capabilities.documentFormattingProvider = false
+        end
       end
+
 
       keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
       keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
