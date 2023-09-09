@@ -6,14 +6,6 @@ return {
     config = true
   },
   {
-    "kylechui/nvim-surround",
-    version = "*",
-    event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup({})
-    end
-  },
-  {
     "folke/trouble.nvim",
     dependencies = { "nvim-web-devicons" },
     event = "VeryLazy"
