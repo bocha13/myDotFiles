@@ -1,3 +1,4 @@
+local M = {}
 local root_patterns = { ".git", "lua" }
 
 local function get_root()
@@ -8,8 +9,8 @@ local function get_root()
     for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
       local workspace = client.config.workspace_folders
       local paths = workspace and vim.tbl_map(function(ws)
-            return vim.uri_to_fname(ws.uri)
-          end, workspace) or client.config.root_dir and { client.config.root_dir } or {}
+        return vim.uri_to_fname(ws.uri)
+      end, workspace) or client.config.root_dir and { client.config.root_dir } or {}
       for _, p in ipairs(paths) do
         local r = vim.loop.fs_realpath(p)
         if path:find(r, 1, true) then
@@ -30,7 +31,6 @@ local function get_root()
   return root
 end
 
-
 local function telescope_utils(builtin, opts)
   local params = { builtin = builtin, opts = opts }
   return function()
@@ -49,33 +49,12 @@ local function telescope_utils(builtin, opts)
   end
 end
 
-return {
-  "nvim-telescope/telescope.nvim",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
-  cmd = "Telescope",
-  version = false,
-  keys = {
-    -- find
-    { "<leader>fb", "<cmd>Telescope buffers<cr>",     desc = "Buffers" },
-    { "<leader>ff", telescope_utils("files"),         desc = "Find Files (root dir)" },
-    { "<leader>fg", telescope_utils(),                desc = "Find Files (repo)" },
-    { "<leader>ft", telescope_utils("live_grep"),   desc = "Word" },
-    -- git
-    { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
-    { "<leader>gs", "<cmd>Telescope git_status<CR>",  desc = "status" },
-  },
-  opts = {
-    defaults = {
-      prompt_prefix = " ",
-      selection_caret = " ",
-      file_ignore_patterns = { "node_modules" },
-      initial_mode = "insert",
-      selection_strategy = "reset",
-      sorting_strategy = "descending",
-      use_less = true,
-      borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-    },
-  },
-}
+local function has(plugin)
+  return require("lazy.core.config").spec.plugins[plugin] ~= nil
+end
+
+M.get_root = get_root
+M.telescope_utils = telescope_utils
+M.has = has
+
+return M;
