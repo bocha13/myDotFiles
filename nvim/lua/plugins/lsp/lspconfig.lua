@@ -1,5 +1,3 @@
-local get_root = require("utils").get_root
-
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
@@ -10,6 +8,7 @@ return {
   config = function()
     local lspconfig = require("lspconfig")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
+    local get_root = require("utils").get_root
 
     -- set keymaps
     local keymap = vim.keymap
@@ -18,14 +17,13 @@ return {
       local root_dir = get_root()
 
       -- disable tsserver formatting for learner-frontend project
-      if string.find(root_dir, "frontend") ~= nil then
+      if string.find(root_dir, "learner%-frontend") ~= nil then
         if client.name == "eslint" then
           client.server_capabilities.documentFormattingProvider = true
         elseif client.name == "tsserver" then
           client.server_capabilities.documentFormattingProvider = false
         end
       end
-
 
       keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
       keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
@@ -48,63 +46,44 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
-    --configure servers
-    lspconfig["html"].setup({
+    -- default config for all servers
+    local defaultOpts = {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
 
-    lspconfig["lua_ls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { "vim", "general" }
-          },
-          workspace = {
-            library = {
-              [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-              [vim.fn.stdpath("config") .. "/lua"] = true,
+    -- add servers to this list and they will be automatically setup
+    local serverList = {
+      ["html"] = defaultOpts,
+      ["cssls"] = defaultOpts,
+      ["graphql"] = defaultOpts,
+      ["tsserver"] = defaultOpts,
+      ["gopls"] = defaultOpts,
+      ["tailwindcss"] = defaultOpts,
+      ["rust_analyzer"] = defaultOpts,
+      ["eslint"] = defaultOpts,
+      ["jsonls"] = defaultOpts,
+      ["lua_ls"] = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim", "general" }
+            },
+            workspace = {
+              library = {
+                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                [vim.fn.stdpath("config") .. "/lua"] = true,
+              }
             }
           }
         }
       }
-    })
+    }
 
-    lspconfig["tsserver"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    lspconfig["gopls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    lspconfig["tailwindcss"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    lspconfig["rust_analyzer"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    lspconfig["cssls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    lspconfig["graphql"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    lspconfig["eslint"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    for server, config in pairs(serverList) do
+      lspconfig[server].setup(config)
+    end
   end
 }

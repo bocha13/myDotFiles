@@ -28,6 +28,7 @@ return {
       },
     },
   },
+  -- surround
   {
     "echasnovski/mini.surround",
     keys = function(_, keys)

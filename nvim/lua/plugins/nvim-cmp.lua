@@ -78,7 +78,6 @@ return {
             symbol_map = { Copilot = "" }
           })
         }
-
       })
     end
   }

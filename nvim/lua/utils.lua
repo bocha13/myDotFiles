@@ -49,7 +49,12 @@ local function telescope_utils(builtin, opts)
   end
 end
 
+local function has(plugin)
+  return require("lazy.core.config").spec.plugins[plugin] ~= nil
+end
+
 M.get_root = get_root
 M.telescope_utils = telescope_utils
+M.has = has
 
 return M;
