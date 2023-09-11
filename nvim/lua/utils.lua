@@ -1,6 +1,7 @@
 local M = {}
 local root_patterns = { ".git", "lua" }
 
+-- Get the root directory of the current buffer.
 local function get_root()
   local path = vim.api.nvim_buf_get_name(0)
   path = path ~= "" and vim.loop.fs_realpath(path) or nil
@@ -31,6 +32,7 @@ local function get_root()
   return root
 end
 
+-- Create a function to call a telescope builtin with the current root directory.
 local function telescope_utils(builtin, opts)
   local params = { builtin = builtin, opts = opts }
   return function()
@@ -49,12 +51,22 @@ local function telescope_utils(builtin, opts)
   end
 end
 
+-- Check if a plugin is installed.
 local function has(plugin)
   return require("lazy.core.config").spec.plugins[plugin] ~= nil
+end
+
+-- Get the foreground color of a highlight group.
+local function fg(name)
+  return function()
+    local hl = vim.api.nvim_get_hl_by_name(name, true)
+    return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
+  end
 end
 
 M.get_root = get_root
 M.telescope_utils = telescope_utils
 M.has = has
+M.fg = fg
 
 return M;

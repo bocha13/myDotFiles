@@ -1,3 +1,5 @@
+local fg = require("utils").fg
+
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
@@ -10,18 +12,11 @@ return {
         Info = "I ",
       },
       git = {
-        added = " ",
-        modified = " ",
-        removed = " ",
+        added = "+",
+        modified = "~",
+        removed = "-",
       },
     }
-    local function fg(name)
-      return function()
-        local hl = vim.api.nvim_get_hl_by_name(name, true)
-        return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
-      end
-    end
-
     return {
       options = {
         icons_enabled = true,

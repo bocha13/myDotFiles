@@ -13,6 +13,9 @@ return {
       desc = "Explorer NeoTree (root dir)",
     },
   },
+  deactivate = function()
+    vim.cmd([[Neotree close]])
+  end,
   config = function()
     require("neo-tree").setup({
       close_if_last_window = true,
