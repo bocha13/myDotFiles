@@ -31,13 +31,9 @@ function ex(){
 }
 
 # ----------- EXPORTS -------------
-# macOS
 # homebrew export
 #export PATH="/opt/homebrew/bin:$PATH"
-# enable CLI colours for Mac Terminal
-export CLICOLOR=1
 
-# Windows
 # code
 # export PATH=$PATH:"/mnt/c/Users/ignac/AppData/Local/Programs/Microsoft VS Code/bin"
 
@@ -55,6 +51,9 @@ export PATH=$PATH:/.local/share/nvim/lsp_servers/rust/rust_analyzer
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# enable CLI colours for Mac Terminal
+export CLICOLOR=1
 
 # ----------- PROMPT -----------
 # Enable checking for (un)staged changes, enabling use of %u and %c
@@ -106,6 +105,12 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # opam configuration
 [[ ! -r /home/bocha13/.opam/opam-init/init.zsh ]] || source /home/bocha13/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
+# Zellij aliases
+# alias zl='zellij list-sessions'
+
+# Start Zellij
+# eval "$(zellij --layout compact setup --generate-auto-start zsh)"
+
 # Start Tmux if not already running
 if [[ -z "$TMUX" ]]; then
     # Check for detached sessions
@@ -117,4 +122,4 @@ if [[ -z "$TMUX" ]]; then
         tmux new-session
     fi
 fi
-
+PATH="$HOME/.local/bin:$PATH"
