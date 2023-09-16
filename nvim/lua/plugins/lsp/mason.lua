@@ -23,6 +23,7 @@ return {
         "lua_ls",
         "html",
         "cssls",
+        "gopls",
         "tailwindcss",
         "graphql",
         "eslint"
