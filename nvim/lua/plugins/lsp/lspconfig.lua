@@ -57,7 +57,6 @@ return {
       ["cssls"] = defaultOpts,
       ["graphql"] = defaultOpts,
       ["tsserver"] = defaultOpts,
-      ["gopls"] = defaultOpts,
       ["tailwindcss"] = defaultOpts,
       ["rust_analyzer"] = defaultOpts,
       ["eslint"] = defaultOpts,
