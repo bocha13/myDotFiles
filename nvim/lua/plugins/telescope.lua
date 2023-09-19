@@ -27,7 +27,7 @@ return {
       selection_strategy = "reset",
       sorting_strategy = "descending",
       use_less = true,
-      borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+      -- borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     },
   },
 }
