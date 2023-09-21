@@ -42,6 +42,11 @@ return {
         "<cmd>Gitsigns preview_hunk<CR>",
         desc = "Preview git diff of current line",
       },
+      {
+        "<leader>gb",
+        "<cmd>Gitsigns blame_line<CR>",
+        desc = "Preview git blame for current line",
+      }
     },
     opts = {
       signs = {
