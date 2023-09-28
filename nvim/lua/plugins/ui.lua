@@ -123,6 +123,7 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPre",
+    main = "ibl",
     opts = {
       char = "│",
       filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
