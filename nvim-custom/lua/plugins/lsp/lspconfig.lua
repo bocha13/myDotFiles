@@ -29,7 +29,7 @@ return {
       keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
       keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
       keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
-      keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+      keymap.set("n", "gr", vim.lsp.buf.references, opts)
       keymap.set("n", "K", vim.lsp.buf.hover, opts)
       keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
       keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
@@ -90,21 +90,21 @@ return {
         settings = {
           Lua = {
             diagnostics = {
-              globals = { "vim", "general" }
+              globals = { "vim", "general" },
             },
             workspace = {
               library = {
                 [vim.fn.expand("$VIMRUNTIME/lua")] = true,
                 [vim.fn.stdpath("config") .. "/lua"] = true,
-              }
-            }
-          }
-        }
-      }
+              },
+            },
+          },
+        },
+      },
     }
 
     for server, config in pairs(serverList) do
       lspconfig[server].setup(config)
     end
-  end
+  end,
 }
