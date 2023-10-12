@@ -88,7 +88,7 @@ return {
       -- return true if you don't want this server to be setup with lspconfig
       ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
       setup = {
-        require("lazyvim.util").on_attach(function(client)
+        require("lazyvim.util").lsp.on_attach(function(client)
           if client.name == "eslint" then
             client.server_capabilities.documentFormattingProvider = true
           elseif client.name == "tsserver" then
@@ -114,9 +114,9 @@ return {
         require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
       end
       -- setup autoformat
-      require("lazyvim.plugins.lsp.format").setup(opts)
+      require("lazyvim.util").format.setup(opts)
       -- setup formatting and keymaps
-      Util.on_attach(function(client, buffer)
+      Util.lsp.on_attach(function(client, buffer)
         require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
@@ -211,14 +211,6 @@ return {
 
       if have_mason then
         mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
-      end
-
-      if Util.lsp_get_config("denols") and Util.lsp_get_config("tsserver") then
-        local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
-        Util.lsp_disable("tsserver", is_deno)
-        Util.lsp_disable("denols", function(root_dir)
-          return not is_deno(root_dir)
-        end)
       end
     end,
   },
