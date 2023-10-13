@@ -114,7 +114,8 @@ return {
         require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
       end
       -- setup autoformat
-      require("lazyvim.util").format.setup(opts)
+      Util.format.register(Util.lsp.formatter())
+
       -- setup formatting and keymaps
       Util.lsp.on_attach(function(client, buffer)
         require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
@@ -141,7 +142,7 @@ return {
       local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
 
       if opts.inlay_hints.enabled and inlay_hint then
-        Util.on_attach(function(client, buffer)
+        Util.lsp.on_attach(function(client, buffer)
           if client.supports_method("textDocument/inlayHint") then
             inlay_hint(buffer, true)
           end
@@ -196,7 +197,16 @@ return {
         all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
       end
 
-      local ensure_installed = {} ---@type string[]
+      local ensure_installed = {
+        "tsserver",
+        "lua_ls",
+        "html",
+        "cssls",
+        "gopls",
+        "tailwindcss",
+        "graphql",
+        "eslint",
+      } ---@type string[]
       for server, server_opts in pairs(servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
