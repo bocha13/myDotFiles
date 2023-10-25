@@ -1,6 +1,23 @@
 return {
   "stevearc/conform.nvim",
-  event = { "BufReadPre", "BufNewFile" },
+  dependencies = { "mason.nvim" },
+  lazy = true,
+  cmd = "ConformInfo",
+  keys = {
+    {
+      "<leader>mp",
+      function()
+        require("conform").format({
+          formatters = { "injected" },
+          lsp_fallback = true,
+          async = false,
+          timeout_ms = 1000,
+        })
+      end,
+      mode = { "n", "v" },
+      desc = "Format Injected Langs",
+    },
+  },
   config = function()
     local conform = require("conform")
 
@@ -23,14 +40,11 @@ return {
         async = false,
         timeout_ms = 1000,
       },
-    })
-
-    vim.keymap.set({ "n", "v" }, "<leader>mp", function()
-      conform.format({
-        lsp_fallback = true,
+      format = {
+        timeout_ms = 3000,
         async = false,
-        timeout_ms = 1000,
-      })
-    end, { desc = "Format file or range (in visual mode)" })
+        quiet = false,
+      },
+    })
   end,
 }

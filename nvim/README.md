@@ -1,12 +1,10 @@
-# Neovim config
-
-This config is powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
-
 ## ✨ Features
 
 - 🔥 Transform your Neovim into a full-fledged IDE
 - 💤 Easily customize and extend your config with [lazy.nvim](https://github.com/folke/lazy.nvim)
 - 🚀 Blazingly fast
+- 🧹 Sane default settings for options, autocmds, and keymaps
+- 📦 Comes with a wealth of plugins pre-configured and ready to use
 
 ## ⚡️ Requirements
 
