@@ -7,21 +7,17 @@ return {
   config = function()
     local lspconfig = require("lspconfig")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
-    local get_root = require("utils").get_root
 
     -- set keymaps
     local keymap = vim.keymap
     local on_attach = function(client, bufnr)
       local opts = { noremap = true, silent = true, buffer = bufnr }
-      local root_dir = get_root()
 
-      -- disable tsserver formatting for learner-frontend project
-      if string.find(root_dir, "learner%-frontend") ~= nil then
-        if client.name == "eslint" then
-          client.server_capabilities.documentFormattingProvider = true
-        elseif client.name == "tsserver" then
-          client.server_capabilities.documentFormattingProvider = false
-        end
+      -- diable formatting for tsserver so eslint handles it
+      if client.name == "tsserver" then
+        client.server_capabilities.documentFormattingProvider = false
+      else
+        client.server_capabilities.documentFormattingProvider = true
       end
 
       keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
