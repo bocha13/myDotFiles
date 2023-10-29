@@ -97,6 +97,7 @@ return {
           },
         },
       },
+      ["zls"] = defaultOpts,
     }
 
     for server, config in pairs(serverList) do

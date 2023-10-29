@@ -10,13 +10,13 @@ end
 config.initial_cols = 120
 config.initial_rows = 40
 
-config.color_scheme = "Tokyo Night"
+config.color_scheme = "Gruvbox dark, hard (base16)" -- "Tokyo Night"
 config.font = wezterm.font_with_fallback({
   { family = "JetBrains MonoNL Nerd Font", scale = 0.91 },
 })
 config.window_close_confirmation = "AlwaysPrompt"
 config.scrollback_lines = 3000
--- config.default_workspace = "main"
+config.default_workspace = "main"
 
 -- Dim inactive panes
 config.inactive_pane_hsb = {
@@ -27,6 +27,31 @@ config.inactive_pane_hsb = {
 -- Keys
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
+  -- Prompt for a name to use for a new workspace and switch to it.
+  {
+    key = 'W',
+    mods = 'CTRL|SHIFT',
+    action = act.PromptInputLine {
+      description = wezterm.format {
+        { Attribute = { Intensity = 'Bold' } },
+        { Foreground = { AnsiColor = 'Fuchsia' } },
+        { Text = 'Enter name for new workspace' },
+      },
+      action = wezterm.action_callback(function(window, pane, line)
+        -- line will be `nil` if they hit escape without entering anything
+        -- An empty string if they just hit enter
+        -- Or the actual line of text they wrote
+        if line then
+          window:perform_action(
+            act.SwitchToWorkspace {
+              name = line,
+            },
+            pane
+          )
+        end
+      end),
+    },
+  },
   -- Send C-a when pressing C-a twice
   { key = "a",          mods = "LEADER|CTRL", action = act.SendKey({ key = "a", mods = "CTRL" }) },
   { key = "c",          mods = "LEADER",      action = act.ActivateCopyMode },
@@ -54,7 +79,7 @@ config.keys = {
   { key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
   { key = "[", mods = "LEADER", action = act.ActivateTabRelative(-1) },
   { key = "]", mods = "LEADER", action = act.ActivateTabRelative(1) },
-  { key = "n", mods = "LEADER", action = act.ShowTabNavigator },
+  { key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
   {
     key = "e",
     mods = "LEADER",
@@ -116,16 +141,16 @@ config.tab_bar_at_bottom = true
 wezterm.on("update-status", function(window, pane)
   -- Workspace name
   local stat = window:active_workspace()
-  local stat_color = "#f7768e"
+  local stat_color = "#d5c4a1"
   -- It's a little silly to have workspace name all the time
   -- Utilize this to display LDR or current key table name
   if window:active_key_table() then
     stat = window:active_key_table()
-    stat_color = "#7dcfff"
+    stat_color = "#83a598"
   end
   if window:leader_is_active() then
     stat = "LDR"
-    stat_color = "#bb9af7"
+    stat_color = "#8ec07c"
   end
 
   -- Current working directory
@@ -150,20 +175,6 @@ wezterm.on("update-status", function(window, pane)
     { Text = wezterm.nerdfonts.oct_table .. "  " .. stat },
     { Text = " |" },
   }))
-
-  -- Right status
-  -- window:set_right_status(wezterm.format({
-  -- Wezterm has a built-in nerd fonts
-  -- https://wezfurlong.org/wezterm/config/lua/wezterm/nerdfonts.html
-  -- { Text = wezterm.nerdfonts.md_folder .. "  " .. cwd },
-  -- { Text = " | " },
-  -- { Foreground = { Color = "#e0af68" } },
-  -- { Text = wezterm.nerdfonts.fa_code .. "  " .. cmd },
-  -- "ResetAttributes",
-  -- { Text = " | " },
-  -- { Text = wezterm.nerdfonts.md_clock .. "  " .. time },
-  -- { Text = "  " },
-  -- }))
 end)
 
 local function tab_title(tab_info)
@@ -182,7 +193,7 @@ wezterm.on("format-tab-title", function(tab)
   if tab.is_active then
     return {
       { Foreground = { Color = "black" } },
-      { Background = { Color = "#7495d1" } },
+      { Background = { Color = "#83a598" } },
       { Text = "   " .. title .. "   " },
     }
   end
@@ -192,7 +203,7 @@ wezterm.on("format-tab-title", function(tab)
 end)
 
 -- Appearance setting for when I need to take pretty screenshots
-config.enable_tab_bar = false
+-- config.enable_tab_bar = false
 config.window_padding = {
   left = "0cell",
   right = "0cell",

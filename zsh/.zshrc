@@ -43,6 +43,7 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 # go
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/usr/local/bin
 
 # rust_analyzer
 export PATH=$PATH:/.local/share/nvim/lsp_servers/rust/rust_analyzer
@@ -95,6 +96,15 @@ alias tc='clear; tmux clear-history; clear'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig/"
+
+# ZIG
+export PATH=$PATH:/usr/bin/zig
+
+# exercism cli
+export PATH=$PATH:/usr/bin/exercism
+
+
 # bun completions
 [ -s "/home/bocha13/.bun/_bun" ] && source "/home/bocha13/.bun/_bun"
 
@@ -112,14 +122,14 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # eval "$(zellij --layout compact setup --generate-auto-start zsh)"
 
 # Start Tmux if not already running
-if [[ -z "$TMUX" ]]; then
-    # Check for detached sessions
-    if [[ $(tmux list-sessions 2>/dev/null) ]]; then
-        # Open the first detached session
-        tmux attach-session -t $(tmux list-sessions -F "#S" 2>/dev/null | head -n 1)
-    else
-        # No detached sessions, start a new Tmux session
-        tmux new-session
-    fi
-fi
+# if [[ -z "$TMUX" ]]; then
+#     # Check for detached sessions
+#     if [[ $(tmux list-sessions 2>/dev/null) ]]; then
+#         # Open the first detached session
+#         tmux attach-session -t $(tmux list-sessions -F "#S" 2>/dev/null | head -n 1)
+#     else
+#         # No detached sessions, start a new Tmux session
+#         tmux new-session
+#     fi
+# fi
 PATH="$HOME/.local/bin:$PATH"
