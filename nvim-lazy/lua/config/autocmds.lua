@@ -22,3 +22,13 @@ end, {
   desc = "Open Github Repo",
   force = true,
 })
+
+-- make nvim detect Jenkinsfile as groovy for syntax highlighting
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    vim.cmd("setlocal filetype=groovy")
+  end,
+  group = augroup("general"),
+  pattern = "Jenkinsfile",
+  desc = "Set Jenkinsfile filetype",
+})
