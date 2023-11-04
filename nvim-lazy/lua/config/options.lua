@@ -5,3 +5,4 @@
 local opt = vim.opt
 
 opt.signcolumn = "yes"
+opt.relativenumber = false

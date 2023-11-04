@@ -2,22 +2,7 @@ return {
   "stevearc/conform.nvim",
   dependencies = { "mason.nvim" },
   lazy = true,
-  cmd = "ConformInfo",
-  keys = {
-    {
-      "<leader>mp",
-      function()
-        require("conform").format({
-          formatters = { "injected" },
-          lsp_fallback = true,
-          async = false,
-          timeout_ms = 1000,
-        })
-      end,
-      mode = { "n", "v" },
-      desc = "Format Injected Langs",
-    },
-  },
+  event = { "BufReadPre", "BufNewFile" },
   config = function()
     local conform = require("conform")
 
