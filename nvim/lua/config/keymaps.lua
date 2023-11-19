@@ -38,3 +38,23 @@ map("n", "<C-Up>", ":resize +2<CR>")
 map("n", "<C-Down>", ":resize -2<CR>")
 map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
+
+-- Clear search with <esc>
+map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+
+-- Clear search, diff update and redraw
+-- taken from runtime/lua/_editor.lua
+map(
+	"n",
+	"<leader>ur",
+	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+	{ desc = "Redraw / clear hlsearch / diff update" }
+)
+
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next search result" })
+map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev search result" })
+map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
