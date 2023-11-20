@@ -112,24 +112,30 @@ export PATH=$PATH:/usr/bin/exercism
 export BUN_INSTALL="/home/bocha13/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# Android Studio
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+export PATH=$PATH:$HOME/Applications/android-studio/bin
+
+# raspberry pi pico sdk
+export PICO_SDK_PATH=$HOME/projects/pico/pico-sdk
+alias get_idf='. $HOME/esp/esp-idf/export.sh'
+export IDF_PATH=$HOME/esp/esp-idf
+
 # opam configuration
 [[ ! -r /home/bocha13/.opam/opam-init/init.zsh ]] || source /home/bocha13/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
-# Zellij aliases
-# alias zl='zellij list-sessions'
-
-# Start Zellij
-# eval "$(zellij --layout compact setup --generate-auto-start zsh)"
-
 # Start Tmux if not already running
-# if [[ -z "$TMUX" ]]; then
-#     # Check for detached sessions
-#     if [[ $(tmux list-sessions 2>/dev/null) ]]; then
-#         # Open the first detached session
-#         tmux attach-session -t $(tmux list-sessions -F "#S" 2>/dev/null | head -n 1)
-#     else
-#         # No detached sessions, start a new Tmux session
-#         tmux new-session
-#     fi
-# fi
+if [[ -z "$TMUX" ]]; then
+    # Check for detached sessions
+    if [[ $(tmux list-sessions 2>/dev/null) ]]; then
+        # Open the first detached session
+        tmux attach-session -t $(tmux list-sessions -F "#S" 2>/dev/null | head -n 1)
+    else
+        # No detached sessions, start a new Tmux session
+        tmux new-session
+    fi
+fi
 PATH="$HOME/.local/bin:$PATH"
