@@ -62,7 +62,6 @@ return {
 			},
 			["graphql"] = defaultOpts,
 			["tsserver"] = defaultOpts,
-			["gopls"] = defaultOpts,
 			["tailwindcss"] = defaultOpts,
 			["rust_analyzer"] = {
 				capabilities = capabilities,
@@ -106,7 +105,6 @@ return {
 					},
 				},
 			},
-			["zls"] = defaultOpts,
 		}
 
 		for server, config in pairs(serverList) do

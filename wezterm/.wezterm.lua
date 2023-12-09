@@ -203,7 +203,7 @@ wezterm.on("format-tab-title", function(tab)
 end)
 
 -- Appearance setting for when I need to take pretty screenshots
-config.enable_tab_bar = false
+-- config.enable_tab_bar = false
 config.window_padding = {
 	left = "0cell",
 	right = "0cell",
