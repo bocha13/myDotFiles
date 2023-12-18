@@ -43,9 +43,9 @@ return {
 				},
 				HACK = { icon = " ", color = "warning" },
 				WARN = { icon = " ", color = "warning" },
-				PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-				NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-				TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+				PERF = { icon = "󰄉 ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+				NOTE = { icon = "󰛨 ", color = "hint", alt = { "INFO" } },
+				TEST = { icon = "󱑆 ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
 			},
 			gui_style = {
 				fg = "NONE",

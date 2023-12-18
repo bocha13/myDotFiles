@@ -30,6 +30,7 @@ return {
 				"tailwindcss",
 				"graphql",
 				"eslint",
+				"zls",
 			},
 			automatic_installation = true,
 		})

@@ -6,22 +6,22 @@ return {
 	opts = function()
 		local icons = {
 			diagnostics = {
-				Error = "E ",
-				Warn = "W ",
-				Hint = "H ",
-				Info = "I ",
+				Error = "E",
+				Warn = "W",
+				Hint = "H",
+				Info = "I",
 			},
 			git = {
-				added = "+",
-				modified = "~",
-				removed = "-",
+				added = " ",
+				modified = " ",
+				removed = " ",
 			},
 		}
 		return {
 			options = {
 				icons_enabled = true,
 				theme = "auto",
-				globalstatus = false,
+				globalstatus = true,
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "", right = "" },
 				disabled_filetypes = { statusline = { "dashboard", "lazy" } },
@@ -45,8 +45,8 @@ return {
 						"filename",
 						path = 0,
 						symbols = {
-							modified = "[+]",
-							readonly = "[-]",
+							modified = " ",
+							readonly = " ",
 							unnamed = "[No Name]",
 							newfile = "[New]",
 						},

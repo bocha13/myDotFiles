@@ -10,7 +10,7 @@ end
 config.initial_cols = 120
 config.initial_rows = 40
 
-config.color_scheme = "Gruvbox dark, hard (base16)" -- "Tokyo Night"
+config.color_scheme = "Gruvbox dark, hard (base16)" --"tokyonight_night"
 config.font = wezterm.font_with_fallback({
 	{ family = "JetBrains MonoNL Nerd Font", scale = 0.91 },
 })
