@@ -8,11 +8,11 @@ vim.api.nvim_command("set fillchars+=vert:\\▎")
 
 -- remove auto comment on new line after comment
 vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    vim.opt.formatoptions:remove({ "c", "r", "o" })
-  end,
-  group = general,
-  desc = "Disable New Line Comment",
+	callback = function()
+		vim.opt.formatoptions:remove({ "c", "r", "o" })
+	end,
+	group = general,
+	desc = "Disable New Line Comment",
 })
 
 vim.opt.showmode = false
@@ -50,7 +50,7 @@ vim.g.mapleader = " "
 
 -- Format on save
 vim.api.nvim_create_autocmd("BufWritePre", {
-  callback = function()
-    vim.lsp.buf.format()
-  end,
+	callback = function()
+		vim.lsp.buf.format()
+	end,
 })
