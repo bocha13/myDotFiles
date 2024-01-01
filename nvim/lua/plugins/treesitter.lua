@@ -25,6 +25,7 @@ return {
 			"query",
 			"regex",
 			"tsx",
+			"rust",
 			"typescript",
 			"yaml",
 		},
