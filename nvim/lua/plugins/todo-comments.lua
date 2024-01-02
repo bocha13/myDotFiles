@@ -59,7 +59,7 @@ return {
 				before = "",
 				keyword = "wide",
 				after = "fg",
-				pattern = [[.*<(KEYWORDS)\s*:]],
+				pattern = [[.*<(KEYWORDS)\s*:?]],
 				comments_only = true,
 				max_line_len = 400,
 				exclude = {},
