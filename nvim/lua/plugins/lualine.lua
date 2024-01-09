@@ -41,7 +41,7 @@ return {
 						},
 					},
 					-- show filename, type, icon and path in statusline
-					-- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+					{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
 					{
 						"filename",
 						path = 0,
@@ -73,9 +73,9 @@ return {
 					{ "location", padding = { left = 0, right = 1 } },
 				},
 				lualine_z = {
-					-- function()
-					--   return " " .. os.date("%R")
-					-- end,
+					-- 	function()
+					-- 	  return " " .. os.date("%R")
+					-- 	end,
 				},
 			},
 		}

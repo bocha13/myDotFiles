@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 vim.opt.showmode = false
 vim.opt.nu = true
-vim.opt.relativenumber = true
+-- vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
 
 vim.opt.tabstop = 2
