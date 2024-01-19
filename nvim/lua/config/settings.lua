@@ -15,6 +15,16 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	desc = "Disable New Line Comment",
 })
 
+-- make nvim detect Jenkinsfile as groovy for syntax highlighting
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		vim.cmd("setlocal filetype=groovy")
+	end,
+	group = general,
+	pattern = "Jenkinsfile",
+	desc = "Set Jenkinsfile filetype",
+})
+
 vim.opt.showmode = false
 vim.opt.nu = true
 -- vim.opt.relativenumber = true
