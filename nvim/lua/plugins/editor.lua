@@ -7,18 +7,24 @@ return {
 	},
 	{
 		"folke/trouble.nvim",
-		dependencies = { "nvim-web-devicons" },
-		event = "VeryLazy",
+		cmd = { "TroubleToggle", "Trouble" },
 	},
-	-- {
-	--   "sindrets/diffview.nvim",
-	--   -- event = "VeryLazy",
-	--   cmd = { "DiffviewOpen", "DiffviewClose" },
-	--   keys = {
-	--     { "<leader>gd", ":DiffviewOpen<CR>",  desc = "Open Diffview" },
-	--     { "<leader>gD", ":DiffviewClose<CR>", desc = "Close Diffview" },
-	--   },
-	-- },
+	{
+		"tpope/vim-fugitive",
+		event = "BufWinEnter",
+		-- cmd = {
+		-- 	"G",
+		-- 	"Git",
+		-- 	"Gdiff",
+		-- 	"Gdiffsplit",
+		-- 	"Gread",
+		-- 	"Gwrite",
+		-- 	"Ggrep",
+		-- 	"GMove",
+		-- 	"GDelete",
+		-- 	"GBrowse",
+		-- },
+	},
 	{
 		"windwp/nvim-ts-autotag",
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },

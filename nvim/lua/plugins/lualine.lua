@@ -2,7 +2,7 @@ local fg = require("utils").fg
 
 return {
 	"nvim-lualine/lualine.nvim",
-	event = "VeryLazy",
+	-- event = "VeryLazy",
 	opts = function()
 		local icons = {
 			diagnostics = {
