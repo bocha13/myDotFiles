@@ -80,6 +80,7 @@ config.keys = {
 	{ key = "[", mods = "LEADER", action = act.ActivateTabRelative(-1) },
 	{ key = "]", mods = "LEADER", action = act.ActivateTabRelative(1) },
 	{ key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
+	{ key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
 	{
 		key = "e",
 		mods = "LEADER",
@@ -90,6 +91,22 @@ config.keys = {
 				{ Text = "Renaming Tab Title...:" },
 			}),
 			action = wezterm.action_callback(function(window, pane, line)
+				if line then
+					window:active_tab():set_title(line)
+				end
+			end),
+		}),
+	},
+	-- rename tab
+	{
+		key = "R",
+		mods = "CTRL|SHIFT",
+		action = act.PromptInputLine({
+			description = "Enter new name for tab",
+			action = wezterm.action_callback(function(window, _, line)
+				-- line will be `nil` if they hit escape without entering anything
+				-- An empty string if they just hit enter
+				-- Or the actual line of text they wrote
 				if line then
 					window:active_tab():set_title(line)
 				end
@@ -154,16 +171,16 @@ wezterm.on("update-status", function(window, pane)
 	end
 
 	-- Current working directory
-	local basename = function(s)
-		-- Nothing a little regex can't fix
-		return string.gsub(s, "(.*[/\\])(.*)", "%2")
-	end
+	-- local basename = function(s)
+	-- 	-- Nothing a little regex can't fix
+	-- 	return string.gsub(s, "(.*[/\\])(.*)", "%2")
+	-- end
 	-- CWD and CMD could be nil (e.g. viewing log using Ctrl-Alt-l). Not a big deal, but check in case
 	local cwd = pane:get_current_working_dir()
-	cwd = cwd and basename(cwd) or ""
+	cwd = cwd
 	-- Current command
 	local cmd = pane:get_foreground_process_name()
-	cmd = cmd and basename(cmd) or ""
+	cmd = cmd
 
 	-- Time
 	-- local time = wezterm.strftime("%H:%M")
@@ -194,11 +211,11 @@ wezterm.on("format-tab-title", function(tab)
 		return {
 			{ Foreground = { Color = "black" } },
 			{ Background = { Color = "#83a598" } },
-			{ Text = "   " .. title .. "   " },
+			{ Text = " " .. tab.tab_index + 1 .. ":" .. title .. " " },
 		}
 	end
 	return {
-		{ Text = "   " .. title .. "   " },
+		{ Text = "  " .. title .. "  " },
 	}
 end)
 
