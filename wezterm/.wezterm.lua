@@ -2,7 +2,6 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 
 local config = {}
--- Use config builder object if possible
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
@@ -166,15 +165,10 @@ wezterm.on("update-status", function(window, pane)
 		stat_color = "#83a598"
 	end
 	if window:leader_is_active() then
-		stat = "LDR"
-		stat_color = "#8ec07c"
+		stat = "LDR "
+		stat_color = "#ea6962"
 	end
 
-	-- Current working directory
-	-- local basename = function(s)
-	-- 	-- Nothing a little regex can't fix
-	-- 	return string.gsub(s, "(.*[/\\])(.*)", "%2")
-	-- end
 	-- CWD and CMD could be nil (e.g. viewing log using Ctrl-Alt-l). Not a big deal, but check in case
 	local cwd = pane:get_current_working_dir()
 	cwd = cwd
@@ -182,14 +176,10 @@ wezterm.on("update-status", function(window, pane)
 	local cmd = pane:get_foreground_process_name()
 	cmd = cmd
 
-	-- Time
-	-- local time = wezterm.strftime("%H:%M")
-
 	-- Left status (left of the tab line)
 	window:set_left_status(wezterm.format({
 		{ Foreground = { Color = stat_color } },
-		{ Text = "  " },
-		{ Text = wezterm.nerdfonts.oct_table .. "  " .. stat },
+		{ Text = " " .. wezterm.nerdfonts.cod_remote_explorer .. "  " .. stat },
 		{ Text = " |" },
 	}))
 end)
@@ -201,7 +191,7 @@ local function tab_title(tab_info)
 		return title
 	end
 	-- Otherwise, use the title from the active pane
-	-- in that tab
+	-- in that ta
 	return tab_info.active_pane.title
 end
 
@@ -215,7 +205,7 @@ wezterm.on("format-tab-title", function(tab)
 		}
 	end
 	return {
-		{ Text = "  " .. title .. "  " },
+		{ Text = " " .. tab.tab_index + 1 .. ":" .. title .. " " },
 	}
 end)
 
