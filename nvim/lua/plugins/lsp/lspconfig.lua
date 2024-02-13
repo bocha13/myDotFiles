@@ -51,18 +51,10 @@ return {
 		local serverList = {
 			["html"] = defaultOpts,
 			["cssls"] = defaultOpts,
-			["clangd"] = {
-				on_attach = function(client, bufnr)
-					client.server_capabilities.document_formatting = false
-					on_attach(client, bufnr)
-				end,
-				capabilities = cmp_nvim_lsp.default_capabilities({ offsetEncoding = "utf-8" }),
-				cmd = { "clangd", "--background-index" },
-				filetypes = { "c", "cpp", "objc", "objcpp" },
-			},
 			["graphql"] = defaultOpts,
 			["tsserver"] = defaultOpts,
 			["tailwindcss"] = defaultOpts,
+			["gopls"] = defaultOpts,
 			["rust_analyzer"] = {
 				capabilities = capabilities,
 				on_attach = on_attach,
@@ -105,7 +97,6 @@ return {
 					},
 				},
 			},
-			["zls"] = defaultOpts,
 		}
 
 		for server, config in pairs(serverList) do
