@@ -29,6 +29,7 @@ return {
 				"jsonls",
 				"tailwindcss",
 				"graphql",
+				"prismals",
 				"eslint",
 				"gopls",
 			},

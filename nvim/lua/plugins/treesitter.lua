@@ -16,6 +16,8 @@ return {
 		context_commentstring = { enable = true, enable_autocmd = false },
 		ensure_installed = {
 			"bash",
+			"go",
+			"prisma",
 			"html",
 			"javascript",
 			"json",

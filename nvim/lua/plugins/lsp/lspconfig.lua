@@ -55,6 +55,7 @@ return {
 			["tsserver"] = defaultOpts,
 			["tailwindcss"] = defaultOpts,
 			["gopls"] = defaultOpts,
+			["prismals"] = defaultOpts,
 			["rust_analyzer"] = {
 				capabilities = capabilities,
 				on_attach = on_attach,
