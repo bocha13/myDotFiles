@@ -1,22 +1,4 @@
 return {
-	-- {
-	-- 	"zbirenbaum/copilot.lua",
-	-- 	cmd = "Copilot",
-	-- 	build = ":Copilot auth",
-	-- 	opts = {
-	-- 		sugestion = { enabled = false },
-	-- 		panel = { enabled = false },
-	-- 	},
-	-- },
-	-- {
-	-- 	"zbirenbaum/copilot-cmp",
-	-- 	dependencies = { "copilot.lua" },
-	-- 	event = "BufReadPre",
-	-- 	config = function(_, opts)
-	-- 		local copilot_cmp = require("copilot_cmp")
-	-- 		copilot_cmp.setup(opts)
-	-- 	end,
-	-- },
 	{
 		"Exafunction/codeium.nvim",
 		requires = {
@@ -78,7 +60,6 @@ return {
 				}),
 				-- sources for autocompletion
 				sources = cmp.config.sources({
-					-- { name = "copilot" },
 					{ name = "codeium" },
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },

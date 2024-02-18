@@ -20,7 +20,10 @@ return {
 			"DiffviewRefresh",
 			"DiffviewFileHistory",
 		},
-		keys = { { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview Open" } },
+		keys = {
+			{ "<leader>dv", "<cmd>DiffviewOpen<cr>", desc = "Diffview Open" },
+			{ "<leader>dc", "<cmd>DiffviewClose<cr>", desc = "Diffview Close" },
+		},
 	},
 	{
 		"windwp/nvim-ts-autotag",
