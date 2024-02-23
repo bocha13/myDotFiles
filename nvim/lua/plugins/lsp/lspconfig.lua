@@ -73,9 +73,13 @@ return {
 				procMacro = {
 					enable = true,
 					ignored = {
-						["async-trait"] = { "async_trait" },
-						["napi-derive"] = { "napi" },
-						["async-recursion"] = { "async_recursion" },
+						leptos_macro = {
+							-- "component",
+							"server",
+						},
+						async_trait = { "async_trait" },
+						napi_derive = { "napi" },
+						async_recursion = { "async_recursion" },
 					},
 				},
 			},

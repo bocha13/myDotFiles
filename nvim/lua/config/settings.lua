@@ -56,6 +56,10 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
+-- VIM-FUGITIVE
+-- set gitgutter to always be vertical
+vim.opt.diffopt = "vertical"
+
 vim.g.mapleader = " "
 
 -- Format on save

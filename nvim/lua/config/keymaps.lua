@@ -39,6 +39,7 @@ map("n", "<C-Down>", ":resize -2<CR>")
 map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
 
+-- netrw maps
 -- map("n", "<leader>e", ":Lexplore | vert res 40<CR>", { desc = "Open file explorer" })
 
 -- Clear search with <esc>
@@ -67,3 +68,7 @@ map("x", "Q", ":norm @q<CR>", { desc = "Run macro q in all selected lines" })
 
 -- GOLANG error check
 map("n", "<leader>hh", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>", { desc = "insert error check for golang" })
+
+-- VIM-FUGITIVE
+map("n", "<leader>gv", ":Gdiff<CR>", { desc = "Open Git diff" })
+map("n", "<leader>gV", "<c-w>h<c-w>c<CR>", { desc = "Close fugitive buffer" })
