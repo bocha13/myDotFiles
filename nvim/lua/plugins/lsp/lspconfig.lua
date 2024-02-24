@@ -74,6 +74,7 @@ return {
 					enable = true,
 					ignored = {
 						leptos_macro = {
+							-- optional: --
 							-- "component",
 							"server",
 						},

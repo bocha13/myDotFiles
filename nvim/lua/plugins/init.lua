@@ -1,4 +1,5 @@
 return {
+	-- tmux pane navigation from nvim
 	{
 		"christoomey/vim-tmux-navigator",
 		cmd = {
@@ -16,10 +17,37 @@ return {
 			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 		},
 	},
+	-- golang for microcontrollers
 	{
 		"pcolladosoto/tinygo.nvim",
 		config = function()
 			require("tinygo").setup()
+		end,
+	},
+	{
+		"numToStr/Comment.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		keys = { { "gcc" }, { "gbc" }, { "gc", mode = "v" }, { "gb", mode = "v" } },
+		config = true,
+	},
+	{
+		"folke/trouble.nvim",
+		cmd = { "TroubleToggle", "Trouble" },
+	},
+	{
+		"tpope/vim-fugitive",
+		event = "BufWinEnter",
+	},
+	{
+		"windwp/nvim-ts-autotag",
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+		opts = {},
+	},
+	{
+		"norcalli/nvim-colorizer.lua",
+		event = "BufReadPre",
+		config = function()
+			require("colorizer").setup()
 		end,
 	},
 }
