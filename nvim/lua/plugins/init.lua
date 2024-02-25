@@ -25,12 +25,6 @@ return {
 		end,
 	},
 	{
-		"numToStr/Comment.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		keys = { { "gcc" }, { "gbc" }, { "gc", mode = "v" }, { "gb", mode = "v" } },
-		config = true,
-	},
-	{
 		"folke/trouble.nvim",
 		cmd = { "TroubleToggle", "Trouble" },
 	},

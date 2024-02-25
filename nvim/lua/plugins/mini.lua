@@ -71,4 +71,12 @@ return {
 			})
 		end,
 	},
+	{
+		"echasnovski/mini.comment",
+		version = false,
+		keys = { { "gcc" }, { "gc", mode = "v" } },
+		config = function()
+			require("mini.comment").setup()
+		end,
+	},
 }

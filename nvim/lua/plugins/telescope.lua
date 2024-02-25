@@ -16,7 +16,7 @@ return {
 			-- search
 			{ "<leader>sg", telescope_utils("live_grep"), desc = "Grep (root dir)" },
 			-- git
-			{ "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
+			-- { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
 			{ "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
 		},
 		opts = {
