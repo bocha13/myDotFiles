@@ -21,16 +21,24 @@ return {
 		},
 		opts = {
 			defaults = {
+				layout_config = { prompt_position = "top" },
 				prompt_prefix = " ",
 				selection_caret = " ",
 				path_display = { "smart" },
 				file_ignore_patterns = { "node_modules" },
 				initial_mode = "insert",
 				-- selection_strategy = "reset",
-				sorting_strategy = "descending",
+				sorting_strategy = "ascending",
 				use_less = true,
 				borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 			},
+		},
+	},
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+		keys = {
+			{ "<leader>e", ":Telescope file_browser<CR>", desc = "File Browser explorer" },
 		},
 	},
 }
