@@ -30,7 +30,13 @@ return {
 				-- selection_strategy = "reset",
 				sorting_strategy = "ascending",
 				use_less = true,
-				borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+				-- borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+			},
+			extensions = {
+				file_browser = {
+					hidden = false,
+					respect_gitignore = false,
+				},
 			},
 		},
 	},
@@ -38,7 +44,11 @@ return {
 		"nvim-telescope/telescope-file-browser.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 		keys = {
-			{ "<leader>e", ":Telescope file_browser<CR>", desc = "File Browser explorer" },
+			{
+				"<leader>e",
+				":Telescope file_browser path=%:p:h select_buffer=true<CR>",
+				desc = "File Browser explorer",
+			},
 		},
 	},
 }

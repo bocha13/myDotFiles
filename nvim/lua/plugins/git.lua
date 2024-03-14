@@ -90,10 +90,10 @@ return {
 			end, bufopts)
 		end,
 	},
-	-- {
-	-- 	"tpope/vim-fugitive",
-	-- 	event = "BufWinEnter",
-	-- },
+	{
+		"tpope/vim-fugitive",
+		event = "BufWinEnter",
+	},
 	{
 		"akinsho/git-conflict.nvim",
 		version = "*",

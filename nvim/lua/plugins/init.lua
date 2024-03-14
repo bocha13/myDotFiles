@@ -17,6 +17,13 @@ return {
 			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 		},
 	},
+	-- golang for microcontrollers
+	-- {
+	-- 	"pcolladosoto/tinygo.nvim",
+	-- 	config = function()
+	-- 		require("tinygo").setup()
+	-- 	end,
+	-- },
 	{
 		"folke/trouble.nvim",
 		cmd = { "TroubleToggle", "Trouble" },

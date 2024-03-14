@@ -32,15 +32,8 @@ return {
 			signs = true,
 			sign_priority = 8,
 			keywords = {
-				FIX = {
-					icon = " ",
-					color = "error",
-					alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
-				},
-				TODO = {
-					icon = " ",
-					color = "info",
-				},
+				FIX = { icon = " ", color = "error", alt = { "FIXME", "BUG", "FIXIT", "ISSUE" } },
+				TODO = { icon = " ", color = "info" },
 				HACK = { icon = " ", color = "warning" },
 				WARN = { icon = " ", color = "warning" },
 				PERF = { icon = "󰄉 ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
