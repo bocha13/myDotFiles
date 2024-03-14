@@ -49,3 +49,7 @@ instance = "Alacritty"
 [window.padding]
 x = 0
 y = 0
+
+[window.dimensions]
+columns = 120
+lines = 30
