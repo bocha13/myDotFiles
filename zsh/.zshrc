@@ -38,8 +38,8 @@ function ex(){
 # export PATH=$PATH:"/mnt/c/Users/ignac/AppData/Local/Programs/Microsoft VS Code/bin"
 
 # DENO
-export DENO_INSTALL="/home/bocha13/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
+# export DENO_INSTALL="/home/bocha13/.deno"
+# export PATH="$DENO_INSTALL/bin:$PATH"
 
 # go
 export PATH=$PATH:/usr/local/go/bin
@@ -53,8 +53,35 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# enable CLI colours for Mac Terminal
-export CLICOLOR=1
+# export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig/"
+
+# ZIG
+# export PATH=$PATH:/usr/bin/zig
+
+# exercism cli
+export PATH=$PATH:/usr/bin/exercism
+
+
+# bun completions
+# [ -s "/home/bocha13/.bun/_bun" ] && source "/home/bocha13/.bun/_bun"
+
+# Bun
+export BUN_INSTALL="/home/bocha13/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Android Studio
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$HOME/Applications/android-studio/bin
+
+# PICO SDK
+export PICO_SDK_PATH=$HOME/projects/pico/pico-sdk
+alias get_idf='. $HOME/esp/esp-idf/export.sh'
+export IDF_PATH=$HOME/esp/esp-idf
+
+# EMACS
+export PATH=$PATH:$HOME/.config/emacs/bin
 
 # ----------- PROMPT -----------
 # Enable checking for (un)staged changes, enabling use of %u and %c
@@ -96,37 +123,6 @@ alias tc='clear; tmux clear-history; clear'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig/"
-
-# ZIG
-export PATH=$PATH:/usr/bin/zig
-
-# exercism cli
-export PATH=$PATH:/usr/bin/exercism
-
-
-# bun completions
-[ -s "/home/bocha13/.bun/_bun" ] && source "/home/bocha13/.bun/_bun"
-
-# Bun
-export BUN_INSTALL="/home/bocha13/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# Android Studio
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-export PATH=$PATH:$HOME/Applications/android-studio/bin
-
-# raspberry pi pico sdk
-export PICO_SDK_PATH=$HOME/projects/pico/pico-sdk
-alias get_idf='. $HOME/esp/esp-idf/export.sh'
-export IDF_PATH=$HOME/esp/esp-idf
-
-# opam configuration
-[[ ! -r /home/bocha13/.opam/opam-init/init.zsh ]] || source /home/bocha13/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
-
 # Start Tmux if not already running
 if [[ -z "$TMUX" ]]; then
     # Check for detached sessions
@@ -138,4 +134,7 @@ if [[ -z "$TMUX" ]]; then
         tmux new-session
     fi
 fi
-PATH="$HOME/.local/bin:$PATH"
+# PATH="$HOME/.local/bin:$PATH"
+
+# PLUGINS
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
