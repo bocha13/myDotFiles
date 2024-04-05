@@ -1,14 +1,10 @@
 vim.opt.guicursor = ""
 
--- NEO-TREE
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
 -- NETRW
 vim.g.netrw_keepdir = 0
 vim.g.netrw_winsize = 30
--- vim.g.netrw_liststyle = 3
--- vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
+vim.g.netrw_banner = 0
 vim.g.netrw_list_hide = "(^|ss)\zs.S+"
 vim.g.netrw_localcopydircmd = "cp -r"
 
@@ -16,26 +12,26 @@ vim.api.nvim_command("set fillchars+=vert:\\▎")
 
 -- remove auto comment on new line after comment
 vim.api.nvim_create_autocmd("BufEnter", {
-	callback = function()
-		vim.opt.formatoptions:remove({ "c", "r", "o" })
-	end,
-	group = general,
-	desc = "Disable New Line Comment",
+  callback = function()
+    vim.opt.formatoptions:remove({ "c", "r", "o" })
+  end,
+  group = general,
+  desc = "Disable New Line Comment",
 })
 
 -- make nvim detect Jenkinsfile as groovy for syntax highlighting
 vim.api.nvim_create_autocmd("BufEnter", {
-	callback = function()
-		vim.cmd("setlocal filetype=groovy")
-	end,
-	group = general,
-	pattern = "Jenkinsfile",
-	desc = "Set Jenkinsfile filetype",
+  callback = function()
+    vim.cmd("setlocal filetype=groovy")
+  end,
+  group = general,
+  pattern = "Jenkinsfile",
+  desc = "Set Jenkinsfile filetype",
 })
 
 vim.opt.showmode = false
 vim.opt.nu = true
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
 
 vim.opt.tabstop = 2
@@ -72,7 +68,7 @@ vim.g.mapleader = " "
 
 -- Format on save
 vim.api.nvim_create_autocmd("BufWritePre", {
-	callback = function()
-		vim.lsp.buf.format()
-	end,
+  callback = function()
+    vim.lsp.buf.format()
+  end,
 })

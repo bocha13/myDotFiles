@@ -41,7 +41,7 @@ map("n", "<C-Right>", ":vertical resize +2<CR>")
 
 -- netrw maps
 -- map("n", "<leader>e", ":Ex %:p:h<CR>", { desc = "Open file explorer" })
--- map("n", "<leader>e", ":Ex<CR>", { desc = "Open file explorer" })
+-- map("n", "<leader>E", ":Ex<CR>", { desc = "Open file explorer" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
@@ -49,10 +49,10 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsea
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
 map(
-	"n",
-	"<leader>ur",
-	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-	{ desc = "Redraw / clear hlsearch / diff update" }
+  "n",
+  "<leader>ur",
+  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+  { desc = "Redraw / clear hlsearch / diff update" }
 )
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
