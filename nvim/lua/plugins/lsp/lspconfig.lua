@@ -49,6 +49,7 @@ return {
 
     -- add servers to this list and they will be automatically setup
     local serverList = {
+      ["astro"] = defaultOpts,
       ["html"] = defaultOpts,
       ["cssls"] = defaultOpts,
       ["graphql"] = defaultOpts,

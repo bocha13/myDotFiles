@@ -21,6 +21,7 @@ return {
 
     mason_lspconfig.setup({
       ensure_installed = {
+        "astro",
         "tsserver",
         "rust_analyzer",
         "lua_ls",
