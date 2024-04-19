@@ -13,7 +13,9 @@ return {
         -- mode = "buffers",
         indicator_icon = " ",
         show_close_icon = false,
-        show_buffer_icons = false,
+        buffer_close_icon = "",
+        close_icon = "",
+        -- show_buffer_icons = false,
         close_command = function(n)
           require("mini.bufremove").delete(n, false)
         end,

@@ -40,15 +40,15 @@ return {
       },
     },
   },
-  {
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-    keys = {
-      {
-        "<leader>e",
-        ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
-        desc = "File Browser explorer",
-      },
-    },
-  },
+  -- {
+  --   "nvim-telescope/telescope-file-browser.nvim",
+  --   dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+  --   keys = {
+  --     {
+  --       "<leader>e",
+  --       ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
+  --       desc = "File Browser explorer",
+  --     },
+  --   },
+  -- },
 }

@@ -40,8 +40,8 @@ map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
 
 -- netrw maps
--- map("n", "<leader>e", ":Ex %:p:h<CR>", { desc = "Open file explorer" })
--- map("n", "<leader>E", ":Ex<CR>", { desc = "Open file explorer" })
+map("n", "<leader>e", ":Ex %:p:h<CR>", { desc = "Open file explorer" })
+map("n", "<leader>E", ":Ex<CR>", { desc = "Open file explorer" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
