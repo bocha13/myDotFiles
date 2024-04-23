@@ -9,6 +9,13 @@ map("n", "<A-k>", ":m .-2<cr>==", { desc = "Move selection up" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move selection up" })
 map("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move selection up" })
 
+-- jump to split
+-- use this only when vim-tmux-navigator is not installed
+-- map("n", "<c-k>", ":wincmd k<CR>")
+-- map("n", "<c-j>", ":wincmd j<CR>")
+-- map("n", "<c-h>", ":wincmd h<CR>")
+-- map("n", "<c-l>", ":wincmd l<CR>")
+
 map("n", "<C-d", "<C-d>zz")
 map("n", "<C-u", "<C-u>zz")
 
@@ -39,9 +46,12 @@ map("n", "<C-Down>", ":resize -2<CR>")
 map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
 
+-- OIL
+map("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open file explorer" })
+
 -- netrw maps
-map("n", "<leader>e", ":Ex %:p:h<CR>", { desc = "Open file explorer" })
-map("n", "<leader>E", ":Ex<CR>", { desc = "Open file explorer" })
+-- map("n", "<leader>e", ":Ex %:p:h<CR>", { desc = "Open file explorer" })
+-- map("n", "<leader>E", ":Ex<CR>", { desc = "Open file explorer" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
@@ -67,7 +77,7 @@ map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result
 map("n", "Q", "@qj", { desc = "Run macro q" })
 map("x", "Q", ":norm @q<CR>", { desc = "Run macro q in all selected lines" })
 
--- GOLANG error check
+-- GOLANG error check snippet
 map("n", "<leader>hh", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>", { desc = "insert error check for golang" })
 
 -- VIM-FUGITIVE
