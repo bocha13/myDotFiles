@@ -40,7 +40,7 @@ return {
               modified = " ",
               readonly = " ",
               unnamed = "[No Name]",
-              newfile = "[New]",
+              newfile = "[New]"
             },
           },
           {
