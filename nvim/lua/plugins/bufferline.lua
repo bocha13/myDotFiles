@@ -9,6 +9,12 @@ return {
       { "<A-C>", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
     },
     opts = {
+      highlights = {
+        fill = {
+          fg = "#ebdbb2",
+          bg = "#191b1c"
+        }
+      },
       options = {
         indicator_icon = " ",
         show_close_icon = false,
@@ -21,14 +27,6 @@ return {
           require("mini.bufremove").delete(n, false)
         end,
         always_show_bufferline = false,
-        offsets = {
-          {
-            filetype = "neo-tree",
-            text = "Explorer",
-            highlight = "Directory",
-            text_align = "center",
-          },
-        },
       },
     },
   },
