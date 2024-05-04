@@ -1,22 +1,4 @@
 return {
-  -- {
-  -- 	"folke/tokyonight.nvim",
-  -- 	lazy = false,
-  -- 	priority = 1000,
-  -- 	config = function()
-  -- 		require("tokyonight").setup({
-  -- 			style = "night",
-  -- 			on_colors = function(c)
-  -- 				c.gitSigns = {
-  -- 					add = "#8fc28c",
-  -- 					change = "#7495d1",
-  -- 					delete = "#f38ba8",
-  -- 				}
-  -- 			end,
-  -- 		})
-  -- 		vim.cmd.colorscheme("tokyonight")
-  -- 	end,
-  -- },
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -108,12 +90,14 @@ return {
             return {
               CmpItemMenu = { fg = colors.surface2 },
               CursorLineNr = { fg = colors.text },
-              FloatBorder = { bg = colors.base, fg = colors.surface0 },
-              GitSignsChange = { fg = colors.peach },
-              LineNr = { fg = colors.overlay0 },
+              FloatBorder = { bg = colors.overlay0, fg = colors.surface0 },
+              GitSignsChange = { fg = colors.blue },
+              GitSignsAdd = { fg = colors.teal },
+              GitSignsDelete = { fg = colors.red },
+              LineNr = { fg = colors.surface0 },
               LspInfoBorder = { link = "FloatBorder" },
-              NormalFloat = { bg = colors.base },
-              Pmenu = { bg = colors.mantle, fg = "" },
+              NormalFloat = { bg = colors.crust },
+              Pmenu = { bg = colors.crust, fg = "" },
               PmenuSel = { bg = colors.surface0, fg = "" },
               TelescopePreviewBorder = { bg = colors.crust, fg = colors.crust },
               TelescopePreviewNormal = { bg = colors.crust },
