@@ -104,6 +104,14 @@ return {
           },
         },
       },
+      ["zls"] = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        cmd = { "zls" },
+        filetypes = { "zig" },
+        -- zig_exe_path = "/usr/bin/zig",
+        -- command = "/home/bocha13/.local/share/nvim/mason/bin/zls"
+      }
     }
 
     for server, config in pairs(serverList) do

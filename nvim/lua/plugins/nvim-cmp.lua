@@ -1,29 +1,19 @@
 return {
-  -- {
-  -- 	"Exafunction/codeium.nvim",
-  -- 	requires = {
-  -- 		"nvim-lua/plenary.nvim",
-  -- 		"hrsh7th/nvim-cmp",
-  -- 	},
-  -- 	config = function()
-  -- 		require("codeium").setup({})
-  -- 	end,
-  -- },
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      "hrsh7th/cmp-buffer",           --source for text in buffers
-      "hrsh7th/cmp-path",             -- source for file system paths
-      "L3MON4D3/LuaSnip",             -- snippet engine
-      "saadparwaiz1/cmp_luasnip",     -- for autocompletion
-      "rafamadriz/friendly-snippets", -- useful snippets
-      "onsails/lspkind.nvim",
+      "hrsh7th/cmp-buffer",                                    --source for text in buffers
+      "hrsh7th/cmp-path",                                      -- source for file system paths
+      { "L3MON4D3/LuaSnip", build = "make install_jsregexp" }, -- snippet engine
+      "saadparwaiz1/cmp_luasnip",                              -- for autocompletion
+      "rafamadriz/friendly-snippets",                          -- useful snippets
+      -- "onsails/lspkind.nvim",
     },
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
-      local lspkind = require("lspkind")
+      -- local lspkind = require("lspkind")
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
       -- load vs-code like snippets from plugins
@@ -36,9 +26,9 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
-        formatting = {
-          format = lspkind.cmp_format({ with_text = true, maxwidth = 50 }),
-        },
+        -- formatting = {
+        --   format = lspkind.cmp_format({ with_text = true, maxwidth = 50 }),
+        -- },
         mapping = cmp.mapping.preset.insert({
           ["<Up>"] = cmp.mapping.select_prev_item(cmp_select),
           ["<Down>"] = cmp.mapping.select_next_item(cmp_select),

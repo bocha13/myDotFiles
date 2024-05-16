@@ -28,13 +28,13 @@ return {
         },
         delete = {
           hl = "GitSignsDelete",
-          text = "»",
+          text = "",
           numhl = "GitSignsDeleteNr",
           linehl = "GitSignsDeleteLn",
         },
         topdelete = {
           hl = "GitSignsDelete",
-          text = "»",
+          text = "",
           numhl = "GitSignsDeleteNr",
           linehl = "GitSignsDeleteLn",
         },
@@ -71,7 +71,7 @@ return {
       max_file_length = 40000,
       preview_config = {
         -- Options passed to nvim_open_win
-        border = "single",
+        border = "none",
         style = "minimal",
         relative = "cursor",
         row = 0,

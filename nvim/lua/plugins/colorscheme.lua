@@ -92,9 +92,9 @@ return {
               CursorLineNr = { fg = colors.text },
               FloatBorder = { bg = colors.overlay0, fg = colors.surface0 },
               GitSignsChange = { fg = colors.blue },
-              GitSignsAdd = { fg = colors.teal },
-              GitSignsDelete = { fg = colors.red },
-              LineNr = { fg = colors.surface0 },
+              GitsignsAdd = { fg = colors.teal },
+              gitsignsDelete = { fg = colors.red },
+              LineNr = { fg = colors.overlay0 },
               LspInfoBorder = { link = "FloatBorder" },
               NormalFloat = { bg = colors.crust },
               Pmenu = { bg = colors.crust, fg = "" },
@@ -115,14 +115,11 @@ return {
               YankHighlight = { bg = colors.surface2 },
               FidgetTask = { fg = colors.subtext2 },
               FidgetTitle = { fg = colors.peach },
-
               IblIndent = { fg = colors.surface0 },
               IblScope = { fg = colors.overlay0 },
-
               Boolean = { fg = colors.mauve },
               Number = { fg = colors.mauve },
               Float = { fg = colors.mauve },
-
               PreProc = { fg = colors.mauve },
               PreCondit = { fg = colors.mauve },
               Include = { fg = colors.mauve },
@@ -133,7 +130,6 @@ return {
               Typedef = { fg = colors.red },
               Exception = { fg = colors.red },
               Statement = { fg = colors.red },
-
               Error = { fg = colors.red },
               StorageClass = { fg = colors.peach },
               Tag = { fg = colors.peach },
@@ -148,7 +144,6 @@ return {
               Delimiter = { fg = colors.subtext2 },
               Ignore = { fg = colors.subtext2 },
               Macro = { fg = colors.teal },
-
               TSAnnotation = { fg = colors.mauve },
               TSAttribute = { fg = colors.mauve },
               TSBoolean = { fg = colors.mauve },

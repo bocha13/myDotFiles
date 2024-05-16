@@ -32,6 +32,7 @@ return {
         "graphql",
         "eslint",
         "gopls",
+        "zls"
       },
       automatic_installation = true,
     })
