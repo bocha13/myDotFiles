@@ -46,8 +46,8 @@ map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
 
 -- netrw maps
-map("n", "<leader>e", ":e .<CR>", { desc = "Open Netrw in the directory of the current file." })
-map("n", "<C-c>", ":b#<CR>", { desc = "Close netrw" })
+-- map("n", "<leader>e", ":e .<CR>", { desc = "Open Netrw in the directory of the current file." })
+-- map("n", "<C-c>", ":b#<CR>", { desc = "Close netrw" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
@@ -79,3 +79,14 @@ map("x", "Q", ":norm @q<CR>", { desc = "Run macro q in all selected lines" })
 -- VIM-FUGITIVE
 map("n", "<leader>gv", ":Gdiff<CR>", { desc = "Open Git diff" })
 map("n", "<leader>gV", "<c-w>h<c-w>c<CR>", { desc = "Close fugitive buffer" })
+
+-- CHANGE COLORSCHEME
+local colorschemes = { "catppuccin-mocha", "catppuccin-latte" }
+local current_index = 1
+function Toggle_colorscheme()
+  current_index = current_index % #colorschemes + 1
+  vim.cmd("colorscheme " .. colorschemes[current_index])
+  print("Colorscheme switched to " .. colorschemes[current_index])
+end
+
+map("n", "<leader>cs", "<cmd>lua Toggle_colorscheme()<CR>", { desc = "Change current colorscheme to catppuccin-latte" })

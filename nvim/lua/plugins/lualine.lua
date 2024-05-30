@@ -31,8 +31,6 @@ return {
         lualine_a = { "mode" },
         lualine_b = { "branch" },
         lualine_c = {
-          -- show filename, type, icon and path in statusline
-          -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           {
             "filename",
             path = 0,
@@ -54,6 +52,7 @@ return {
           },
         },
         lualine_x = {
+          { "filetype", padding = { left = 1, right = 1 } },
           {
             require("lazy.status").updates,
             cond = require("lazy.status").has_updates,
