@@ -22,7 +22,7 @@ return {
     opts = {
       defaults = {
         layout_config = { prompt_position = "top" },
-        prompt_prefix = " ",
+        prompt_prefix = " ",
         selection_caret = " ",
         path_display = { "smart" },
         file_ignore_patterns = { "node_modules" },

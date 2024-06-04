@@ -52,7 +52,7 @@ return {
           },
         },
         lualine_x = {
-          { "filetype", padding = { left = 1, right = 1 } },
+          -- { "filetype", padding = { left = 1, right = 1 } },
           {
             require("lazy.status").updates,
             cond = require("lazy.status").has_updates,

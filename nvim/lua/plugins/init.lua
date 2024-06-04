@@ -18,13 +18,6 @@ return {
     },
   },
   {
-    "folke/trouble.nvim",
-    cmd = { "TroubleToggle", "Trouble" },
-    opts = {
-      icons = false
-    }
-  },
-  {
     "windwp/nvim-ts-autotag",
     event = { "BufReadPost", "BufWritePost", "BufNewFile" },
     opts = {},

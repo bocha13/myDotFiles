@@ -27,6 +27,7 @@ return {
         "lua_ls",
         "html",
         "cssls",
+        "clangd",
         "jsonls",
         "tailwindcss",
         "graphql",

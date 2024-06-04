@@ -1,3 +1,5 @@
+local diagnostics_list = require("utils").diagnostics_list
+
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
@@ -13,6 +15,8 @@ return {
     local on_attach = function(client, bufnr)
       local opts = { noremap = true, silent = true, buffer = bufnr }
 
+      keymap.set('n', '<leader>q', diagnostics_list,
+        { noremap = true, silent = true })
       keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
       keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
       keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
@@ -56,10 +60,36 @@ return {
       ["tsserver"] = defaultOpts,
       ["tailwindcss"] = defaultOpts,
       ["gopls"] = defaultOpts,
-      ["clangd"] = defaultOpts,
+      ["clangd"] = {
+        -- INFO: you need to install necessary libs to make cpp work
+        -- INFO: sudo apt install libstdc++-12-dev
+        -- INFO: sudo apt install libtinfo-dev
+        on_attach = on_attach,
+        capabilities = capabilities,
+        cmd = { "clangd" },
+        filetypes = { "c", "cpp", "objc", "objcpp" },
+        root_dir = function(fname)
+          return lspconfig.util.root_pattern('compile_commands.json', 'compile_flags.txt', '.git')(fname) or
+              lspconfig.util.path.dirname(fname)
+        end,
+        settings = {
+          clangd = {
+            -- Here you can add any specific settings for clangd
+            -- For example:
+            -- arguments = {"--completion-style=detailed"},
+          },
+        },
+        flags = {
+          debounce_text_changes = 150,
+        }
+      },
       ["rust_analyzer"] = {
         capabilities = capabilities,
         on_attach = on_attach,
+        -- check = {
+        --   allTargets = false,
+        --   extraArgs = "--target thumbv7em-none-eabihf"
+        -- },
         cargo = {
           allFeatures = true,
           loadOutDirsFromCheck = true,
@@ -75,8 +105,6 @@ return {
           enable = true,
           ignored = {
             leptos_macro = {
-              -- optional: --
-              -- "component",
               "server",
             },
             async_trait = { "async_trait" },
