@@ -76,7 +76,7 @@ return {
           clangd = {
             -- Here you can add any specific settings for clangd
             -- For example:
-            -- arguments = {"--completion-style=detailed"},
+            arguments = { "--query-driver= /usr/bin/gcc" },
           },
         },
         flags = {
