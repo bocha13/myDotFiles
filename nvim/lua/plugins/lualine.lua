@@ -1,22 +1,10 @@
 local fg = require("utils").fg
+local icons = require("utils").icons
 
 return {
   "nvim-lualine/lualine.nvim",
   -- event = "VeryLazy",
   opts = function()
-    local icons = {
-      diagnostics = {
-        Error = "E",
-        Warn = "W",
-        Hint = "H",
-        Info = "I",
-      },
-      git = {
-        added = " ",
-        modified = " ",
-        removed = " ",
-      },
-    }
     return {
       options = {
         icons_enabled = true,
@@ -35,10 +23,10 @@ return {
             "filename",
             path = 0,
             symbols = {
-              modified = " ",
-              readonly = " ",
-              unnamed = "[No Name]",
-              newfile = "[New]"
+              modified = icons.symbols.modified,
+              readonly = icons.symbols.readonly,
+              unnamed = icons.symbols.unnamed,
+              newfile = icons.symbols.newfile
             },
           },
           {
@@ -70,11 +58,11 @@ return {
         lualine_y = {
           { "progress", padding = { left = 1, right = 1 } },
           -- function()
-          -- 	return " " .. os.date("%R")
+          -- 	return icons.common.time .. os.date("%R")
           -- end,
         },
         lualine_z = {
-          { "location", padding = { left = 0, right = 1 } },
+          { "location", padding = { left = 1, right = 1 } },
         },
       },
     }

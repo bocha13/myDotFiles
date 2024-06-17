@@ -1,4 +1,5 @@
 local telescope_utils = require("utils").telescope_utils
+local icons = require("utils").icons
 
 return {
   {
@@ -22,8 +23,8 @@ return {
     opts = {
       defaults = {
         layout_config = { prompt_position = "top" },
-        prompt_prefix = " ",
-        selection_caret = " ",
+        prompt_prefix = icons.common.arrow_right,
+        selection_caret = icons.common.arrow_right,
         path_display = { "smart" },
         file_ignore_patterns = { "node_modules" },
         initial_mode = "insert",

@@ -86,14 +86,15 @@ return {
       ["rust_analyzer"] = {
         capabilities = capabilities,
         on_attach = on_attach,
-        -- check = {
-        --   allTargets = false,
-        --   extraArgs = "--target thumbv7em-none-eabihf"
-        -- },
+        check = {
+          allTargets = false,
+        },
         cargo = {
-          allFeatures = true,
+          -- allFeatures = true,
+          allTargets = false,
           loadOutDirsFromCheck = true,
           runBuildScripts = true,
+          target = "thumbv7em-none-eabihf"
         },
         -- Add clippy lints for Rust.
         checkOnSave = {

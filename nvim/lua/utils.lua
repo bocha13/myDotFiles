@@ -95,10 +95,45 @@ local function populate_quickfix_with_diagnostics()
   vim.cmd('copen')
 end
 
+-- all icons used through the entire config
+local icons = {
+  diagnostics = {
+    Error = "E",
+    Warn = "W",
+    Hint = "H",
+    Info = "I",
+  },
+  git = {
+    added = " ",
+    modified = " ",
+    removed = " ",
+  },
+  symbols = {
+    modified = " ",
+    readonly = " ",
+    unnamed = "[No Name]",
+    newfile = "[New]"
+  },
+  todo = {
+    fix = " ",
+    todo = " ",
+    hack = " ",
+    warn = " ",
+    perf = "󰄉 ",
+    note = "󰛨 ",
+    test = "󱑆 ",
+  },
+  common = {
+    time = " ",
+    arrow_right = " "
+  }
+}
+
 M.get_root = get_root
 M.telescope_utils = telescope_utils
 M.has = has
 M.fg = fg
 M.diagnostics_list = populate_quickfix_with_diagnostics
+M.icons = icons
 
 return M
