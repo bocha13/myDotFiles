@@ -23,10 +23,9 @@ return {
     opts = {},
   },
   {
-    "norcalli/nvim-colorizer.lua",
-    event = "BufReadPre",
+    'brenoprata10/nvim-highlight-colors',
     config = function()
-      require("colorizer").setup()
-    end,
-  },
+      require("nvim-highlight-colors").setup({})
+    end
+  }
 }
