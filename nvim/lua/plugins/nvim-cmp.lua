@@ -56,6 +56,9 @@ return {
           { name = "buffer" },
           { name = "path" },
         }),
+        formatting = {
+          format = require("nvim-highlight-colors").format
+        },
       })
     end,
   },
