@@ -10,8 +10,8 @@ map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move selection up" })
 map("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move selection up" })
 
 -- jump 1 page down/up
-map("n", "<C-d", "<C-d>zz")
-map("n", "<C-u", "<C-u>zz")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
 
 -- INFO: use this only when vim-tmux-navigator is not installed
 -- jump to split
@@ -74,7 +74,7 @@ map("n", "Q", "@qj", { desc = "Run macro q" })
 map("x", "Q", ":norm @q<CR>", { desc = "Run macro q in all selected lines" })
 
 -- GOLANG error check snippet
--- map("n", "<leader>hh", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>", { desc = "insert error check for golang" })
+map("n", "<leader>hh", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>", { desc = "insert error check for golang" })
 
 -- VIM-FUGITIVE
 map("n", "<leader>gv", ":Gdiff<CR>", { desc = "Open Git diff" })
@@ -89,4 +89,4 @@ function Toggle_colorscheme()
   print("Colorscheme switched to " .. colorschemes[current_index])
 end
 
-map("n", "<leader>cs", "<cmd>lua Toggle_colorscheme()<CR>", { desc = "Change current colorscheme to catppuccin-latte" })
+map("n", "<leader>cs", "<cmd>lua Toggle_colorscheme()<CR>", { desc = "Change colorscheme mocha/latte" })

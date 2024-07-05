@@ -8,12 +8,10 @@ return {
       { "L3MON4D3/LuaSnip", build = "make install_jsregexp" }, -- snippet engine
       "saadparwaiz1/cmp_luasnip",                              -- for autocompletion
       "rafamadriz/friendly-snippets",                          -- useful snippets
-      -- "onsails/lspkind.nvim",
     },
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
-      -- local lspkind = require("lspkind")
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
       -- load vs-code like snippets from plugins
@@ -26,9 +24,9 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
-        -- formatting = {
-        --   format = lspkind.cmp_format({ with_text = true, maxwidth = 50 }),
-        -- },
+        formatting = {
+          format = require("nvim-highlight-colors").format
+        },
         mapping = cmp.mapping.preset.insert({
           ["<Up>"] = cmp.mapping.select_prev_item(cmp_select),
           ["<Down>"] = cmp.mapping.select_next_item(cmp_select),
@@ -50,15 +48,11 @@ return {
         }),
         -- sources for autocompletion
         sources = cmp.config.sources({
-          -- { name = "codeium" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
         }),
-        formatting = {
-          format = require("nvim-highlight-colors").format
-        },
       })
     end,
   },
