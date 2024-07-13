@@ -52,6 +52,10 @@ map("n", "<C-Right>", ":vertical resize +2<CR>")
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
+-- Navigate between quickfix items
+map("n", "<leader>h", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist" })
+map("n", "<leader>l", "<cmd>cprev<CR>zz", { desc = "Backward qfixlist" })
+
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
 map(
