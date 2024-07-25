@@ -15,10 +15,10 @@ map("n", "<C-u>", "<C-u>zz")
 
 -- INFO: use this only when vim-tmux-navigator is not installed
 -- jump to split
--- map("n", "<c-k>", ":wincmd k<CR>")
--- map("n", "<c-j>", ":wincmd j<CR>")
--- map("n", "<c-h>", ":wincmd h<CR>")
--- map("n", "<c-l>", ":wincmd l<CR>")
+map("n", "<c-k>", ":wincmd k<CR>")
+map("n", "<c-j>", ":wincmd j<CR>")
+map("n", "<c-h>", ":wincmd h<CR>")
+map("n", "<c-l>", ":wincmd l<CR>")
 
 -- use system clipboard
 -- yank
