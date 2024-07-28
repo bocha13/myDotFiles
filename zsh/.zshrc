@@ -50,8 +50,8 @@ export PATH=$PATH:/.local/share/nvim/lsp_servers/rust/rust_analyzer
 
 # nvm export
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
 
 # export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig/"
 
@@ -108,18 +108,18 @@ alias vim='nvim'
 alias dosaml="yarn server do api --useHttps --host auth.learnlight.com --port 8443"
 
 # Tmux
-# attaches tmux to a session
-alias ta='tmux attach -t'
-# creates a new session
-alias tn='tmux new-session -s '
-# kill session
-alias tk='tmux kill-session -t '
-# list all ongoing sessions
-alias tl='tmux list-sessions'
-# detach from session
-alias td='tmux detach'
-# tmux clear pane
-alias tc='clear; tmux clear-history; clear'
+# # attaches tmux to a session
+# alias ta='tmux attach -t'
+# # creates a new session
+# alias tn='tmux new-session -s '
+# # kill session
+# alias tk='tmux kill-session -t '
+# # list all ongoing sessions
+# alias tl='tmux list-sessions'
+# # detach from session
+# alias td='tmux detach'
+# # tmux clear pane
+# alias tc='clear; tmux clear-history; clear'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
