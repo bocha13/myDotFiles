@@ -1,9 +1,11 @@
-# --------- LOADS / IMPORTS ----------
+# ---------------- LOADS / IMPORTS ----------------
 autoload -Uz add-zsh-hook vcs_info
+# git completion
+autoload -Uz compinit && compinit
 zstyle ':vcs_info:*' enable git svn
 
 
-# ---------- FUNCTIONS ----------
+# ---------------- FUNCTIONS ----------------
 # File extraction
 # usage: ex <file>
 function ex(){
@@ -30,7 +32,7 @@ function ex(){
     fi
 }
 
-# ----------- EXPORTS -------------
+# ---------------- EXPORTS ----------------
 # homebrew export
 #export PATH="/opt/homebrew/bin:$PATH"
 
@@ -61,13 +63,11 @@ alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
 # exercism cli
 export PATH=$PATH:/usr/bin/exercism
 
-
-# bun completions
-# [ -s "/home/bocha13/.bun/_bun" ] && source "/home/bocha13/.bun/_bun"
-
-# Bun
+# BUN
 export BUN_INSTALL="/home/bocha13/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+# bun completions
+# [ -s "/home/bocha13/.bun/_bun" ] && source "/home/bocha13/.bun/_bun"
 
 # Android Studio
 export ANDROID_HOME=$HOME/Android/Sdk
@@ -83,7 +83,7 @@ export IDF_PATH=$HOME/esp/esp-idf
 # EMACS
 export PATH=$PATH:$HOME/.config/emacs/bin
 
-# ----------- PROMPT -----------
+# ---------------- PROMPT ----------------
 # Enable checking for (un)staged changes, enabling use of %u and %c
 zstyle ':vcs_info:*' check-for-changes true
 # Set custom strings for an unstaged vcs repo changes (*) and staged changes (+)
@@ -96,7 +96,7 @@ setopt prompt_subst
 add-zsh-hook precmd vcs_info
 PROMPT='[%n:%F{green}%.%f]%F{red}${vcs_info_msg_0_}%f$ '
 
-# ---------- ALIAS ----------
+# ---------------- ALIAS ----------------
 # readlink doesn't work like in linux so we map it
 # to execute greadlink which works the same
 alias readlink=greadlink
@@ -136,5 +136,5 @@ if [[ -z "$TMUX" ]]; then
 fi
 # PATH="$HOME/.local/bin:$PATH"
 
-# PLUGINS
+# ---------------- PLUGINS ----------------
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
