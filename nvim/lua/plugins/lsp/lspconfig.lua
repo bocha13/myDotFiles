@@ -61,28 +61,36 @@ return {
       ["tailwindcss"] = defaultOpts,
       ["gopls"] = defaultOpts,
       ["clangd"] = {
-        -- INFO: you need to install necessary libs to make cpp work
-        -- INFO: sudo apt install libstdc++-12-dev
-        -- INFO: sudo apt install libtinfo-dev
         on_attach = on_attach,
         capabilities = capabilities,
-        cmd = { "clangd" },
+        cmd = { "/usr/bin/clang++-14" },
         filetypes = { "c", "cpp", "objc", "objcpp" },
-        root_dir = function(fname)
-          return lspconfig.util.root_pattern('compile_commands.json', 'compile_flags.txt', '.git')(fname) or
-              lspconfig.util.path.dirname(fname)
-        end,
-        settings = {
-          clangd = {
-            -- Here you can add any specific settings for clangd
-            -- For example:
-            arguments = { "--query-driver= /usr/bin/gcc" },
-          },
-        },
-        flags = {
-          debounce_text_changes = 150,
-        }
+        root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
+        single_file_support = true
       },
+      -- ["clangd"] = {
+      --   -- INFO: you need to install necessary libs to make cpp work
+      --   -- INFO: sudo apt install libstdc++-12-dev
+      --   -- INFO: sudo apt install libtinfo-dev
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   cmd = { "clangd" },
+      --   filetypes = { "c", "cpp", "objc", "objcpp" },
+      --   root_dir = function(fname)
+      --     return lspconfig.util.root_pattern('compile_commands.json', 'compile_flags.txt', '.git')(fname) or
+      --         lspconfig.util.path.dirname(fname)
+      --   end,
+      --   settings = {
+      --     clangd = {
+      --       -- Here you can add any specific settings for clangd
+      --       -- For example:
+      --       arguments = { "--query-driver= /usr/bin/gcc" },
+      --     },
+      --   },
+      --   flags = {
+      --     debounce_text_changes = 150,
+      --   }
+      -- },
       ["rust_analyzer"] = {
         capabilities = capabilities,
         on_attach = on_attach,
