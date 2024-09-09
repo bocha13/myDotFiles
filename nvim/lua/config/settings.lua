@@ -72,3 +72,22 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.lsp.buf.format()
   end,
 })
+
+-- -- Function to highlight the word under the cursor
+-- function HighlightWordUnderCursor()
+--   local word = vim.fn.expand('<cword>')
+--   if word ~= '' then
+--     vim.cmd('match Search /\\<' .. word .. '\\>/')
+--   else
+--     vim.cmd('match none')
+--   end
+-- end
+--
+-- -- Create a new autocommand group
+-- local highlight_group = vim.api.nvim_create_augroup('HighlightWord', { clear = true })
+--
+-- -- Define the autocommand to trigger the function when the cursor moves
+-- vim.api.nvim_create_autocmd('CursorMoved', {
+--   group = highlight_group,
+--   callback = HighlightWordUnderCursor,
+-- })
