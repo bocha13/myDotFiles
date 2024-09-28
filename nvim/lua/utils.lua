@@ -4,10 +4,10 @@ local root_patterns = { ".git", "lua" }
 -- Get the root directory of the current buffer.
 local function get_root()
   local path = vim.api.nvim_buf_get_name(0)
-  path = path ~= "" and vim.loop.fs_realpath(path) or nil
+  path = path ~= "" and vim.fn.resolve(path) or nil
   local roots = {}
   if path then
-    for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+    for _, client in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
       local workspace = client.config.workspace_folders
       local paths = workspace
           and vim.tbl_map(function(ws)
@@ -16,7 +16,7 @@ local function get_root()
           or client.config.root_dir and { client.config.root_dir }
           or {}
       for _, p in ipairs(paths) do
-        local r = vim.loop.fs_realpath(p)
+        local r = vim.fn.resolve(p)
         if path:find(r, 1, true) then
           roots[#roots + 1] = r
         end
@@ -28,9 +28,9 @@ local function get_root()
   end)
   local root = roots[1]
   if not root then
-    path = path and vim.fs.dirname(path) or vim.loop.cwd()
+    path = path and vim.fs.dirname(path) or vim.fn.getcwd()
     root = vim.fs.find(root_patterns, { path = path, upward = true })[1]
-    root = root and vim.fs.dirname(root) or vim.loop.cwd()
+    root = root and vim.fs.dirname(root) or vim.fn.getcwd()
   end
   return root
 end
@@ -69,8 +69,8 @@ end
 ---@return function
 local function fg(name)
   return function()
-    local hl = vim.api.nvim_get_hl_by_name(name, true)
-    return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
+    local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+    return hl and hl.fg and { fg = string.format("#%06x", hl.fg) }
   end
 end
 

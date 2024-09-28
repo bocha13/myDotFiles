@@ -62,7 +62,7 @@ return {
           -- end,
         },
         lualine_z = {
-          { "location", padding = { left = 1, right = 1 } },
+          { "location", padding = { left = 0, right = 1 } },
         },
       },
     }
