@@ -63,7 +63,7 @@ return {
       ["clangd"] = {
         on_attach = on_attach,
         capabilities = capabilities,
-        -- cmd = { "/usr/bin/clang++-13" },
+        -- cmd = { "/usr/bin/clang++-14" },
         filetypes = { "c", "cpp", "objc", "objcpp" },
         root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
         single_file_support = true
