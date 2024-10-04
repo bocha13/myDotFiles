@@ -1,0 +1,8 @@
+general {
+    colors = true
+    interval = 1
+}
+
+order += "disk /"
+order += "volume"
+order += "date"
