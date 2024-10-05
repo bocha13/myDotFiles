@@ -7,7 +7,7 @@ volume=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | head -1)
 
 # Check if muted and show the correct notification
 if [ "$mute_status" == "yes" ]; then
-    dunstify -t 1000 -r 2593 "Volume: Muted"
+    dunstify -t 1000 -r 2593 -u low "Volume: Muted"
 else
-    dunstify -t 1000 -r 2593 "Volume: $volume"
+    dunstify -t 1000 -r 2593 -u low "Volume: $volume"
 fi

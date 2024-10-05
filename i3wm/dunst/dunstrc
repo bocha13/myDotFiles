@@ -6,18 +6,21 @@ foreground = "#f8f8f2"  # Text color for notifications
 # Border color
 frame_color = "#7daea3"  # Border color
 
-[normal]
+[urgency_normal]
 background = "#7495d1"  # Background color for normal notifications
 foreground = "#ffffff"  # Text color for normal notifications
 
-[critical]
+[urgency_critical]
 background = "#ea6962"  # Background color for critical notifications
 foreground = "#ffffff"  # Text color for critical notifications
 
-[low]
+[urgency_low]
 background = "#89b482"  # Background color for low notifications
 foreground = "#282a36"  # Text color for low notifications
 
-[warning]
+[urgency_warning]
 background = "#d8a657"  # Background color for warning notifications
 foreground = "#282a36"  # Text color for warning notifications
+
+# Set a script to run for notifications
+script = ~/.config/dunst/notify-sound.sh

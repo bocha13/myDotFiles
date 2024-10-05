@@ -1,9 +1,11 @@
 # INFO:
 # this config requires some plugins to work properly, you have to install them
-# - i3status
-# - feh
-# - dunst
-# - i3lock-color
+# - i3status (custom status bar)
+# - feh (wallpapers)
+# - dunst  (notifications)
+# - pasystray (volume)
+# - i3lock-color (custom theme for lock screen)
+# - xautolock (to run custom script on screen lock)
 # - PulseAudio ???? not sure
 
 # i3 config file (v4)
@@ -22,7 +24,8 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xautolock -time 10 -locker ~/.config/i3/lock.sh -detectsleep
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -148,6 +151,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # Open Microsoft teams
 bindsym $mod+t exec --no-startup-id gtk-launch brave-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop
 
+# Open Screenshot
+bindsym $mod+Shift+s exec gnome-screenshot -i
+
 # Open file Explorer
 # bindsym $mod+e exec nemo
 
@@ -187,8 +193,8 @@ for_window [class="Nemo"] floating enable, resize set 800 600, move position cen
 assign [class="steam"] 6
 
 # Panel border and colors
-new_window pixel 1
-new_float pixel 1
+new_window normal
+new_float normal
 client.focused #7daea3 #7daea3 #1d2021 #2e9ef4 #7daea3
 client.unfocused #333333 #333333 #ebdbb2 #2e9ef4 #333333
 client.placeholder #333333 #333333 #ebdbb2 #2e9ef4 #333333
@@ -198,7 +204,8 @@ client.urgent #ea6962 #ea6962 #1d2021 #2e9ef4 #ea6962
 # finds out, if available)
 bar {
     status_command i3status
-    padding 2px 10px
+    padding 1px 10px
+    tray_output primary
     tray_padding 5px
     position bottom
     colors {
