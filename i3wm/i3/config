@@ -188,6 +188,7 @@ bindsym $mod+r mode "resize"
 for_window [title="^Calculator"] floating enable
 for_window [title="blueman-manager"] floating enable, resize set 800 600, move position center
 for_window [class="Nemo"] floating enable, resize set 800 600, move position center
+for_window [class="Gnome-calendar"] floating enable, resize set 800 600, move position center
 
 # Open apps in a new workspace
 assign [class="steam"] 6
