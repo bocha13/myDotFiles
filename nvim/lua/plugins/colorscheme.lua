@@ -107,7 +107,8 @@ return {
           all = function(colors)
             return {
               CmpItemMenu = { fg = colors.surface2 },
-              CursorLineNr = { fg = colors.text },
+              CursorLineNr = { fg = colors.text, bg = colors.surface0 },
+              CursorLine = { bg = colors.surface0 },
               FloatBorder = { bg = colors.overlay0, fg = colors.surface2 },
               GitSignsChange = { fg = colors.blue },
               GitsignsAdd = { fg = colors.teal },

@@ -69,32 +69,20 @@ return {
         single_file_support = true
       },
       ["rust_analyzer"] = {
-        capabilities = capabilities,
         on_attach = on_attach,
-        -- cargo = {
-        --   -- allFeatures = true,
-        --   allTargets = false,
-        --   loadOutDirsFromCheck = true,
-        --   runBuildScripts = true,
-        --   target = "thumbv7em-none-eabihf"
-        -- },
-        -- Add clippy lints for Rust.
+        capabilities = capabilities,
         checkOnSave = {
-          allFeatures = true,
           command = "clippy",
+          allFeatures = true,
           extraArgs = { "--no-deps" },
         },
-        -- procMacro = {
-        --   enable = true,
-        --   ignored = {
-        --     leptos_macro = {
-        --       "server",
-        --     },
-        --     async_trait = { "async_trait" },
-        --     napi_derive = { "napi" },
-        --     async_recursion = { "async_recursion" },
-        --   },
-        -- },
+        cargo = {
+          loadOutDirsFromCheck = true,
+          allTargets = false, -- Try setting this to true if needed
+        },
+        procMacro = {
+          enable = true,
+        },
       },
       ["eslint"] = defaultOpts,
       ["jsonls"] = defaultOpts,
