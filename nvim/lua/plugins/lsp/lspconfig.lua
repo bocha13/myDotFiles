@@ -15,6 +15,8 @@ return {
     local on_attach = function(client, bufnr)
       local opts = { noremap = true, silent = true, buffer = bufnr }
 
+      vim.lsp.inlay_hint.enable(true)
+
       keymap.set('n', '<leader>q', diagnostics_list,
         { noremap = true, silent = true })
       keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
@@ -71,18 +73,30 @@ return {
       ["rust_analyzer"] = {
         on_attach = on_attach,
         capabilities = capabilities,
-        checkOnSave = {
-          command = "clippy",
-          allFeatures = true,
-          extraArgs = { "--no-deps" },
-        },
-        cargo = {
-          loadOutDirsFromCheck = true,
-          allTargets = false, -- Try setting this to true if needed
-        },
-        procMacro = {
-          enable = true,
-        },
+        settings = {
+
+          inlayHints = {
+            -- typeHints = true,
+            -- parameterHints = true,
+            -- chainingHints = true,
+            enable = true,
+            showParameterNames = true,
+            parameterHintsPrefix = "<- ",
+            otherHintsPrefix = "=> ",
+          },
+          checkOnSave = {
+            command = "clippy",
+            allFeatures = true,
+            extraArgs = { "--no-deps" },
+          },
+          cargo = {
+            loadOutDirsFromCheck = true,
+            allTargets = false, -- Try setting this to true if needed
+          },
+          procMacro = {
+            enable = true,
+          },
+        }
       },
       ["eslint"] = defaultOpts,
       ["jsonls"] = defaultOpts,
