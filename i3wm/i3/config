@@ -25,7 +25,7 @@ exec --no-startup-id dex --autostart --environment i3
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id xautolock -time 10 -locker ~/.config/i3/lock.sh -detectsleep
+# exec --no-startup-id xautolock -time 10 -locker ~/.config/i3/lock.sh -detectsleep
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -41,7 +41,7 @@ bindsym XF86AudioMute exec "pactl set-sink-mute @DEFAULT_SINK@ toggle && ~/.conf
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec wezterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -196,10 +196,11 @@ assign [class="steam"] 6
 # Panel border and colors
 new_window normal
 new_float normal
-client.focused #7daea3 #7daea3 #1d2021 #2e9ef4 #7daea3
-client.unfocused #333333 #333333 #ebdbb2 #2e9ef4 #333333
-client.placeholder #333333 #333333 #ebdbb2 #2e9ef4 #333333
-client.urgent #ea6962 #ea6962 #1d2021 #2e9ef4 #ea6962
+#                  #border #background #text   #indicator #child
+client.focused     #83a598 #83a598     #1d2021 #83a598    #83a598
+client.unfocused   #404040 #404040     #ebdbb2 #404040    #404040
+client.placeholder #404040 #404040     #ebdbb2 #404040    #404040
+client.urgent      #ea6962 #ea6962     #1d2021 #83a598    #ea6962
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -208,11 +209,12 @@ bar {
     padding 1px 10px
     tray_output primary
     tray_padding 5px
-    position bottom
+    # position bottom
+    position top
     colors {
         background #1d2021
         statusline #ebdbb2
-        focused_workspace  #1d2021 #7daea3
+        focused_workspace  #1d2021 #83a598
         active_workspace   #ebdbb2 #404040
         inactive_workspace #ebdbb2 #404040
         urgent_workspace   #ebdbb2 #ea6962
@@ -223,4 +225,4 @@ bar {
 bindsym $mod+x exec ~/.config/i3/lock.sh
 
 # Display Wallpaper
-exec_always feh --bg-fill ~/Pictures/rails.jpg
+exec_always feh --bg-fill ~/Pictures/lantern.png
