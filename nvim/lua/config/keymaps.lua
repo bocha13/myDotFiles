@@ -80,6 +80,17 @@ map("x", "Q", ":norm @q<CR>", { desc = "Run macro q in all selected lines" })
 -- GOLANG error check snippet
 map("n", "<leader>hh", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>", { desc = "insert error check for golang" })
 
+-- JAVASCRIPT multiline comment
+map("n", "<leader>cc", function()
+  local line = vim.fn.line(".")
+  vim.fn.append(line - 1, "/**")
+  vim.fn.append(line, " * ")
+  vim.fn.append(line + 1, " */")
+  vim.cmd("normal! k")
+  vim.cmd("normal! k")
+  vim.cmd("startinsert!")
+end, { desc = "Insert multiline JS comment", silent = true })
+
 -- VIM-FUGITIVE
 map("n", "<leader>gv", ":Gdiff<CR>", { desc = "Open Git diff" })
 map("n", "<leader>gV", "<c-w>h<c-w>c<CR>", { desc = "Close fugitive buffer" })

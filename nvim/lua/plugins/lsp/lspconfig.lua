@@ -73,30 +73,27 @@ return {
       ["rust_analyzer"] = {
         on_attach = on_attach,
         capabilities = capabilities,
-        settings = {
-
-          inlayHints = {
-            -- typeHints = true,
-            -- parameterHints = true,
-            -- chainingHints = true,
-            enable = true,
-            showParameterNames = true,
-            parameterHintsPrefix = "<- ",
-            otherHintsPrefix = "=> ",
-          },
-          checkOnSave = {
-            command = "clippy",
-            allFeatures = true,
-            extraArgs = { "--no-deps" },
-          },
-          cargo = {
-            loadOutDirsFromCheck = true,
-            allTargets = false, -- Try setting this to true if needed
-          },
-          procMacro = {
-            enable = true,
-          },
-        }
+        inlayHints = {
+          typeHints = true,
+          parameterHints = true,
+          chainingHints = true,
+          enable = true,
+          showParameterNames = true,
+          parameterHintsPrefix = "<- ",
+          otherHintsPrefix = "=> ",
+        },
+        checkOnSave = {
+          command = "clippy",
+          allFeatures = true,
+          extraArgs = { "--no-deps" },
+        },
+        cargo = {
+          loadOutDirsFromCheck = true,
+          allTargets = true, -- Try setting this to true if needed
+        },
+        procMacro = {
+          enable = true,
+        },
       },
       ["eslint"] = defaultOpts,
       ["jsonls"] = defaultOpts,

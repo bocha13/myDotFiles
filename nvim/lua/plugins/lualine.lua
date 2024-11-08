@@ -56,6 +56,20 @@ return {
           },
         },
         lualine_y = {
+          -- {
+          --   'vim.fn["codeium#GetStatusString"]()',
+          --   fmt = function(str)
+          --     if str == " ON" then
+          --       return "{..}"
+          --     elseif str == " OFF" then
+          --       return "{..}"
+          --     elseif str == " * " then
+          --       return ".."
+          --     else
+          --       return str
+          --     end
+          --   end,
+          -- },
           { "progress", padding = { left = 1, right = 1 } },
           -- function()
           -- 	return icons.common.time .. os.date("%R")
