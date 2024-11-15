@@ -24,9 +24,6 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
-        formatting = {
-          format = require("nvim-highlight-colors").format
-        },
         mapping = cmp.mapping.preset.insert({
           ["<Up>"] = cmp.mapping.select_prev_item(cmp_select),
           ["<Down>"] = cmp.mapping.select_next_item(cmp_select),

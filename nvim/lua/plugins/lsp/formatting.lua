@@ -17,7 +17,7 @@ return {
           html = { "prettier" },
           json = { "prettier" },
           yaml = { "prettier" },
-          markdown = { "prettier" },
+          -- markdown = { "prettier" },
           graphql = { "prettier" },
           -- rust = { "rust_analyzer" },
           -- go = { "gopls" },
