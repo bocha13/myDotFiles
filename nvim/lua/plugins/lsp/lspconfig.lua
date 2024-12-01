@@ -30,14 +30,25 @@ return {
       keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
       keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
       keymap.set("n", "<space>cd", vim.diagnostic.open_float, opts)
-
-      -- diable formatting for tsserver so eslint handles it
-      if client.name == "tsserver" then
-        client.server_capabilities.documentFormattingProvider = false
-      else
-        client.server_capabilities.documentFormattingProvider = true
-      end
     end
+
+    -- tsserver setup with formatting disabled
+    lspconfig.ts_ls.setup({
+      on_attach = function(client, _)
+        -- Disable tsserver formatting
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+      end,
+    })
+
+    -- eslint setup with formatting disabled
+    lspconfig.eslint.setup({
+      on_attach = function(client, _)
+        -- Disable eslint formatting
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+      end,
+    })
 
     -- used to enable autocompletion
     local capabilities = cmp_nvim_lsp.default_capabilities()
@@ -65,10 +76,7 @@ return {
       ["clangd"] = {
         on_attach = on_attach,
         capabilities = capabilities,
-        -- cmd = { "/usr/bin/clang++-14" },
-        filetypes = { "c", "cpp", "objc", "objcpp" },
-        root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
-        single_file_support = true
+        cmd = { "clangd", "--clang-tidy", "--completion-style=detailed" }, -- Adjust flags as needed
       },
       ["rust_analyzer"] = {
         on_attach = on_attach,
@@ -114,14 +122,6 @@ return {
           },
         },
       },
-      ["zls"] = {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        cmd = { "zls" },
-        filetypes = { "zig" },
-        -- zig_exe_path = "/usr/bin/zig",
-        -- command = "/home/bocha13/.local/share/nvim/mason/bin/zls"
-      }
     }
 
     for server, config in pairs(serverList) do
