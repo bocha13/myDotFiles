@@ -32,23 +32,6 @@ return {
       keymap.set("n", "<space>cd", vim.diagnostic.open_float, opts)
     end
 
-    -- tsserver setup with formatting disabled
-    lspconfig.ts_ls.setup({
-      on_attach = function(client, _)
-        -- Disable tsserver formatting
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-      end,
-    })
-
-    -- eslint setup with formatting disabled
-    lspconfig.eslint.setup({
-      on_attach = function(client, _)
-        -- Disable eslint formatting
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-      end,
-    })
 
     -- used to enable autocompletion
     local capabilities = cmp_nvim_lsp.default_capabilities()
@@ -127,5 +110,23 @@ return {
     for server, config in pairs(serverList) do
       lspconfig[server].setup(config)
     end
+
+    -- tsserver setup with formatting disabled
+    lspconfig.ts_ls.setup({
+      on_attach = function(client, _)
+        -- Disable tsserver formatting
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+      end,
+    })
+
+    -- eslint setup with formatting disabled
+    lspconfig.eslint.setup({
+      on_attach = function(client, _)
+        -- Disable eslint formatting
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+      end,
+    })
   end,
 }

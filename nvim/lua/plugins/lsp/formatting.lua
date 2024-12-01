@@ -2,8 +2,8 @@ return {
   {
     "stevearc/conform.nvim",
     dependencies = { "mason.nvim" },
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    -- lazy = true,
+    -- event = { "BufReadPre", "BufNewFile" },
     config = function()
       local conform = require("conform")
 
@@ -22,16 +22,7 @@ return {
         },
         format_on_save = {
           lsp_fallback = true,
-          -- quiet = false,
-          -- async = false,
-          -- timeout_ms = 1000,
         },
-        -- format = {
-        --   timeout_ms = 3000,
-        --   async = false,
-        --   quiet = false,
-        --   lsp_fallback = true,
-        -- },
       })
     end,
   },

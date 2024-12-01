@@ -66,12 +66,20 @@ vim.opt.diffopt = "vertical"
 
 vim.g.mapleader = " "
 
--- Format on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-  callback = function()
-    vim.lsp.buf.format()
-  end,
-})
+-- Format on save only use one of these
+-- NATIVE
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   callback = function()
+--     vim.lsp.buf.format()
+--   end,
+-- })
+-- CONFORM
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   pattern = "*",
+--   callback = function(args)
+--     require("conform").format({ bufnr = args.buf })
+--   end,
+-- })
 
 -- -- Function to highlight the word under the cursor
 -- function HighlightWordUnderCursor()
