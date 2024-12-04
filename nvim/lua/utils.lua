@@ -2,7 +2,7 @@ local M = {}
 local root_patterns = { ".git", "lua" }
 
 -- Get the root directory of the current buffer.
-local function get_root()
+function M.get_root()
   local path = vim.api.nvim_buf_get_name(0)
   path = path ~= "" and vim.fn.resolve(path) or nil
   local roots = {}
@@ -39,12 +39,12 @@ end
 ---@param builtin any
 ---@param opts any
 ---@return function
-local function telescope_utils(builtin, opts)
+function M.telescope_utils(builtin, opts)
   local params = { builtin = builtin, opts = opts }
   return function()
     builtin = params.builtin
     opts = params.opts
-    opts = vim.tbl_deep_extend("force", { cwd = get_root() }, opts or {})
+    opts = vim.tbl_deep_extend("force", { cwd = M.get_root() }, opts or {})
     -- if builtin == "files" then
     --   if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
     --     opts.show_untracked = true
@@ -60,14 +60,14 @@ end
 -- Check if a plugin is installed.
 ---@param plugin any
 ---@return boolean
-local function has(plugin)
+function M.has(plugin)
   return require("lazy.core.config").spec.plugins[plugin] ~= nil
 end
 
 -- Get the foreground color of a highlight group.
 ---@param name any
 ---@return function
-local function fg(name)
+function M.fg(name)
   return function()
     local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
     return hl and hl.fg and { fg = string.format("#%06x", hl.fg) }
@@ -76,7 +76,7 @@ end
 
 -- Function to populate quickfix list with diagnostics of current file
 ---@return nil
-local function populate_quickfix_with_diagnostics()
+function M.diagnostics_list()
   local diagnostics = vim.diagnostic.get()
   local qflist = {}
   for _, diag in ipairs(diagnostics) do
@@ -96,7 +96,7 @@ local function populate_quickfix_with_diagnostics()
 end
 
 -- all icons used through the entire config
-local icons = {
+M.icons = {
   diagnostics = {
     Error = "E",
     Warn = "W",
@@ -128,12 +128,5 @@ local icons = {
     arrow_right = " "
   }
 }
-
-M.get_root = get_root
-M.telescope_utils = telescope_utils
-M.has = has
-M.fg = fg
-M.diagnostics_list = populate_quickfix_with_diagnostics
-M.icons = icons
 
 return M

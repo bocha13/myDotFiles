@@ -30,6 +30,11 @@ return {
       keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
       keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
       keymap.set("n", "<space>cd", vim.diagnostic.open_float, opts)
+
+      if (client.name == "eslint" or client.name == "ts_ls") then
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+      end
     end
 
 
@@ -110,23 +115,5 @@ return {
     for server, config in pairs(serverList) do
       lspconfig[server].setup(config)
     end
-
-    -- tsserver setup with formatting disabled
-    lspconfig.ts_ls.setup({
-      on_attach = function(client, _)
-        -- Disable tsserver formatting
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-      end,
-    })
-
-    -- eslint setup with formatting disabled
-    lspconfig.eslint.setup({
-      on_attach = function(client, _)
-        -- Disable eslint formatting
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-      end,
-    })
   end,
 }
