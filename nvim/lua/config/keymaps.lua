@@ -91,10 +91,6 @@ map("n", "<leader>cc", function()
   vim.cmd("startinsert!")
 end, { desc = "Insert multiline JS comment", silent = true })
 
--- VIM-FUGITIVE
-map("n", "<leader>gv", ":Gdiff<CR>", { desc = "Open Git diff" })
-map("n", "<leader>gV", "<c-w>h<c-w>c<CR>", { desc = "Close fugitive buffer" })
-
 -- CHANGE COLORSCHEME
 local colorschemes = { "catppuccin-mocha", "catppuccin-latte" }
 local current_index = 1

@@ -75,19 +75,23 @@ return {
   {
     "tpope/vim-fugitive",
     event = "BufWinEnter",
-  },
-  {
-    "akinsho/git-conflict.nvim",
-    version = "*",
     config = function()
-      vim.cmd([[highlight NewIncoming guibg=#344f69]])
-      vim.cmd([[highlight NewCurrent guibg=#2e5049]])
-      require("git-conflict").setup({
-        highlights = {
-          incoming = "NewIncoming",
-          current = "NewCurrent",
-        },
-      })
-    end,
+      vim.keymap.set("n", "<leader>gv", ":Gdiffsplit!<CR>", { desc = "Open Git diff" })
+      vim.keymap.set("n", "<leader>gV", "<c-w>h<c-w>c<CR>", { desc = "Close fugitive buffer" })
+    end
   },
+  -- {
+  --   "akinsho/git-conflict.nvim",
+  --   version = "*",
+  --   config = function()
+  --     vim.cmd([[highlight NewIncoming guibg=#344f69]])
+  --     vim.cmd([[highlight NewCurrent guibg=#2e5049]])
+  --     require("git-conflict").setup({
+  --       highlights = {
+  --         incoming = "NewIncoming",
+  --         current = "NewCurrent",
+  --       },
+  --     })
+  --   end,
+  -- },
 }

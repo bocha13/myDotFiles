@@ -11,13 +11,14 @@ return {
     version = false,
     keys = {
       -- find
-      { "<leader>fb", "<cmd>Telescope buffers<cr>",  desc = "Buffers" },
-      { "<leader>ff", telescope_utils("find_files"), desc = "Find Files (root dir)" },
-      { "<leader>fg", telescope_utils("git_files"),  desc = "Find Files (repo)" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>",   desc = "Buffers" },
+      { "<leader>ff", telescope_utils("find_files"),  desc = "Find Files (root dir)" },
+      { "<leader>fg", telescope_utils("git_files"),   desc = "Find Files (repo)" },
       -- search
-      { "<leader>sg", telescope_utils("live_grep"),  desc = "Grep (root dir)" },
+      { "<leader>sg", telescope_utils("live_grep"),   desc = "Grep (root dir)" },
       -- git
-      { "<leader>gs", telescope_utils("git_status"), desc = "Git status" },
+      { "<leader>gs", telescope_utils("git_status"),  desc = "Git status in a fuzzy searcher" },
+      { "<leader>gc", telescope_utils("git_commits"), desc = "Git log" },
     },
     opts = {
       defaults = {

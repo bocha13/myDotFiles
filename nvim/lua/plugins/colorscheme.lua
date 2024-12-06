@@ -67,8 +67,6 @@ return {
           hop = true,
           illuminate = { enabled = true },
           native_lsp = { enabled = true, inlay_hints = { background = true } },
-          neogit = true,
-          neotree = true,
           semantic_tokens = true,
           treesitter = true,
           treesitter_context = true,
@@ -81,6 +79,27 @@ return {
               CmpItemMenu = { fg = colors.surface2 },
               CursorLineNr = { fg = colors.text, bg = colors.surface0 },
               CursorLine = { bg = colors.surface0 },
+
+              -- FUGITIVE
+              -- LOCAL
+              DiffAdd = { bg = "#1E2326", fg = colors.text },
+              DiffDelete = { bg = colors.red, fg = colors.text },
+              DiffChange = { bg = colors.blue, fg = colors.text },
+              DiffText = { bg = "#3B3B2A", fg = colors.text },
+              -- BASE
+              Diffbase = { bg = colors.yellow, fg = colors.text },
+              DiffbaseAdd = { bg = colors.sky, fg = colors.text },
+              DiffbaseDelete = { bg = colors.red, fg = colors.text },
+              DiffbaseChange = { bg = colors.blue, fg = colors.text },
+              DiffbaseText = { bg = colors.pink, fg = colors.text },
+              -- REMOTE
+              DiffRemoved = { bg = colors.red, fg = colors.text },
+              DiffAdded = { bg = colors.sky, fg = colors.text },
+              --SPECIAL REGIONS
+              ConflictMarkers = { bg = "#232A2E", fg = colors.text },
+              DiffFile = { bg = "#232A2E", fg = colors.text },
+              DiffLine = { bg = "#232A2E", fg = colors.text },
+
               FloatBorder = { bg = colors.overlay0, fg = colors.surface2 },
               GitSignsChange = { fg = colors.blue },
               GitsignsAdd = { fg = colors.teal },
