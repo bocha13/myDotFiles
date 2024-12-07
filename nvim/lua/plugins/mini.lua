@@ -1,73 +1,32 @@
 return {
-  { "echasnovski/mini.nvim", version = false },
-  -- buffer remove
   {
-    "echasnovski/mini.bufremove",
-    keys = {
-      {
-        "<leader>bd",
-        function()
-          require("mini.bufremove").delete(0, false)
-        end,
-        desc = "Delete Buffer",
-      },
-      {
-        "<leader>bD",
-        function()
-          require("mini.bufremove").delete(0, true)
-        end,
-        desc = "Delete Buffer (Force)",
-      },
-    },
-  },
-  -- surround
-  {
-    "echasnovski/mini.surround",
-    opts = {
-      mappings = {
-        add = "gza",            -- Add surrounding in Normal and Visual modes
-        delete = "gzd",         -- Delete surrounding
-        find = "gzf",           -- Find surrounding (to the right)
-        find_left = "gzF",      -- Find surrounding (to the left)
-        highlight = "gzh",      -- Highlight surrounding
-        replace = "gzr",        -- Replace surrounding
-        update_n_lines = "gzn", -- Update `n_lines`
-      },
-    },
-  },
-  {
-    "echasnovski/mini.indentscope",
-    version = false, -- wait till new 0.7.0 release to put it back on semver
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      symbol = "│",
-      options = { try_as_border = true },
-    },
-    init = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = {
-          "help",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "lazy",
-          "mason",
-          "notify",
-          "toggleterm",
-          "lazyterm",
-        },
-        callback = function()
-          vim.b.miniindentscope_disable = true
-        end,
-      })
-    end,
-  },
-  {
-    'echasnovski/mini.pairs',
-    version = '*',
+    "echasnovski/mini.nvim",
+    version = false,
     config = function()
-      require("mini.pairs").setup({})
+      local bufremove = require("mini.bufremove")
+      local surround = require("mini.surround")
+      local indentscope = require("mini.indentscope")
+      local pairs = require("mini.pairs")
+      pairs.setup({})
+      bufremove.setup({})
+      surround.setup({
+        mappings = {
+          add = "gza",            -- Add surrounding in Normal and Visual modes
+          delete = "gzd",         -- Delete surrounding
+          find = "gzf",           -- Find surrounding (to the right)
+          find_left = "gzF",      -- Find surrounding (to the left)
+          highlight = "gzh",      -- Highlight surrounding
+          replace = "gzr",        -- Replace surrounding
+          update_n_lines = "gzn", -- Update `n_lines`
+        },
+      })
+      indentscope.setup({
+        symbol = "│",
+        options = { try_as_border = true },
+      })
+
+      vim.api.nvim_set_keymap('n', '<leader>bd', ":lua require'mini.bufremove'.delete(0)<CR>",
+        { noremap = true, silent = true })
     end
   },
 }
