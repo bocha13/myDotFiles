@@ -66,31 +66,6 @@ return {
         capabilities = capabilities,
         cmd = { "clangd", "--clang-tidy", "--completion-style=detailed" }, -- Adjust flags as needed
       },
-      ["rust_analyzer"] = {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        inlayHints = {
-          typeHints = true,
-          parameterHints = true,
-          chainingHints = true,
-          enable = true,
-          showParameterNames = true,
-          parameterHintsPrefix = "<- ",
-          otherHintsPrefix = "=> ",
-        },
-        checkOnSave = {
-          command = "clippy",
-          allFeatures = true,
-          extraArgs = { "--no-deps" },
-        },
-        cargo = {
-          loadOutDirsFromCheck = true,
-          allTargets = true, -- Try setting this to true if needed
-        },
-        procMacro = {
-          enable = true,
-        },
-      },
       ["eslint"] = defaultOpts,
       ["jsonls"] = defaultOpts,
       ["lua_ls"] = {

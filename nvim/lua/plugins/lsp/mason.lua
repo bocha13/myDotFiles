@@ -21,7 +21,6 @@ return {
       ensure_installed = {
         "astro",
         "ts_ls",
-        "rust_analyzer",
         "lua_ls",
         "html",
         "cssls",
