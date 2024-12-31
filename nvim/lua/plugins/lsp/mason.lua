@@ -20,16 +20,16 @@ return {
     mason_lspconfig.setup({
       ensure_installed = {
         "astro",
-        "ts_ls",
-        "lua_ls",
-        "html",
         "cssls",
         "clangd",
-        "jsonls",
-        "tailwindcss",
-        "graphql",
         "eslint",
+        "graphql",
         "gopls",
+        "jsonls",
+        "lua_ls",
+        "tailwindcss",
+        "ts_ls",
+        "html",
       },
       automatic_installation = true,
     })

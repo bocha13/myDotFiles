@@ -1,12 +1,26 @@
 return {
   -- {
-  --   "supermaven-inc/supermaven-nvim",
-  --   config = function()
-  --     require("supermaven-nvim").setup({
-  --       -- everything is disabled to use nvim-cmp
-  --       disable_inline_completion = true,
-  --       disable_keymaps = true,
-  --     })
-  --   end,
-  -- },
+  --   "yetone/avante.nvim",
+  --   event = "VeryLazy",
+  --   lazy = false,
+  --   version = false, -- set this if you want to always pull the latest change
+  --   opts = {
+  --     -- add any opts here
+  --     provider = "copilot",
+  --     windows = {
+  --       width = 50
+  --     },
+  --     hints = {
+  --       -- disable inline keymaps hints on selected text
+  --       enabled = false
+  --     }
+  --   },
+  --   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+  --   build = "make",
+  --   dependencies = {
+  --     "stevearc/dressing.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "MunifTanjim/nui.nvim",
+  --   },
+  -- }
 }
