@@ -1,5 +1,22 @@
+# general
 theme = gruvbox-material
+cursor-style = block
+cursor-style-blink = false
+focus-follows-mouse = true
+window-padding-x = 0,0
+# window-padding-y = 0,0
+window-padding-balance = true
 
+# render
+adjust-cell-height = -1
+adjust-cell-width = -1
+
+# disable font ligatures
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+
+# KEYBINDS
 # split
 keybind = ctrl+shift+v=new_split:right
 keybind = ctrl+shift+s=new_split:down
@@ -7,9 +24,7 @@ keybind = ctrl+shift+l=goto_split:right
 keybind = ctrl+shift+h=goto_split:left
 keybind = ctrl+shift+j=goto_split:bottom
 keybind = ctrl+shift+k=goto_split:top
-
 # tabs
-keybind = ctrl+shift+t=new_tab
+# keybind = ctrl+shift+t=new_tab
 keybind = ctrl+shift+b=previous_tab
 keybind = ctrl+shift+n=next_tab
-
