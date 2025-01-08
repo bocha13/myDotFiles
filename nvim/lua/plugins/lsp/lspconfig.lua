@@ -61,11 +61,12 @@ return {
       ["ts_ls"] = defaultOpts,
       ["tailwindcss"] = defaultOpts,
       ["gopls"] = defaultOpts,
-      ["clangd"] = {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        cmd = { "clangd", "--clang-tidy", "--completion-style=detailed" }, -- Adjust flags as needed
-      },
+      ["clangd"] = defaultOpts,
+      -- ["clangd"] = {
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   cmd = { "clangd", "--query-driver=/usr/bin/arm-none-eabi-*", "--compile-commands-dir=build" }, -- Adjust flags as needed
+      -- },
       ["eslint"] = defaultOpts,
       ["jsonls"] = defaultOpts,
       ["lua_ls"] = {
@@ -85,6 +86,7 @@ return {
           },
         },
       },
+      ["zls"] = defaultOpts
     }
 
     for server, config in pairs(serverList) do
