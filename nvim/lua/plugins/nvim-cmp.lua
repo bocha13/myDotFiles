@@ -50,6 +50,25 @@ return {
           { name = "buffer" },
           { name = "path" },
         }),
+        formatting = {
+          format = function(entry, vim_item)
+            -- Add source name to completion menu
+            -- vim_item.menu = ({
+            --   nvim_lsp = "[LSP]",
+            --   luasnip = "[Snippet]",
+            --   buffer = "[Buffer]",
+            --   path = "[Path]",
+            -- })[entry.source.name]
+            -- Remove duplicates by prioritizing sources
+            vim_item.dup = ({
+              nvim_lsp = 0,
+              luasnip = 1,
+              buffer = 1,
+              path = 1,
+            })[entry.source.name] or 0
+            return vim_item
+          end,
+        },
       })
     end,
   },
