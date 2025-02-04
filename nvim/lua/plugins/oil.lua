@@ -1,6 +1,15 @@
 return {
   "stevearc/oil.nvim",
   opts = {},
+  keys = {
+    {
+      "<leader>e",
+      function()
+        require("oil").open()
+      end,
+      desc = "Open parent directory"
+    }
+  },
   config = function()
     require("oil").setup({
       default_file_explorer = true,
@@ -10,6 +19,6 @@ return {
       },
     })
 
-    vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+    -- vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
   end
 }

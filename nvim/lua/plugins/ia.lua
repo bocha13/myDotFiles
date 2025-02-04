@@ -5,7 +5,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    cmd = "CodeCompanionChat",
+    cmd = { "CodeCompanionChat", "CodeCompanionActions" },
     config = function()
       require('codecompanion').setup({
         openai = function()
