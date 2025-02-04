@@ -1,26 +1,22 @@
 return {
-  -- {
-  --   "yetone/avante.nvim",
-  --   event = "VeryLazy",
-  --   lazy = false,
-  --   version = false, -- set this if you want to always pull the latest change
-  --   opts = {
-  --     -- add any opts here
-  --     provider = "copilot",
-  --     windows = {
-  --       width = 50
-  --     },
-  --     hints = {
-  --       -- disable inline keymaps hints on selected text
-  --       enabled = false
-  --     }
-  --   },
-  --   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-  --   build = "make",
-  --   dependencies = {
-  --     "stevearc/dressing.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --     "MunifTanjim/nui.nvim",
-  --   },
-  -- }
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    cmd = "CodeCompanionChat",
+    config = function()
+      require('codecompanion').setup({
+        openai = function()
+          return require("codecompanion.adapters").extend("openai", {
+            env = {
+              api_key = ""
+            }
+          })
+        end
+      })
+    end
+
+  },
 }

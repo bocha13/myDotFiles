@@ -27,6 +27,7 @@ return {
 
       vim.api.nvim_set_keymap('n', '<leader>bd', ":lua require'mini.bufremove'.delete(0)<CR>",
         { noremap = true, silent = true })
+      -- vim.api.nvim_set_keymap("n", "<leader>e", ":lua MiniFiles.open()<CR>", { noremap = true, silent = true })
     end
   },
 }

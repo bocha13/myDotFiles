@@ -30,7 +30,6 @@ return {
         "tailwindcss",
         "ts_ls",
         "html",
-        "zls"
       },
       automatic_installation = true,
     })
