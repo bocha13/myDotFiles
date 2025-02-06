@@ -7,11 +7,12 @@ return {
     },
     cmd = { "CodeCompanionChat", "CodeCompanionActions" },
     config = function()
+      local api_key = os.getenv("CODECOMPANION_API_KEY")
       require('codecompanion').setup({
-        openai = function()
-          return require("codecompanion.adapters").extend("openai", {
+        deepseek = function()
+          return require("codecompanion.adapters").extend("deepseek", {
             env = {
-              api_key = ""
+              api_key = api_key
             }
           })
         end
