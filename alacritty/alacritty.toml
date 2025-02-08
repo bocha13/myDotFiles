@@ -25,8 +25,6 @@ yellow = "#d79921"
 background = "#1d2021"
 foreground = "#ebdbb2"
 
-[font]
-size = 12
 
 [font.normal]
 family = "JetBrainsMonoNL Nerd Font"
