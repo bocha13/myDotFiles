@@ -59,6 +59,7 @@ return {
       ensure_installed = {
         "astro",
         "html",
+        "rust_analyzer",
         "cssls",
         "graphql",
         "ts_ls",
