@@ -40,12 +40,29 @@ return {
       end
     end
 
+    vim.diagnostic.config({
+      -- Enable virtual text
+      virtual_text = {
+        source = "if_many",
+        prefix = "■",
+        spacing = 4,
+      },
+      -- Other diagnostic options...
+      update_in_insert = false,
+      underline = true,
+      severity_sort = true,
+    })
+
     -- used to enable autocompletion
     local capabilities = cmp_nvim_lsp.default_capabilities()
     local signs = { Error = "E", Warn = "W", Hint = "H", Info = "I" }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+      vim.diagnostic.config({
+        signs = {
+          { name = hl, text = icon, texthl = hl } -- numhl is not needed in the new API
+        },
+      })
     end
 
     -- default config for all servers
@@ -63,7 +80,7 @@ return {
         "cssls",
         "graphql",
         "ts_ls",
-        "tailwindcss",
+        -- "tailwindcss",
         "gopls",
         "clangd",
         "eslint",
