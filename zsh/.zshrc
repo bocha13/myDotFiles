@@ -124,17 +124,19 @@ alias dosaml="yarn server do api --useHttps --host auth.learnlight.com --port 84
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Start Tmux if not already running
-if [[ -z "$TMUX" ]]; then
-    # Check for detached sessions
-    if [[ $(tmux list-sessions 2>/dev/null) ]]; then
-        # Open the first detached session
-        tmux attach-session -t $(tmux list-sessions -F "#S" 2>/dev/null | head -n 1)
-    else
-        # No detached sessions, start a new Tmux session
-        tmux new-session
-    fi
-fi
+# if [[ -z "$TMUX" ]]; then
+#     # Check for detached sessions
+#     if [[ $(tmux list-sessions 2>/dev/null) ]]; then
+#         # Open the first detached session
+#         tmux attach-session -t $(tmux list-sessions -F "#S" 2>/dev/null | head -n 1)
+#     else
+#         # No detached sessions, start a new Tmux session
+#         tmux new-session
+#     fi
+# fi
 # PATH="$HOME/.local/bin:$PATH"
 
 # ---------------- PLUGINS ----------------
+# install the plugin first:
+# git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
