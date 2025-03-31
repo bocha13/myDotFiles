@@ -1,12 +1,18 @@
+@define-color basebg #1d2021; /* Background color */
+@define-color active #7daea3; /* Default text color */
+@define-color hover #89b482;
+@define-color urgent #ea6962;
+@define-color textfg #ebdbb2;
+
 window#waybar {
-    background-color: #2e3440;  /* Background color */
-    color: #d8dee9;            /* Default text color */
-    border: none;              /* Remove borders if present */
-    font-family: "Fira Code", "Font Awesome", sans-serif; /* Optional font */
-    font-size: 12px;           /* Base font size */
+    background-color: @basebg;     
+    color: @textfg;
+    border: none;
+    font-family: "JetBrains Mono", "Font Awesome", sans-serif;
+    font-size: 12px;
 }
 
-/* Optional: Make all modules inherit colors */
+/* Make all modules inherit colors */
 #workspaces, #window, #tray, #clock, #pulseaudio, #network {
     background-color: inherit;
     color: inherit;
@@ -23,22 +29,22 @@ window#waybar {
 }
 
 #workspaces button {
-    color: #d8dee9; /* Text color */
-    background-color: #3b4252; /* Button background */
+    color: @textfg; /* Text color */
+    background-color: @basebg; /* Button background */
     border-radius: 4px;
     margin: 0 2px;
     padding: 0 8px;
 }
 
 #workspaces button.active {
-    background-color: #81a1c1; /* Active workspace highlight */
-    color: #2e3440; /* Text color for active workspace */
+    background-color: @active; /* Active workspace highlight */
+    color: @basebg; /* Text color for active workspace */
 }
 
 #workspaces button.urgent {
-    background-color: #bf616a; /* Urgent workspace (red) */
+    background-color: @urgent; /* Urgent workspace (red) */
 }
 
 #workspaces button:hover {
-    background-color: #4c566a; /* Hover effect */
+    background-color: @hover; /* Hover effect */
 }
