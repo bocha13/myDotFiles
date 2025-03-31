@@ -1,0 +1,44 @@
+window#waybar {
+    background-color: #2e3440;  /* Background color */
+    color: #d8dee9;            /* Default text color */
+    border: none;              /* Remove borders if present */
+    font-family: "Fira Code", "Font Awesome", sans-serif; /* Optional font */
+    font-size: 12px;           /* Base font size */
+}
+
+/* Optional: Make all modules inherit colors */
+#workspaces, #window, #tray, #clock, #pulseaudio, #network {
+    background-color: inherit;
+    color: inherit;
+    padding: 0 10px;           /* Add some spacing */
+    margin: 2px 4px;           /* Small margins */
+    border-radius: 5px;         /* Rounded corners */
+}
+
+/* Workspaces Module Styling */
+#workspaces {
+    background-color: transparent; /* or your preferred color */
+    padding: 0 5px;
+    margin: 2px 0;
+}
+
+#workspaces button {
+    color: #d8dee9; /* Text color */
+    background-color: #3b4252; /* Button background */
+    border-radius: 4px;
+    margin: 0 2px;
+    padding: 0 8px;
+}
+
+#workspaces button.active {
+    background-color: #81a1c1; /* Active workspace highlight */
+    color: #2e3440; /* Text color for active workspace */
+}
+
+#workspaces button.urgent {
+    background-color: #bf616a; /* Urgent workspace (red) */
+}
+
+#workspaces button:hover {
+    background-color: #4c566a; /* Hover effect */
+}
