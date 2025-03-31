@@ -35,7 +35,7 @@
          "disable-scroll": true,
          "all-outputs": true,
          "warp-on-scroll": false,
-         "format": "{name}: {icon}",
+         "format": "{name}",
          "format-icons": {
              "urgent": "",
              "active": "",
