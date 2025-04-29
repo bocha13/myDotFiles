@@ -51,6 +51,7 @@ return {
     ensure_installed = {
       "astro",
       "bash",
+      "go",
       "html",
       "javascript",
       "json",
@@ -60,7 +61,6 @@ return {
       "query",
       "regex",
       "tsx",
-      "rust",
       "typescript",
       "yaml",
     },

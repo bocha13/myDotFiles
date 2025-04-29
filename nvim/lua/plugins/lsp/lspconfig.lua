@@ -76,11 +76,10 @@ return {
       ensure_installed = {
         "astro",
         "html",
-        "rust_analyzer",
         "cssls",
         "graphql",
+        "tailwindcss",
         "ts_ls",
-        -- "tailwindcss",
         "gopls",
         "clangd",
         "eslint",
@@ -93,6 +92,19 @@ return {
     mason_lspconfig.setup_handlers({
       function(server_name)
         lspconfig[server_name].setup(defaultOpts)
+      end,
+      ["cssls"] = function()
+        lspconfig.cssls.setup({
+          settings = {
+            css = {
+              validate = true,
+              lint = {
+                unknownAtRules = "ignore"
+              },
+              modules = true -- Enable CSS modules
+            }
+          }
+        })
       end,
       ["lua_ls"] = function()
         lspconfig.lua_ls.setup(vim.tbl_deep_extend("force", defaultOpts, {
