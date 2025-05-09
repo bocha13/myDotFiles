@@ -5,8 +5,8 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     'saghen/blink.cmp',
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
+    "mason-org/mason-lspconfig.nvim",
   },
   config = function()
     local lspconfig = require("lspconfig")
@@ -24,7 +24,7 @@ return {
       keymap.set('n', '<leader>q', diagnostics_list, { noremap = true, silent = true })
       keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
       keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-      keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+      keymap.set("n", "gd", vim.lsp.buf.definition, opts)
       keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
       keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
       keymap.set("n", "gr", vim.lsp.buf.references, opts)
@@ -65,11 +65,6 @@ return {
       })
     end
 
-    -- default config for all servers
-    local defaultOpts = {
-      capabilities = capabilities,
-      on_attach = on_attach,
-    }
 
     mason.setup()
     mason_lspconfig.setup({
@@ -86,15 +81,15 @@ return {
         "jsonls",
         "lua_ls",
       },
+      automatic_enable = false
     })
 
-    -- Automatically setup lsp in mason config
-    mason_lspconfig.setup_handlers({
-      function(server_name)
-        lspconfig[server_name].setup(defaultOpts)
-      end,
-      ["cssls"] = function()
-        lspconfig.cssls.setup({
+    -- attach config to each lsp
+    for _, server_name in pairs(mason_lspconfig.get_installed_servers()) do
+      if server_name == "cssls" then
+        lspconfig[server_name].setup({
+          on_attach = on_attach,
+          capabilities = capabilities,
           settings = {
             css = {
               validate = true,
@@ -105,24 +100,28 @@ return {
             }
           }
         })
-      end,
-      ["lua_ls"] = function()
-        lspconfig.lua_ls.setup(vim.tbl_deep_extend("force", defaultOpts, {
+      elseif server_name == "lua_ls" then
+        lspconfig[server_name].setup({
+          on_attach = on_attach,
+          capabilities = capabilities,
           settings = {
-            Lua = {
-              diagnostics = {
-                globals = { "vim", "general" },
-              },
-              workspace = {
-                library = {
-                  [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                  [vim.fn.stdpath("config") .. "/lua"] = true,
-                },
+            diagnostics = {
+              globals = { "vim", "general" },
+            },
+            workspace = {
+              library = {
+                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                [vim.fn.stdpath("config") .. "/lua"] = true,
               },
             },
           },
-        }))
-      end,
-    })
+        })
+      else
+        lspconfig[server_name].setup({
+          on_attach = on_attach,
+          capabilities = capabilities,
+        })
+      end
+    end
   end,
 }

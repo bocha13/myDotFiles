@@ -29,6 +29,8 @@ return {
               newfile = icons.symbols.newfile
             },
           },
+        },
+        lualine_x = {
           {
             "diagnostics",
             symbols = {
@@ -38,9 +40,6 @@ return {
               hint = icons.diagnostics.Hint,
             },
           },
-        },
-        lualine_x = {
-          -- { "filetype", padding = { left = 1, right = 1 } },
           {
             require("lazy.status").updates,
             cond = require("lazy.status").has_updates,
