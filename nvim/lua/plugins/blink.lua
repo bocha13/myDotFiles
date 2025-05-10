@@ -20,6 +20,7 @@ return {
       keymap = { preset = 'enter' },
 
       appearance = {
+        use_nvim_cmp_as_default = false,
         nerd_font_variant = 'mono'
       },
       completion = {
@@ -28,6 +29,7 @@ return {
         menu = {
           -- nvim-cmp style menu
           draw = {
+            treesitter = { "lsp" },
             columns = {
               { "label",     "label_description", gap = 1 },
               { "kind_icon", "kind" }
@@ -37,7 +39,7 @@ return {
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lsp', 'buffer', 'snippets', 'path' },
       },
       fuzzy = { implementation = "prefer_rust_with_warning" }
     },
