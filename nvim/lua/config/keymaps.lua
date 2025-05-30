@@ -51,6 +51,34 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsea
 -- Navigate between quickfix items
 map("n", "<leader>h", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist" })
 map("n", "<leader>l", "<cmd>cprev<CR>zz", { desc = "Backward qfixlist" })
+-- GIT merge conflict files to quickfix list
+map('n', '<leader>mc', '', {
+  noremap = true,
+  callback = function()
+    -- Run git command to find files with merge conflicts
+    local handle = io.popen('git diff --name-only --diff-filter=U 2>/dev/null')
+    if handle then
+      local files = {}
+      for file in handle:lines() do
+        table.insert(files, {
+          filename = file,
+          text = 'Merge conflict',
+        })
+      end
+      handle:close()
+
+      if #files > 0 then
+        vim.fn.setqflist(files)
+        vim.cmd('copen') -- Open the quickfix window
+      else
+        vim.notify('No files with merge conflicts found', vim.log.levels.INFO)
+      end
+    else
+      vim.notify('Failed to check for merge conflicts - not a git repository?', vim.log.levels.ERROR)
+    end
+  end,
+  desc = 'Show files with merge conflicts in quickfix',
+})
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua

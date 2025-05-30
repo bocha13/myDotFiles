@@ -84,13 +84,13 @@ return {
     "akinsho/git-conflict.nvim",
     version = "*",
     config = function()
-      vim.cmd([[highlight NewIncoming guibg=#344f69]])
-      vim.cmd([[highlight NewCurrent guibg=#2e5049]])
+      -- vim.cmd([[highlight NewIncoming guibg=#344f69]])
+      -- vim.cmd([[highlight NewCurrent guibg=#2e5049]])
       require("git-conflict").setup({
-        highlights = {
-          incoming = "NewIncoming",
-          current = "NewCurrent",
-        },
+        -- highlights = {
+        --   incoming = "NewIncoming",
+        --   current = "NewCurrent",
+        -- },
       })
     end,
   },

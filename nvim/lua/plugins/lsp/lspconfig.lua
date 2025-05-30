@@ -4,15 +4,19 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    'saghen/blink.cmp',
+    -- 'saghen/blink.cmp',
+    "hrsh7th/cmp-nvim-lsp",
     "mason-org/mason.nvim",
     "mason-org/mason-lspconfig.nvim",
+    "nvim-telescope/telescope.nvim",
   },
   config = function()
     local lspconfig = require("lspconfig")
-    local blink_cmp = require("blink.cmp")
+    -- local blink_cmp = require("blink.cmp")
+    local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local mason = require("mason")
     local mason_lspconfig = require("mason-lspconfig")
+    local builtin = require('telescope.builtin')
 
     -- set keymaps
     local keymap = vim.keymap
@@ -24,7 +28,16 @@ return {
       keymap.set('n', '<leader>q', diagnostics_list, { noremap = true, silent = true })
       keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
       keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-      keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+      -- keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+      keymap.set('n', 'gd', function()
+        builtin.lsp_definitions({
+          fname_width = 60,
+          trim_text = true,
+          show_line = false,
+          ignore_filename = true,
+          file_ignore_patterns = { "node_modules/@types/*" }
+        })
+      end, { desc = 'Goto Definition' })
       keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
       keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
       keymap.set("n", "gr", vim.lsp.buf.references, opts)
@@ -54,7 +67,7 @@ return {
     })
 
     -- used to enable autocompletion
-    local capabilities = blink_cmp.get_lsp_capabilities()
+    local capabilities = cmp_nvim_lsp.default_capabilities()
     local signs = { Error = "E", Warn = "W", Hint = "H", Info = "I" }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
