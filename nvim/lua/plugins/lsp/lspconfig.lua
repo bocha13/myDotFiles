@@ -86,6 +86,7 @@ return {
         "html",
         "cssls",
         "graphql",
+        "rust_analyzer",
         "tailwindcss",
         "ts_ls",
         "gopls",
@@ -118,14 +119,12 @@ return {
           on_attach = on_attach,
           capabilities = capabilities,
           settings = {
-            diagnostics = {
-              globals = { "vim", "general" },
-            },
             workspace = {
-              library = {
-                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                [vim.fn.stdpath("config") .. "/lua"] = true,
-              },
+              library = vim.api.nvim_get_runtime_file("", true),
+              checkThirdParty = false,
+            },
+            diagnostics = {
+              globals = { "vim" },
             },
           },
         })

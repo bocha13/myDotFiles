@@ -3,27 +3,27 @@ return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      "hrsh7th/cmp-buffer", --source for text in buffers
-      "hrsh7th/cmp-path",   -- source for file system paths
-      -- { "L3MON4D3/LuaSnip", build = "make install_jsregexp" }, -- snippet engine
-      -- "saadparwaiz1/cmp_luasnip",     -- for autocompletion
-      "rafamadriz/friendly-snippets", -- useful snippets
+      "hrsh7th/cmp-buffer",                                    --source for text in buffers
+      "hrsh7th/cmp-path",                                      -- source for file system paths
+      { "L3MON4D3/LuaSnip", build = "make install_jsregexp" }, -- snippet engine
+      "saadparwaiz1/cmp_luasnip",                              -- for autocompletion
+      "rafamadriz/friendly-snippets",                          -- useful snippets
     },
     config = function()
       local cmp = require("cmp")
-      -- local luasnip = require("luasnip")
+      local luasnip = require("luasnip")
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
       -- load vs-code like snippets from plugins
-      -- require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_vscode").lazy_load()
 
       -- vim.opt.completeopt = "menu,preview,menuone,noinsert"
       cmp.setup({
-        -- snippet = {
-        --   expand = function(args)
-        --     luasnip.lsp_expand(args.body)
-        --   end,
-        -- },
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
         mapping = cmp.mapping.preset.insert({
           ["<Up>"] = cmp.mapping.select_prev_item(cmp_select),
           ["<Down>"] = cmp.mapping.select_next_item(cmp_select),
