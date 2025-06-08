@@ -7,8 +7,17 @@ return {
       local surround = require("mini.surround")
       local indentscope = require("mini.indentscope")
       local pairs = require("mini.pairs")
+      local mini_tabline = require("mini.tabline")
       pairs.setup({})
       bufremove.setup({})
+      mini_tabline.setup({
+        show_icons = false,
+        format = function(buf_id, label)
+          local suffix = vim.bo[buf_id].modified and '● ' or ' '
+          return " " .. MiniTabline.default_format(buf_id, label) .. suffix
+        end,
+        tabpage_section = 'left'
+      })
       surround.setup({
         mappings = {
           add = "gza",            -- Add surrounding in Normal and Visual modes
@@ -25,8 +34,20 @@ return {
         options = { try_as_border = true },
       })
 
-      vim.api.nvim_set_keymap('n', '<leader>bd', ":lua require'mini.bufremove'.delete(0)<CR>",
-        { noremap = true, silent = true })
+      -- CHANGE COLOURS OF TABLINE
+      vim.api.nvim_set_hl(0, 'MiniTablineCurrent', {
+        bg = "#292929",
+        bold = true
+      })
+      vim.api.nvim_set_hl(0, 'MiniTablineHidden', {
+        bg = "#141617",
+        bold = true
+      })
+
+      vim.api.nvim_set_hl(0, 'MiniTablineModifiedCurrent', {
+        fg = '#8fc28c',
+        bold = true
+      })
     end
   },
 }

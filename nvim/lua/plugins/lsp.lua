@@ -1,10 +1,9 @@
 local diagnostics_list = require("utils").diagnostics_list
 
 return {
-  "neovim/nvim-lspconfig",
+  "mason-org/mason.nvim",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "mason-org/mason.nvim",
     'saghen/blink.cmp',
     -- "hrsh7th/cmp-nvim-lsp",
     "nvim-telescope/telescope.nvim",

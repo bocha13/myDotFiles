@@ -20,6 +20,11 @@ map("n", "<c-j>", ":wincmd j<CR>")
 map("n", "<c-h>", ":wincmd h<CR>")
 map("n", "<c-l>", ":wincmd l<CR>")
 
+-- bufer
+map('n', '<leader>bd', ":lua require'mini.bufremove'.delete(0)<CR>", { noremap = true, silent = true })
+map('n', 'H', ':bprevious<CR>', { noremap = true, silent = true })
+map('n', 'L', ':bnext<CR>', { noremap = true, silent = true })
+
 -- use system clipboard
 -- yank
 map("n", "<leader>y", '"+y', { desc = "Yank to clipboard" })
