@@ -13,8 +13,13 @@ return {
       mini_tabline.setup({
         show_icons = false,
         format = function(buf_id, label)
-          local suffix = vim.bo[buf_id].modified and '● ' or ' '
-          return " " .. MiniTabline.default_format(buf_id, label) .. suffix
+          if (vim.bo[buf_id].modified) then
+            return "▌" .. MiniTabline.default_format(buf_id, label) .. "▐"
+          elseif (buf_id == vim.api.nvim_get_current_buf()) then
+            return "▌" .. MiniTabline.default_format(buf_id, label) .. "▐"
+          end
+
+          return " " .. MiniTabline.default_format(buf_id, label) .. " "
         end,
         tabpage_section = 'left'
       })

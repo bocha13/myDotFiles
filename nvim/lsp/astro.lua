@@ -1,8 +1,10 @@
 return {
   cmd = { 'astro-ls', '--stdio' },
   filetypes = { 'astro' },
-  root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
+  root_markers = { 'astro.config.mjs', 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
   init_options = {
-    typescript = {},
+    typescript = {
+      tsdk = vim.fn.stdpath('data') .. '/mason/packages/typescript-language-server/node_modules/typescript/lib'
+    },
   },
 }

@@ -61,11 +61,12 @@ return {
         end
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and (client.name == "eslint" or client.name == "ts_ls") then
+        if not client then return end
+        if (client.name == "eslint" or client.name == "ts_ls") then
           client.server_capabilities.documentFormattingProvider = false
           client.server_capabilities.documentRangeFormattingProvider = false
         end
-        if client and client.server_capabilities.documentHighlightProvider then
+        if client.server_capabilities.documentHighlightProvider then
           local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
           -- Highlight word under cursor in entire file
           vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
