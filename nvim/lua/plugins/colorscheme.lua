@@ -57,46 +57,23 @@ return {
               CmpItemMenu = { fg = colors.surface2 },
               CursorLineNr = { fg = colors.text, bg = colors.surface0 },
               CursorLine = { bg = colors.surface0 },
+              DiffAdd = { bg = colors.green, fg = colors.base },     -- Green background for additions
+              DiffChange = { bg = colors.yellow, fg = colors.base }, -- Yellow background for changes
+              DiffText = { bg = colors.peach, fg = colors.base },    -- Orange/peach for specific changed text
+              DiffDelete = { bg = colors.red, fg = colors.text },    -- Red background for deletions
 
-              -- -- Current changes (your local changes)
-              -- DiffAdd = { bg = "#2e5049" },                        -- Darker blue-gray background for your changes
-              -- -- Incoming changes (changes from the other branch)
-              -- DiffChange = { bg = "#344f69" },                     -- Darker purple-ish background for incoming changes
-              -- DiffText = { bg = "#36345d" },                       -- Slightly more vibrant for specific changed text
-              -- -- Deleted lines
-              -- DiffDelete = { bg = "#3c2c2d" },                     -- Darker red-ish background for deletions
-              -- -- For conflict markers (<<<<<<< HEAD, =======, >>>>>>> branch)
-              -- ConflictMarker = { bg = "#3b3a2c", fg = "#e6e600" }, -- Yellow-ish for markers
-              -- ConflictMarkerBegin = { bg = "#344f69" },            -- Current changes section
-              -- ConflictMarkerOurs = { bg = "#344f69" },             -- Your changes
-              -- ConflictMarkerTheirs = { bg = "#2e5049" },           -- Their changes
-              -- ConflictMarkerEnd = { bg = "#2e5049" },              -- End of conflict section
-              -- ConflictMarkerSeparator = { bg = "#3b3a2c" },        -- The ======= separator
-
-              -- -- FUGITIVE
-              -- -- LOCAL
-              -- DiffAdd = { bg = "#1E2326", fg = colors.text },
-              -- DiffDelete = { bg = colors.red, fg = colors.text },
-              -- DiffChange = { bg = colors.blue, fg = colors.text },
-              -- DiffText = { bg = "#3B3B2A", fg = colors.text },
-              -- -- BASE
-              -- Diffbase = { bg = colors.yellow, fg = colors.text },
-              -- DiffbaseAdd = { bg = colors.sky, fg = colors.text },
-              -- DiffbaseDelete = { bg = colors.red, fg = colors.text },
-              -- DiffbaseChange = { bg = colors.blue, fg = colors.text },
-              -- DiffbaseText = { bg = colors.pink, fg = colors.text },
-              -- -- REMOTE
-              -- DiffRemoved = { bg = colors.red, fg = colors.text },
-              -- DiffAdded = { bg = colors.sky, fg = colors.text },
-              -- --SPECIAL REGIONS
-              -- ConflictMarkers = { bg = "#232A2E", fg = colors.text },
-              -- DiffFile = { bg = "#232A2E", fg = colors.text },
-              -- DiffLine = { bg = "#232A2E", fg = colors.text },
+              -- For conflict markers (<<<<<<< HEAD, =======, >>>>>>> branch)
+              ConflictMarker = { bg = colors.surface1, fg = colors.yellow }, -- Gray background with yellow text
+              ConflictMarkerBegin = { bg = colors.blue },                    -- Blue for current changes section
+              ConflictMarkerOurs = { bg = colors.blue },                     -- Blue for your changes
+              ConflictMarkerTheirs = { bg = colors.teal },                   -- Teal for their changes
+              ConflictMarkerEnd = { bg = colors.teal },                      -- Teal for end of conflict
+              ConflictMarkerSeparator = { bg = colors.surface1 },            -- Gray for separator
 
               FloatBorder = { bg = colors.overlay0, fg = colors.surface2 },
               GitSignsChange = { fg = colors.blue },
               GitsignsAdd = { fg = colors.teal },
-              gitsignsDelete = { fg = colors.red },
+              GitsignsDelete = { fg = colors.red },
               LineNr = { fg = colors.overlay0 },
               LspInfoBorder = { link = "FloatBorder" },
               NormalFloat = { bg = colors.crust },
