@@ -25,7 +25,7 @@ return {
             sky = "#89b482",
             sapphire = "#89b482",
             blue = "#7daea3",
-            lavender = "#7daea3",
+            lavender = "#7c9fad",
             text = "#ebdbb2",
             subtext1 = "#d5c4a1",
             subtext0 = "#bdae93",
@@ -57,23 +57,10 @@ return {
               CmpItemMenu = { fg = colors.surface2 },
               CursorLineNr = { fg = colors.text, bg = colors.surface0 },
               CursorLine = { bg = colors.surface0 },
-              DiffAdd = { bg = colors.green, fg = colors.base },     -- Green background for additions
-              DiffChange = { bg = colors.yellow, fg = colors.base }, -- Yellow background for changes
-              DiffText = { bg = colors.peach, fg = colors.base },    -- Orange/peach for specific changed text
-              DiffDelete = { bg = colors.red, fg = colors.text },    -- Red background for deletions
-
-              -- For conflict markers (<<<<<<< HEAD, =======, >>>>>>> branch)
-              ConflictMarker = { bg = colors.surface1, fg = colors.yellow }, -- Gray background with yellow text
-              ConflictMarkerBegin = { bg = colors.blue },                    -- Blue for current changes section
-              ConflictMarkerOurs = { bg = colors.blue },                     -- Blue for your changes
-              ConflictMarkerTheirs = { bg = colors.teal },                   -- Teal for their changes
-              ConflictMarkerEnd = { bg = colors.teal },                      -- Teal for end of conflict
-              ConflictMarkerSeparator = { bg = colors.surface1 },            -- Gray for separator
-
               FloatBorder = { bg = colors.overlay0, fg = colors.surface2 },
               GitSignsChange = { fg = colors.blue },
               GitsignsAdd = { fg = colors.teal },
-              GitsignsDelete = { fg = colors.red },
+              gitsignsDelete = { fg = colors.red },
               LineNr = { fg = colors.overlay0 },
               LspInfoBorder = { link = "FloatBorder" },
               NormalFloat = { bg = colors.crust },

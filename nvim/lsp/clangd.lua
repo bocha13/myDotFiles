@@ -48,6 +48,9 @@ end
 
 return {
   cmd = { 'clangd' },
+  cmd_env = {
+    PICO_SDK_PATH = os.getenv('PICO_SDK_PATH') or vim.fn.expand('$HOME/opt/pico-sdk'),
+  },
   filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
   root_markers = {
     '.clangd',

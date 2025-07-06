@@ -60,9 +60,10 @@ return {
       "markdown_inline",
       "query",
       "regex",
+      "rust_analyzer",
       "tsx",
       "typescript",
-      "yaml",
+      "yaml"
     },
     incremental_selection = {
       enable = true,
