@@ -60,7 +60,7 @@ return {
       "markdown_inline",
       "query",
       "regex",
-      "rust_analyzer",
+      "rust",
       "tsx",
       "typescript",
       "yaml"
