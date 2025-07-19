@@ -63,7 +63,7 @@ return {
       "rust",
       "tsx",
       "typescript",
-      "yaml"
+      "yaml",
     },
     incremental_selection = {
       enable = true,

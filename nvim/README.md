@@ -13,7 +13,6 @@ This config is powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ### Plugins
 
-- [codecompanion](https://github.com/olimorris/codecompanion.nvim): ai chat integration
 - [blink.cmp](https://github.com/saghen/blink.cmp): completion plugin
 - [bufferline](https://github.com/akinsho/bufferline.nvim): buffer line
 - [catpuccin](https://github.com/catppuccin/nvim): colorcheme
@@ -26,8 +25,12 @@ This config is powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ### Default languages support
 
-- TypeScript/JavaScript
-- HTML/CSS
-- Lua
+- Astro
 - C
+- CSS
 - Go
+- HTML
+- JSON
+- Lua
+- TypeScript/JavaScript
+
