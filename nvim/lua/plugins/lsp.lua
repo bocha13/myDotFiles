@@ -11,7 +11,6 @@ return {
   config = function()
     local mason = require("mason")
     local blink_cmp = require("blink.cmp")
-    -- local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local builtin = require('telescope.builtin')
     mason.setup()
 

@@ -1,6 +1,9 @@
 local map = vim.keymap.set
 vim.g.mapleader = " "
 
+-- Reload vim configuration
+map("n", "<leader>o", ":update<CR> :source<CR>")
+
 -- Move Lines
 map("n", "<A-j>", ":m .+1<cr>==", { desc = "Move selection down" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move selection down" })

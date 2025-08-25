@@ -60,7 +60,6 @@ return {
       "markdown_inline",
       "query",
       "regex",
-      "rust",
       "tsx",
       "typescript",
       "yaml",

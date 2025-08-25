@@ -26,11 +26,11 @@ This config is powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
 ### Default languages support
 
 - Astro
-- C
+- C/C++
 - CSS
 - Go
 - HTML
 - JSON
 - Lua
 - TypeScript/JavaScript
-
+- TailwindCSS
