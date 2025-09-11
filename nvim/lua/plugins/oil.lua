@@ -5,13 +5,15 @@ return {
     {
       "<leader>e",
       function()
-        require("oil").open()
+        local oil = require("oil")
+        oil.open()
       end,
       desc = "Open parent directory"
     }
   },
   config = function()
-    require("oil").setup({
+    local oil = require("oil")
+    oil.setup({
       default_file_explorer = true,
       view_options = {
         show_hidden = true,

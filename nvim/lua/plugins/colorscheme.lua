@@ -1,28 +1,11 @@
 return {
-  -- {
-  --   "folke/tokyonight.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     require("tokyonight").setup({
-  --       style = "night",
-  --       on_colors = function(c)
-  --         c.gitSigns = {
-  --           add = "#8fc28c",
-  --           change = "#7495d1",
-  --           delete = "#f38ba8",
-  --         }
-  --       end,
-  --     })
-  --     vim.cmd.colorscheme("tokyonight")
-  --   end,
-  -- }
   {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
     config = function()
-      require("catppuccin").setup({
+      local catppuccin = require("catppuccin")
+      catppuccin.setup({
         background = {
           light = "latte",
           dark = "mocha",
@@ -42,7 +25,7 @@ return {
             sky = "#89b482",
             sapphire = "#89b482",
             blue = "#7daea3",
-            lavender = "#7daea3",
+            lavender = "#7c9fad",
             text = "#ebdbb2",
             subtext1 = "#d5c4a1",
             subtext0 = "#bdae93",
@@ -74,42 +57,6 @@ return {
               CmpItemMenu = { fg = colors.surface2 },
               CursorLineNr = { fg = colors.text, bg = colors.surface0 },
               CursorLine = { bg = colors.surface0 },
-
-              -- Current changes (your local changes)
-              DiffAdd = { bg = "#2e5049" },                        -- Darker blue-gray background for your changes
-              -- Incoming changes (changes from the other branch)
-              DiffChange = { bg = "#344f69" },                     -- Darker purple-ish background for incoming changes
-              DiffText = { bg = "#36345d" },                       -- Slightly more vibrant for specific changed text
-              -- Deleted lines
-              DiffDelete = { bg = "#3c2c2d" },                     -- Darker red-ish background for deletions
-              -- For conflict markers (<<<<<<< HEAD, =======, >>>>>>> branch)
-              ConflictMarker = { bg = "#3b3a2c", fg = "#e6e600" }, -- Yellow-ish for markers
-              ConflictMarkerBegin = { bg = "#344f69" },            -- Current changes section
-              ConflictMarkerOurs = { bg = "#344f69" },             -- Your changes
-              ConflictMarkerTheirs = { bg = "#2e5049" },           -- Their changes
-              ConflictMarkerEnd = { bg = "#2e5049" },              -- End of conflict section
-              ConflictMarkerSeparator = { bg = "#3b3a2c" },        -- The ======= separator
-
-              -- -- FUGITIVE
-              -- -- LOCAL
-              -- DiffAdd = { bg = "#1E2326", fg = colors.text },
-              -- DiffDelete = { bg = colors.red, fg = colors.text },
-              -- DiffChange = { bg = colors.blue, fg = colors.text },
-              -- DiffText = { bg = "#3B3B2A", fg = colors.text },
-              -- -- BASE
-              -- Diffbase = { bg = colors.yellow, fg = colors.text },
-              -- DiffbaseAdd = { bg = colors.sky, fg = colors.text },
-              -- DiffbaseDelete = { bg = colors.red, fg = colors.text },
-              -- DiffbaseChange = { bg = colors.blue, fg = colors.text },
-              -- DiffbaseText = { bg = colors.pink, fg = colors.text },
-              -- -- REMOTE
-              -- DiffRemoved = { bg = colors.red, fg = colors.text },
-              -- DiffAdded = { bg = colors.sky, fg = colors.text },
-              -- --SPECIAL REGIONS
-              -- ConflictMarkers = { bg = "#232A2E", fg = colors.text },
-              -- DiffFile = { bg = "#232A2E", fg = colors.text },
-              -- DiffLine = { bg = "#232A2E", fg = colors.text },
-
               FloatBorder = { bg = colors.overlay0, fg = colors.surface2 },
               GitSignsChange = { fg = colors.blue },
               GitsignsAdd = { fg = colors.teal },
@@ -133,7 +80,7 @@ return {
               TelescopeSelection = { bg = colors.surface0 },
               VertSplit = { bg = colors.base, fg = colors.surface0 },
               YankHighlight = { bg = colors.surface2 },
-              FidgetTask = { fg = colors.subtext2 },
+              FidgetTask = { fg = colors.text },
               FidgetTitle = { fg = colors.peach },
               IblIndent = { fg = colors.surface0 },
               IblScope = { fg = colors.overlay0 },
@@ -161,8 +108,8 @@ return {
               SpecialChar = { fg = colors.yellow },
               Type = { fg = colors.yellow, style = { "bold" } },
               Function = { fg = colors.green, style = { "bold" } },
-              Delimiter = { fg = colors.subtext2 },
-              Ignore = { fg = colors.subtext2 },
+              Delimiter = { fg = colors.text },
+              Ignore = { fg = colors.text },
               Macro = { fg = colors.teal },
               TSAnnotation = { fg = colors.mauve },
               TSAttribute = { fg = colors.mauve },
@@ -211,7 +158,7 @@ return {
               TSRepeat = { fg = colors.red },
               TSStorageClass = { fg = colors.peach },
               TSStorageClassLifetime = { fg = colors.peach },
-              TSStrike = { fg = colors.subtext2 },
+              TSStrike = { fg = colors.text },
               TSString = { fg = colors.teal },
               TSStringEscape = { fg = colors.green },
               TSStringRegex = { fg = colors.green },

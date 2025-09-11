@@ -1,3 +1,5 @@
+local os_utils = require("utils")
+
 vim.opt.guicursor = ""
 
 -- NETRW
@@ -77,7 +79,7 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undodir = os_utils.get_home() .. "/.vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.hlsearch = true
@@ -111,23 +113,4 @@ vim.g.mapleader = " "
 --   callback = function(args)
 --     require("conform").format({ bufnr = args.buf })
 --   end,
--- })
-
--- -- Function to highlight the word under the cursor
--- function HighlightWordUnderCursor()
---   local word = vim.fn.expand('<cword>')
---   if word ~= '' then
---     vim.cmd('match Search /\\<' .. word .. '\\>/')
---   else
---     vim.cmd('match none')
---   end
--- end
---
--- -- Create a new autocommand group
--- local highlight_group = vim.api.nvim_create_augroup('HighlightWord', { clear = true })
---
--- -- Define the autocommand to trigger the function when the cursor moves
--- vim.api.nvim_create_autocmd('CursorMoved', {
---   group = highlight_group,
---   callback = HighlightWordUnderCursor,
 -- })

@@ -1,6 +1,9 @@
 local map = vim.keymap.set
 vim.g.mapleader = " "
 
+-- Reload vim configuration
+map("n", "<leader>o", ":update<CR> :source<CR>")
+
 -- Move Lines
 map("n", "<A-j>", ":m .+1<cr>==", { desc = "Move selection down" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move selection down" })
@@ -19,6 +22,11 @@ map("n", "<c-k>", ":wincmd k<CR>")
 map("n", "<c-j>", ":wincmd j<CR>")
 map("n", "<c-h>", ":wincmd h<CR>")
 map("n", "<c-l>", ":wincmd l<CR>")
+
+-- bufer
+map('n', '<leader>bd', ":lua require'mini.bufremove'.delete(0)<CR>", { noremap = true, silent = true })
+map('n', 'H', ':bprevious<CR>', { noremap = true, silent = true })
+map('n', 'L', ':bnext<CR>', { noremap = true, silent = true })
 
 -- use system clipboard
 -- yank

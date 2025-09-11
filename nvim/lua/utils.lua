@@ -95,6 +95,22 @@ function M.diagnostics_list()
   vim.cmd('copen')
 end
 
+-- Check if the current operating system is Windows
+-- Returns true if running on Windows, false otherwise
+function M.is_windows()
+  return vim.loop.os_uname().sysname == "Windows_NT"
+end
+
+-- Get the user's home directory path in a cross-platform way
+-- Returns the home directory path as a string, or empty string if not found
+function M.get_home()
+  if M.is_windows() then
+    return os.getenv("USERPROFILE") or os.getenv("HOME") or ""
+  else
+    return os.getenv("HOME") or ""
+  end
+end
+
 -- all icons used through the entire config
 M.icons = {
   diagnostics = {

@@ -1,14 +1,33 @@
 return {
   {
-    "echasnovski/mini.nvim",
+    "nvim-mini/mini.nvim",
     version = false,
     config = function()
       local bufremove = require("mini.bufremove")
       local surround = require("mini.surround")
       local indentscope = require("mini.indentscope")
       local pairs = require("mini.pairs")
+      local mini_tabline = require("mini.tabline")
       pairs.setup({})
       bufremove.setup({})
+      mini_tabline.setup({
+        show_icons = false,
+        format = function(buf_id, label)
+          -- if (vim.bo[buf_id].modified and buf_id == vim.api.nvim_get_current_buf()) then
+          --   return "▌" .. MiniTabline.default_format(buf_id, label) .. "▐"
+          -- if (vim.bo[buf_id].modified) then
+          --   return " " .. MiniTabline.default_format(buf_id, label) .. " "
+          -- elseif (buf_id == vim.api.nvim_get_current_buf()) then
+          --   return "▌" .. MiniTabline.default_format(buf_id, label) .. "▐"
+          -- end
+          if (vim.bo[buf_id].modified) then
+            return " " .. MiniTabline.default_format(buf_id, label) .. " "
+          end
+
+          return " " .. MiniTabline.default_format(buf_id, label) .. " "
+        end,
+        tabpage_section = 'left'
+      })
       surround.setup({
         mappings = {
           add = "gza",            -- Add surrounding in Normal and Visual modes
@@ -25,8 +44,23 @@ return {
         options = { try_as_border = true },
       })
 
-      vim.api.nvim_set_keymap('n', '<leader>bd', ":lua require'mini.bufremove'.delete(0)<CR>",
-        { noremap = true, silent = true })
+      -- CHANGE COLOURS OF TABLINE
+      vim.api.nvim_set_hl(0, 'MiniTablineCurrent', {
+        fg = "#ebdbb2",
+        bg = "#404040",
+        bold = true
+      })
+      vim.api.nvim_set_hl(0, 'MiniTablineHidden', {
+        fg = "#a89984",
+        bg = "#141617",
+        bold = true
+      })
+
+      vim.api.nvim_set_hl(0, 'MiniTablineModifiedCurrent', {
+        fg = '#8fc28c',
+        bg = "#404040",
+        bold = true
+      })
     end
   },
 }

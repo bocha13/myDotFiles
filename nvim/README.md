@@ -4,7 +4,7 @@ This config is powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ## ⚡️ Requirements
 
-- Neovim >= **0.11** (needs to be built with **LuaJIT**)
+- Neovim >= **0.11** with LuaJIT support
 - Git >= **2.43.0** (for partial clones support)
 - A [Nerd Font](https://www.nerdfonts.com/) **_(optional)_**
 - If your terminal doesn't include a clipboard, install one (eg. sudo apt-get install xclip)
@@ -13,7 +13,6 @@ This config is powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ### Plugins
 
-- [codecompanion](https://github.com/olimorris/codecompanion.nvim): ai chat integration
 - [blink.cmp](https://github.com/saghen/blink.cmp): completion plugin
 - [bufferline](https://github.com/akinsho/bufferline.nvim): buffer line
 - [catpuccin](https://github.com/catppuccin/nvim): colorcheme
@@ -26,8 +25,12 @@ This config is powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ### Default languages support
 
-- TypeScript/JavaScript
-- HTML/CSS
-- Lua
-- C
+- Astro
+- C/C++
+- CSS
 - Go
+- HTML
+- JSON
+- Lua
+- TypeScript/JavaScript
+- TailwindCSS

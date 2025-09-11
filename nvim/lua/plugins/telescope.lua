@@ -28,7 +28,7 @@ return {
         path_display = { "smart" },
         file_ignore_patterns = { "node_modules" },
         initial_mode = "insert",
-        -- selection_strategy = "reset",
+        selection_strategy = "reset",
         sorting_strategy = "ascending",
         use_less = true,
         -- borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
