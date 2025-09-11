@@ -61,7 +61,8 @@ return {
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if not client then return end
-        if (client.name == "eslint" or client.name == "ts_ls") then
+        if (client.name == "eslint" or client.name == "ts_ls") and vim.fn.getcwd():match("learner%-frontend") then
+          -- if (client.name == "eslint" or client.name == "ts_ls") then
           client.server_capabilities.documentFormattingProvider = false
           client.server_capabilities.documentRangeFormattingProvider = false
         end
@@ -104,6 +105,7 @@ return {
     vim.lsp.enable("eslint")
     vim.lsp.enable("gopls")
     vim.lsp.enable("html")
+    vim.lsp.enable("prismals")
     vim.lsp.enable("jsonls")
     vim.lsp.enable("lua_ls")
     vim.lsp.enable("tailwindcss")

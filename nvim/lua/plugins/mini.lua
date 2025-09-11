@@ -46,16 +46,19 @@ return {
 
       -- CHANGE COLOURS OF TABLINE
       vim.api.nvim_set_hl(0, 'MiniTablineCurrent', {
-        bg = "#292929",
+        fg = "#ebdbb2",
+        bg = "#404040",
         bold = true
       })
       vim.api.nvim_set_hl(0, 'MiniTablineHidden', {
+        fg = "#a89984",
         bg = "#141617",
         bold = true
       })
 
       vim.api.nvim_set_hl(0, 'MiniTablineModifiedCurrent', {
         fg = '#8fc28c',
+        bg = "#404040",
         bold = true
       })
     end
