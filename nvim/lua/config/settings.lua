@@ -10,7 +10,16 @@ vim.g.netrw_liststyle = 0
 vim.g.netrw_list_hide = "(^|ss)\zs.S+"
 vim.g.netrw_localcopydircmd = "cp -r"
 
-vim.api.nvim_command("set fillchars+=vert:\\▎")
+-- change split separator character
+vim.opt.fillchars:append({
+  vert      = "┃",
+  horiz     = "━",
+  horizup   = "┻",
+  horizdown = "┳",
+  vertleft  = "┫",
+  vertright = "┣",
+  verthoriz = "╋",
+})
 
 -- remove auto comment on new line after comment
 vim.api.nvim_create_autocmd("BufEnter", {

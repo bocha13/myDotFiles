@@ -7,10 +7,10 @@ return {
       local surround = require("mini.surround")
       local indentscope = require("mini.indentscope")
       local pairs = require("mini.pairs")
-      local mini_tabline = require("mini.tabline")
+      local tabline = require("mini.tabline")
       pairs.setup({})
       bufremove.setup({})
-      mini_tabline.setup({
+      tabline.setup({
         show_icons = false,
         format = function(buf_id, label)
           -- if (vim.bo[buf_id].modified and buf_id == vim.api.nvim_get_current_buf()) then
