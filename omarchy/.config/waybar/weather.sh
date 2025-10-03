@@ -1,58 +1,64 @@
 #!/usr/bin/env bash
-
-#  Put this on your waybar config.jsonc
-#  then add "custom/weather" to any of the modules (modules-left, modules-right or modules-center)
-#
-#   "custom/weather": {
-#     "exec": "~/.config/waybar/weather.sh",
-#     "interval": 600, // refresh every 10 min
-#     "return-type": "json",
-#     "id": "custom-weather"
-#   },
+set -euo pipefail
 
 CITY="Santa%20Fe,AR"
+UNIT="metric"
+API_KEY="${OWM_API_KEY:-}"
 
+# Icons
 ICON_SUN="☀️"
+ICON_MOON="🌙"
 ICON_CLOUD="☁️"
 ICON_RAIN="🌧️"
 ICON_SNOW="❄️"
 ICON_UNKNOWN="🌡️"
 
-# Fetch weather JSON with proper headers
-weather=$(curl -sf -A "curl" "https://wttr.in/${CITY}?format=j1")
-
-if [ -n "$weather" ]; then
-    # Current weather
-    temp=$(echo "$weather" | jq -r ".current_condition[0].temp_C")
-    condition=$(echo "$weather" | jq -r ".current_condition[0].weatherDesc[0].value")
-
-    # Determine icon
-    case $condition in
-        Clear*|Sunny*) icon=$ICON_SUN ;;
-        Cloud*|Overcast*) icon=$ICON_CLOUD ;;
-        Rain*|Drizzle*) icon=$ICON_RAIN ;;
-        Snow*) icon=$ICON_SNOW ;;
-        *) icon=$ICON_UNKNOWN ;;
-    esac
-
-    # Build tooltip (3-day forecast)
-    tooltip=""
-    for i in {0..2}; do
-        day=$(date -d "+$i day" +%a)
-        day_temp=$(echo "$weather" | jq -r ".weather[$i].avgtempC")
-        day_cond=$(echo "$weather" | jq -r ".weather[$i].hourly[0].weatherDesc[0].value")
-        case $day_cond in
-            Clear*|Sunny*) day_icon=$ICON_SUN ;;
-            Cloud*|Overcast*) day_icon=$ICON_CLOUD ;;
-            Rain*|Drizzle*) day_icon=$ICON_RAIN ;;
-            Snow*) day_icon=$ICON_SNOW ;;
-            *) day_icon=$ICON_UNKNOWN ;;
-        esac
-        tooltip+="$day $day_icon ${day_temp}°C\n"
-    done
-
-    # Output JSON for Waybar
-    echo "{\"text\": \"\u2009\u2009 ${temp}°C $icon\", \"tooltip\": \"$tooltip\"}"
-else
-    echo "{\"text\": \"--\", \"tooltip\": \"No data\"}"
+if [ -z "$API_KEY" ]; then
+  echo '{"text":"--"}'
+  exit 0
 fi
+
+url="https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=$UNIT&appid=$API_KEY"
+resp=$(curl -s "$url")
+
+# Make sure we got a valid response
+if ! echo "$resp" | grep -q '"cod":200'; then
+  echo '{"text":"--"}'
+  exit 0
+fi
+
+temp=$(echo "$resp" | sed -n 's/.*"temp":\([^,}]*\).*/\1/p' | head -1 | cut -d. -f1)
+condition=$(echo "$resp" | sed -n 's/.*"main":"\([^"]*\)".*/\1/p' | head -1)
+icon_code=$(echo "$resp" | sed -n 's/.*"icon":"\([^"]*\)".*/\1/p' | head -1)
+
+# Unit symbol
+case "$UNIT" in
+  metric) unit="°C" ;;
+  imperial) unit="°F" ;;
+  *) unit="K" ;;
+esac
+
+# Determine day/night
+if [[ "$icon_code" =~ n$ ]]; then
+  is_night=1
+else
+  is_night=0
+fi
+
+# Pick icon
+case "$condition" in
+  Clear)
+    if [ "$is_night" -eq 1 ]; then
+      icon="$ICON_MOON"
+    else
+      icon="$ICON_SUN"
+    fi
+    ;;
+  Clouds) icon="$ICON_CLOUD" ;;
+  Rain|Drizzle|Thunderstorm) icon="$ICON_RAIN" ;;
+  Snow) icon="$ICON_SNOW" ;;
+  *) icon="$ICON_UNKNOWN" ;;
+esac
+
+# Waybar JSON output
+echo "{\"text\":\"  ${temp}${unit} ${icon}\"}"
