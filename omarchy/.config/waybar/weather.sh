@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# WARN: DON'T FORGET TO SET OWM_API_KEY ON YOUR ENV!!!
+#  Put this on your waybar config.jsonc
+#  then add "custom/weather" to any of the modules (modules-left, modules-right or modules-center)
+#
+#   "custom/weather": {
+#     "exec": "~/.config/waybar/weather.sh",
+#     "interval": 600, // refresh every 10 min
+#     "return-type": "json",
+#     "id": "custom-weather"
+#   },
+
 CITY="Santa%20Fe,AR"
 UNIT="metric"
 API_KEY="${OWM_API_KEY:-}"
