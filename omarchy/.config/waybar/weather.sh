@@ -2,6 +2,9 @@
 set -euo pipefail
 
 # WARN: DON'T FORGET TO SET OWM_API_KEY ON YOUR ENV!!!
+# WARN: you need to add the variable to the /etc/environment file
+# WARN: because waybar loads before bashrc is called
+#
 #  Put this on your waybar config.jsonc
 #  then add "custom/weather" to any of the modules (modules-left, modules-right or modules-center)
 #
@@ -15,6 +18,12 @@ set -euo pipefail
 CITY="Santa%20Fe,AR"
 UNIT="metric"
 API_KEY="${OWM_API_KEY:-}"
+
+# Wait for network (max 30 seconds)
+for i in {1..30}; do
+  if ping -c1 8.8.8.8 &>/dev/null; then break; fi
+  sleep 1
+done
 
 # Icons
 ICON_SUN="☀️"
