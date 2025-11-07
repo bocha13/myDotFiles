@@ -19,19 +19,22 @@ CITY="Santa%20Fe,AR"
 UNIT="metric"
 API_KEY="${OWM_API_KEY:-}"
 
-# Wait for network (max 30 seconds)
-for i in {1..30}; do
-  if ping -c1 8.8.8.8 &>/dev/null; then break; fi
-  sleep 1
-done
-
 # Icons
 ICON_SUN="☀️"
 ICON_MOON="🌙"
 ICON_CLOUD="☁️"
 ICON_RAIN="🌧️"
+ICON_DRIZZLE="🌦️"
+ICON_THUNDERSTORM="🌩️"
 ICON_SNOW="❄️"
 ICON_UNKNOWN="🌡️"
+ICON_SMOKE="💨"
+
+# Wait for network (max 30 seconds)
+for i in {1..30}; do
+  if ping -c1 8.8.8.8 &>/dev/null; then break; fi
+  sleep 1
+done
 
 if [ -z "$API_KEY" ]; then
   echo '{"text":"--"}'
@@ -48,7 +51,7 @@ if ! echo "$resp" | grep -q '"cod":200'; then
 fi
 
 temp=$(echo "$resp" | sed -n 's/.*"temp":\([^,}]*\).*/\1/p' | head -1 | cut -d. -f1)
-condition=$(echo "$resp" | sed -n 's/.*"main":"\([^"]*\)".*/\1/p' | head -1)
+condition=$(echo "$resp" | sed -n 's/.*"description":"\([^"]*\)".*/\1/p' | head -1 | tr '[:upper:]' '[:lower:]')
 icon_code=$(echo "$resp" | sed -n 's/.*"icon":"\([^"]*\)".*/\1/p' | head -1)
 
 # Unit symbol
@@ -67,18 +70,20 @@ fi
 
 # Pick icon
 case "$condition" in
-  Clear)
+  *clear*) 
     if [ "$is_night" -eq 1 ]; then
       icon="$ICON_MOON"
     else
       icon="$ICON_SUN"
     fi
     ;;
-  Clouds) icon="$ICON_CLOUD" ;;
-  Rain|Drizzle|Thunderstorm) icon="$ICON_RAIN" ;;
-  Snow) icon="$ICON_SNOW" ;;
+  *cloud*) icon="$ICON_CLOUD" ;;
+  *rain*) icon="$ICON_RAIN" ;;
+  *drizzle*) icon="$ICON_DRIZZLE" ;;
+  *thunderstorm*) icon="$ICON_THUNDERSTORM" ;;
+  *snow*) icon="$ICON_SNOW" ;;
+  *smoke*) icon="$ICON_SMOKE" ;;
   *) icon="$ICON_UNKNOWN" ;;
 esac
-
 # Waybar JSON output
 echo "{\"text\":\"  ${temp}${unit} ${icon}\"}"
