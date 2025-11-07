@@ -74,21 +74,6 @@ return {
           client.server_capabilities.documentRangeFormattingProvider = false
         end
         if client.server_capabilities.documentHighlightProvider then
-          local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
-          -- Highlight word under cursor in entire file
-          vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-            buffer = event.buf,
-            group = highlight_augroup,
-            callback = vim.lsp.buf.document_highlight,
-          })
-
-          -- remove highlight on cursor move
-          vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-            buffer = event.buf,
-            group = highlight_augroup,
-            callback = vim.lsp.buf.clear_references,
-          })
-
           vim.api.nvim_create_autocmd("LspDetach", {
             group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
             callback = function(event2)
@@ -102,7 +87,6 @@ return {
 
     vim.lsp.config("*", {
       capabilities = blink_cmp.get_lsp_capabilities()
-      -- capabilities = cmp_nvim_lsp.default_capabilities()
     })
 
     -- enable LSP servers

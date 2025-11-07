@@ -32,6 +32,24 @@ return {
         sorting_strategy = "ascending",
         use_less = true,
         -- borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+        preview = {
+          treesitter = false, -- 👈 disable Tree-sitter highlighting in previews
+        },
+        -- Configure ripgrep arguments
+        vimgrep_arguments = {
+          'rg',
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--smart-case',
+
+          -- 👇 Add exclusions here
+          '--glob=!node_modules/*',
+          '--glob=!dist/*',
+          '--glob=!src/generated/*',
+        },
       },
       extensions = {
         file_browser = {

@@ -22,12 +22,11 @@ vim.opt.fillchars:append({
 })
 
 -- remove auto comment on new line after comment
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("no_auto_comment", {}),
   callback = function()
-    vim.opt.formatoptions:remove({ "c", "r", "o" })
-  end,
-  group = general,
-  desc = "Disable New Line Comment",
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+  end
 })
 
 -- make nvim detect Jenkinsfile as groovy for syntax highlighting
@@ -43,9 +42,45 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- Highlight when yanking text
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking text",
-  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+  group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
   callback = function()
     vim.highlight.on_yank()
+  end
+})
+
+-- Auto resize splits when the terminal window is resized
+vim.api.nvim_create_autocmd("VimResized", {
+  command = "wincmd =",
+})
+
+-- Syntax highlighting for dotenv files
+vim.api.nvim_create_autocmd("BufRead", {
+  group = vim.api.nvim_create_augroup("dotenv_ft", { clear = true }),
+  pattern = { ".env", ".env.*" },
+  callback = function()
+    vim.bo.filetype = "dosini"
+  end,
+})
+
+vim.api.nvim_create_autocmd("CursorMoved", {
+  group = vim.api.nvim_create_augroup("LspReferenceHighlight", { clear = true }),
+  desc = "Highlight references under cursor",
+  callback = function()
+    if vim.fn.mode() ~= "i" then
+      local clients = vim.lsp.get_clients({ bufnr = 0 })
+      local supports_highlight = false
+      for _, client in ipairs(clients) do
+        if client.server_capabilities.documentHighlightProvider then
+          supports_highlight = true
+          break
+        end
+      end
+
+      if supports_highlight then
+        vim.lsp.buf.clear_references()
+        vim.lsp.buf.document_highlight()
+      end
+    end
   end
 })
 
@@ -57,20 +92,20 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 --then add this to the path:
 -- export PATH="$HOME/.local/bin:$PATH"
-if vim.fn.executable('win32yank.exe') == 1 then
-  vim.g.clipboard = {
-    name = 'win32yank-wsl',
-    copy = {
-      ['+'] = 'win32yank.exe -i --crlf',
-      ['*'] = 'win32yank.exe -i --crlf',
-    },
-    paste = {
-      ['+'] = 'win32yank.exe -o --lf',
-      ['*'] = 'win32yank.exe -o --lf',
-    },
-    cache_enabled = false,
-  }
-end
+-- if vim.fn.executable('win32yank.exe') == 1 then
+--   vim.g.clipboard = {
+--     name = 'win32yank-wsl',
+--     copy = {
+--       ['+'] = 'win32yank.exe -i --crlf',
+--       ['*'] = 'win32yank.exe -i --crlf',
+--     },
+--     paste = {
+--       ['+'] = 'win32yank.exe -o --lf',
+--       ['*'] = 'win32yank.exe -o --lf',
+--     },
+--     cache_enabled = false,
+--   }
+-- end
 
 vim.opt.showmode = false
 vim.opt.nu = true
