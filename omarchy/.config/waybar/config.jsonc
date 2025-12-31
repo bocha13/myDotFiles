@@ -43,7 +43,8 @@
     "exec": "~/.config/waybar/weather",
     "interval": 600, // refresh every 10 min
     "return-type": "json",
-    "id": "custom-weather"
+    "id": "custom-weather",
+    "tooltip": true
   },
   "custom/omarchy": {
     "format": "<span font='omarchy'>\ue900</span>",
