@@ -186,8 +186,8 @@ func main() {
 		tooltip.WriteString(fmt.Sprintf("%s  %s  %.0f° / %.0f°\n",
 			dayIcon,
 			day,
-			d.max,
 			d.min,
+			d.max,
 		))
 	}
 
