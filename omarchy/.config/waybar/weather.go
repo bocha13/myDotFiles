@@ -134,9 +134,9 @@ func main() {
 
 	// Group forecast by day and get min/max
 	days := make(map[string]struct {
-		min, max float64
-		id       int
-		desc     string
+		min, max   float64
+		id         int
+		fallbackID int
 	})
 	var dayOrder []string
 
@@ -144,35 +144,85 @@ func main() {
 		t := time.Unix(item.Dt, 0)
 		dayKey := t.Format("Mon 02")
 
-		if _, exists := days[dayKey]; !exists {
+		d, exists := days[dayKey]
+		if !exists {
 			dayOrder = append(dayOrder, dayKey)
-			days[dayKey] = struct {
-				min, max float64
-				id       int
-				desc     string
+			d = struct {
+				min, max   float64
+				id         int
+				fallbackID int
 			}{min: item.Main.TempMin, max: item.Main.TempMax}
 		}
 
-		d := days[dayKey]
 		if item.Main.TempMin < d.min {
 			d.min = item.Main.TempMin
 		}
 		if item.Main.TempMax > d.max {
 			d.max = item.Main.TempMax
 		}
-		// Use midday weather for the icon
-		if t.Hour() >= 12 && t.Hour() <= 15 && len(item.Weather) > 0 {
-			d.id = item.Weather[0].ID
-			d.desc = item.Weather[0].Description
+
+		// Capture first weather as fallback
+		if d.fallbackID == 0 && len(item.Weather) > 0 {
+			d.fallbackID = item.Weather[0].ID
 		}
+
+		// Prefer midday weather (UTC 15-18 = ~12-15 local for AR)
+		if t.Hour() >= 15 && t.Hour() <= 18 && len(item.Weather) > 0 {
+			d.id = item.Weather[0].ID
+		}
+
 		days[dayKey] = d
 	}
 
 	for _, day := range dayOrder {
 		d := days[day]
-		dayIcon := getIcon(d.id)
+		weatherID := d.id
+		if weatherID == 0 {
+			weatherID = d.fallbackID
+		}
+		dayIcon := getIcon(weatherID)
 		tooltip.WriteString(fmt.Sprintf("%s  %s  %.0f° / %.0f°\n", dayIcon, day, d.max, d.min))
 	}
+	// days := make(map[string]struct {
+	// 	min, max float64
+	// 	id       int
+	// 	desc     string
+	// })
+	// var dayOrder []string
+	//
+	// for _, item := range forecast.List {
+	// 	t := time.Unix(item.Dt, 0)
+	// 	dayKey := t.Format("Mon 02")
+	//
+	// 	if _, exists := days[dayKey]; !exists {
+	// 		dayOrder = append(dayOrder, dayKey)
+	// 		days[dayKey] = struct {
+	// 			min, max float64
+	// 			id       int
+	// 			desc     string
+	// 		}{min: item.Main.TempMin, max: item.Main.TempMax}
+	// 	}
+	//
+	// 	d := days[dayKey]
+	// 	if item.Main.TempMin < d.min {
+	// 		d.min = item.Main.TempMin
+	// 	}
+	// 	if item.Main.TempMax > d.max {
+	// 		d.max = item.Main.TempMax
+	// 	}
+	// 	// Use midday weather for the icon
+	// 	if t.Hour() >= 12 && t.Hour() <= 15 && len(item.Weather) > 0 {
+	// 		d.id = item.Weather[0].ID
+	// 		d.desc = item.Weather[0].Description
+	// 	}
+	// 	days[dayKey] = d
+	// }
+
+	// for _, day := range dayOrder {
+	// 	d := days[day]
+	// 	dayIcon := getIcon(d.id)
+	// 	tooltip.WriteString(fmt.Sprintf("%s  %s  %.0f° / %.0f°\n", dayIcon, day, d.min, d.max))
+	// }
 
 	output := WaybarOutput{
 		Text:    text,
