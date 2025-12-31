@@ -1,22 +1,22 @@
-package main
-
 // WARN: DON'T FORGET TO SET OWM_API_KEY ON YOUR ENV!!!
 // WARN: you need to add the variable to the /etc/environment file
 // WARN: because waybar loads before bashrc is called
 //
-//  Put this on your waybar config.jsonc
-//  then add "custom/weather" to any of the modules (modules-left, modules-right or modules-center)
+//	Put this on your waybar config.jsonc
+//	then add "custom/weather" to any of the modules (modules-left, modules-right or modules-center)
 //
-//   "custom/weather": {
-//     "exec": "~/.config/waybar/weather",
-//     "interval": 600, // refresh every 10 min
-//     "return-type": "json",
-//     "id": "custom-weather"
-//   },
+//	 "custom/weather": {
+//	   "exec": "~/.config/waybar/weather",
+//	   "interval": 600, // refresh every 10 min
+//	   "return-type": "json",
+//	   "id": "custom-weather"
+//	 },
+package main
 
 import (
 	"encoding/json"
 	"fmt"
+	"math"
 	"net/http"
 	"os"
 	"strings"
@@ -67,23 +67,23 @@ type Forecast struct {
 func getIcon(id int) string {
 	switch {
 	case id >= 200 && id < 300:
-		return "⛈️" // Thunderstorm
+		return "⛈️"
 	case id >= 300 && id < 400:
-		return "🌧️" // Drizzle
+		return "🌧️"
 	case id >= 500 && id < 600:
-		return "🌧️" // Rain
+		return "🌧️"
 	case id >= 600 && id < 700:
-		return "❄️" // Snow
+		return "❄️"
 	case id >= 700 && id < 800:
-		return "🌫️" // Atmosphere (fog, mist)
+		return "🌫️"
 	case id == 800:
-		return "☀️" // Clear
+		return "☀️"
 	case id == 801:
-		return "🌤️" // Few clouds
+		return "🌤️"
 	case id == 802:
-		return "⛅" // Scattered clouds
+		return "⛅"
 	case id >= 803:
-		return "☁️" // Cloudy
+		return "☁️"
 	default:
 		return "🌡️"
 	}
@@ -98,7 +98,6 @@ func main() {
 
 	client := &http.Client{Timeout: 10 * time.Second}
 
-	// Fetch current weather
 	currentURL := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&units=%s&appid=%s", city, units, apiKey)
 	current, err := fetchJSON[CurrentWeather](client, currentURL)
 	if err != nil {
@@ -106,7 +105,6 @@ func main() {
 		return
 	}
 
-	// Fetch 5-day forecast
 	forecastURL := fmt.Sprintf("https://api.openweathermap.org/data/2.5/forecast?q=%s&units=%s&appid=%s", city, units, apiKey)
 	forecast, err := fetchJSON[Forecast](client, forecastURL)
 	if err != nil {
@@ -114,14 +112,14 @@ func main() {
 		return
 	}
 
-	// Current weather text
+	// Current weather
 	icon := "🌡️"
 	if len(current.Weather) > 0 {
 		icon = getIcon(current.Weather[0].ID)
 	}
 	text := fmt.Sprintf("%s %.0f°C", icon, current.Main.Temp)
 
-	// Build tooltip with current + forecast
+	// Tooltip
 	var tooltip strings.Builder
 	tooltip.WriteString(fmt.Sprintf("<b>%s</b>\n", current.Name))
 	if len(current.Weather) > 0 {
@@ -132,12 +130,17 @@ func main() {
 	tooltip.WriteString(fmt.Sprintf("Wind: %.1f m/s\n", current.Wind.Speed))
 	tooltip.WriteString("\n<b>Forecast</b>\n")
 
-	// Group forecast by day and get min/max
-	days := make(map[string]struct {
-		min, max   float64
-		id         int
-		fallbackID int
-	})
+	// Current hour for comparison
+	now := time.Now()
+	currentHour := now.Hour()
+
+	type dayData struct {
+		min, max     float64
+		weatherID    int
+		closestDelta int
+		hasWeather   bool
+	}
+	days := make(map[string]*dayData)
 	var dayOrder []string
 
 	for _, item := range forecast.List {
@@ -147,11 +150,12 @@ func main() {
 		d, exists := days[dayKey]
 		if !exists {
 			dayOrder = append(dayOrder, dayKey)
-			d = struct {
-				min, max   float64
-				id         int
-				fallbackID int
-			}{min: item.Main.TempMin, max: item.Main.TempMax}
+			d = &dayData{
+				min:          item.Main.TempMin,
+				max:          item.Main.TempMax,
+				closestDelta: 24,
+			}
+			days[dayKey] = d
 		}
 
 		if item.Main.TempMin < d.min {
@@ -161,68 +165,31 @@ func main() {
 			d.max = item.Main.TempMax
 		}
 
-		// Capture first weather as fallback
-		if d.fallbackID == 0 && len(item.Weather) > 0 {
-			d.fallbackID = item.Weather[0].ID
+		// Pick weather closest to current hour
+		if len(item.Weather) > 0 {
+			entryHour := t.Hour()
+			delta := int(math.Abs(float64(entryHour - currentHour)))
+			if delta < d.closestDelta {
+				d.closestDelta = delta
+				d.weatherID = item.Weather[0].ID
+				d.hasWeather = true
+			}
 		}
-
-		// Prefer midday weather (UTC 15-18 = ~12-15 local for AR)
-		if t.Hour() >= 15 && t.Hour() <= 18 && len(item.Weather) > 0 {
-			d.id = item.Weather[0].ID
-		}
-
-		days[dayKey] = d
 	}
 
 	for _, day := range dayOrder {
 		d := days[day]
-		weatherID := d.id
-		if weatherID == 0 {
-			weatherID = d.fallbackID
+		dayIcon := "🌡️"
+		if d.hasWeather {
+			dayIcon = getIcon(d.weatherID)
 		}
-		dayIcon := getIcon(weatherID)
-		tooltip.WriteString(fmt.Sprintf("%s  %s  %.0f° / %.0f°\n", dayIcon, day, d.max, d.min))
+		tooltip.WriteString(fmt.Sprintf("%s  %s  %.0f° / %.0f°\n",
+			dayIcon,
+			day,
+			d.max,
+			d.min,
+		))
 	}
-	// days := make(map[string]struct {
-	// 	min, max float64
-	// 	id       int
-	// 	desc     string
-	// })
-	// var dayOrder []string
-	//
-	// for _, item := range forecast.List {
-	// 	t := time.Unix(item.Dt, 0)
-	// 	dayKey := t.Format("Mon 02")
-	//
-	// 	if _, exists := days[dayKey]; !exists {
-	// 		dayOrder = append(dayOrder, dayKey)
-	// 		days[dayKey] = struct {
-	// 			min, max float64
-	// 			id       int
-	// 			desc     string
-	// 		}{min: item.Main.TempMin, max: item.Main.TempMax}
-	// 	}
-	//
-	// 	d := days[dayKey]
-	// 	if item.Main.TempMin < d.min {
-	// 		d.min = item.Main.TempMin
-	// 	}
-	// 	if item.Main.TempMax > d.max {
-	// 		d.max = item.Main.TempMax
-	// 	}
-	// 	// Use midday weather for the icon
-	// 	if t.Hour() >= 12 && t.Hour() <= 15 && len(item.Weather) > 0 {
-	// 		d.id = item.Weather[0].ID
-	// 		d.desc = item.Weather[0].Description
-	// 	}
-	// 	days[dayKey] = d
-	// }
-
-	// for _, day := range dayOrder {
-	// 	d := days[day]
-	// 	dayIcon := getIcon(d.id)
-	// 	tooltip.WriteString(fmt.Sprintf("%s  %s  %.0f° / %.0f°\n", dayIcon, day, d.min, d.max))
-	// }
 
 	output := WaybarOutput{
 		Text:    text,
