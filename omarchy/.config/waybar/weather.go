@@ -43,6 +43,7 @@ type CurrentWeather struct {
 	Weather []struct {
 		ID          int    `json:"id"`
 		Description string `json:"description"`
+		Icon        string `json:"icon"`
 	} `json:"weather"`
 	Wind struct {
 		Speed float64 `json:"speed"`
@@ -64,7 +65,16 @@ type Forecast struct {
 	} `json:"list"`
 }
 
-func getIcon(id int) string {
+func getDayNight() string {
+	hour := time.Now().Hour()
+	if hour >= 20 || hour < 7 {
+		return "n"
+	}
+	return "d"
+}
+
+func getIcon(id int, iconCode string) string {
+	isNight := strings.HasSuffix(iconCode, "n")
 	switch {
 	case id >= 200 && id < 300:
 		return "⛈️"
@@ -77,10 +87,19 @@ func getIcon(id int) string {
 	case id >= 700 && id < 800:
 		return "🌫️"
 	case id == 800:
+		if isNight {
+			return "🌙"
+		}
 		return "☀️"
 	case id == 801:
+		if isNight {
+			return "🌙☁️"
+		}
 		return "🌤️"
 	case id == 802:
+		if isNight {
+			return "🌙☁️"
+		}
 		return "⛅"
 	case id >= 803:
 		return "☁️"
@@ -123,7 +142,7 @@ func main() {
 	// Current weather
 	icon := "🌡️"
 	if len(current.Weather) > 0 {
-		icon = getIcon(current.Weather[0].ID)
+		icon = getIcon(current.Weather[0].ID, current.Weather[0].Icon)
 	}
 	text := fmt.Sprintf("%s %.0f°C", icon, current.Main.Temp)
 
@@ -189,7 +208,7 @@ func main() {
 		d := days[day]
 		dayIcon := "🌡️"
 		if d.hasWeather {
-			dayIcon = getIcon(d.weatherID)
+			dayIcon = getIcon(d.weatherID, getDayNight())
 		}
 		tooltip.WriteString(fmt.Sprintf("%s  %s  %.0f° / %.0f°\n",
 			dayIcon,
