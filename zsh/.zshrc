@@ -51,9 +51,11 @@ export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/.local/share/nvim/lsp_servers/rust/rust_analyzer
 
 # nvm export
+set -h
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
+set +h
 
 # export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig/"
 
