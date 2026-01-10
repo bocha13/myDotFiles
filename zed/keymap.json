@@ -1,0 +1,152 @@
+// Zed keymap - Migrated from Neovim
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  // ============================================================
+  // WORKSPACE BINDINGS (global shortcuts)
+  // ============================================================
+  {
+    "context": "Workspace",
+    "bindings": {
+      // File navigation (Telescope equivalents)
+      "space f f": "file_finder::Toggle", // <leader>ff - find files
+      "space f b": "tab_switcher::Toggle", // <leader>fb - buffers
+      "space f g": "file_finder::Toggle", // <leader>fg - git files (Zed auto-respects git)
+
+      // Search (Telescope grep equivalent)
+      "space s g": "pane::DeploySearch", // <leader>sg - live grep
+
+      // File explorer
+      "space e": "project_panel::ToggleFocus", // <leader>e - oil.nvim equivalent
+
+      // Reload/source config (Zed auto-reloads, but this opens settings)
+      "space o": "zed::OpenSettings", // <leader>o - open settings
+
+      // Buffer/Tab management
+      "space b d": "pane::CloseActiveItem", // <leader>bd - close buffer
+    },
+  },
+
+  // ============================================================
+  // EDITOR - VIM NORMAL MODE
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // Page navigation (keep centered)
+      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-d z z"],
+      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-u z z"],
+
+      // Buffer navigation
+      "shift-h": "pane::ActivatePrevItem", // H - previous buffer
+      "shift-l": "pane::ActivateNextItem", // L - next buffer
+
+      // Move lines (Alt+j/k)
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp",
+
+      // Quickfix navigation
+      "space h": "editor::GoToDiagnostic", // <leader>h - next diagnostic
+      "space l": "editor::GoToPrevDiagnostic", // <leader>l - prev diagnostic
+
+      // Clear search with Escape
+      "escape": "editor::Cancel",
+
+      // Disable Q (nop in nvim config)
+      // Note: In Zed, you can't truly disable a key, but we can make it do nothing useful
+      "shift-q": "editor::Cancel",
+
+      // Macros - Q to replay macro
+      // Note: Zed's vim mode supports macros with q, but replay is @q
+      // We can't easily remap Q to @q in Zed's current implementation
+
+      // File finder (from your existing config)
+      "ctrl-f": "file_finder::Toggle",
+
+      // Redraw/clear (similar to <leader>ur)
+      "space u r": "editor::Cancel",
+    },
+  },
+
+  // ============================================================
+  // EDITOR - VIM VISUAL MODE
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      // Move selected lines
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp",
+
+      // Clipboard operations (visual mode)
+      "space y": "editor::Copy", // <leader>y - yank to clipboard
+      "space p": "editor::Paste", // <leader>p - paste from clipboard
+      "space d": "editor::Delete", // <leader>d - delete without copy
+
+      // Macro execution on selection
+      "shift-q": ["workspace::SendKeystrokes", ": norm @ q"],
+    },
+  },
+
+  // ============================================================
+  // EDITOR - VIM INSERT MODE
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // Clear search with Escape (also exits insert)
+      "escape": "vim::NormalBefore",
+    },
+  },
+
+  // ============================================================
+  // EDITOR - ALL VIM MODES (normal + visual)
+  // ============================================================
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual)",
+    "bindings": {
+      // Clipboard operations (works in both normal and visual)
+      "space y": "editor::Copy", // <leader>y - yank to clipboard
+      "space shift-y": "editor::Copy", // <leader>Y - yank to clipboard
+      "space p": "editor::Paste", // <leader>p - paste from clipboard
+      "space d": "editor::Delete", // <leader>d - delete without yanking
+    },
+  },
+
+  // ============================================================
+  // EDITOR - GENERAL (all modes)
+  // ============================================================
+  {
+    "context": "Editor",
+    "bindings": {
+      // Clear search highlighting
+      "escape": "editor::Cancel",
+
+      // Theme toggle (closest equivalent to colorscheme toggle)
+      // Note: Zed doesn't have a direct toggle, but you can use theme selector
+      "space c s": "theme_selector::Toggle", // <leader>cs - change theme
+    },
+  },
+
+  // ============================================================
+  // PROJECT PANEL (file explorer)
+  // ============================================================
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "space e": "project_panel::ToggleFocus", // Close panel with same key
+    },
+  },
+
+  // ============================================================
+  // TERMINAL
+  // ============================================================
+  {
+    "context": "Terminal",
+    "bindings": {},
+  },
+]
