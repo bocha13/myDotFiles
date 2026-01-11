@@ -1,0 +1,70 @@
+# If not running interactively, don't do anything (leave this at the top of this file)
+[[ $- != *i* ]] && return
+
+# All the default Omarchy aliases and functions
+# (don't mess with these directly, just overwrite them here!)
+source ~/.local/share/omarchy/default/bash/rc
+
+# Add your own exports, aliases, and functions here.
+#
+# Make an alias for invoking commands you use constantly
+# alias p='python'
+
+# ---------------- FUNCTIONS ----------------
+# File extraction
+# usage: ex <file>
+function ex(){
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)    tar xjf    $1  ;;
+            *.tar.gz)     tar xzf    $1  ;;
+            *.bz2)        bunzip2    $1  ;;
+            *.rar)        unrar x    $1  ;;
+            *.gz)         gunzip     $1  ;;
+            *.tar)        tar xf     $1  ;;
+            *.tbz2)       tar xjf    $1  ;;
+            *.tgz)        tar xzf    $1  ;;
+            *.zip)        unzip      $1  ;;
+            *.Z)          uncompress $1  ;;
+            *.7z)         7z x       $1  ;;
+            *.deb)        ar x       $1  ;;
+            *.tar.xz)     tar xf     $1  ;;
+            *.tar.zst)    unzstd     $1  ;;
+            *)            echo "'$1' cannot be extracted via ex()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+
+# ---------------- ALIAS ----------------
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias vim='nvim'
+alias dosaml="yarn server do api --useHttps --host auth.learnlight.com --port 8443"
+
+# Start Tmux if not already running
+if [[ -z "$TMUX" ]]; then
+    # Check for detached sessions
+    if [[ $(tmux list-sessions 2>/dev/null) ]]; then
+        # Open the first detached session
+        tmux attach-session -t $(tmux list-sessions -F "#S" 2>/dev/null | head -n 1)
+    else
+        # No detached sessions, start a new Tmux session
+        tmux new-session
+    fi
+fi
+
+# NVM
+set -h
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+set +h
+
+# OPENCODE
+export PATH=/home/bocha13/.opencode/bin:$PATH
+export EDITOR="nvim"
