@@ -62,27 +62,6 @@ vim.api.nvim_create_autocmd("BufRead", {
   end,
 })
 
-vim.api.nvim_create_autocmd("CursorMoved", {
-  group = vim.api.nvim_create_augroup("LspReferenceHighlight", { clear = true }),
-  desc = "Highlight references under cursor",
-  callback = function()
-    if vim.fn.mode() ~= "i" then
-      local clients = vim.lsp.get_clients({ bufnr = 0 })
-      local supports_highlight = false
-      for _, client in ipairs(clients) do
-        if client.server_capabilities.documentHighlightProvider then
-          supports_highlight = true
-          break
-        end
-      end
-
-      if supports_highlight then
-        vim.lsp.buf.clear_references()
-        vim.lsp.buf.document_highlight()
-      end
-    end
-  end
-})
 
 -- this is to have yank in wsl, requires the following dependencies
 -- install in WSL:
@@ -143,18 +122,3 @@ vim.opt.updatetime = 50
 vim.opt.diffopt = "vertical"
 
 vim.g.mapleader = " "
-
--- Format on save only use one of these
--- NATIVE
--- vim.api.nvim_create_autocmd("BufWritePre", {
---   callback = function()
---     vim.lsp.buf.format()
---   end,
--- })
--- CONFORM
--- vim.api.nvim_create_autocmd("BufWritePre", {
---   pattern = "*",
---   callback = function(args)
---     require("conform").format({ bufnr = args.buf })
---   end,
--- })
