@@ -68,11 +68,11 @@ return {
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if not client then return end
-        if (client.name == "eslint" or client.name == "ts_ls") and vim.fn.getcwd():match("learner%-frontend") then
-          -- if (client.name == "eslint" or client.name == "ts_ls") then
-          client.server_capabilities.documentFormattingProvider = false
-          client.server_capabilities.documentRangeFormattingProvider = false
-        end
+        -- if (client.name == "eslint" or client.name == "ts_ls") and vim.fn.getcwd():match("learner%-frontend") then
+        --   -- if (client.name == "eslint" or client.name == "ts_ls") then
+        --   client.server_capabilities.documentFormattingProvider = false
+        --   client.server_capabilities.documentRangeFormattingProvider = false
+        -- end
         if client.server_capabilities.documentHighlightProvider then
           local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
           -- Highlight word under cursor in entire file
@@ -115,7 +115,6 @@ return {
     vim.lsp.enable("jsonls")
     vim.lsp.enable("lua_ls")
     vim.lsp.enable("tailwindcss")
-    -- vim.lsp.enable("ts_ls")
     vim.lsp.enable("vtsls")
   end
 }
