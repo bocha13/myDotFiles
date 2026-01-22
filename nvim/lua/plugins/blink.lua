@@ -35,15 +35,7 @@ return {
         },
       },
       sources = {
-        default = { 'lazydev', 'lsp', 'buffer', 'snippets', 'path' },
-        providers = {
-          lazydev = {
-            name = "LazyDev",
-            module = "lazydev.integrations.blink",
-            -- make lazydev completions top priority (see `:h blink.cmp`)
-            score_offset = 100,
-          },
-        },
+        default = { 'lsp', 'buffer', 'snippets', 'path' },
       },
       fuzzy = { implementation = "prefer_rust_with_warning" }
     },

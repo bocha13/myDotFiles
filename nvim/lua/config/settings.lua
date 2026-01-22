@@ -34,7 +34,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     vim.cmd("setlocal filetype=groovy")
   end,
-  group = general,
+  group = vim.api.nvim_create_augroup("General", { clear = true }),
   pattern = "Jenkinsfile",
   desc = "Set Jenkinsfile filetype",
 })
