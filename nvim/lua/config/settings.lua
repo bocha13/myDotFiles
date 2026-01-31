@@ -22,12 +22,12 @@ vim.opt.fillchars:append({
 })
 
 -- remove auto comment on new line after comment
-vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("no_auto_comment", {}),
-  callback = function()
-    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
-  end
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--   group = vim.api.nvim_create_augroup("no_auto_comment", {}),
+--   callback = function()
+--     vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+--   end
+-- })
 
 -- make nvim detect Jenkinsfile as groovy for syntax highlighting
 vim.api.nvim_create_autocmd("BufEnter", {

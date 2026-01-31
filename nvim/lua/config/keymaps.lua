@@ -110,7 +110,13 @@ map("n", "Q", "@qj", { desc = "Run macro q" })
 map("x", "Q", ":norm @q<CR>", { desc = "Run macro q in all selected lines" })
 
 -- GOLANG error check snippet
-map("n", "<leader>hh", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>", { desc = "insert error check for golang" })
+-- map("n", "<leader>hh", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>", { desc = "insert error check for golang" })
+map(
+  "n",
+  "<leader>hh",
+  "oif err != nil {<CR>}<Esc>O<Esc>A",
+  { desc = "insert error check for golang" }
+)
 
 -- JAVASCRIPT multiline comment
 map("n", "<leader>cc", function()

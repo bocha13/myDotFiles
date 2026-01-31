@@ -6,19 +6,42 @@ return {
   dependencies = {
     'saghen/blink.cmp',
     "nvim-telescope/telescope.nvim",
+    "williamboman/mason-lspconfig.nvim",
   },
   config = function()
     local mason = require("mason")
+    local mason_lspconfig = require("mason-lspconfig")
     local blink_cmp = require("blink.cmp")
     local builtin = require('telescope.builtin')
+
+    -- List of LSP servers to ensure are installed
+    local servers = {
+      "astro",
+      "clangd",
+      "cssls",
+      "eslint",
+      "gopls",
+      "html",
+      "prismals",
+      "jsonls",
+      "lua_ls",
+      "vtsls",
+    }
+
     mason.setup({
       ui = {
         icons = {
           package_installed = "󰸞",
           package_pending = "󰜴",
-          package_uninstalled = "",
+          package_uninstalled = "",
         }
       }
+    })
+
+    -- Automatically install LSP servers
+    mason_lspconfig.setup({
+      ensure_installed = servers,
+      automatic_installation = true,
     })
 
     vim.api.nvim_create_autocmd("LspAttach", {
@@ -61,7 +84,7 @@ return {
           local hl = "DiagnosticSign" .. type
           vim.diagnostic.config({
             signs = {
-              { name = hl, text = icon, texthl = hl } -- numhl is not needed in the new API
+              { name = hl, text = icon, texthl = hl }
             },
           })
         end
@@ -90,9 +113,8 @@ return {
           })
           vim.api.nvim_create_autocmd("LspDetach", {
             group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
-            callback = function(event2)
+            callback = function()
               vim.lsp.buf.clear_references()
-              -- vim.api.nvim_clear_autocmds({ group = "lsp-highlight", buffer = event2.buf })
             end,
           })
         end
@@ -118,7 +140,6 @@ return {
         client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
           runtime = {
             -- Tell the language server which version of Lua you're using (most
-            -- likely LuaJIT in the case of Neovim)
             version = 'LuaJIT',
             -- Tell the language server how to find Lua modules same way as Neovim
             -- (see `:h lua-module-load`)
@@ -132,16 +153,7 @@ return {
             checkThirdParty = false,
             library = {
               vim.env.VIMRUNTIME,
-              -- Depending on the usage, you might want to add additional paths
-              -- here.
-              -- '${3rd}/luv/library',
-              -- '${3rd}/busted/library',
             },
-            -- Or pull in all of 'runtimepath'.
-            -- NOTE: this is a lot slower and will cause issues when working on
-            -- your own configuration.
-            -- See https://github.com/neovim/nvim-lspconfig/issues/3189
-            -- library = vim.api.nvim_get_runtime_file('', true),
           },
         })
       end,
@@ -151,17 +163,8 @@ return {
     })
 
     -- enable LSP servers
-    vim.lsp.enable("astro")
-    vim.lsp.enable("clangd")
-    vim.lsp.enable("cssls")
-    vim.lsp.enable("eslint")
-    vim.lsp.enable("gopls")
-    vim.lsp.enable("html")
-    vim.lsp.enable("rust_analyzer")
-    vim.lsp.enable("prismals")
-    vim.lsp.enable("jsonls")
-    vim.lsp.enable("lua_ls")
-    vim.lsp.enable("tailwindcss")
-    vim.lsp.enable("vtsls")
+    for _, server in ipairs(servers) do
+      vim.lsp.enable(server)
+    end
   end
 }
