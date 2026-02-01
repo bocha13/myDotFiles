@@ -11,33 +11,11 @@ return {
     -- during startup.
     require("lazy.core.loader").add_to_rtp(plugin)
   end,
-  -- dependencies = {
-  --   {
-  --     "nvim-treesitter/nvim-treesitter-textobjects",
-  --     config = function()
-  --       -- When in diff mode, we want to use the default
-  --       -- vim text objects c & C instead of the treesitter ones.
-  --       local move = require("nvim-treesitter.textobjects.move") ---@type table<string,fun(...)>
-  --       local configs = require("nvim-treesitter.configs")
-  --       for name, fn in pairs(move) do
-  --         if name:find("goto") == 1 then
-  --           move[name] = function(q, ...)
-  --             if vim.wo.diff then
-  --               local config = configs.get_module("textobjects.move")[name] ---@type table<string,string>
-  --               for key, query in pairs(config or {}) do
-  --                 if q == query and key:find("[%]%[][cC]") then
-  --                   vim.cmd("normal! " .. key)
-  --                   return
-  --                 end
-  --               end
-  --             end
-  --             return fn(q, ...)
-  --           end
-  --         end
-  --       end
-  --     end,
-  --   },
-  -- },
+  dependencies = {
+    {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
+  },
   cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
   keys = {
     { "<c-space>", desc = "Increment selection" },
@@ -85,20 +63,23 @@ return {
   -- config = function(_, opts)
   --   require("nvim-treesitter.configs").setup(opts)
   -- end,
-  config = function()
-    local ok_move, move = pcall(require, "nvim-treesitter.textobjects.move")
-    local ok_cfg, configs = pcall(require, "nvim-treesitter.configs")
-    if not (ok_move and ok_cfg) then
+  config = function(_, opts)
+    require("nvim-treesitter.configs").setup(opts)
+
+    -- FIX: override textobject moves AFTER everything is loaded
+    local ok, move = pcall(require, "nvim-treesitter.textobjects.move")
+    if not ok then
       return
     end
 
+    local configs = require("nvim-treesitter.configs")
+
     for name, fn in pairs(move) do
-      if type(fn) == "function" and name:find("^goto") then
+      if name:find("goto") == 1 then
         move[name] = function(q, ...)
           if vim.wo.diff then
-            local mod = configs.get_module("textobjects.move") or {}
-            local conf = mod[name] or {}
-            for key, query in pairs(conf) do
+            local config = configs.get_module("textobjects.move")[name]
+            for key, query in pairs(config or {}) do
               if q == query and key:find("[%]%[][cC]") then
                 vim.cmd("normal! " .. key)
                 return
@@ -109,5 +90,30 @@ return {
         end
       end
     end
-  end
+  end,
+  -- config = function()
+  --   local ok_move, move = pcall(require, "nvim-treesitter.textobjects.move")
+  --   local ok_cfg, configs = pcall(require, "nvim-treesitter.configs")
+  --   if not (ok_move and ok_cfg) then
+  --     return
+  --   end
+  --
+  --   for name, fn in pairs(move) do
+  --     if type(fn) == "function" and name:find("^goto") then
+  --       move[name] = function(q, ...)
+  --         if vim.wo.diff then
+  --           local mod = configs.get_module("textobjects.move") or {}
+  --           local conf = mod[name] or {}
+  --           for key, query in pairs(conf) do
+  --             if q == query and key:find("[%]%[][cC]") then
+  --               vim.cmd("normal! " .. key)
+  --               return
+  --             end
+  --           end
+  --         end
+  --         return fn(q, ...)
+  --       end
+  --     end
+  --   end
+  -- end
 }
