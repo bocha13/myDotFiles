@@ -88,6 +88,11 @@ end
 return {
   cmd = { 'gopls' },
   filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+  on_attach = function(client)
+    -- Disable semantic tokens so treesitter handles all syntax highlighting.
+    -- gopls semantic tokens override treesitter with less granular coloring.
+    client.server_capabilities.semanticTokensProvider = nil
+  end,
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
     get_mod_cache_dir()
