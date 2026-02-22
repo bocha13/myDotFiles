@@ -1,5 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "opencode-anthropic-auth"
+  ],
   "theme": "gruvbox-material",
   "model": "anthropic/claude-sonnet-4-5",
   "autoupdate": true,
@@ -19,6 +22,11 @@
     "figma": {
       "type": "remote",
       "url": "https://mcp.figma.com/mcp",
+      "enabled": true
+    },
+    "attlasian": {
+      "type": "remote",
+      "url": "https://mcp.atlassian.com/v1/mcp",
       "enabled": true
     }
   }
