@@ -90,11 +90,16 @@ return {
             LineNrAbove = { fg = palette.overlay0 },
             LineNrBelow = { fg = palette.overlay0 },
             WinSeparator = { bg = palette.base, fg = palette.blue },
+            Visual = { bg = palette.overlay0 }, -- #595959
 
             -- Pmenu (completion menu)
             Pmenu = { bg = palette.crust, fg = palette.text },
             PmenuSel = { bg = palette.surface0, fg = palette.text },
             CmpItemMenu = { fg = palette.surface2 },
+            PmenuKind = { fg = palette.blue, bg = palette.crust },
+            PmenuExtra = { fg = palette.overlay2, bg = palette.crust },
+            PmenuSbar = { bg = palette.surface0 },
+            PmenuThumb = { bg = palette.overlay0 },
 
             -- Git signs (signcolumn)
             GitSignsChange = { fg = palette.blue },
@@ -351,6 +356,39 @@ return {
           bg = palette.surface0,
           bold = true
         })
+
+        -- Blink.cmp completion menu highlights
+        vim.api.nvim_set_hl(0, 'BlinkCmpLabel', { fg = palette.text, bg = palette.crust })
+        vim.api.nvim_set_hl(0, 'BlinkCmpLabelMatch', { fg = palette.green, bg = palette.crust, bold = true })
+        vim.api.nvim_set_hl(0, 'BlinkCmpLabelDetail', { fg = palette.overlay2, bg = palette.crust })
+        vim.api.nvim_set_hl(0, 'BlinkCmpLabelDescription', { fg = palette.subtext0, bg = palette.crust })
+
+        -- Kind-specific colors (mapped to syntax colors)
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindText', { fg = palette.text })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindMethod', { fg = palette.green })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindFunction', { fg = palette.green })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindConstructor', { fg = palette.green })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindField', { fg = palette.blue })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindVariable', { fg = palette.text })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindClass', { fg = palette.yellow })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindInterface', { fg = palette.yellow })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindModule', { fg = palette.yellow })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindProperty', { fg = palette.blue })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindUnit', { fg = palette.pink })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindValue', { fg = palette.pink })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindEnum', { fg = palette.yellow })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindKeyword', { fg = palette.red })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindSnippet', { fg = palette.teal })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindColor', { fg = palette.pink })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindFile', { fg = palette.blue })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindReference', { fg = palette.peach })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindFolder', { fg = palette.blue })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindEnumMember', { fg = palette.blue })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindConstant', { fg = palette.pink })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindStruct', { fg = palette.yellow })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindEvent', { fg = palette.peach })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindOperator', { fg = palette.peach })
+        vim.api.nvim_set_hl(0, 'BlinkCmpKindTypeParameter', { fg = palette.yellow })
       end
     end
   },
