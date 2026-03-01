@@ -84,13 +84,15 @@ return {
     "akinsho/git-conflict.nvim",
     version = "*",
     config = function()
+      -- Define highlights before git-conflict setup
+      vim.cmd([[highlight GitConflictIncoming guibg=#344f69]])
+      vim.cmd([[highlight GitConflictCurrent guibg=#2e5049]])
+      
       local git_conflict = require("git-conflict")
-      vim.cmd([[highlight NewIncoming guibg=#344f69]])
-      vim.cmd([[highlight NewCurrent guibg=#2e5049]])
       git_conflict.setup({
         highlights = {
-          incoming = "NewIncoming",
-          current = "NewCurrent",
+          incoming = "GitConflictIncoming",
+          current = "GitConflictCurrent",
         },
       })
     end,
