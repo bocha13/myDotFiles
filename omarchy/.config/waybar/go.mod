@@ -1,3 +1,3 @@
-module github.com/bocha13/myDotFiles
+module waybar-scripts
 
 go 1.25.3
