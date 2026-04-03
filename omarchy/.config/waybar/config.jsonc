@@ -169,7 +169,7 @@
     "format-connected": "󰂱",
     "format-no-controller": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "$TERMINAL --class=Bluetui -e bluetui"
+    "on-click": "$TERMINAL --title=Bluetui -e bluetui"
   },
   "pulseaudio": {
     "format": "{icon}",
