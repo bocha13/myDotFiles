@@ -23,6 +23,7 @@ import (
 	"os"
 	"strings"
 	"time"
+	"unicode"
 )
 
 type WaybarOutput struct {
@@ -110,6 +111,16 @@ func getIcon(id int, iconCode string) string {
 	}
 }
 
+func titleCase(s string) string {
+	words := strings.Fields(s)
+	for i, w := range words {
+		runes := []rune(w)
+		runes[0] = unicode.ToUpper(runes[0])
+		words[i] = string(runes)
+	}
+	return strings.Join(words, " ")
+}
+
 func main() {
 	apiKey := os.Getenv("OWM_API_KEY")
 	if apiKey == "" {
@@ -119,16 +130,8 @@ func main() {
 
 	client := &http.Client{Timeout: 10 * time.Second}
 
-	var current *CurrentWeather
-	var err error
-	for range 3 {
-		currentURL := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&units=%s&appid=%s", city, units, apiKey)
-		current, err = fetchJSON[CurrentWeather](client, currentURL)
-		if err == nil {
-			break
-		}
-		time.Sleep(5 * time.Second)
-	}
+	currentURL := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&units=%s&appid=%s", city, units, apiKey)
+	current, err := fetchJSON[CurrentWeather](client, currentURL)
 	if err != nil {
 		outputError(err.Error())
 		return
@@ -152,7 +155,7 @@ func main() {
 	var tooltip strings.Builder
 	tooltip.WriteString(fmt.Sprintf("<b>%s</b>\n", current.Name))
 	if len(current.Weather) > 0 {
-		tooltip.WriteString(fmt.Sprintf("%s %s\n", icon, strings.Title(current.Weather[0].Description)))
+		tooltip.WriteString(fmt.Sprintf("%s %s\n", icon, titleCase(current.Weather[0].Description)))
 	}
 	tooltip.WriteString(fmt.Sprintf("Feels like: %.0f°C\n", current.Main.FeelsLike))
 	tooltip.WriteString(fmt.Sprintf("Humidity: %d%%\n", current.Main.Humidity))

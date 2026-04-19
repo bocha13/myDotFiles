@@ -74,7 +74,7 @@
   "custom/cpu": {
     "exec": "~/.config/waybar/cpu",
     "format": " 󰍛 ",
-    "interval": 3,
+    "interval": 5,
     "return-type": "json"
   },
   // "cpu": {
@@ -114,8 +114,8 @@
     "format-wifi": "{icon}",
     "format-ethernet": "󰀂",
     "format-disconnected": "󰤮",
-    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-wifi": "{essid} ({frequency} GHz)",
+    "tooltip-format-ethernet": "Connected",
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
@@ -169,7 +169,7 @@
     "format-connected": "󰂱",
     "format-no-controller": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "$TERMINAL --title=Bluetui -e bluetui"
+    "on-click": "$TERMINAL --class=Bluetui --title=Bluetui -e bluetui"
   },
   "pulseaudio": {
     "format": "{icon}",

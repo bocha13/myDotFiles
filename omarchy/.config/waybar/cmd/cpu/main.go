@@ -3,7 +3,7 @@
 //
 //	"custom/cpu": {
 //	  "exec": "~/.config/waybar/cpu",
-//	  "format": " 󰍛 ",
+//	  "format": "󰍛",
 //	  "interval": 3,
 //	  "return-type": "json"
 //	},
