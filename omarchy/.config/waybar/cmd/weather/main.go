@@ -131,7 +131,17 @@ func main() {
 	client := &http.Client{Timeout: 10 * time.Second}
 
 	currentURL := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&units=%s&appid=%s", city, units, apiKey)
-	current, err := fetchJSON[CurrentWeather](client, currentURL)
+	var current *CurrentWeather
+	var err error
+	for attempt, delays := 0, []time.Duration{3 * time.Second, 7 * time.Second, 15 * time.Second}; attempt <= len(delays); attempt++ {
+		current, err = fetchJSON[CurrentWeather](client, currentURL)
+		if err == nil {
+			break
+		}
+		if attempt < len(delays) {
+			time.Sleep(delays[attempt])
+		}
+	}
 	if err != nil {
 		outputError(err.Error())
 		return
