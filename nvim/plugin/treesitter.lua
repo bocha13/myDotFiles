@@ -35,15 +35,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Incremental Highlight
-vim.keymap.set("n", "<CR>", function()
-  ts_utils.incremental_selection()
-end)
-
-vim.keymap.set("n", "<BS>", function()
-  ts_utils.decremental_selection()
-end)
-
 TS.setup({
   context_commentstring = { enable = true, enable_autocmd = false },
   ensure_installed = {
@@ -52,7 +43,6 @@ TS.setup({
     "css",
     "go",
     "html",
-    "rust",
     "javascript",
     "json",
     "lua",

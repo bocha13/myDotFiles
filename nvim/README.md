@@ -1,8 +1,10 @@
 # Neovim config
 
+This config is powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
+
 ## ⚡️ Requirements
 
-- Neovim >= **0.12** with LuaJIT support
+- Neovim >= **0.11** with LuaJIT support
 - Git >= **2.43.0** (for partial clones support)
 - A [Nerd Font](https://www.nerdfonts.com/) **_(optional)_**
 - If your terminal doesn't include a clipboard, install one (eg. sudo apt-get install xclip)

@@ -13,7 +13,6 @@ local servers = {
   "gopls",
   "html",
   "prismals",
-  "rust_analyzer",
   "jsonls",
   "lua_ls",
   "vtsls",

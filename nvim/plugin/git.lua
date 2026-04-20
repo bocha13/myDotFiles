@@ -1,9 +1,8 @@
-vim.pack.add({ "https://github.com/lewis6991/gitsigns.nvim",
+vim.pack.add({
+  "https://github.com/lewis6991/gitsigns.nvim",
   "https://github.com/tpope/vim-fugitive",
   "https://github.com/akinsho/git-conflict.nvim"
 })
-
--- git-signs
 require("gitsigns").setup({
   signs = {
     add = { text = "█" },
