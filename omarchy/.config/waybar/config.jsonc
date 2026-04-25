@@ -51,7 +51,7 @@
     }
   },
   "custom/weather": {
-    "exec": "~/.config/waybar/weather",
+    "exec": "~/.config/waybar/waybar_tools/target/release/weather_rs",
     "interval": 600, // refresh every 10 min
     "return-type": "json",
     "id": "custom-weather",
@@ -72,8 +72,8 @@
     "interval": 3600
   },
   "custom/cpu": {
-    "exec": "~/.config/waybar/cpu",
-    "format": " 󰍛 ",
+    "exec": "~/.config/waybar/waybar_tools/target/release/cpu_rs",
+    // "format": "󰍛",
     "interval": 5,
     "return-type": "json"
   },
