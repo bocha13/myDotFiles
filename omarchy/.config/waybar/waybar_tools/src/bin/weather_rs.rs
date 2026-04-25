@@ -84,7 +84,19 @@ fn main() {
     let endpoint = String::from(
         "https://api.open-meteo.com/v1/forecast?latitude=-31.6488&longitude=-60.7087&daily=weather_code,temperature_2m_max,temperature_2m_min&current=temperature_2m,is_day,weather_code,apparent_temperature,relative_humidity_2m,wind_speed_10m&timezone=America%2FSao_Paulo&past_days=0&forecast_days=7",
     );
-    let data: Data = client.get(endpoint).send().and_then(|r| r.json()).unwrap();
+    let data: Data = match client.get(endpoint).send().and_then(|r| r.json()) {
+        Ok(data) => data,
+        Err(_) => {
+            println!(
+                "{}",
+                serde_json::json!({
+                "text": "⚠️ N/A",
+                "tooltip": "Failed to fetch weather"
+                })
+            );
+            return;
+        }
+    };
 
     let c = data.current;
     let d = data.daily;
