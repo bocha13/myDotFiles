@@ -1,3 +1,12 @@
+// Put this on your waybar config.jsonc
+// then add "custom/weather" to any of the modules (modules-left, modules-right, modules-center)
+// "custom/weather": {
+//   "exec": "~/.config/waybar/waybar_tools/target/release/weather_rs",
+//   "interval": 600, // refresh every 10 min
+//   "return-type": "json",
+//   "id": "custom-weather",
+//   "tooltip": true
+// },
 use chrono::NaiveDate;
 use reqwest::blocking::Client;
 use serde::Deserialize;

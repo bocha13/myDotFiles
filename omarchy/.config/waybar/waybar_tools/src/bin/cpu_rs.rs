@@ -1,3 +1,10 @@
+// Put this on your waybar config.jsonc
+// then add "custom/cpu" to any of the modules (modules-left, modules-right, modules-center)
+// "custom/cpu": {
+//   "exec": "~/.config/waybar/waybar_tools/target/release/cpu_rs",
+//   "interval": 5,
+//   "return-type": "json"
+// },
 use serde_json::json;
 use std::{fs, thread};
 use sysinfo::{Components, System};
