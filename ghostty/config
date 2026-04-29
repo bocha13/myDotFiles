@@ -14,9 +14,7 @@ adjust-cell-height = -1
 adjust-cell-width = -1
 
 # disable font ligatures
-font-feature = -calt
-font-feature = -liga
-font-feature = -dlig
+font-feature = -calt, -liga, -dlig
 
 # KEYBINDS
 # split
