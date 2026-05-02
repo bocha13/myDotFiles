@@ -80,6 +80,12 @@ local p = {
 
 local hi = function(name, opts) vim.api.nvim_set_hl(0, name, opts) end
 
+-- Diagnostic overrides
+hi("DiagnosticWarn", { fg = p.yellow })
+hi("DiagnosticSignWarn", { fg = p.yellow })
+hi("DiagnosticVirtualTextWarn", { fg = p.yellow })
+hi("DiagnosticUnderlineWarn", { sp = p.yellow, underline = true })
+
 -- UI overrides
 hi("CmpItemMenu", { fg = p.surface2 })
 hi("CursorLineNr", { fg = p.text, bg = p.surface0 })
@@ -144,6 +150,7 @@ hi("Function", { fg = p.green, bold = true })
 hi("Delimiter", { fg = p.text })
 hi("Ignore", { fg = p.text })
 hi("Macro", { fg = p.teal })
+hi("Comment", { fg = p.subtext0 })
 
 -- Treesitter
 hi("TSAnnotation", { fg = p.mauve })
@@ -323,8 +330,34 @@ hi("@lsp.type.type", { link = "TSType" })
 hi("@lsp.type.typeParameter", { link = "TSTypeDefinition" })
 hi("@lsp.type.variable", { link = "TSVariable" })
 
+-- Diff highlights
+hi("DiffAdd", { bg = "#1e3a2f" })
+hi("DiffDelete", { bg = "#3a1e1e" })
+hi("DiffChange", { bg = "#1e2a3a" })
+hi("DiffText", { bg = "#44491e" })
+-- Git conflict marker highlights (matchadd-based, no plugin needed)
+hi("GitConflictMarkerOurs", { bg = "#386c58", bold = true })
+hi("GitConflictMarkerBase", { bg = "#44491e", bold = true })
+hi("GitConflictMarkerTheirs", { bg = "#384f6c", bold = true })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    vim.fn.matchadd("GitConflictMarkerOurs", "^<<<<<<< .*$")
+    vim.fn.matchadd("GitConflictMarkerBase", "^\\(|\\{7\\}\\|=======\\).*$")
+    vim.fn.matchadd("GitConflictMarkerTheirs", "^>>>>>>> .*$")
+  end,
+})
+
+-- Word reference highlights (cursor on word highlights all occurrences)
+hi("LspReferenceText", { bg = p.surface1 })
+hi("LspReferenceRead", { bg = p.surface1 })
+hi("LspReferenceWrite", { bg = p.surface1 })
+
 -- Visual selection
 hi("Visual", { bg = p.surface2 })
+
+-- MiniIndentscope
+hi("MiniIndentscopeSymbol", { fg = p.subtext0 })
 
 -- MiniTabline
 hi("MiniTablineCurrent", { fg = p.text, bg = p.surface1, bold = true })

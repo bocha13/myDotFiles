@@ -1,6 +1,10 @@
-vim.pack.add({ "https://github.com/saghen/blink.cmp" })
+vim.pack.add({
+  "https://github.com/saghen/blink.cmp",
+  "https://github.com/L3MON4D3/LuaSnip",
+  "https://github.com/rafamadriz/friendly-snippets"
+})
 
--- rebuild blink fuzzy matcher whenever we update blink plugin
+-- rebuild blink fuzzy matcher whenever we update blink
 vim.api.nvim_create_autocmd("PackChanged", {
   callback = function(ev)
     if ev.data.spec.name == "blink.cmp" and ev.data.kind == "update" then
@@ -32,7 +36,7 @@ local blinkCmp = require("blink.cmp")
 luaSnipLoader.lazy_load()
 
 blinkCmp.setup({
-  keymap = { preset = 'enter' },
+  keymap = { preset = 'default' },
   appearance = {
     use_nvim_cmp_as_default = false,
     nerd_font_variant = 'mono'

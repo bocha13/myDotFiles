@@ -6,9 +6,8 @@ vim.pack.add({
 })
 
 local TS = require("nvim-treesitter")
-local ts_utils = vim.treesitter
 
--- Update tree-sitter parsers whenever plugin named ‘nvim-treesitter’ is updated
+-- Update tree-sitter parsers whenever ‘nvim-treesitter’ is updated
 vim.api.nvim_create_autocmd('PackChanged', {
   callback = function(ev)
     local name, kind = ev.data.spec.name, ev.data.kind
@@ -24,14 +23,10 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function(args)
     local ft = vim.bo[args.buf].filetype
 
-    local ok = pcall(function()
+    pcall(function()
       local lang = vim.treesitter.language.get_lang(ft)
       vim.treesitter.start(args.buf, lang)
     end)
-
-    if ok then
-      vim.bo[args.buf].indentexpr = "v:lua.vim.treesitter.indentexpr()"
-    end
   end,
 })
 

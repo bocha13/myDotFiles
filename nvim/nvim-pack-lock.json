@@ -16,10 +16,6 @@
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
-    "git-conflict.nvim": {
-      "rev": "a1badcd070d176172940eb55d9d59029dad1c5a6",
-      "src": "https://github.com/akinsho/git-conflict.nvim"
-    },
     "gitsigns.nvim": {
       "rev": "8d82c240f190fc33723d48c308ccc1ed8baad69d",
       "src": "https://github.com/lewis6991/gitsigns.nvim"

@@ -1,7 +1,6 @@
 vim.pack.add({
   "https://github.com/lewis6991/gitsigns.nvim",
   "https://github.com/tpope/vim-fugitive",
-  "https://github.com/akinsho/git-conflict.nvim"
 })
 require("gitsigns").setup({
   signs = {
@@ -52,6 +51,3 @@ require("gitsigns").setup({
 -- vim-fugitive
 vim.keymap.set("n", "<leader>gv", ":Gdiffsplit!<CR>", { desc = "Open Git diff" })
 vim.keymap.set("n", "<leader>gV", "<c-w>h<c-w>c<CR>", { desc = "Close fugitive buffer" })
-
--- git-conflict
-require("git-conflict").setup()
