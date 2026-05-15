@@ -1,24 +1,19 @@
-// WARN: DON'T FORGET TO SET OWM_API_KEY ON YOUR ENV!!!
-// WARN: you need to add the variable to the /etc/environment file
-// WARN: because waybar loads before bashrc is called
+// Build: go build -o ~/.config/waybar/weather ./cmd/weather
 //
 //	Put this on your waybar config.jsonc
 //	then add "custom/weather" to any of the modules (modules-left, modules-right or modules-center)
 //
 //	 "custom/weather": {
 //	   "exec": "~/.config/waybar/weather",
-//	   "interval": 600, // refresh every 10 min
+//	   "interval": 600,
 //	   "return-type": "json",
 //	   "id": "custom-weather"
 //	 },
-
-// BUILD: go build -o ~/.config/waybar ./cmd/weather
 package main
 
 import (
 	"encoding/json"
 	"fmt"
-	"math"
 	"net/http"
 	"os"
 	"strings"
@@ -31,99 +26,79 @@ type WaybarOutput struct {
 	Class   string `json:"class"`
 }
 
-const (
-	city  = "Santa%20Fe,AR"
-	units = "metric"
-)
+const apiURL = "https://api.open-meteo.com/v1/forecast" +
+	"?latitude=-31.6488&longitude=-60.7087" +
+	"&daily=weather_code,temperature_2m_max,temperature_2m_min" +
+	"&current=temperature_2m,is_day,weather_code,apparent_temperature,relative_humidity_2m,wind_speed_10m" +
+	"&timezone=America%2FSao_Paulo&past_days=0&forecast_days=7"
 
-type CurrentWeather struct {
-	Main struct {
-		Temp      float64 `json:"temp"`
-		FeelsLike float64 `json:"feels_like"`
-		Humidity  int     `json:"humidity"`
-	} `json:"main"`
-	Weather []struct {
-		ID          int    `json:"id"`
-		Description string `json:"description"`
-		Icon        string `json:"icon"`
-	} `json:"weather"`
-	Wind struct {
-		Speed float64 `json:"speed"`
-	} `json:"wind"`
-	Name string `json:"name"`
+type OpenMeteoResponse struct {
+	Current struct {
+		Temperature      float64 `json:"temperature_2m"`
+		IsDay            int     `json:"is_day"`
+		WeatherCode      int     `json:"weather_code"`
+		ApparentTemp     float64 `json:"apparent_temperature"`
+		RelativeHumidity int     `json:"relative_humidity_2m"`
+		WindSpeed        float64 `json:"wind_speed_10m"`
+	} `json:"current"`
+	Daily struct {
+		Time        []string  `json:"time"`
+		WeatherCode []int     `json:"weather_code"`
+		TempMax     []float64 `json:"temperature_2m_max"`
+		TempMin     []float64 `json:"temperature_2m_min"`
+	} `json:"daily"`
 }
 
-type Forecast struct {
-	List []struct {
-		Dt   int64 `json:"dt"`
-		Main struct {
-			TempMin float64 `json:"temp_min"`
-			TempMax float64 `json:"temp_max"`
-		} `json:"main"`
-		Weather []struct {
-			ID          int    `json:"id"`
-			Description string `json:"description"`
-		} `json:"weather"`
-	} `json:"list"`
-}
-
-func getDayNight() string {
-	hour := time.Now().Hour()
-	if hour >= 20 || hour < 7 {
-		return "n"
-	}
-	return "d"
-}
-
-func getIcon(id int, iconCode string) string {
-	isNight := strings.HasSuffix(iconCode, "n")
+// WMO weather code to emoji icon
+func getIcon(code int, isDay bool) string {
 	switch {
-	case id >= 200 && id < 300:
-		return "⛈️"
-	case id >= 300 && id < 400:
-		return "🌧️"
-	case id >= 500 && id < 600:
-		return "🌧️"
-	case id >= 600 && id < 700:
-		return "❄️"
-	case id >= 700 && id < 800:
-		return "🌫️"
-	case id == 800:
-		if isNight {
-			return "🌙"
+	case code == 0:
+		if isDay {
+			return ""
 		}
-		return "☀️"
-	case id == 801:
-		if isNight {
-			return "🌙☁️"
+		return ""
+	case code <= 2:
+		if isDay {
+			return ""
 		}
-		return "🌤️"
-	case id == 802:
-		if isNight {
-			return "🌙☁️"
+		return ""
+	case code == 3:
+		return ""
+	case code >= 45 && code <= 48:
+		return ""
+	case code >= 51 && code <= 57:
+		if isDay {
+			return ""
 		}
-		return "⛅"
-	case id >= 803:
-		return "☁️"
+		return ""
+	case code >= 61 && code <= 67:
+		return ""
+	case code >= 71 && code <= 77:
+		if isDay {
+			return ""
+		}
+		return ""
+	case code >= 80 && code <= 82:
+		return ""
+	case code == 85 || code == 86:
+		if isDay {
+			return ""
+		}
+		return ""
+	case code >= 95 && code <= 99:
+		return ""
 	default:
 		return "🌡️"
 	}
 }
 
 func main() {
-	apiKey := os.Getenv("OWM_API_KEY")
-	if apiKey == "" {
-		outputError("OWM_API_KEY not set")
-		return
-	}
-
 	client := &http.Client{Timeout: 10 * time.Second}
 
-	var current *CurrentWeather
+	var data *OpenMeteoResponse
 	var err error
 	for range 3 {
-		currentURL := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&units=%s&appid=%s", city, units, apiKey)
-		current, err = fetchJSON[CurrentWeather](client, currentURL)
+		data, err = fetchJSON[OpenMeteoResponse](client, apiURL)
 		if err == nil {
 			break
 		}
@@ -134,89 +109,35 @@ func main() {
 		return
 	}
 
-	forecastURL := fmt.Sprintf("https://api.openweathermap.org/data/2.5/forecast?q=%s&units=%s&appid=%s", city, units, apiKey)
-	forecast, err := fetchJSON[Forecast](client, forecastURL)
-	if err != nil {
-		outputError(err.Error())
-		return
-	}
+	c := data.Current
+	isDay := c.IsDay == 1
+	icon := getIcon(c.WeatherCode, isDay)
 
-	// Current weather
-	icon := "🌡️"
-	if len(current.Weather) > 0 {
-		icon = getIcon(current.Weather[0].ID, current.Weather[0].Icon)
-	}
-	text := fmt.Sprintf("%s %.0f°C", icon, current.Main.Temp)
+	text := fmt.Sprintf("%s %.0f°C", icon, c.Temperature)
 
-	// Tooltip
 	var tooltip strings.Builder
-	tooltip.WriteString(fmt.Sprintf("<b>%s</b>\n", current.Name))
-	if len(current.Weather) > 0 {
-		tooltip.WriteString(fmt.Sprintf("%s %s\n", icon, strings.Title(current.Weather[0].Description)))
-	}
-	tooltip.WriteString(fmt.Sprintf("Feels like: %.0f°C\n", current.Main.FeelsLike))
-	tooltip.WriteString(fmt.Sprintf("Humidity: %d%%\n", current.Main.Humidity))
-	tooltip.WriteString(fmt.Sprintf("Wind: %.1f m/s\n", current.Wind.Speed))
+	tooltip.WriteString(fmt.Sprintf("<b>Santa Fe, AR</b>\n"))
+	tooltip.WriteString(fmt.Sprintf("%s %s\n", icon, wmoDescription(c.WeatherCode)))
+	tooltip.WriteString(fmt.Sprintf("Feels like: %.0f°C\n", c.ApparentTemp))
+	tooltip.WriteString(fmt.Sprintf("Humidity: %d%%\n", c.RelativeHumidity))
+	tooltip.WriteString(fmt.Sprintf("Wind: %.1f km/h\n", c.WindSpeed))
 	tooltip.WriteString("\n<b>Forecast</b>\n")
 
-	// Current hour for comparison
-	now := time.Now()
-	currentHour := now.Hour()
-
-	type dayData struct {
-		min, max     float64
-		weatherID    int
-		closestDelta int
-		hasWeather   bool
-	}
-	days := make(map[string]*dayData)
-	var dayOrder []string
-
-	for _, item := range forecast.List {
-		t := time.Unix(item.Dt, 0)
-		dayKey := t.Format("Mon 02")
-
-		d, exists := days[dayKey]
-		if !exists {
-			dayOrder = append(dayOrder, dayKey)
-			d = &dayData{
-				min:          item.Main.TempMin,
-				max:          item.Main.TempMax,
-				closestDelta: 24,
-			}
-			days[dayKey] = d
+	for i, t := range data.Daily.Time {
+		if i >= len(data.Daily.WeatherCode) {
+			break
 		}
-
-		if item.Main.TempMin < d.min {
-			d.min = item.Main.TempMin
+		parsed, parseErr := time.Parse("2006-01-02", t)
+		dayLabel := t
+		if parseErr == nil {
+			dayLabel = parsed.Format("Mon 02")
 		}
-		if item.Main.TempMax > d.max {
-			d.max = item.Main.TempMax
-		}
-
-		// Pick weather closest to current hour
-		if len(item.Weather) > 0 {
-			entryHour := t.Hour()
-			delta := int(math.Abs(float64(entryHour - currentHour)))
-			if delta < d.closestDelta {
-				d.closestDelta = delta
-				d.weatherID = item.Weather[0].ID
-				d.hasWeather = true
-			}
-		}
-	}
-
-	for _, day := range dayOrder {
-		d := days[day]
-		dayIcon := "🌡️"
-		if d.hasWeather {
-			dayIcon = getIcon(d.weatherID, getDayNight())
-		}
+		dayIcon := getIcon(data.Daily.WeatherCode[i], true)
 		tooltip.WriteString(fmt.Sprintf("%s  %s  %.0f° / %.0f°\n",
 			dayIcon,
-			day,
-			d.min,
-			d.max,
+			dayLabel,
+			data.Daily.TempMin[i],
+			data.Daily.TempMax[i],
 		))
 	}
 
@@ -225,8 +146,50 @@ func main() {
 		Tooltip: strings.TrimSpace(tooltip.String()),
 		Class:   "weather",
 	}
-
 	json.NewEncoder(os.Stdout).Encode(output)
+}
+
+func wmoDescription(code int) string {
+	switch {
+	case code == 0:
+		return "Clear Sky"
+	case code == 1:
+		return "Mainly Clear"
+	case code == 2:
+		return "Partly Cloudy"
+	case code == 3:
+		return "Overcast"
+	case code == 45:
+		return "Fog"
+	case code == 48:
+		return "Icy Fog"
+	case code >= 51 && code <= 53:
+		return "Drizzle"
+	case code >= 55 && code <= 57:
+		return "Heavy Drizzle"
+	case code >= 61 && code <= 63:
+		return "Rain"
+	case code == 65:
+		return "Heavy Rain"
+	case code == 66 || code == 67:
+		return "Freezing Rain"
+	case code >= 71 && code <= 73:
+		return "Snow"
+	case code == 75:
+		return "Heavy Snow"
+	case code == 77:
+		return "Snow Grains"
+	case code >= 80 && code <= 82:
+		return "Rain Showers"
+	case code == 85 || code == 86:
+		return "Snow Showers"
+	case code == 95:
+		return "Thunderstorm"
+	case code == 96 || code == 99:
+		return "Thunderstorm with Hail"
+	default:
+		return "Unknown"
+	}
 }
 
 func fetchJSON[T any](client *http.Client, url string) (*T, error) {

@@ -18,7 +18,7 @@ return {
       },
       -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
       diagnostics = {
-        globals = { "dd", "bt" },
+        globals = { "dd", "bt", "vim" },
         disable = { "missing-fields" },
       },
     },

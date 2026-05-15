@@ -191,11 +191,11 @@ func main() {
 
 	var text string
 	if cpuTempErr == nil && gpuErr == nil {
-		text = fmt.Sprintf(" %.0f%%  %.0f°C   %.0f%%  %.0f°C", cpuUsage, cpuTemp, gpu.Usage, gpu.Temp)
+		text = fmt.Sprintf("<b>CPU:</b> %.0f%%  <b>GPU:</b> %.0f%%", cpuUsage, gpu.Usage)
 	} else if cpuTempErr == nil {
-		text = fmt.Sprintf(" %.0f%%  %.0f°C", cpuUsage, cpuTemp)
+		text = fmt.Sprintf("<b>CPU:</b> %.0f%%", cpuUsage)
 	} else {
-		text = fmt.Sprintf(" %.0f%%", cpuUsage)
+		text = fmt.Sprintf("<b>CPU:</b> %.0f%%", cpuUsage)
 	}
 
 	var sb strings.Builder

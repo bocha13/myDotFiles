@@ -57,21 +57,12 @@ function M.telescope_utils(builtin, opts)
   end
 end
 
--- Check if a plugin is installed.
----@param plugin any
----@return boolean
-function M.has(plugin)
-  return require("lazy.core.config").spec.plugins[plugin] ~= nil
-end
-
 -- Get the foreground color of a highlight group.
 ---@param name any
----@return function
+---@return table|nil
 function M.fg(name)
-  return function()
-    local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
-    return hl and hl.fg and { fg = string.format("#%06x", hl.fg) }
-  end
+  local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+  return hl and hl.fg and { fg = string.format("#%06x", hl.fg) }
 end
 
 -- Function to populate quickfix list with diagnostics of current file

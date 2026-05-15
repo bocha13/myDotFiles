@@ -51,7 +51,7 @@
     }
   },
   "custom/weather": {
-    "exec": "~/.config/waybar/weather",
+    "exec": "~/.config/waybar/waybar_tools/target/release/weather_rs",
     "interval": 600, // refresh every 10 min
     "return-type": "json",
     "id": "custom-weather",
@@ -72,9 +72,9 @@
     "interval": 3600
   },
   "custom/cpu": {
-    "exec": "~/.config/waybar/cpu",
-    "format": " 󰍛 ",
-    "interval": 3,
+    "exec": "~/.config/waybar/waybar_tools/target/release/cpu_rs",
+    // "format": "󰍛",
+    "interval": 5,
     "return-type": "json"
   },
   // "cpu": {
@@ -114,8 +114,8 @@
     "format-wifi": "{icon}",
     "format-ethernet": "󰀂",
     "format-disconnected": "󰤮",
-    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-wifi": "{essid} ({frequency} GHz)",
+    "tooltip-format-ethernet": "Connected",
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
@@ -169,7 +169,7 @@
     "format-connected": "󰂱",
     "format-no-controller": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "$TERMINAL --title=Bluetui -e bluetui"
+    "on-click": "$TERMINAL --class=Bluetui --title=Bluetui -e bluetui"
   },
   "pulseaudio": {
     "format": "{icon}",
