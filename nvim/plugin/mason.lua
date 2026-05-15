@@ -11,6 +11,7 @@ local servers = {
   "cssls",
   "eslint",
   "gopls",
+  "rust_analyzer",
   "html",
   "prismals",
   "jsonls",

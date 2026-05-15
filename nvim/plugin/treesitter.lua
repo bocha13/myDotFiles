@@ -42,6 +42,7 @@ TS.setup({
     "json",
     "lua",
     "markdown",
+    "rust",
     "markdown_inline",
     "query",
     "regex",

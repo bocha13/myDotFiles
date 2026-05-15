@@ -7,7 +7,7 @@ vim.pack.add({
 -- rebuild blink fuzzy matcher whenever we update blink
 vim.api.nvim_create_autocmd("PackChanged", {
   callback = function(ev)
-    if ev.data.spec.name == "blink.cmp" and ev.data.kind == "update" then
+    if ev.data.spec.name == "blink.cmp" and (ev.data.kind == "update" or ev.data.kind == "add") then
       local dir = ev.data.path
       vim.notify("blink.cmp: building fuzzy library...", vim.log.levels.INFO)
       vim.system(
@@ -36,7 +36,18 @@ local blinkCmp = require("blink.cmp")
 luaSnipLoader.lazy_load()
 
 blinkCmp.setup({
-  keymap = { preset = 'default' },
+  keymap = {
+    preset = 'default',
+    ['<CR>'] = {
+      function(cmp)
+        if cmp.is_visible() then
+          cmp.accept()
+          return true
+        end
+      end,
+      'fallback',
+    },
+  },
   appearance = {
     use_nvim_cmp_as_default = false,
     nerd_font_variant = 'mono'
