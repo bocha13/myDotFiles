@@ -1,7 +1,7 @@
 vim.pack.add({
-  "https://github.com/saghen/blink.cmp",
-  "https://github.com/L3MON4D3/LuaSnip",
-  "https://github.com/rafamadriz/friendly-snippets"
+  { src = "https://github.com/saghen/blink.cmp",            version = vim.version.range("1.*") },
+  { src = "https://github.com/L3MON4D3/LuaSnip" },
+  { src = "https://github.com/rafamadriz/friendly-snippets" }
 })
 
 -- rebuild blink fuzzy matcher whenever we update blink
@@ -41,8 +41,7 @@ blinkCmp.setup({
     ['<CR>'] = {
       function(cmp)
         if cmp.is_visible() then
-          cmp.accept()
-          return true
+          return cmp.accept()
         end
       end,
       'fallback',

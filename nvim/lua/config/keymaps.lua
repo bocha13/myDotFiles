@@ -16,13 +16,6 @@ map("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move selection up" })
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
--- INFO: use this only when vim-tmux-navigator is not installed
--- jump to split
--- map("n", "<c-k>", ":wincmd k<CR>")
--- map("n", "<c-j>", ":wincmd j<CR>")
--- map("n", "<c-h>", ":wincmd h<CR>")
--- map("n", "<c-l>", ":wincmd l<CR>")
-
 -- bufer
 map('n', '<leader>bd', ":lua require'mini.bufremove'.delete(0)<CR>", { noremap = true, silent = true })
 map('n', 'H', ':bprevious<CR>', { noremap = true, silent = true })
@@ -129,13 +122,5 @@ map("n", "<leader>cc", function()
   vim.cmd("startinsert!")
 end, { desc = "Insert multiline JS comment", silent = true })
 
--- CHANGE COLORSCHEME
-local colorschemes = { "catppuccin-mocha", "catppuccin-latte" }
-local current_index = 1
-function Toggle_colorscheme()
-  current_index = current_index % #colorschemes + 1
-  vim.cmd("colorscheme " .. colorschemes[current_index])
-  print("Colorscheme switched to " .. colorschemes[current_index])
-end
-
-map("n", "<leader>cs", "<cmd>lua Toggle_colorscheme()<CR>", { desc = "Change colorscheme mocha/latte" })
+-- CHANGE COLORSCHEME (Toggle_colorscheme is defined in plugin/mini.lua)
+map("n", "<leader>cs", "<cmd>lua Toggle_colorscheme()<CR>", { desc = "Toggle base16 dark/light" })
