@@ -28,7 +28,7 @@ type WaybarOutput struct {
 }
 
 // city is the location to fetch weather for. Change this to any city name.
-const city = "Santa Fe"
+const city = "Santa Fe,Argentina"
 
 const geoURL = "https://geocoding-api.open-meteo.com/v1/search?name=%s&count=1&language=en&format=json"
 
