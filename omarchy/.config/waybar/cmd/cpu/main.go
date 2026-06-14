@@ -191,7 +191,7 @@ func main() {
 
 	var text string
 	if cpuTempErr == nil && gpuErr == nil {
-		text = fmt.Sprintf("<b>CPU:</b> %.0f%%  <b>GPU:</b> %.0f%%", cpuUsage, gpu.Usage)
+		text = fmt.Sprintf(" <b>CPU:</b> %.0f%%  <b>GPU:</b> %.0f%%", cpuUsage, gpu.Usage)
 	} else if cpuTempErr == nil {
 		text = fmt.Sprintf("<b>CPU:</b> %.0f%%", cpuUsage)
 	} else {

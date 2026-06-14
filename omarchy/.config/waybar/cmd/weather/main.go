@@ -15,6 +15,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"os"
 	"strings"
 	"time"
@@ -26,11 +27,20 @@ type WaybarOutput struct {
 	Class   string `json:"class"`
 }
 
-const apiURL = "https://api.open-meteo.com/v1/forecast" +
-	"?latitude=-31.6488&longitude=-60.7087" +
-	"&daily=weather_code,temperature_2m_max,temperature_2m_min" +
-	"&current=temperature_2m,is_day,weather_code,apparent_temperature,relative_humidity_2m,wind_speed_10m" +
-	"&timezone=America%2FSao_Paulo&past_days=0&forecast_days=7"
+// city is the location to fetch weather for. Change this to any city name.
+const city = "Santa Fe"
+
+const geoURL = "https://geocoding-api.open-meteo.com/v1/search?name=%s&count=1&language=en&format=json"
+
+type GeoResponse struct {
+	Results []struct {
+		Name      string  `json:"name"`
+		Latitude  float64 `json:"latitude"`
+		Longitude float64 `json:"longitude"`
+		Country   string  `json:"country"`
+		Timezone  string  `json:"timezone"`
+	} `json:"results"`
+}
 
 type OpenMeteoResponse struct {
 	Current struct {
@@ -95,8 +105,25 @@ func getIcon(code int, isDay bool) string {
 func main() {
 	client := &http.Client{Timeout: 10 * time.Second}
 
+	geo, err := fetchJSON[GeoResponse](client, fmt.Sprintf(geoURL, url.QueryEscape(city)))
+	if err != nil {
+		outputError(err.Error())
+		return
+	}
+	if len(geo.Results) == 0 {
+		outputError(fmt.Sprintf("no location found for %q", city))
+		return
+	}
+	loc := geo.Results[0]
+
+	apiURL := fmt.Sprintf("https://api.open-meteo.com/v1/forecast"+
+		"?latitude=%f&longitude=%f"+
+		"&daily=weather_code,temperature_2m_max,temperature_2m_min"+
+		"&current=temperature_2m,is_day,weather_code,apparent_temperature,relative_humidity_2m,wind_speed_10m"+
+		"&timezone=%s&past_days=0&forecast_days=7",
+		loc.Latitude, loc.Longitude, url.QueryEscape(loc.Timezone))
+
 	var data *OpenMeteoResponse
-	var err error
 	for range 3 {
 		data, err = fetchJSON[OpenMeteoResponse](client, apiURL)
 		if err == nil {
@@ -113,10 +140,10 @@ func main() {
 	isDay := c.IsDay == 1
 	icon := getIcon(c.WeatherCode, isDay)
 
-	text := fmt.Sprintf("%s %.0f°C", icon, c.Temperature)
+	text := fmt.Sprintf(" %s %.0f°C", icon, c.Temperature)
 
 	var tooltip strings.Builder
-	tooltip.WriteString(fmt.Sprintf("<b>Santa Fe, AR</b>\n"))
+	tooltip.WriteString(fmt.Sprintf("<b>%s, %s</b>\n", loc.Name, loc.Country))
 	tooltip.WriteString(fmt.Sprintf("%s %s\n", icon, wmoDescription(c.WeatherCode)))
 	tooltip.WriteString(fmt.Sprintf("Feels like: %.0f°C\n", c.ApparentTemp))
 	tooltip.WriteString(fmt.Sprintf("Humidity: %d%%\n", c.RelativeHumidity))
@@ -133,12 +160,11 @@ func main() {
 			dayLabel = parsed.Format("Mon 02")
 		}
 		dayIcon := getIcon(data.Daily.WeatherCode[i], true)
-		tooltip.WriteString(fmt.Sprintf("%s  %s  %.0f° / %.0f°\n",
+		fmt.Fprintf(&tooltip, "%s  %s  %.0f° / %.0f°\n",
 			dayIcon,
 			dayLabel,
 			data.Daily.TempMin[i],
-			data.Daily.TempMax[i],
-		))
+			data.Daily.TempMax[i])
 	}
 
 	output := WaybarOutput{
@@ -212,7 +238,7 @@ func fetchJSON[T any](client *http.Client, url string) (*T, error) {
 
 func outputError(msg string) {
 	output := WaybarOutput{
-		Text:    "⚠️ N/A",
+		Text:    " ⚠️ N/A",
 		Tooltip: msg,
 		Class:   "weather-error",
 	}

@@ -50,13 +50,6 @@
       "5": []
     }
   },
-  "custom/weather": {
-    "exec": "~/.config/waybar/waybar_tools/target/release/weather_rs",
-    "interval": 600, // refresh every 10 min
-    "return-type": "json",
-    "id": "custom-weather",
-    "tooltip": true
-  },
   "custom/omarchy": {
     "format": "<span font='omarchy'>\ue900</span>",
     "on-click": "omarchy-menu",
@@ -69,19 +62,14 @@
     "on-click": "omarchy-launch-floating-terminal-with-presentation omarchy-update",
     "tooltip-format": "Omarchy update available",
     "signal": 7,
-    "interval": 3600
+    "interval": 21600
   },
-  "custom/cpu": {
-    "exec": "~/.config/waybar/waybar_tools/target/release/cpu_rs",
-    // "format": "󰍛",
+  "cpu": {
     "interval": 5,
-    "return-type": "json"
+    "format": "󰍛",
+    "on-click": "omarchy-launch-or-focus-tui btop",
+    "on-click-right": "alacritty"
   },
-  // "cpu": {
-  //   "interval": 5,
-  //   "format": "󰍛",
-  //   "on-click": "omarchy-launch-or-focus-tui btop"
-  // },
   "clock": {
     "format": "{:L%A %H:%M}",
     "format-alt": "{:L%d %B %Y}",
@@ -101,6 +89,19 @@
       }
     },
     "on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select"
+  },
+  "custom/weather": {
+    "exec": "~/.config/waybar/weather",
+    "interval": 600, // refresh every 10 min
+    "return-type": "json",
+    "id": "custom-weather",
+    "tooltip": true
+  },
+  "custom/cpu": {
+    "exec": "~/.config/waybar/cpu",
+    // "format": "󰍛",
+    "interval": 5,
+    "return-type": "json"
   },
   "network": {
     "format-icons": [
@@ -157,6 +158,7 @@
     "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
     "interval": 5,
     "on-click": "omarchy-menu power",
+    "on-click-right": "notify-send -u low \"$(omarchy-battery-status)\"",
     "states": {
       "warning": 20,
       "critical": 10
@@ -164,12 +166,12 @@
   },
   "bluetooth": {
     "format": "",
-    "format-disabled": "󰂲",
     "format-off": "󰂲",
+    "format-disabled": "󰂲",
     "format-connected": "󰂱",
     "format-no-controller": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "$TERMINAL --class=Bluetui --title=Bluetui -e bluetui"
+    "on-click": "omarchy-launch-bluetooth"
   },
   "pulseaudio": {
     "format": "{icon}",
@@ -208,9 +210,21 @@
     "on-scroll-right": ""
   },
   "custom/screenrecording-indicator": {
-    "on-click": "omarchy-cmd-screenrecord",
+    "on-click": "omarchy-capture-screenrecording",
     "exec": "$OMARCHY_PATH/default/waybar/indicators/screen-recording.sh",
     "signal": 8,
+    "return-type": "json"
+  },
+  "custom/idle-indicator": {
+    "on-click": "omarchy-toggle-idle",
+    "exec": "$OMARCHY_PATH/default/waybar/indicators/idle.sh",
+    "signal": 9,
+    "return-type": "json"
+  },
+  "custom/notification-silencing-indicator": {
+    "on-click": "omarchy-toggle-notification-silencing",
+    "exec": "$OMARCHY_PATH/default/waybar/indicators/notification-silencing.sh",
+    "signal": 10,
     "return-type": "json"
   },
   "custom/voxtype": {
@@ -226,20 +240,8 @@
     "on-click-right": "omarchy-voxtype-config",
     "on-click": "omarchy-voxtype-model"
   },
-  "custom/idle-indicator": {
-    "on-click": "omarchy-toggle-idle",
-    "exec": "$OMARCHY_PATH/default/waybar/indicators/idle.sh",
-    "signal": 9,
-    "return-type": "json"
-  },
-  "custom/notification-silencing-indicator": {
-    "on-click": "omarchy-toggle-notification-silencing",
-    "exec": "$OMARCHY_PATH/default/waybar/indicators/notification-silencing.sh",
-    "signal": 10,
-    "return-type": "json"
-  },
   "tray": {
     "icon-size": 12,
-    "spacing": 12
+    "spacing": 17
   }
 }
