@@ -28,7 +28,7 @@ type WaybarOutput struct {
 }
 
 // city is the location to fetch weather for. Change this to any city name.
-const city = "Santa Fe,Argentina"
+const city = "Santa Fe"
 
 const geoURL = "https://geocoding-api.open-meteo.com/v1/search?name=%s&count=1&language=en&format=json"
 
@@ -105,7 +105,7 @@ func getIcon(code int, isDay bool) string {
 func main() {
 	client := &http.Client{Timeout: 10 * time.Second}
 
-	geo, err := fetchJSON[GeoResponse](client, fmt.Sprintf(geoURL, url.QueryEscape(city)))
+	geo, err := fetchJSONRetry[GeoResponse](client, fmt.Sprintf(geoURL, url.QueryEscape(city)))
 	if err != nil {
 		outputError(err.Error())
 		return
@@ -123,14 +123,7 @@ func main() {
 		"&timezone=%s&past_days=0&forecast_days=7",
 		loc.Latitude, loc.Longitude, url.QueryEscape(loc.Timezone))
 
-	var data *OpenMeteoResponse
-	for range 3 {
-		data, err = fetchJSON[OpenMeteoResponse](client, apiURL)
-		if err == nil {
-			break
-		}
-		time.Sleep(5 * time.Second)
-	}
+	data, err := fetchJSONRetry[OpenMeteoResponse](client, apiURL)
 	if err != nil {
 		outputError(err.Error())
 		return
@@ -143,11 +136,11 @@ func main() {
 	text := fmt.Sprintf(" %s %.0f°C", icon, c.Temperature)
 
 	var tooltip strings.Builder
-	tooltip.WriteString(fmt.Sprintf("<b>%s, %s</b>\n", loc.Name, loc.Country))
-	tooltip.WriteString(fmt.Sprintf("%s %s\n", icon, wmoDescription(c.WeatherCode)))
-	tooltip.WriteString(fmt.Sprintf("Feels like: %.0f°C\n", c.ApparentTemp))
-	tooltip.WriteString(fmt.Sprintf("Humidity: %d%%\n", c.RelativeHumidity))
-	tooltip.WriteString(fmt.Sprintf("Wind: %.1f km/h\n", c.WindSpeed))
+	fmt.Fprintf(&tooltip, "<b>%s, %s</b>\n", loc.Name, loc.Country)
+	fmt.Fprintf(&tooltip, "%s %s\n", icon, wmoDescription(c.WeatherCode))
+	fmt.Fprintf(&tooltip, "Feels like: %.0f°C\n", c.ApparentTemp)
+	fmt.Fprintf(&tooltip, "Humidity: %d%%\n", c.RelativeHumidity)
+	fmt.Fprintf(&tooltip, "Wind: %.1f km/h\n", c.WindSpeed)
 	tooltip.WriteString("\n<b>Forecast</b>\n")
 
 	for i, t := range data.Daily.Time {
@@ -216,6 +209,25 @@ func wmoDescription(code int) string {
 	default:
 		return "Unknown"
 	}
+}
+
+// fetchJSONRetry retries on failure with a backoff, so a cold boot (where the
+// network isn't ready yet when waybar first runs this) eventually succeeds
+// instead of giving up after one attempt.
+func fetchJSONRetry[T any](client *http.Client, url string) (*T, error) {
+	const attempts = 6
+	var data *T
+	var err error
+	for attempt := range attempts {
+		data, err = fetchJSON[T](client, url)
+		if err == nil {
+			return data, nil
+		}
+		if attempt < attempts-1 {
+			time.Sleep(time.Duration(attempt+1) * 5 * time.Second)
+		}
+	}
+	return nil, err
 }
 
 func fetchJSON[T any](client *http.Client, url string) (*T, error) {
