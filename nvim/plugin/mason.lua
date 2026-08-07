@@ -17,7 +17,6 @@ local servers = {
   "jsonls",
   "lua_ls",
   "vtsls",
-  "zls"
 }
 
 require("mason").setup({
