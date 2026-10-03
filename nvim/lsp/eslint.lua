@@ -1,5 +1,26 @@
 local lsp = vim.lsp
 
+local flat_configs = {
+  'eslint.config.js',
+  'eslint.config.mjs',
+  'eslint.config.cjs',
+  'eslint.config.ts',
+  'eslint.config.mts',
+  'eslint.config.cts',
+}
+
+local function uses_flat_config(root)
+  if not root or root == '' then
+    return false
+  end
+  for _, name in ipairs(flat_configs) do
+    if vim.uv.fs_stat(vim.fs.joinpath(root, name)) then
+      return true
+    end
+  end
+  return false
+end
+
 return {
   cmd = { 'vscode-eslint-language-server', '--stdio' },
   filetypes = {
@@ -28,26 +49,29 @@ return {
     end, {})
   end,
   root_markers = {
-    '.eslintrc',
-    '.eslintrc.js',
-    '.eslintrc.cjs',
-    '.eslintrc.yaml',
-    '.eslintrc.yml',
-    '.eslintrc.json',
-    'eslint.config.js',
-    'eslint.config.mjs',
-    'eslint.config.cjs',
-    'eslint.config.ts',
-    'eslint.config.mts',
-    'eslint.config.cts',
+    {
+      '.eslintrc',
+      '.eslintrc.js',
+      '.eslintrc.cjs',
+      '.eslintrc.yaml',
+      '.eslintrc.yml',
+      '.eslintrc.json',
+      'eslint.config.js',
+      'eslint.config.mjs',
+      'eslint.config.cjs',
+      'eslint.config.ts',
+      'eslint.config.mts',
+      'eslint.config.cts',
+    },
   },
+  before_init = function(_, config)
+    config.settings.useFlatConfig = uses_flat_config(config.root_dir)
+  end,
   settings = {
     validate = 'on',
     packageManager = nil,
     useESLintClass = false,
-    experimental = {
-      useFlatConfig = false,
-    },
+    experimental = {},
     codeActionOnSave = {
       enable = false,
       mode = 'all',

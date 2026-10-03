@@ -34,6 +34,25 @@ require("mason-lspconfig").setup({
   automatic_installation = true,
 })
 
+vim.diagnostic.config({
+  virtual_text = {
+    source = "if_many",
+    prefix = "■",
+    spacing = 4,
+  },
+  update_in_insert = false,
+  underline = true,
+  severity_sort = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "E",
+      [vim.diagnostic.severity.WARN] = "W",
+      [vim.diagnostic.severity.HINT] = "H",
+      [vim.diagnostic.severity.INFO] = "I",
+    },
+  },
+})
+
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
   callback = function(event)
@@ -59,27 +78,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
     map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
     map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-
-    vim.diagnostic.config({
-      virtual_text = {
-        source = "if_many",
-        prefix = "■",
-        spacing = 4,
-      },
-      update_in_insert = false,
-      underline = true,
-      severity_sort = true,
-    })
-
-    local signs = { Error = "E", Warn = "W", Hint = "H", Info = "I" }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.diagnostic.config({
-        signs = {
-          { name = hl, text = icon, texthl = hl }
-        },
-      })
-    end
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     if not client then return end

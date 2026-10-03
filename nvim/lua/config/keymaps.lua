@@ -35,7 +35,6 @@ map("x", "<leader>p", '"_dp', { desc = "Paste but don't save to buffer" })
 map("n", "<leader>d", '"_d', { desc = "Delete without copy to clipboard" })
 map("v", "<leader>d", '"_d', { desc = "Delete without copy to clipboard" })
 
-map("n", "Q", "<nop>", { desc = "Does nothing, that's the point" })
 map("n", "<C-f>", "<cmd>silent !tmux new tmux-sessionizer<CR>")
 map("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", { desc = "replace word under cursor" })
 map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })

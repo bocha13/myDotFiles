@@ -1,29 +1,30 @@
 # Neovim config
 
-This config is powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
+Plugins are installed with Neovim's built-in `vim.pack`.
 
-## ⚡️ Requirements
+## Requirements
 
-- Neovim >= **0.11** with LuaJIT support
+- Neovim >= **0.12** with LuaJIT support
 - Git >= **2.43.0** (for partial clones support)
-- A [Nerd Font](https://www.nerdfonts.com/) **_(optional)_**
-- If your terminal doesn't include a clipboard, install one (eg. sudo apt-get install xclip)
+- A [Nerd Font](https://www.nerdfonts.com/) (optional)
+- A clipboard provider if the terminal does not provide one (for example `xclip`)
 
-## Features
+## Plugins
 
-### Plugins
+- [blink.cmp](https://github.com/saghen/blink.cmp): completion
+- [conform.nvim](https://github.com/stevearc/conform.nvim): formatting
+- [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim): git signs
+- [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim): indent guides
+- [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim): status line
+- [mason.nvim](https://github.com/mason-org/mason.nvim): language server installer
+- [mini.nvim](https://github.com/nvim-mini/mini.nvim): base16 colorscheme, tabline, pairs, surround, buffer delete
+- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter): parser installer and highlighting
+- [oil.nvim](https://github.com/stevearc/oil.nvim): file explorer
+- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim): fuzzy finder
+- [todo-comments.nvim](https://github.com/folke/todo-comments.nvim): TODO highlighting
+- [vim-fugitive](https://github.com/tpope/vim-fugitive): git commands
 
-- [blink.cmp](https://github.com/saghen/blink.cmp): completion plugin
-- [bufferline](https://github.com/akinsho/bufferline.nvim): buffer line
-- [catpuccin](https://github.com/catppuccin/nvim): colorcheme
-- [vim-fugitive](https://github.com/tpope/vim-fugitive): git integration
-- [lualine](https://github.com/nvim-lualine/lualine.nvim): status line
-- [mini.nvim](https://github.com/echasnovski/mini.nvim): useful lua modules
-- [oil.nvim](https://github.com/stevearc/oil.nvim): vim-vinegar like file explorer
-- [telescope](https://github.com/nvim-telescope/telescope.nvim): fizzy finder
-- [treesitter](https://github.com/nvim-treesitter/nvim-treesitter): configuration abstraction layer
-
-### Default languages support
+## Languages
 
 - Astro
 - C/C++
@@ -32,5 +33,6 @@ This config is powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
 - HTML
 - JSON
 - Lua
+- Prisma
+- Rust
 - TypeScript/JavaScript
-- TailwindCSS
